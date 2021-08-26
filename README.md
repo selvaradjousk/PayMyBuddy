@@ -73,6 +73,8 @@ Keeping in mind the obligations of the production environment, the following tec
 ![SpotBugs / FindBugs](https://img.shields.io/badge/%F0%9F%90%9B-SpotBugs%20%2F%20FindBugs-important)
 ![Swagger API](https://img.shields.io/badge/%F0%9F%93%8A-Swagger%20API-red)
 ![Actuator](https://img.shields.io/badge/%F0%9F%93%89-Actuator-red)
+![POSTMAN](https://img.shields.io/badge/%F0%9F%93%A9-POSTMAN-critical)
+![Lombok](https://img.shields.io/badge/%F0%9F%9A%80-LOMBOK-brightgreen)
 ![BCrypt Encryption](https://img.shields.io/badge/%F0%9F%94%8F-BCrypt%20Encryption-yellowgreen)
 
 
