@@ -2,85 +2,231 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.5.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	
+	<!-- =============================================================== -->
+	<!-- Information on the project -->
+	<!-- =============================================================== -->
 	<groupId>com.paymybuddy</groupId>
 	<artifactId>PayMyBuddy</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
+	<!-- ===================================================================== -->
+	<!-- ===== general information ===== -->
+	<!-- ===================================================================== -->		
 	<name>PayMyBuddy</name>
 	<description>PayMyBuddy project for easy money transfer Services</description>
 	<properties>
 		<java.version>1.8</java.version>
+		<dep.jacoco.version>0.8.6</dep.jacoco.version>
 	</properties>
+	
+	
 	<dependencies>
+	
+		<!-- ===================================================================== -->
+		<!-- spring-boot-starter-actuator API documentation for the application -->
+		<!-- ===================================================================== -->		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+		
+		<!-- ===================================================================== -->
+		<!-- spring-boot-starter-data-jpa that interact with your application -->
+		<!-- ===================================================================== -->			
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		
+		<!-- ===================================================================== -->
+		<!-- spring-boot-starter-security that interact with your application -->
+		<!-- ===================================================================== -->		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+		
+		<!-- ===================================================================== -->
+		<!-- spring-boot-starter-thymeleaf that interact with your application -->
+		<!-- ===================================================================== -->			
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		
+		<!-- ============================================================== -->
+		<!-- ====================== VALIDATORS ============================ -->
+		<!-- ============================================================== -->
+		<!-- spring-boot-starter-validation -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>jakarta.el</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+
+		<!-- hibernate-validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.2.0.Final</version>
+		</dependency>
+
+		<!-- JAVAX validation api -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>		
+
+		
+		<!-- ===================================================================== -->
+		<!-- Starter Web used for building web application - RESTful applications 
+			using Spring MVC and includes Tomcat as the default embedded container -->
+		<!-- ===================================================================== -->		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
+		
+		
+		<!--<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
-		</dependency>
+		</dependency> -->
 
+		<!-- ============================================================== -->
+		<!-- ==================spring-boot-devtools ====================== -->
+		<!-- ============================================================== -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		
+		
+		
+		<!-- ================     DATABASES  ========================= -->
+		<!-- ==================  H2 database ====================== -->
+		<!-- ============================================================== -->			
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
+		<!-- ============================================================== -->
+		<!-- ==================mysql-connector-java ====================== -->
+		<!-- ============================================================== -->		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
+		
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+		
+		<!-- ===================================================================== -->
+		<!-- Tests imports - JUnit4, Spring Test, AssertJ, Hamcrest, Mockito, JSONassert 
+			& JSONPath -->
+		<!-- ===================================================================== -->		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- ===================================================================== -->
+		<!-- spring-security-test -->
+		<!-- ===================================================================== -->		
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
 
+		<!-- ===================================================================== -->
+		<!-- ************** Log4J : logger **************** -->
+		<!-- ===================================================================== -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+		
+		<!-- ===================================================================== -->
+		<!-- LOMBOK annotations used to reduce boilerplate code for model/data 
+			objects -->
+		<!-- ===================================================================== -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>			
+
+		<!-- ===================================================================== -->
+		<!-- Jacoco - Java Code Coverage -->
+		<!-- ===================================================================== -->		
+		<!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>0.8.5</version>
+		</dependency>
+		
+		<!-- ===================================================================== -->
+		<!-- FindBugs - tool for static code analysis of Java programs -->
+		<!-- ===================================================================== -->
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+
+        <!-- webjar bootstrap and jquery dependencies -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.3.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        	
+		
+	</dependencies>
+	<!-- ======================================================= -->
+	<!-- Build -->
+	<!-- ======================================================= -->
 	<build>
 		<plugins>
+		
+		
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -93,7 +239,231 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			
+			<!-- ===================================================================== -->
+			<!-- Maven failsafe - used during the integration-test and verify phases 
+				of the build lifecycle to execute the integration tests of an application -->
+			<!-- ===================================================================== -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>**/*IT.java</include>
+					</includes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			
+			<!-- ===================================================================== -->
+			<!-- JACOCO test report build configuration -->
+			<!-- ===================================================================== -->			
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${dep.jacoco.version}</version>
+				<executions>
+
+					<execution>
+						<id>prepare-agent-test</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>test-report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>prepare-agent-it</id>
+						<goals>
+							<goal>prepare-agent-integration</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>integration-test-report</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>merge-results</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>merge</goal>
+						</goals>
+						<configuration>
+							<fileSets>
+								<fileSet>
+									<directory>${project.build.directory}</directory>
+									<includes>
+										<include>*.exec</include>
+									</includes>
+								</fileSet>
+							</fileSets>
+							<destFile>${project.build.directory}/aggregate.exec</destFile>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>post-merge-report</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<dataFile>${project.build.directory}/aggregate.exec</dataFile>
+							<outputDirectory>${project.reporting.outputDirectory}/jacoco-aggregate</outputDirectory>
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
+
+			<!-- ===================================================================== -->
+			<!-- Maven sure fire tests and test reports configuration -->
+			<!-- ===================================================================== -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/*IT.java</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<phase>integration-test</phase>
+						<configuration>
+							<excludes>
+								<exclude>none</exclude>
+							</excludes>
+							<includes>
+								<include>**/*IT.java</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.9.1</version>
+			</plugin>	
+			
 		</plugins>
 	</build>
+
+	<!-- ======================================================= -->
+	<!-- Reporting -->
+	<!-- ======================================================= -->
+	<!-- ======================================================= -->
+	<!-- REPORTING -->
+	<!-- ======================================================= -->
+	<reporting>
+		<plugins>
+
+			<!-- ===================================================================== -->
+			<!-- generate reports information about the project. -->
+			<!-- ===================================================================== -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<dependencyDetailsEnabled>false</dependencyDetailsEnabled>
+					<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>dependencies</report>
+							<report>scm</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+			<!-- ===================================================================== -->
+			<!-- During the test phase of the build lifecycle to execute the unit 
+				tests of an application -->
+			<!-- ===================================================================== -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>3.0.0-M4</version>
+			</plugin>
+
+			<!-- ===================================================================== -->
+			<!-- generates a report regarding the code style used by the developers -->
+			<!-- ===================================================================== -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.1.1</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>checkstyle</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+			<!-- ===================================================================== -->
+			<!-- static analysis to inspect Java bytecode for occurrences of bug patterns -->
+			<!-- ===================================================================== -->
+			<plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+				<version>4.0.0</version>
+			</plugin>
+
+			<!-- ===================================================================== -->
+			<!-- jacoco-maven-plugin -->
+			<!-- ===================================================================== -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report</report>
+							<report>report-integration</report>
+							<report>report-aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			
+			
+		</plugins>
+		
+	</reporting>
 
 </project>
