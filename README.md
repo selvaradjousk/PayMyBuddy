@@ -36,6 +36,7 @@
 
 Introduction
 ===
+
 The main goal is to commit on participating in the different phases of the software development cycle that involves:<br />
 	![📝 PLANNING](https://img.shields.io/badge/%F0%9F%93%9D-PLANNING-blueviolet)(requirements definition - Functional & Technical requirements),<br />
 	![🔨 ANALYSIS](https://img.shields.io/badge/%F0%9F%94%A8-%20ANALYSIS-blue) (objectives, opportunities, constraints, resources, requirements, milestones ...),<br />
@@ -43,7 +44,7 @@ The main goal is to commit on participating in the different phases of the softw
 	![🔨 CODING IMPLEMENTATION](https://img.shields.io/badge/%F0%9F%94%A8-%20CODING%20IMPLEMENTATION-success) (Spring boot framework - backend API development),<br />
 	![❓ ❕  FUNCTIONAL TESTING](https://img.shields.io/badge/%E2%9D%93%20%E2%9D%95-FUNCTIONAL%20TESTING-informational) (Unit, Integration Testing... Code quality review, report generation, Test summary..),<br />
 	![🔑 DEPLOYMENT](https://img.shields.io/badge/%F0%9F%94%91-DEPLOYMENT-red) - pre-release evaluation with domain experts on its quality standards to deliver as a functionally strong backend Application API.<br />
-===
+
 
 Technical Specifications
 ===
