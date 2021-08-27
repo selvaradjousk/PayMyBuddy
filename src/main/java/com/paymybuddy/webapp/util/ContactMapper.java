@@ -1,5 +1,5 @@
 package com.paymybuddy.webapp.util;
 
-public class BuddyMapper {
+public class ContactMapper {
 
 }

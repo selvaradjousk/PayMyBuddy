@@ -1,5 +1,5 @@
 package com.paymybuddy.webapp.dto;
 
-public class BuddyDTO {
+public class ContactDTO {
 
 }

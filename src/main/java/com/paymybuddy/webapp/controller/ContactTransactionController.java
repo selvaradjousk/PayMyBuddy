@@ -1,5 +1,5 @@
 package com.paymybuddy.webapp.controller;
 
-public class BuddyTransactionController {
+public class ContactTransactionController {
 
 }
