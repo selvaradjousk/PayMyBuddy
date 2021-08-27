@@ -8,6 +8,18 @@ import org.springframework.stereotype.Service;
 import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.repository.UserRepository;
 
+
+// **************************** TODOs LIST ***********************************
+
+// Method: 
+// --> getAllUsers(String email) served by userRepository.findAll()
+// --> addNewUser(userDTO) 
+// 			check for user exist already by userRepository.findUserByEmail(email)
+//			add served by userMapper.toUserDTO(user)
+// --> check for email validity
+// --> check password match on confirm password
+// --> input fields validation done in the respective DO with annotations
+
 @Service
 public class UserServiceImpl implements IUserService{
 

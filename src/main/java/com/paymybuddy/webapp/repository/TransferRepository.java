@@ -7,6 +7,20 @@ import com.paymybuddy.webapp.model.User;
 
 public interface TransferRepository extends JpaRepository<Transfer, Integer> {
 
+
+	// **************************** TODOs LIST ***********************************
+	
+	// Method: c
+	// -->
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	
 	Transfer findByUser(User user);
 
 }

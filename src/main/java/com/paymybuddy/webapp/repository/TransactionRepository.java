@@ -7,4 +7,17 @@ import com.paymybuddy.webapp.model.Transaction;
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
 
 
+	// **************************** TODOs LIST ***********************************
+	
+	// Method: c
+	// -->
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+
 }

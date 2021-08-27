@@ -8,5 +8,19 @@ import com.paymybuddy.webapp.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+
+	// **************************** TODOs LIST ***********************************
+	
+	// Method: c
+	// -->
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	
 	public User findByEmail(String name);
 }

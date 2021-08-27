@@ -7,4 +7,17 @@ import com.paymybuddy.webapp.model.Contact;
 public interface ContactRepository extends JpaRepository<Contact, Integer> {
 
 
+	// **************************** TODOs LIST ***********************************
+	
+	// Method: c
+	// -->
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+
 }

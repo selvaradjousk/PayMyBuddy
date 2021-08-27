@@ -6,4 +6,18 @@ import com.paymybuddy.webapp.model.BankAccount;
 
 public interface BankAccountRepository extends JpaRepository<BankAccount, Integer> {
 
+
+	// **************************** TODOs LIST ***********************************
+	
+	// Method: c
+	// -->
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	// --> 
+	
 }

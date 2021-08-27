@@ -2,6 +2,10 @@ package com.paymybuddy.webapp.unitTest.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.when;
+
+import java.time.LocalDate;
 
 import javax.sql.DataSource;
 
@@ -75,5 +79,28 @@ public class TransferRepositoryTest {
 		assertEquals(15, transferRepository.findAll().size());
 	}
 
+	// *******************************************************************
+//	@Test
+//	void whenSaved_thenFindsByUser() {
+//		testUser1 = new User(101, "testUserName", "testFirstName", "testLastName", "myEmail", "myPassword",
+//				LocalDate.parse("2019-12-31"), LocalDate.parse("2019-12-31"), "admin", true, 1000.0);
+//		when(userRepository.save(testUser1)).thenReturn(testUser1);
+//		Transfer newTransfer = new Transfer(
+//	            "test Rib",
+//	            LocalDate.parse("2019-12-31"),
+//	            1000.0,
+//	            "CREDIT",
+//				testUser1);
+//		transferRepository.save(newTransfer);
+//		
+//		Transfer savedTransfer = transferRepository.findByUser(testUser1);
+//		
+//		assertNotNull(savedTransfer);
+//		assertEquals("testUser1", savedTransfer.getUser());
+//		
+//		
+//	}
+//
+//	// *******************************************************************
 
 }
