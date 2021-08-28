@@ -124,8 +124,8 @@ public class UserRepositoryTest {
 	// ******************************************************************
 	// ******************* FIND USER BY EMAIL ***************************
 	// ******************************************************************
-	@DisplayName(
-			"GIVEN a valid user email Id"
+	@DisplayName(" Save and Find By Email- "
+			+ "GIVEN a valid user email Id"
 			+ "WHEN request find user by email"
 			+ "THEN returns user corresponding to the given email")
 	@Test
@@ -138,8 +138,8 @@ public class UserRepositoryTest {
 	}
 
 	// ******************************************************************
-	@DisplayName(
-			"GIVEN User "
+	@DisplayName(" find user by Email - ContextHolder- "
+			+ "GIVEN User "
 			+ "WHEN requested to find user by Email"
 			+ "THEN returns user found ")
 	@WithMockUser(username = "testemail1@email.com")
@@ -155,8 +155,8 @@ public class UserRepositoryTest {
 	//**********************prepopulate using SQL ***********************
 	// ******************* ADD USER & FIND BY EMAIL *********************
 	// ******************************************************************
-	@DisplayName(
-			"GIVEN sql script to add a new User in H2 Database "
+	@DisplayName("ADD USER SQL script + Find by email - InitializedByDbUnit- "
+			+ "GIVEN sql script to add a new User in H2 Database "
 			+ "WHEN request insert user and find user by email"
 			+ "THEN user added returns expected email ")
 	@Test
@@ -170,8 +170,8 @@ public class UserRepositoryTest {
 	//*******************************************************************
 	//**********************prepopulate using SQL ***********************
 	//*******************************************************************
-	@DisplayName(
-			"GIVEN sql script to add a new User in H2 Database "
+	@DisplayName("ADD USER SQL script + Find by email - "
+			+"GIVEN sql script to add a new User in H2 Database "
 			+ "WHEN request insert user and find user by email"
 			+ "THEN user added returns expected parameter values of the user added ")
 	@Test
@@ -185,8 +185,8 @@ public class UserRepositoryTest {
 	//*******************************************************************
 	//**********************prepopulate using EntityManager**************
 	//*******************************************************************
-	@DisplayName(
-			"GIVEN new User to add in H2 Database "
+	@DisplayName("FINDBY EMAIL - ENTITY MANAGER - "
+			+ "GIVEN new User to add in H2 Database "
 			+ "WHEN requested to persist user data using entityManager in H2 DB"
 			+ "THEN user data email added match expected value ")
 	@Test
@@ -226,8 +226,8 @@ public class UserRepositoryTest {
 	// ******************************************************************
 	// ******************* OPTINAL<User> FIND BY EMAIL ******************
 	// ******************************************************************
-	@DisplayName(
-			"GIVEN User "
+	@DisplayName("FIND USER BY EMAIL - "
+			+ "GIVEN User "
 			+ "WHEN requested to find by Email"
 			+ "THEN returns expected user found by Email")
 	@Test
@@ -271,22 +271,18 @@ public class UserRepositoryTest {
 //	    where
 //	        user0_.email=?
 
-	
-	
-	
-	
-	
+
 	
 	
 	// ******************************************************************
 	// ******************* findUserById(Integer id) ******************
 	// ******************************************************************
 	@DisplayName(
-			"GIVEN User Id "
+			"GIVEN User Id - "
 			+ "WHEN requested to find by user ID"
 			+ "THEN returns expected user found by Id")
 	@Test
-	public void testFindUserByyId() {
+	public void testFindUserById() {
 		User user = new User();
 		user.setId(1);
 		user.setFirstName("testfirstname1");
@@ -301,6 +297,29 @@ public class UserRepositoryTest {
 		assertEquals(1, user.getId());
 		}
 
+	
+	// ******************************************************************
+	// ******************* find User By UserName ******************
+	// ******************************************************************
+	@DisplayName("FIND BY USER NAME - "
+			+ "GIVEN User name - "
+			+ "WHEN requested to find by user name"
+			+ "THEN returns expected user found by username")
+	@Test
+	public void testFindUserByUserName() {
+		User user = new User();
+		user.setId(1);
+		user.setFirstName("testfirstname1");
+		user.setLastName("testleastname1");
+		user.setUserName("testusername1");
+		user.setEmail("testemail1@email.com");
+		user.setPassword("testpassword1");
+		user.setRoles("admin");
+		user.setCreationDate(LocalDate.parse("2021-08-26"));
+		user.setModificationDate(LocalDate.parse("2021-08-26"));
+		user = userRepository.findById(1).get();
+		assertEquals(1, user.getId());
+		}
 	
 	
 }
