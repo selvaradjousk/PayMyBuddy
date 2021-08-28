@@ -199,9 +199,9 @@ public class UserRepositoryTest {
 		alex.setEmail("myEmail@email.com");
 		alex.setPassword("password");
 		alex.setRoles("roles");
-		alex.setCreationDate(LocalDate.parse("2019-12-31"));
-		alex.setModificationDate(LocalDate.parse("2019-12-31"));
-		// LocalDateTime.parse("2019-12-31T23:59:59"))
+		alex.setCreationDate(LocalDate.parse("2021-08-26"));
+		alex.setModificationDate(LocalDate.parse("2021-08-26"));
+		// LocalDateTime.parse("2021-08-26T09:01:01"))
 
 		entityManager.persist(alex);
 		entityManager.flush();
@@ -239,8 +239,8 @@ public class UserRepositoryTest {
 		user.setEmail("myEmail@email.com");
 		user.setPassword("myEmail");
 		user.setRoles("myEmail");
-		user.setCreationDate(LocalDate.parse("2019-12-31"));
-		user.setModificationDate(LocalDate.parse("2019-12-31"));
+		user.setCreationDate(LocalDate.parse("2021-08-26"));
+		user.setModificationDate(LocalDate.parse("2021-08-26"));
 		user = entityManager.persistAndFlush(user);
 		assertEquals(user, userRepository.findByEmail(user.getEmail()).get());
 		}
