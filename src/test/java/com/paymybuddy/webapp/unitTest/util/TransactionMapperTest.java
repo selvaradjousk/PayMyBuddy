@@ -22,8 +22,8 @@ import com.paymybuddy.webapp.util.TransactionMapper;
 	            "testLastName",
 	            "myEmail",
 	            "myPassword",
-	            LocalDate.parse("2019-12-31"),
-	            LocalDate.parse("2019-12-31"),
+	            LocalDate.parse("2021-08-26"),
+	            LocalDate.parse("2021-08-26"),
 	            "admin",
 	            true,
 	            1000.0);
@@ -35,7 +35,7 @@ import com.paymybuddy.webapp.util.TransactionMapper;
 				user,
 				1000.0,
 				"testDescription",
-				LocalDate.parse("2019-12-31"),
+				LocalDate.parse("2021-08-26"),
 				0.25);
 		
 		TransactionMapper mapper = new TransactionMapper();
@@ -53,7 +53,7 @@ import com.paymybuddy.webapp.util.TransactionMapper;
 				user,
 				1000.0,
 				"testDescription",
-				LocalDate.parse("2019-12-31"),
+				LocalDate.parse("2021-08-26"),
 				0.25);
 		
 		TransactionMapper mapper = new TransactionMapper();

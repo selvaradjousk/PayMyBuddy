@@ -21,8 +21,8 @@ class BankAccountDTOTest {
             "testLastName",
             "myEmail",
             "myPassword",
-            LocalDate.parse("2019-12-31"),
-            LocalDate.parse("2019-12-31"),
+            LocalDate.parse("2021-08-26"),
+            LocalDate.parse("2021-08-26"),
             "admin",
             true,
             1000.0);
@@ -34,8 +34,8 @@ class BankAccountDTOTest {
             "testLastName",
             "myEmail",
             "myPassword",
-            LocalDate.parse("2019-12-31"),
-            LocalDate.parse("2019-12-31"),
+            LocalDate.parse("2021-08-26"),
+            LocalDate.parse("2021-08-26"),
             "admin",
             true,
             1000.0);

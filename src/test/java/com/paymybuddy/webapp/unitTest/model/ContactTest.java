@@ -33,21 +33,21 @@ class ContactTest {
             "testLastName",
             "myEmail",
             "myPassword",
-            LocalDate.parse("2019-12-31"),
-            LocalDate.parse("2019-12-31"),
+            LocalDate.parse("2021-08-26"),
+            LocalDate.parse("2021-08-26"),
             "admin",
             true,
             1000.0);
 	
 	Contact toTest1 = new Contact(
 			1,
-            LocalDate.parse("2019-12-31"),
+            LocalDate.parse("2021-08-26"),
 			testUser1,
             testUser2);
 
 	Contact toTest2 = new Contact(
 			1,
-            LocalDate.parse("2019-12-31"),
+            LocalDate.parse("2021-08-26"),
 			testUser1,
             testUser2);
 	
@@ -124,7 +124,7 @@ class ContactTest {
 	@Test
 	final void testSetCreationDate() {
 		Transaction transaction = new Transaction();
-		transaction.setCreationDate(LocalDate.parse("2019-12-31"));
+		transaction.setCreationDate(LocalDate.parse("2021-08-26"));
 		assertEquals(transaction.getCreationDate(), toTest1.getCreationDate());
 	}	
 	

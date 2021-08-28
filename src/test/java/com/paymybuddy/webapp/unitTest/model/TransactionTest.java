@@ -20,8 +20,8 @@ class TransactionTest {
             "testLastName",
             "myEmail",
             "myPassword",
-            LocalDate.parse("2019-12-31"),
-            LocalDate.parse("2019-12-31"),
+            LocalDate.parse("2021-08-26"),
+            LocalDate.parse("2021-08-26"),
             "admin",
             true,
             1000.0);
@@ -33,8 +33,8 @@ class TransactionTest {
             "testLastName",
             "myEmail",
             "myPassword",
-            LocalDate.parse("2019-12-31"),
-            LocalDate.parse("2019-12-31"),
+            LocalDate.parse("2021-08-26"),
+            LocalDate.parse("2021-08-26"),
             "admin",
             true,
             1000.0);
@@ -46,7 +46,7 @@ class TransactionTest {
             testUser2,
             1000.0,
             "description",
-            LocalDate.parse("2019-12-31"),
+            LocalDate.parse("2021-08-26"),
             0.25);
 	
 	Transaction toTest2 = new Transaction(
@@ -55,7 +55,7 @@ class TransactionTest {
             testUser2,
             1000.0,
             "description",
-            LocalDate.parse("2019-12-31"),
+            LocalDate.parse("2021-08-26"),
             0.25);
 
 
@@ -132,7 +132,7 @@ class TransactionTest {
 	@Test
 	final void testSetCreationDate() {
 		Contact contact = new Contact();
-		contact.setCreationDate(LocalDate.parse("2019-12-31"));
+		contact.setCreationDate(LocalDate.parse("2021-08-26"));
 		assertEquals(contact.getCreationDate(), toTest1.getCreationDate());
 	}
 	

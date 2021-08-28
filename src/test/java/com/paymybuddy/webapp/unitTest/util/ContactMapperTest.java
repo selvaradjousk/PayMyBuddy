@@ -6,12 +6,12 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import com.paymybuddy.webapp.dto.TransferDTO;
-import com.paymybuddy.webapp.model.Transfer;
+import com.paymybuddy.webapp.dto.ContactDTO;
+import com.paymybuddy.webapp.model.Contact;
 import com.paymybuddy.webapp.model.User;
-import com.paymybuddy.webapp.util.TransferMapper;
+import com.paymybuddy.webapp.util.ContactMapper;
 
-	class TransferMapperTest {
+	class ContactMapperTest {
 
 
 		User user = new User(
@@ -29,36 +29,32 @@ import com.paymybuddy.webapp.util.TransferMapper;
 
 		@Test
 	    public void testToEntity() {
-		TransferDTO dto = new TransferDTO(
-				10,
-				"testRib",
+		ContactDTO dto = new ContactDTO(
 				LocalDate.parse("2021-08-26"),
-				1000.0,
-				"CREDIT",
+				user,
 				user);
 		
-		TransferMapper mapper = new TransferMapper();
-		Transfer entity = mapper.toTransferDO(dto);
+		ContactMapper mapper = new ContactMapper();
+		Contact entity = mapper.toContactDO(dto);
 		
-		assertEquals(entity.getUser(), dto.getUser());
+		assertEquals(entity.getPayer(), dto.getPayer());
 		}
 		
 		@Test
 	    public void testToDTO() {
 			
-		Transfer entity = new Transfer(
-				"testRib",
+		Contact entity = new Contact(
+				10,
 				LocalDate.parse("2021-08-26"),
-				1000.0,
-				"CREDIT",
+				user,
 				user);
 		
-		TransferMapper mapper = new TransferMapper();
-		TransferDTO dto = mapper.toTransferDTO(entity);
+		ContactMapper mapper = new ContactMapper();
+		ContactDTO dto = mapper.toContactDTO(entity);
 		
-		assertEquals(dto.getUser(), entity.getUser());
-//		assertEquals(dto.getType(), entity.getRib());
-		assertEquals(dto.getType(), entity.getType());
+		assertEquals(dto.getPayer(), entity.getPayer());
+		assertEquals(dto.getCreationDate(), entity.getCreationDate());
 		}
 
 }
+
