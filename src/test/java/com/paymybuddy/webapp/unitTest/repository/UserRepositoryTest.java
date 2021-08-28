@@ -80,7 +80,9 @@ public class UserRepositoryTest {
 		assertEquals(15, userRepository.findAll().size());
 	}
 	
+	// https://stackoverflow.com/questions/23435937/how-to-test-spring-data-repositories
 	// ******************************************************************
+	//**********************prepopulate using Repo ***********************
 	// ******************* SAVE USER -FIND USER *************************
 	// ******************************************************************
 //	@Rollback(false)
@@ -93,7 +95,7 @@ public class UserRepositoryTest {
 		userRepository.save(new User(
 				100,
 				"userName",
-				"FirstName",
+				"firstName",
 				"lastName",
 				"myEmail",
 				"password",
@@ -150,6 +152,7 @@ public class UserRepositoryTest {
 	}
 	
 	// ******************************************************************
+	//**********************prepopulate using SQL ***********************
 	// ******************* ADD USER & FIND BY EMAIL *********************
 	// ******************************************************************
 	@DisplayName(
@@ -165,6 +168,8 @@ public class UserRepositoryTest {
 	}
 
 	//*******************************************************************
+	//**********************prepopulate using SQL ***********************
+	//*******************************************************************
 	@DisplayName(
 			"GIVEN sql script to add a new User in H2 Database "
 			+ "WHEN request insert user and find user by email"
@@ -178,6 +183,8 @@ public class UserRepositoryTest {
 	}
 
 	//*******************************************************************
+	//**********************prepopulate using EntityManager**************
+	//*******************************************************************
 	@DisplayName(
 			"GIVEN new User to add in H2 Database "
 			+ "WHEN requested to persist user data using entityManager in H2 DB"
@@ -186,12 +193,12 @@ public class UserRepositoryTest {
 	public void whenFindByEmail_thenReturnUser() {
 		// given
 		User alex = new User();
-		alex.setFirstName("myEmail");
-		alex.setLastName("myEmail");
-		alex.setUserName("myEmail");
+		alex.setFirstName("firstName");
+		alex.setLastName("lastName");
+		alex.setUserName("userName");
 		alex.setEmail("myEmail@email.com");
-		alex.setPassword("myEmail");
-		alex.setRoles("myEmail");
+		alex.setPassword("password");
+		alex.setRoles("roles");
 		alex.setCreationDate(LocalDate.parse("2019-12-31"));
 		alex.setModificationDate(LocalDate.parse("2019-12-31"));
 		// LocalDateTime.parse("2019-12-31T23:59:59"))
@@ -206,10 +213,14 @@ public class UserRepositoryTest {
 		assertEquals(alex.getEmail(), found.getEmail());
 	}
 
+	
 	//*******************************************************************
 
 
 
+	
+	
+	
 	
 	
 	// ******************************************************************
@@ -259,9 +270,37 @@ public class UserRepositoryTest {
 //	        user user0_ 
 //	    where
 //	        user0_.email=?
+
 	
-	//*******************************************************************	
 	
+	
+	
+	
+	
+	
+	// ******************************************************************
+	// ******************* findUserById(Integer id) ******************
+	// ******************************************************************
+	@DisplayName(
+			"GIVEN User Id "
+			+ "WHEN requested to find by user ID"
+			+ "THEN returns expected user found by Id")
+	@Test
+	public void testFindUserByyId() {
+		User user = new User();
+		user.setId(1);
+		user.setFirstName("testfirstname1");
+		user.setLastName("testleastname1");
+		user.setUserName("testusername1");
+		user.setEmail("testemail1@email.com");
+		user.setPassword("testpassword1");
+		user.setRoles("admin");
+		user.setCreationDate(LocalDate.parse("2021-08-26"));
+		user.setModificationDate(LocalDate.parse("2021-08-26"));
+		user = userRepository.findById(1).get();
+		assertEquals(1, user.getId());
+		}
+
 	
 	
 }
