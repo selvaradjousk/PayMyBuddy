@@ -10,7 +10,7 @@ import com.paymybuddy.webapp.model.User;
 @Component
 public class UserMapper {
 
-    LocalDate createDate = LocalDate.now();
+//    LocalDate creationDate = LocalDate.now();
 
     public UserDTO toUserDTO(User user) {
             UserDTO userDTO = new UserDTO();

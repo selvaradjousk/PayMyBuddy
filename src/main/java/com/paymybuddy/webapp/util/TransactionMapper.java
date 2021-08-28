@@ -10,7 +10,7 @@ import com.paymybuddy.webapp.model.Transaction;
 @Component
 public class TransactionMapper {
 
-	LocalDate createDate = LocalDate.now();	
+//	LocalDate creationDate = LocalDate.now();	
 	
 	  public Transaction toTransactionDO(TransactionDTO transactionDTO) {
 

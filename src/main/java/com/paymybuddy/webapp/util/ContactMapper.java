@@ -11,7 +11,7 @@ import com.paymybuddy.webapp.model.Contact;
 @Component
 public class ContactMapper {
 
-	LocalDate createDate = LocalDate.now();	
+//	LocalDate creationDate = LocalDate.now();	
 	
     public Contact toContactDO(ContactDTO contactDTO) {
 

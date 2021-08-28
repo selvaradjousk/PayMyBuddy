@@ -16,5 +16,8 @@ public class Exception {
 	// --> https://www.baeldung.com/exception-handling-for-rest-with-spring
 	// --> https://stackoverflow.com/questions/28902374/spring-boot-rest-service-exception-handling
 	
+void willdoSomething(){
+	
+}
 	
 }

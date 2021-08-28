@@ -10,7 +10,7 @@ import com.paymybuddy.webapp.model.Transfer;
 @Component
 public class TransferMapper {
 
-	LocalDate createDate = LocalDate.now();	
+//	LocalDate createDate = LocalDate.now();	
 
     public Transfer toTransferDO(TransferDTO transferDTO) {
         Transfer transfer = new Transfer();
