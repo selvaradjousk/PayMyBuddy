@@ -39,7 +39,7 @@ public class Transfer {
     @Column(name= "rib", nullable = false)
     private String rib;
 
-    @Getter
+    @Getter @Setter
     @Column(name= "date", nullable = false)
     private LocalDate createDate = LocalDate.now();
 
