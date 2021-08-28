@@ -1,11 +1,18 @@
 package com.paymybuddy.webapp.dto;
 
+import java.time.LocalDate;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
 public class UserDTO {
 
 	
 	// **************************** TODOs LIST ***********************************
 	
-	// Method: c
+	// Method:
 	// --> https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application
 	//
 	// --> An outside entity (a "mapper" or "assembler") is called to create a DTO from 
@@ -15,12 +22,88 @@ public class UserDTO {
 	// --> Entity is class mapped to table. Dto is class mapped to "view" layer mostly.
 	// --> What needed to store is entity & which needed to 'show' on web page is DTO
 	// --> https://www.amitph.com/spring-entity-to-dto/
-	// --> 
-	// --> 
-	// --> 
-	// --> 
 	
-	
-	
-	
+	@Setter @Getter
+    private int id;
+
+    private String userName;
+
+    private String firstName;
+
+	@Setter @Getter
+    private String lastName;
+
+    private String email;
+
+    private String password;
+
+	@Setter @Getter
+    private LocalDate creationDate;
+
+	@Setter @Getter
+    private LocalDate modificationDate;
+
+	@Setter @Getter
+    private String roles;
+
+    private boolean active;
+
+	@Setter @Getter
+    private Double  walletAmount;	
+
+    public UserDTO(String userName, String firstName, String email, String password) {
+		this.userName = userName;
+		this.firstName = firstName;
+		this.email = email;
+		this.password = password;
+	}
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+   
+
+    @Override
+	public String toString() {
+		return "User [id=" + id
+				+ ", userName=" + userName + ","
+				+ " firstName=" + firstName
+				+ ", lastName=" + lastName
+				+ ", email=" + email
+				+ ", password=" + password
+				+ ", creationDate=" + creationDate
+				+ ", modificationDate=" + modificationDate
+				+ ", roles=" + roles
+				+ ", active=" + active
+				+ ", walletAmount=" + walletAmount + "]";
+	}
 }

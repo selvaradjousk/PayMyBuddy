@@ -1,26 +1,42 @@
-package com.paymybuddy.webapp.unitTest.model;
+package com.paymybuddy.webapp.unitTest.dto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.paymybuddy.webapp.dto.UserDTO;
+import com.paymybuddy.webapp.model.User;
 
 @DisplayName("User Entity / DO - Unit Tests")
-class UserTest {
+class UserDTOTest {
 
-	UserDTO toTest1 = new UserDTO(
+	User toTest1 = new User(
+    		100,
             "testUserName",
             "testFirstName",
+            "testLastName",
             "myEmail",
-            "myPassword");
+            "myPassword",
+            LocalDate.parse("2019-12-31"),
+            LocalDate.parse("2019-12-31"),
+            "admin",
+            true,
+            1000.0);
 	
-	UserDTO toTest2 = new UserDTO(
+	User toTest2 = new User(
+    		100,
             "testUserName",
             "testFirstName",
+            "testLastName",
             "myEmail",
-            "myPassword");
+            "myPassword",
+            LocalDate.parse("2019-12-31"),
+            LocalDate.parse("2019-12-31"),
+            "admin",
+            true,
+            1000.0);
 	
 	
 	@Test
@@ -47,6 +63,13 @@ class UserTest {
 	@Test
 	final void testUserId() {
 		assertEquals(toTest1.getId(), toTest2.getId());
+	}
+	
+	@Test
+	final void testSetPhone() {
+		User tosSetTest = new User();
+		tosSetTest.setId(100);
+		assertEquals(tosSetTest.getId(), toTest1.getId());
 	}
 	
 	@Test
@@ -92,7 +115,13 @@ class UserTest {
 	}
 	@Test
 	final void testWalletAmount() {
-		assertEquals(toTest1.getWalletAmount(), toTest2.getWalletAmount());
+		assertEquals(toTest1.getwalletAmount(), toTest2.getwalletAmount());
 	}
-
+		
+	@Test
+	final void testSetWalletAmount() {
+		User tosSetTest = new User();
+		tosSetTest.setWalletAmount(1000.0);
+		assertEquals(tosSetTest.getwalletAmount(), toTest1.getwalletAmount());
+	}
 }
