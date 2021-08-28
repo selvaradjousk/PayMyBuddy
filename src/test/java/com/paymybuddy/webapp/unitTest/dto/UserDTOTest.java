@@ -115,13 +115,13 @@ class UserDTOTest {
 	}
 	@Test
 	final void testWalletAmount() {
-		assertEquals(toTest1.getwalletAmount(), toTest2.getwalletAmount());
+		assertEquals(toTest1.getWalletAmount(), toTest2.getWalletAmount());
 	}
 		
 	@Test
 	final void testSetWalletAmount() {
 		User tosSetTest = new User();
 		tosSetTest.setWalletAmount(1000.0);
-		assertEquals(tosSetTest.getwalletAmount(), toTest1.getwalletAmount());
+		assertEquals(tosSetTest.getWalletAmount(), toTest1.getWalletAmount());
 	}
 }

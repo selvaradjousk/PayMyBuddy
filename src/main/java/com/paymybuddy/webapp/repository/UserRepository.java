@@ -1,5 +1,7 @@
 package com.paymybuddy.webapp.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,15 +14,37 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	// **************************** TODOs LIST ***********************************
 	
 	// Method: c
-	// -->
-	// --> 
-	// --> 
-	// --> 
-	// --> 
-	// --> 
-	// --> 
-	// --> 
+	// --> User findUserById(Integer id);
+	// --> User findByEmail(String email)
+	// --> User findByUserName(String userName);
+	// --> User findByEmailAndPassword(String email, String password);
+	// --> Optional<User> findByEmail(String email);
+	// --> Page<User> listUserNotContact(User payer, @Param("x")String keyWord , Pageable pageable)
+	// --> Page<User> listUserAlreadyContact(User beneficiary, @Param("x")String keyWord , Pageable pageable)
 	// --> 
 	
-	public User findByEmail(String name);
+	
+	/**
+	 * Find by email.
+	 *
+	 * @param email the email
+	 * @return the user
+	 */
+	public User findUserByEmail(String email);
+	
+	
+	Optional<User> findByEmail(String email);
+	
 }
+
+
+// Custom JPQL Queries with @Query
+// @Query("select u from UserEntity u where u.name = :name")
+// UserEntity findByNameCustomQuery(@Param("name") String name);
+
+// Native Queries with @Query
+// @Query(
+// value = "select * from user as u where u.name = :name", nativeQuery = true)
+// UserEntity findByNameNativeQuery(@Param("name") String name);
+
+

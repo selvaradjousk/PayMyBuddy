@@ -23,7 +23,7 @@ public class UserMapper {
             userDTO.setModificationDate(user.getModificationDate());
             userDTO.setRoles(user.getRoles());
             userDTO.setActive(user.isActive());
-            userDTO.setWalletAmount(user.getwalletAmount());
+            userDTO.setWalletAmount(user.getWalletAmount());
 
 
 

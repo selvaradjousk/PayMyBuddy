@@ -33,7 +33,7 @@ public class UserServiceImpl implements IUserService{
 	
 	@Override
 	public User getUserByEmail(String email) {
-		return userRepository.findByEmail(email);
+		return userRepository.findUserByEmail(email);
 	}
 
 }

@@ -160,7 +160,7 @@ public class User {
         this.active = active;
     }
 
-    public Double getwalletAmount() {
+    public Double getWalletAmount() {
         return walletAmount; 
     }
 
