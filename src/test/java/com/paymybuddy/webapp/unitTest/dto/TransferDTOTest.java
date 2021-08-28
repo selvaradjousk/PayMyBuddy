@@ -84,10 +84,61 @@ class TransferDTOTest {
 		assertEquals(transfer.getUser(), toTest1.getUser());
 	}
 	
+	@Test
+	final void testRib() {
+		assertNotNull(toTest1.getRib());
+		assertNotNull(toTest2.getRib());
+	}
+	
+	@Test
+	final void testSetRib() {
+		TransferDTO transfer = new TransferDTO();
+		transfer.setRib("test Rib");
+		assertEquals(transfer.getRib(), toTest1.getRib());
+	}
+	
+	@Test
+	final void testAmount() {
+		assertNotNull(toTest1.getAmount());
+		assertNotNull(toTest2.getAmount());
+	}
+	
+	@Test
+	final void testSetAmount() {
+		TransferDTO transfer = new TransferDTO();
+		transfer.setAmount(1000.0);
+		assertEquals(transfer.getAmount(), toTest1.getAmount());
+	}
 
 	@Test
 	void testHashCode() {
 		assertEquals((toTest1.toString()).hashCode(), (toTest2.toString()).hashCode());
+	}
+	
+	@Test
+	final void testSetType() {
+		TransferDTO transfer = new TransferDTO();
+		transfer.setType("CREDIT");
+		assertEquals(transfer.getType(), toTest1.getType());
+	}
+	
+	@Test
+	final void testType() {
+		assertNotNull(toTest1.getType());
+		assertNotNull(toTest2.getType());
+	}
+	
+	@Test
+	final void testSetCreateDate() {
+		TransferDTO transfer = new TransferDTO();
+		transfer.setCreateDate(LocalDate.parse("2019-12-31"));
+		assertEquals(transfer.getCreateDate(), toTest1.getCreateDate());
+	}
+	
+	@Test
+	final void testCreateDate() {
+		assertNotNull(toTest1.getCreateDate());
+		assertNotNull(toTest2.getCreateDate());
 	}
 	
 	

@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import com.paymybuddy.webapp.dto.ContactDTO;
 import com.paymybuddy.webapp.model.Contact;
-import com.paymybuddy.webapp.model.Transaction;
 import com.paymybuddy.webapp.model.User;
 
 class ContactDTOTest {
@@ -92,9 +91,9 @@ class ContactDTOTest {
 	
 	@Test
 	final void testSetPayer() {
-		Contact transaction = new Contact();
-		transaction.setPayer(testUser1);
-		assertEquals(transaction.getPayer(), toTest1.getPayer());
+		ContactDTO contact = new ContactDTO();
+		contact.setPayer(testUser1);
+		assertEquals(contact.getPayer(), toTest1.getPayer());
 	}
 	
 	@Test
@@ -104,9 +103,9 @@ class ContactDTOTest {
 	
 	@Test
 	final void testSetContact() {
-		Contact transaction = new Contact();
-		transaction.setContact(testUser1);
-		assertEquals(transaction.getContact().toString(), toTest1.getContact().toString());
+		ContactDTO contact = new ContactDTO();
+		contact.setContact(testUser1);
+		assertEquals(contact.getContact().toString(), toTest1.getContact().toString());
 	}
 	
 	@Test
@@ -116,9 +115,9 @@ class ContactDTOTest {
 
 	@Test
 	final void testSetCreationDate() {
-		Transaction transaction = new Transaction();
-		transaction.setCreationDate(LocalDate.parse("2019-12-31"));
-		assertEquals(transaction.getCreationDate(), toTest1.getCreationDate());
+		ContactDTO contact = new ContactDTO();
+		contact.setCreationDate(LocalDate.parse("2019-12-31"));
+		assertEquals(contact.getCreationDate(), toTest1.getCreationDate());
 	}	
 	
 }

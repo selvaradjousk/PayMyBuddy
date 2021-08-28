@@ -8,8 +8,6 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 import com.paymybuddy.webapp.dto.TransactionDTO;
-import com.paymybuddy.webapp.model.Contact;
-import com.paymybuddy.webapp.model.Transaction;
 import com.paymybuddy.webapp.model.User;
 
 class TransactionDTOTest {
@@ -98,7 +96,7 @@ class TransactionDTOTest {
 	
 	@Test
 	final void testSetPayer() {
-		Transaction transaction = new Transaction();
+		TransactionDTO transaction = new TransactionDTO();
 		transaction.setPayer(testUser1);
 		assertEquals(transaction.getPayer(), toTest1.getPayer());
 	}
@@ -111,9 +109,10 @@ class TransactionDTOTest {
 	
 	@Test
 	final void testSetBeneficiary() {
-		Transaction transaction = new Transaction();
+		TransactionDTO transaction = new TransactionDTO();
 		transaction.setBeneficiary(testUser1);
 		assertEquals((transaction.getBeneficiary()).toString(), toTest1.getBeneficiary().toString());
+		assertNotNull(transaction.getBeneficiary());
 	}
 	
 	@Test
@@ -123,9 +122,10 @@ class TransactionDTOTest {
 
 	@Test
 	final void testSetCreationDate() {
-		Contact contact = new Contact();
-		contact.setCreationDate(LocalDate.parse("2019-12-31"));
-		assertEquals(contact.getCreationDate(), toTest1.getCreationDate());
+		TransactionDTO transaction = new TransactionDTO();
+		transaction.setCreationDate(LocalDate.parse("2019-12-31"));
+		assertEquals(transaction.getCreationDate(), toTest1.getCreationDate());
+		
 	}
 	
 	@Test
@@ -136,7 +136,7 @@ class TransactionDTOTest {
 	
 	@Test
 	final void testSetAmount() {
-		Transaction transaction = new Transaction();
+		TransactionDTO transaction = new TransactionDTO();
 		transaction.setAmount(1000.0);
 		assertEquals(transaction.getAmount(), toTest1.getAmount());
 	}	
@@ -149,7 +149,7 @@ class TransactionDTOTest {
 	
 	@Test
 	final void testSetDescription() {
-		Transaction transaction = new Transaction();
+		TransactionDTO transaction = new TransactionDTO();
 		transaction.setDescription("description");
 		assertEquals(transaction.getDescription(), toTest1.getDescription());
 	}	
@@ -162,7 +162,7 @@ class TransactionDTOTest {
 	
 	@Test
 	final void testSetCommision() {
-		Transaction transaction = new Transaction();
+		TransactionDTO transaction = new TransactionDTO();
 		transaction.setCommision(0.25);
 		assertEquals(transaction.getCommision(), toTest1.getCommision());
 	}

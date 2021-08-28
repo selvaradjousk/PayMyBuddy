@@ -91,12 +91,19 @@ public class UserDTO {
         this.password = password;
     }
    
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     @Override
 	public String toString() {
 		return "User [id=" + id
-				+ ", userName=" + userName + ","
-				+ " firstName=" + firstName
+				+ ", userName=" + userName
+				+ ", firstName=" + firstName
 				+ ", lastName=" + lastName
 				+ ", email=" + email
 				+ ", password=" + password
