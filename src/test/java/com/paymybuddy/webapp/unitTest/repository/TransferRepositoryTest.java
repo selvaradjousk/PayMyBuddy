@@ -155,5 +155,5 @@ public class TransferRepositoryTest {
 		// THEN
 		assertNotNull(savedTransfers);
 		assertEquals(2, savedTransfers.size());
-	}	
+	}
 }
