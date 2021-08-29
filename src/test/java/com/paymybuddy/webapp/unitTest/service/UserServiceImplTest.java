@@ -79,5 +79,7 @@ public class UserServiceImplTest {
 		 assertEquals(userIdDTO.getId(), userDTO.getId());
     }
 	
+	// *******************************************************************
+	
 	
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.paymybuddy.webapp.dto.UserDTO;
+import com.paymybuddy.webapp.exception.DataNotFoundException;
 import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.repository.UserRepository;
 import com.paymybuddy.webapp.util.UserMapper;
@@ -81,10 +82,20 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public UserDTO findUserById(Integer id) {
 
+		log.info(" ====> FIND USER by ID requested <==== ");
+
 		User user = userRepository.findUserById(id);
-		return userMapper.toUserDTO(user);
+
+        if (user == null) {
+            log.info(" ====> FIND USER by ID - user NOT FOUND<==== ");
+            throw new DataNotFoundException(
+            		"ERROR: User By ID - NOT FOUND");
+        }
+
+        return userMapper.toUserDTO(user);
 	}
 
+	// *******************************************************************
 
-	
+
 }
