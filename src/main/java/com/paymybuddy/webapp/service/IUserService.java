@@ -29,6 +29,8 @@ public interface IUserService {
  	 * @return the user DTO
  	 */
  	public UserDTO findUserById(Integer id);
+
+	public UserDTO saveUser(UserDTO userDTO);
  
  
  	
