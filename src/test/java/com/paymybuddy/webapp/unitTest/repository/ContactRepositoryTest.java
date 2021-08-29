@@ -110,5 +110,50 @@ public class ContactRepositoryTest {
 		assertNotNull(savedContacts);
 		assertEquals(4, savedContacts.size());
 	}
+	
+	
+	// ******************************************************************
+	// ******************* FIND CONTACTS AS BENiFICIARY ***************************
+	// ******************************************************************
+	@DisplayName(" Find By LIST OF Contacts AS BENiFICIARY - "
+			+ "GIVEN a user"
+			+ "WHEN request find contacts by user"
+			+ "THEN returns number of contacts by user")
+	@Test
+	void whenRequestContactListByBeneficiarythenReturnContactsListByBeneficiaryFromDB() {
+		
 
+		// GIVEN
+		testUser = userRespository.findUserByEmail("testemail1@email.com");
+		
+		// WHEN
+		List<Contact> savedContacts = contactRepository.findListContactByContact(testUser);
+
+		// THEN
+		assertNotNull(savedContacts);
+		assertEquals(2, savedContacts.size());
+	}
+	
+	// ******************************************************************
+	// ******************* FIND CONTACTS AS BENiFICIARY ***************************
+	// ******************************************************************
+	@DisplayName(" Find By LIST OF Contacts AS BENiFICIARY - "
+			+ "GIVEN a user"
+			+ "WHEN request find contacts by user"
+			+ "THEN returns number of contacts by user")
+	@Sql({ "/h2sourcedata_morecontacts.sql" })
+	@Test
+	void whenRequestContactListByBeneficiarythenReturnContactsListByBeneficiaryFromDBOnMoreUpdateData() {
+		
+
+		// GIVEN
+		testUser = userRespository.findUserByEmail("testemail1@email.com");
+		
+		// WHEN
+		List<Contact> savedContacts = contactRepository.findListContactByContact(testUser);
+
+		// THEN
+		assertNotNull(savedContacts);
+		assertEquals(4, savedContacts.size());
+	}
 }
