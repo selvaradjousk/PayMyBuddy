@@ -1,6 +1,14 @@
 package com.paymybuddy.webapp.config;
 
-public class SecurityConfig {
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	
 	// **************************** TODOs LIST ***********************************
@@ -30,4 +38,21 @@ public class SecurityConfig {
 	// --> https://howtodoinjava.com/spring5/security/security-java-config-enablewebsecurity-example/
 	// --> https://medium.com/@er.rameshkatiyar/configure-spring-security-in-your-application-ae303fa78959
 
+	
+	// for testing initially i am deactivating the basic spring security login page
+	// https://stackoverflow.com/questions/23636368/how-to-disable-spring-security-login-screen
+//	@Override
+//    protected void configure(HttpSecurity security) throws Exception
+//    {
+//     security.httpBasic().disable();
+//    }
+	
+	// https://stackoverflow.com/questions/44629289/spring-security-disable-default-login-page/44629660
+	//  disable the default login page
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .authorizeRequests().antMatchers(HttpMethod.OPTIONS,"*/").permitAll()
+                .antMatchers(HttpMethod.GET,"/login").permitAll();
+    }
 }
