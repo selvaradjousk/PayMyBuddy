@@ -6,8 +6,8 @@ import com.paymybuddy.webapp.model.User;
 
 public interface IUserService {
 
-	List<User> getAllUsers();
+	List<User> findAllUsers();
 
-	User getUserByEmail(String email);
+	User findUserByEmail(String email);
 
 }

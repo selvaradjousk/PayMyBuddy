@@ -23,8 +23,9 @@ class HomeControllerWebMvcTest {
     .andExpect(MockMvcResultMatchers.status().is(200))
     .andExpect(MockMvcResultMatchers.content().string("home"))
     .andExpect(MockMvcResultMatchers.header().string("Content-Type", "text/plain;charset=UTF-8"))
-    .andExpect(MockMvcResultMatchers.header().string("Content-Length", "4"));
-}
+    .andExpect(MockMvcResultMatchers.header().string("Content-Length", "4")); 
+//    .andExpect(model().attribute("msg", equalTo("SUCCESS LODAING HOME PAGE")))
+    }
 
     @Test
     public void testLoginShouldReturnMessage() throws Exception {
@@ -32,15 +33,14 @@ class HomeControllerWebMvcTest {
     .andExpect(MockMvcResultMatchers.status().is(200))
     .andExpect(MockMvcResultMatchers.content().string("login"))
     .andExpect(MockMvcResultMatchers.header().string("Content-Type", "text/plain;charset=UTF-8"))
-    .andExpect(MockMvcResultMatchers.header().string("Content-Length", "5"));
-}
+    .andExpect(MockMvcResultMatchers.header().string("Content-Length", "5")); 
+    }
     
     @Test
     public void testLogoutShouldReturnMessage() throws Exception {
     mockMvc.perform(MockMvcRequestBuilders.get("/logout"))
-    .andExpect(MockMvcResultMatchers.status().is(302));
-
-}
+    .andExpect(MockMvcResultMatchers.status().is(302)); 
+    }
     
     
 }

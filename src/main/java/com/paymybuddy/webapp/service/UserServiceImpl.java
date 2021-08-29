@@ -27,12 +27,12 @@ public class UserServiceImpl implements IUserService{
     private UserRepository userRepository;
 	
 	@Override
-	public List<User> getAllUsers() {
+	public List<User> findAllUsers() {
 		return userRepository.findAll();
 	}
 	
 	@Override
-	public User getUserByEmail(String email) {
+	public User findUserByEmail(String email) {
 		return userRepository.findUserByEmail(email);
 	}
 

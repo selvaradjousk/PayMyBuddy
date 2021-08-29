@@ -1,5 +1,6 @@
 package com.paymybuddy.webapp.controller;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,28 +45,25 @@ public class HomeController {
 	// https://www.nexsoftsys.com/articles/spring-boot-controller-unit-testing.html
 	// ***
 
-
-	
-	
 	// ************************************************************************
 	@GetMapping("/home")
-	public String home() {
+	public String home(Model model) {
+//		model.addAttribute("msg", "SUCCESS");
 		return "home";
 	}
-	
-	
+
 	// ************************************************************************
 	@GetMapping("/login")
-	public String login() {
+	public String login(Model model) {
+//		model.addAttribute("msg", "SUCCESS");
 		return "login";
 	}
-	
 
 	// ************************************************************************
 	@GetMapping("/logout")
-	public String logout() {
+	public String logout(Model model) {
+//		model.addAttribute("msg", "SUCCESS");
 		return "redirect:/login?logout";
 	}
-	
 
 }
