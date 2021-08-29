@@ -1,7 +1,6 @@
 package com.paymybuddy.webapp.unitTest.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -58,7 +57,7 @@ public class UserServiceImplTest {
         List<UserDTO> listUserDTO = userService.findAllUsers();
 
         //THEN
-        assertEquals(10, listUserDTO);
+        assertEquals(10, listUserDTO.size());
     }
 
 	// *******************************************************************

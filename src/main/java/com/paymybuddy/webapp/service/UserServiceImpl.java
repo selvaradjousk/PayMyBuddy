@@ -1,5 +1,6 @@
 package com.paymybuddy.webapp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,25 @@ public class UserServiceImpl implements IUserService {
 
 
     // *******************************************************************
+    /**
+     * Find all users.
+     *
+     * @return the list
+     */
 	@Override
 	public List<UserDTO> findAllUsers() {
-		return null;
+
+		List<User> listOfUsers = userRepository.findAll();
+
+		log.info(" ====> FIND All USER requested <==== ");
+
+		List<UserDTO> listOfUsersDTO = new ArrayList<UserDTO>();
+
+        for (User user: listOfUsers) {
+        	listOfUsersDTO.add(userMapper.toUserDTO(user));
+        }
+        log.info(" ====> FIND All USER Successfull <==== ");
+        return listOfUsersDTO;        
 	}
 
 
