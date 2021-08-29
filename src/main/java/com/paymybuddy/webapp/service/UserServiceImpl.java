@@ -32,11 +32,11 @@ public class UserServiceImpl implements IUserService {
 
     public UserMapper userMapper = new UserMapper();
 
-    
+
     // *******************************************************************
 	@Override
-	public List<User> findAllUsers() {
-		return userRepository.findAll();
+	public List<UserDTO> findAllUsers() {
+		return null;
 	}
 
 

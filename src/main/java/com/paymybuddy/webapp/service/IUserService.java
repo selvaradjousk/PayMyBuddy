@@ -3,11 +3,15 @@ package com.paymybuddy.webapp.service;
 import java.util.List;
 
 import com.paymybuddy.webapp.dto.UserDTO;
-import com.paymybuddy.webapp.model.User;
 
 public interface IUserService {
 
-	List<User> findAllUsers();
+	/**
+	 * Find all users.
+	 *
+	 * @return the list
+	 */
+	public List<UserDTO> findAllUsers();
 
 	/**
 	 * Find user by email.

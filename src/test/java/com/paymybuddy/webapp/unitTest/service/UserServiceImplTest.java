@@ -1,6 +1,9 @@
 package com.paymybuddy.webapp.unitTest.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,7 +44,24 @@ public class UserServiceImplTest {
 	
 	
 	// *******************************************************************
- 
+	@DisplayName("Find User All User (Service) - "
+			+ "GIVEN User list "
+			+ "WHEN Requested find all user list"
+			+ "THEN returns expected user list size")
+    @Test
+    public void testFindAllUser(){
+
+		//GIVEN
+		// list of users populated in the H2 DB dataset
+		
+        //WHEN
+        List<UserDTO> listUserDTO = userService.findAllUsers();
+
+        //THEN
+        assertEquals(10, listUserDTO);
+    }
+
+	// *******************************************************************
 	
     
 }
