@@ -19,7 +19,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.paymybuddy.webapp.model.Contact;
 import com.paymybuddy.webapp.model.Transaction;
 import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.repository.TransactionRepository;
@@ -48,6 +47,10 @@ public class TransactionRepositoryTest {
 		// *******************************************************************
 	  
 	  @Test
+		@DisplayName("@DataJpaTest & JPA components - "
+				+ "GIVEN @DataJpaTest "
+				+ "WHEN testing SpringData JPA repositories or JPA components"
+				+ "THEN will set up a Spring application context")
 	  void injectedComponentsAreNotNull(){
 	    assertThat(dataSource).isNotNull();
 	    assertThat(jdbcTemplate).isNotNull();
@@ -56,8 +59,12 @@ public class TransactionRepositoryTest {
 	  }
 	  
 		// ******************************************************************
-		// *******************LIST BANK ACCOUNTS ***************************
-		// ******************************************************************	  
+		// *******************LIST TRANSACTIONS ***************************
+		// ******************************************************************
+		@DisplayName("LIST OF TRANSACTIONS - "
+				+ "GIVEN - TRANSACTIONS in H2 Database "
+				+ "WHEN request list of TRANSACTIONS SpringData JPA repositories"
+				+ "THEN returns the number of TRANSACTIONS associated to H2 DB dataset")
 	  @Test
 	  public void should_find_all_Transactions() {
 		  
@@ -70,13 +77,17 @@ public class TransactionRepositoryTest {
 		// ******************* LOAD TRANSACTIONS - SQL SCRIPT***********************
 		// ******************************************************************	    
 	    @Test
+		@DisplayName("SQL SCRIPT TO LOAD & FIND ALL TRANSACTIONS SIZE- "
+				+ "GIVEN sql script to load more TRANSACTIONS in H2 Database "
+				+ "WHEN request insert TRANSACTIONS data and get number of TRANSACTIONS after update"
+				+ "THEN returns the number of TRANSACTIONS avalable after update in the H2 DB dataset")
 	    @Sql({"/h2sourcedata_moretransactions.sql"})
 	    public void testLoadDataForTestClassOnMoreTransaction() {
 	        assertEquals(15, transactionRepository.findAll().size());
 	    } 
 	    
 		// ******************************************************************
-		// ******************* FIND CONTACTS BY USER ***************************
+		// ******************* FIND TRANSACTIONS BY USER ***************************
 		// ******************************************************************
 		@DisplayName(" Find By LIST OF Transactions BY USER (Payer) - "
 				+ "GIVEN a user (Payer)"

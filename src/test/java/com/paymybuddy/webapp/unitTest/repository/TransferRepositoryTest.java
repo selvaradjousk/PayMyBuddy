@@ -3,12 +3,12 @@ package com.paymybuddy.webapp.unitTest.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
+import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -55,6 +55,10 @@ public class TransferRepositoryTest {
 
 	// *******************************************************************
 	@Test
+	@DisplayName("@DataJpaTest & JPA components - "
+			+ "GIVEN @DataJpaTest "
+			+ "WHEN testing SpringData JPA repositories or JPA components"
+			+ "THEN will set up a Spring application context")
 	void injectedComponentsAreNotNull() {
 		assertThat(dataSource).isNotNull();
 		assertThat(jdbcTemplate).isNotNull();
@@ -62,9 +66,15 @@ public class TransferRepositoryTest {
 		assertThat(transferRepository).isNotNull();
 	}
 
-	// *******************************************************************
+	// ******************************************************************
+	// *******************LIST TRANSFERS ***************************
+	// ******************************************************************	
 	@Test
-	public void should_find_all_Users() {
+	@DisplayName("LIST OF TRANSFERS - "
+			+ "GIVEN - TRANSFERS in H2 Database "
+			+ "WHEN request list of TRANSFERS SpringData JPA repositories"
+			+ "THEN returns the number of TRANSFERS associated to H2 DB dataset")
+	public void should_find_all_Transferss() {
 
 		Iterable<Transfer> transfers = transferRepository.findAll();
 
@@ -74,12 +84,38 @@ public class TransferRepositoryTest {
 	// *******************************************************************
 //	  @Sql("classpath:h2sourcedata_moretransfers.sql")
 	@Test
+	@DisplayName("SQL SCRIPT TO LOAD & FIND ALL TRANSFERS SIZE- "
+			+ "GIVEN sql script to load more TRANSFERS in H2 Database "
+			+ "WHEN request insert TRANSFERS data and get number of TRANSFERS after update"
+			+ "THEN returns the number of TRANSACTIONS avalable after update in the H2 DB dataset")
 	@Sql({ "/h2sourcedata_moretransfers.sql" })
-	public void testLoadDataForTestClass() {
+	public void testLoadDataForTestClasOnMoreTransferss() {
 		assertEquals(15, transferRepository.findAll().size());
 	}
 
 	// *******************************************************************
 
+	// ******************************************************************
+	// ******************* FIND TRANSFERS BY USER ***************************
+	// ******************************************************************
+	@DisplayName(" Find By LIST OF TRANSFERS BY USER (Payer) - "
+			+ "GIVEN a user"
+			+ "WHEN request find TRANSFERS by user"
+			+ "THEN returns number of TRANSFERS by user")
+	@Test
+	void whenRequestTransfersListBUserthenReturnTransfersListByUserFromDB() {
+		
+
+		// GIVEN
+		testUser1 = userRepository.findUserByEmail("testemail1@email.com");
+		
+		// WHEN
+		List<Transfer> savedTranactions = transferRepository.findAllByUser(testUser1);
+		
+
+		// THEN
+		assertNotNull(savedTranactions);
+		assertEquals(3, savedTranactions.size());
+	}		
 
 }
