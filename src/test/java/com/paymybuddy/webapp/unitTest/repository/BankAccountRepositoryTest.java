@@ -152,4 +152,55 @@ public class BankAccountRepositoryTest {
 		assertEquals(10+1, savedBankAccounts.size());
 	}
 	
+	// ******************************************************************
+	// ******************* DELETE A BANK ACCOUNT FROM USER **************
+	// ******************************************************************
+	@DisplayName(" SAVING NEW BANK ACCOUNT TO USER AND DELETING THE ACCOUNT- "
+			+ "GIVEN a added bank account to user"
+			+ "WHEN request to delete new bank accounts to user and count number of accounts associated to user"
+			+ "THEN returns number of bank accounts by user after deleting new account")
+	@Test
+	void whenSavedAndDeleteLAter_thenFindBankAccountsByUserFromDB() {
+
+		// GIVEN
+		testUser = userRespository.findUserByEmail("testemail1@email.com");
+		
+		BankAccount newBankAccount = new BankAccount();
+		newBankAccount.setUser(testUser);
+		newBankAccount.setRib("new rib added");;
+		
+		entityManager.persist(newBankAccount);
+		entityManager.flush();
+		
+//		entityManager.getTransaction().begin();
+//		entityManager.merge(fieldValue);
+//		entityManager.getTransaction().commit()
+
+		bankAccountRepository.save(newBankAccount);
+		
+//		entityManager.persist(testUser);
+//		entityManager.flush();
+
+		List<BankAccount> savedBankAccountsAll = bankAccountRepository.findAll();
+
+		List<BankAccount> savedBankAccountsUser = bankAccountRepository.findBankAccountByUser(testUser);
+
+		assertNotNull(savedBankAccountsAll);
+		assertEquals(10+1, savedBankAccountsAll.size());
+		
+		assertNotNull(savedBankAccountsUser);
+		assertEquals(4+1, savedBankAccountsUser.size());
+		
+		
+		// WHEN
+		bankAccountRepository.delete(newBankAccount);
+		
+		List<BankAccount> savedBankAccountsAfterDelete = bankAccountRepository.findAll();
+		
+		// THEN
+		assertNotNull(savedBankAccountsAfterDelete);
+		assertEquals(10, savedBankAccountsAfterDelete.size());	
+		
+	}
+	
 }
