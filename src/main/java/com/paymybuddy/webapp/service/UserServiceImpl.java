@@ -10,6 +10,8 @@ import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.repository.UserRepository;
 import com.paymybuddy.webapp.util.UserMapper;
 
+import lombok.extern.log4j.Log4j2;
+
 // **************************** TODOs LIST ***********************************
 
 // Method: 
@@ -21,6 +23,7 @@ import com.paymybuddy.webapp.util.UserMapper;
 // --> check password match on confirm password
 // --> input fields validation done in the respective DO with annotations
 
+@Log4j2	
 @Service
 public class UserServiceImpl implements IUserService {
 
@@ -28,17 +31,35 @@ public class UserServiceImpl implements IUserService {
 	private UserRepository userRepository;
 
     public UserMapper userMapper = new UserMapper();
-	
-	
+
+    
+    // *******************************************************************
 	@Override
 	public List<User> findAllUsers() {
 		return userRepository.findAll();
 	}
 
+
+	// *******************************************************************
+	/**
+	 * Find user by email.
+	 *
+	 * @param email the email
+	 * @return the user DTO
+	 */
 	@Override
 	public UserDTO findUserByEmail(String email) {
+
+		log.info(" ====> FIND USER by EMAIL requested <==== ");
+
 		User user = userRepository.findUserByEmail(email);
+
+		log.info(" ====> FIND USER by EMAIL Sucessfull <==== ");
+
 		return userMapper.toUserDTO(user);
 	}
+	// *******************************************************************
 
+
+	
 }

@@ -11,27 +11,37 @@ import org.springframework.test.context.ActiveProfiles;
 import com.paymybuddy.webapp.dto.UserDTO;
 import com.paymybuddy.webapp.service.IUserService;
 
+@DisplayName("USER SERVICE - H2 DB TEST ")
 @SpringBootTest
 @ActiveProfiles("test")
 public class UserServiceImplTest {
 
     @Autowired
     IUserService userService;
+    
+    
 
 	// *******************************************************************
-
+	@DisplayName("Find User By Email Service - "
+			+ "GIVEN User Email "
+			+ "WHEN Requested find user by email"
+			+ "THEN returns expected user by email")
     @Test
-    @DisplayName("Test findUserByEmail")
-    public void findUserByEmailTest(){
-        //GIVEN
+    public void testFindUserByEmail(){
+
+		//GIVEN
         String email = "testemail2@email.com";
+
         //WHEN
         UserDTO userDTO = userService.findUserByEmail(email);
+
         //THEN
         assertEquals(userDTO.getEmail(), "testemail2@email.com");
     }
-    
+	
+	
 	// *******************************************************************
-    
+ 
+	
     
 }
