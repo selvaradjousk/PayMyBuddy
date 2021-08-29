@@ -80,27 +80,6 @@ public class TransferRepositoryTest {
 	}
 
 	// *******************************************************************
-//	@Test
-//	void whenSaved_thenFindsByUser() {
-//		testUser1 = new User(101, "testUserName", "testFirstName", "testLastName", "myEmail", "myPassword",
-//				LocalDate.parse("2019-12-31"), LocalDate.parse("2019-12-31"), "admin", true, 1000.0);
-//		when(userRepository.save(testUser1)).thenReturn(testUser1);
-//		Transfer newTransfer = new Transfer(
-//	            "test Rib",
-//	            LocalDate.parse("2019-12-31"),
-//	            1000.0,
-//	            "CREDIT",
-//				testUser1);
-//		transferRepository.save(newTransfer);
-//		
-//		Transfer savedTransfer = transferRepository.findByUser(testUser1);
-//		
-//		assertNotNull(savedTransfer);
-//		assertEquals("testUser1", savedTransfer.getUser());
-//		
-//		
-//	}
-//
-//	// *******************************************************************
+
 
 }
