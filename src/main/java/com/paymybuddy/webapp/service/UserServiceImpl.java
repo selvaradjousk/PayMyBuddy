@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.paymybuddy.webapp.dto.UserDTO;
 import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.repository.UserRepository;
-
+import com.paymybuddy.webapp.util.UserMapper;
 
 // **************************** TODOs LIST ***********************************
 
@@ -21,19 +22,23 @@ import com.paymybuddy.webapp.repository.UserRepository;
 // --> input fields validation done in the respective DO with annotations
 
 @Service
-public class UserServiceImpl implements IUserService{
+public class UserServiceImpl implements IUserService {
 
 	@Autowired
-    private UserRepository userRepository;
+	private UserRepository userRepository;
+
+    public UserMapper userMapper = new UserMapper();
+	
 	
 	@Override
 	public List<User> findAllUsers() {
 		return userRepository.findAll();
 	}
-	
+
 	@Override
-	public User findUserByEmail(String email) {
-		return userRepository.findUserByEmail(email);
+	public UserDTO findUserByEmail(String email) {
+		User user = userRepository.findUserByEmail(email);
+		return userMapper.toUserDTO(user);
 	}
 
 }
