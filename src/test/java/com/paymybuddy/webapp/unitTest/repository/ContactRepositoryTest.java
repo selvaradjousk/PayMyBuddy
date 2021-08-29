@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -156,4 +157,81 @@ public class ContactRepositoryTest {
 		assertNotNull(savedContacts);
 		assertEquals(4, savedContacts.size());
 	}
+	
+	
+	// ******************************************************************
+	// ******************* SAVE CONTACT TO USER ***************************
+	// ******************************************************************
+	@DisplayName(" SAVING NEW CONTACT TO USER- "
+			+ "GIVEN a new contact to user"
+			+ "WHEN request to Add new contacts to user and count number of contacts associated to user"
+			+ "THEN returns number of contacts by user after adding contact")
+	@Test
+	void whenSaved_thenFindContactsByUserFromDB() {
+
+		// GIVEN
+		testUser = userRespository.findUserByEmail("testemail1@email.com");
+		
+		Contact newContact = new Contact();
+		newContact.setContact(testUser);
+		newContact.setPayer(testUser);
+		newContact.setCreationDate(LocalDate.parse("2021-08-26"));
+		
+		
+		entityManager.persist(newContact);
+		entityManager.flush();
+
+		// WHEN
+		contactRepository.save(newContact);
+		
+		// WHEN
+		List<Contact> savedContacts = contactRepository.findAll();
+
+		// THEN
+		assertNotNull(savedContacts);
+		assertEquals(10+1, savedContacts.size());
+	}
+	
+	
+	// ******************************************************************
+	// ******************* SAVE CONTACT TO USER ***************************
+	// ******************************************************************
+	@DisplayName(" DELETE CONTACT TO USER- "
+			+ "GIVEN a user"
+			+ "WHEN request to delete a contact and count number of accounts associated to user"
+			+ "THEN returns number of contacts by user after adding contact")
+	@Test
+	void whenDelete_thenDeleteContactsByUserFromDB() {
+
+		// GIVEN
+		testUser = userRespository.findUserByEmail("testemail1@email.com");
+		
+		Contact newContact = new Contact();
+		newContact.setContact(testUser);
+		newContact.setPayer(testUser);
+		newContact.setCreationDate(LocalDate.parse("2021-08-26"));
+		
+		
+		entityManager.persist(newContact);
+		entityManager.flush();
+
+		contactRepository.save(newContact);
+		
+		List<Contact> savedContacts = contactRepository.findAll();
+
+		assertNotNull(savedContacts);
+		assertEquals(10+1, savedContacts.size());
+		
+		
+		// WHEN
+		contactRepository.delete(newContact);
+		
+		List<Contact> savedContactsAfterDelete = contactRepository.findAll();
+		
+		// THEN
+		assertNotNull(savedContactsAfterDelete);
+		assertEquals(10, savedContactsAfterDelete.size());			
+		
+	}
+	
 }
