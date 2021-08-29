@@ -2,21 +2,29 @@ package com.paymybuddy.webapp.unitTest.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.data.domain.Page;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.paymybuddy.webapp.model.BankAccount;
 import com.paymybuddy.webapp.model.Contact;
+import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.repository.ContactRepository;
+import com.paymybuddy.webapp.repository.UserRepository;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
@@ -33,7 +41,17 @@ public class ContactRepositoryTest {
 
 	@Autowired
 	ContactRepository contactRepository;
+	
+	@Autowired
+	UserRepository userRespository;
 
+	User testUser = new User();
+	
+	// *******************************************************************
+	@DisplayName("@DataJpaTest & JPA components - "
+			+ "GIVEN @DataJpaTest "
+			+ "WHEN testing SpringData JPA repositories or JPA components"
+			+ "THEN will set up a Spring application context")
 	@Test
 	void injectedComponentsAreNotNull() {
 		assertThat(dataSource).isNotNull();
@@ -42,18 +60,55 @@ public class ContactRepositoryTest {
 		assertThat(contactRepository).isNotNull();
 	}
 
+	// ******************************************************************
+	// *******************LIST BANK ACCOUNTS ***************************
+	// ******************************************************************
+	@DisplayName("LIST OF CONTACTS - "
+			+ "GIVEN - Contacts in H2 Database "
+			+ "WHEN request list of Contacts SpringData JPA repositories"
+			+ "THEN returns the number of contacts associated to H2 DB dataset")
 	@Test
-	public void should_find_all_Userss() {
+	public void should_find_all_Contacts() {
 
 		Iterable<Contact> contacts = contactRepository.findAll();
 
 		assertThat(contacts).hasSize(10);
 	}
 
+	// ******************************************************************
+	// ******************* LOAD CONTACTS - SQL SCRIPT***********************
+	// ******************************************************************
+	@DisplayName("SQL SCRIPT TO LOAD & FIND ALL CONTACTS SIZE- "
+			+ "GIVEN sql script to load more Contacts in H2 Database "
+			+ "WHEN request insert contacts data and get number ofcontacts after update"
+			+ "THEN returns the number of contacts avalable after update in the H2 DB dataset")
 	@Test
 	@Sql({ "/h2sourcedata_morecontacts.sql" })
-	public void testLoadDataForTestClass() {
+	public void testLoadDataForTestClassContacts() {
 		assertEquals(15, contactRepository.findAll().size());
+	}
+
+	
+	// ******************************************************************
+	// ******************* FIND CONTACTS BY USER ***************************
+	// ******************************************************************
+	@DisplayName(" Find By LIST OF Contacts BY USER- "
+			+ "GIVEN a user"
+			+ "WHEN request find contacts by user"
+			+ "THEN returns number of contacts by user")
+	@Test
+	void whenRequestContactListByUserthenReturnContactsListByUserFromDB() {
+		
+
+		// GIVEN
+		testUser = userRespository.findUserByEmail("testemail1@email.com");
+		
+		// WHEN
+		List<Contact> savedContacts = contactRepository.findListContactByPayer(testUser);
+
+		// THEN
+		assertNotNull(savedContacts);
+		assertEquals(4, savedContacts.size());
 	}
 
 }

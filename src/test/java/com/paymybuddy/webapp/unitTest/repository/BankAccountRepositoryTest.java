@@ -63,9 +63,9 @@ public class BankAccountRepositoryTest {
 	// *******************LIST BANK ACCOUNTS ***************************
 	// ******************************************************************
 	@DisplayName("LIST OF BANK ACCOUNTS - "
-			+ "GIVEN - Users in H2 Database "
+			+ "GIVEN - User in H2 Database "
 			+ "WHEN request list of Bank Accounts SpringData JPA repositories"
-			+ "THEN returns the number of Bank Accounts associated to the user in the H2 DB dataset")
+			+ "THEN returns the number of Bank Accounts associated  in the H2 DB dataset")
 	@Test
 	public void should_find_all_BankAccounts() {
 
