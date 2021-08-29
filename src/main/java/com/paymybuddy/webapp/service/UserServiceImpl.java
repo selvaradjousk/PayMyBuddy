@@ -80,8 +80,9 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public UserDTO findUserById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		User user = userRepository.findUserById(id);
+		return userMapper.toUserDTO(user);
 	}
 
 
