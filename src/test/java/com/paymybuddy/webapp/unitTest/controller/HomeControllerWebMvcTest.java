@@ -18,10 +18,29 @@ class HomeControllerWebMvcTest {
     private MockMvc mockMvc;
 
     @Test
-    public void testShouldReturnMessage() throws Exception {
-    mockMvc.perform(MockMvcRequestBuilders.get("/login")).andExpect(MockMvcResultMatchers.status().is(200))
+    public void testHomeShouldReturnMessage() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.get("/home"))
+    .andExpect(MockMvcResultMatchers.status().is(200))
+    .andExpect(MockMvcResultMatchers.content().string("home"))
+    .andExpect(MockMvcResultMatchers.header().string("Content-Type", "text/plain;charset=UTF-8"))
+    .andExpect(MockMvcResultMatchers.header().string("Content-Length", "4"));
+}
+
+    @Test
+    public void testLoginShouldReturnMessage() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.get("/login"))
+    .andExpect(MockMvcResultMatchers.status().is(200))
     .andExpect(MockMvcResultMatchers.content().string("login"))
     .andExpect(MockMvcResultMatchers.header().string("Content-Type", "text/plain;charset=UTF-8"))
     .andExpect(MockMvcResultMatchers.header().string("Content-Length", "5"));
 }
+    
+    @Test
+    public void testLogoutShouldReturnMessage() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.get("/logout"))
+    .andExpect(MockMvcResultMatchers.status().is(302));
+
+}
+    
+    
 }

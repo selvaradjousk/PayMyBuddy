@@ -36,7 +36,7 @@ class HomeControllerSpringBTest {
 	}
 
 	@Test
-	public void testShouldReturnMessage_HTTPRequestTest() {
+	public void testLoginShouldReturnMessage_HTTPRequestTest() {
 		assertThat(testRestTemplate.getForObject("http://localhost:" + localPort + "/login", String.class)
 				.contains("login"));
 	}
