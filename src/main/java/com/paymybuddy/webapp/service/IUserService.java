@@ -20,5 +20,7 @@ public interface IUserService {
 	 * @return the user DTO
 	 */
 	public UserDTO findUserByEmail(String email);
-
+	
+	
+	 public UserDTO findUserById(Integer id);
 }

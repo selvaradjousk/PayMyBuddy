@@ -21,10 +21,10 @@ public class UserServiceImplTest {
     @Autowired
     IUserService userService;
     
-    
+    String testEmail = "testemail2@email.com";
 
 	// *******************************************************************
-	@DisplayName("Find User By Email Service - "
+	@DisplayName("Find User By Email  - "
 			+ "GIVEN User Email "
 			+ "WHEN Requested find user by email"
 			+ "THEN returns expected user by email")
@@ -32,13 +32,13 @@ public class UserServiceImplTest {
     public void testFindUserByEmail(){
 
 		//GIVEN
-        String email = "testemail2@email.com";
+        // a user Email
 
         //WHEN
-        UserDTO userDTO = userService.findUserByEmail(email);
+        UserDTO userDTO = userService.findUserByEmail(testEmail);
 
         //THEN
-        assertEquals(userDTO.getEmail(), "testemail2@email.com");
+        assertEquals(userDTO.getEmail(), testEmail);
     }
 	
 	
@@ -62,5 +62,22 @@ public class UserServiceImplTest {
 
 	// *******************************************************************
 	
-    
+	@DisplayName("Find User by Id - "
+			+ "GIVEN User ID "
+			+ "WHEN Requested find user by ID"
+			+ "THEN returns expected user by ID")
+    @Test
+    public void testFindUserById(){
+
+		//GIVEN
+		UserDTO userDTO = userService.findUserByEmail(testEmail);
+		
+        //WHEN
+		 UserDTO userIdDTO = userService.findUserById(userDTO.getId());
+
+        //THEN
+		 assertEquals(userIdDTO.getId(), userDTO.getId());
+    }
+	
+	
 }
