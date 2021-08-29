@@ -59,7 +59,8 @@ public class Transfer {
     public Transfer() {
     }
     
-    public Transfer(String rib, LocalDate createDate, double amount, String type, User user) {
+	public Transfer(String rib, LocalDate createDate,
+			double amount, String type, User user) {
 		super();
 		this.rib = rib;
 		this.createDate = createDate;

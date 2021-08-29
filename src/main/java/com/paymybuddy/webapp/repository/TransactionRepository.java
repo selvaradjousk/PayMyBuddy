@@ -14,14 +14,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 	
 	// Method: c
 	// --> Find list of Transactions By Payer
-	// --> 
-	// --> 
-	// --> 
-	// --> 
-	// --> 
-	// --> 
-	// --> 
-	// --> 
+
 
 	List<Transaction> findAllByPayer(User payer);
 	

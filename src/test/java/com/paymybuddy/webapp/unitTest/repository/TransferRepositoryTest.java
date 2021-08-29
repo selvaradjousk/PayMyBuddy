@@ -11,7 +11,6 @@ import javax.sql.DataSource;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -41,15 +40,13 @@ public class TransferRepositoryTest {
 	@Autowired
 	TransferRepository transferRepository;
 	
-	@Mock
-	User testUser1; 
+	User testUser1 = new User(); 
 	
-	@Mock
+	@Autowired
 	UserRepository userRepository;
 	
 	public void setUp() {
-
-		
+	
 	}
 
 
@@ -93,8 +90,6 @@ public class TransferRepositoryTest {
 		assertEquals(15, transferRepository.findAll().size());
 	}
 
-	// *******************************************************************
-
 	// ******************************************************************
 	// ******************* FIND TRANSFERS BY USER ***************************
 	// ******************************************************************
@@ -103,19 +98,62 @@ public class TransferRepositoryTest {
 			+ "WHEN request find TRANSFERS by user"
 			+ "THEN returns number of TRANSFERS by user")
 	@Test
-	void whenRequestTransfersListBUserthenReturnTransfersListByUserFromDB() {
-		
+	void whenRequestTransfersListUserthenReturnTransfersListByUserFromDB() {
 
 		// GIVEN
 		testUser1 = userRepository.findUserByEmail("testemail1@email.com");
 		
 		// WHEN
-		List<Transfer> savedTranactions = transferRepository.findAllByUser(testUser1);
+		List<Transfer> savedTransfers = transferRepository.findAllByUser(testUser1);
 		
 
 		// THEN
-		assertNotNull(savedTranactions);
-		assertEquals(3, savedTranactions.size());
+		assertNotNull(savedTransfers);
+		assertEquals(4, savedTransfers.size());
 	}		
 
+
+	// ******************************************************************
+	// ******************* FIND TRANSFERS BY USER TYPE CREDIT ***************************
+	// ******************************************************************
+	@DisplayName(" Find By LIST OF TRANSFERS BY USER Type Credit - "
+			+ "GIVEN a user"
+			+ "WHEN request find TRANSFERS by user Type Credit"
+			+ "THEN returns number of TRANSFERS by user Type Credit")
+	@Test
+	void whenRequestTransfersListUserTypeCreditthenReturnTransfersListByUserTypeCreditFromDB() {
+
+		// GIVEN
+		testUser1 = userRepository.findUserByEmail("testemail1@email.com");
+		
+		// WHEN
+		List<Transfer> savedTransfers = transferRepository.findAllByUserTypeCredit(testUser1);
+		
+
+		// THEN
+		assertNotNull(savedTransfers);
+		assertEquals(2, savedTransfers.size());
+	}
+	
+	// ******************************************************************
+	// ******************* FIND TRANSFERS BY USER TYPE DEBIT ***************************
+	// ******************************************************************
+	@DisplayName(" Find By LIST OF TRANSFERS BY USER Type DEBIT - "
+			+ "GIVEN a user"
+			+ "WHEN request find TRANSFERS by user Type DEBIT"
+			+ "THEN returns number of TRANSFERS by user Type DEBIT")
+	@Test
+	void whenRequestTransfersListUserTypeDEBITthenReturnTransfersListByUserTypeDEBITFromDB() {
+
+		// GIVEN
+		testUser1 = userRepository.findUserByEmail("testemail1@email.com");
+		
+		// WHEN
+		List<Transfer> savedTransfers = transferRepository.findAllByUserTypeDebit(testUser1);
+		
+
+		// THEN
+		assertNotNull(savedTransfers);
+		assertEquals(2, savedTransfers.size());
+	}	
 }

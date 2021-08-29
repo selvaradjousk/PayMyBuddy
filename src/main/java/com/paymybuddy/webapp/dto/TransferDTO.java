@@ -28,7 +28,6 @@ public class TransferDTO {
 	public TransferDTO(int idTransfer, String rib, LocalDate createDate,
 			double amount, String type, User user) {
 		super();
-		this.idTransfer = idTransfer;
 		this.rib = rib;
 		this.createDate = createDate;
 		this.amount = amount;
