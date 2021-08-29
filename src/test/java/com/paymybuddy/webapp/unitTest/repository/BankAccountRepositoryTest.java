@@ -87,6 +87,11 @@ public class BankAccountRepositoryTest {
 		assertEquals(15, bankAccountRepository.findAll().size());
 	}
 
+	
+	
+	
+	
+	
 	// ******************************************************************
 	// ******************* FIND BANK ACCOUNTS BY USER ***************************
 	// ******************************************************************
@@ -95,7 +100,8 @@ public class BankAccountRepositoryTest {
 			+ "WHEN request find bank accounts by user"
 			+ "THEN returns number of bank accounts by user")
 	@Test
-	void whenSaved_thenFindBankAccountsByUserFromDB() {
+	void whenRequestBankAccountListByUserthenReturnBankAccountsListByUserFromDB() {
+		
 
 		// GIVEN
 		testUser = userRespository.findUserByEmail("testemail1@email.com");
@@ -109,6 +115,41 @@ public class BankAccountRepositoryTest {
 	}
 	
 	
-	
+	// ******************************************************************
+	// ******************* SAVE BANK ACCOUNT TO USER ***************************
+	// ******************************************************************
+	@DisplayName(" SAVING NEW BANK ACCOUN TO USER- "
+			+ "GIVEN a new bank account to user"
+			+ "WHEN request to Add new bank accounts to user and count number of accounts associated to user"
+			+ "THEN returns number of bank accounts by user after adding new account")
+	@Test
+	void whenSaved_thenFindBankAccountsByUserFromDB() {
+
+		// GIVEN
+		testUser = userRespository.findUserByEmail("testemail1@email.com");
+		
+		BankAccount newBankAccount = new BankAccount();
+		newBankAccount.setUser(testUser);
+		newBankAccount.setRib("new rib added");;
+		
+		entityManager.persist(newBankAccount);
+		entityManager.flush();
+		
+//		entityManager.getTransaction().begin();
+//		entityManager.merge(fieldValue);
+//		entityManager.getTransaction().commit()
+
+		// WHEN
+		bankAccountRepository.save(newBankAccount);
+		
+//		entityManager.persist(testUser);
+//		entityManager.flush();
+		// WHEN
+		List<BankAccount> savedBankAccounts = bankAccountRepository.findAll();
+
+		// THEN
+		assertNotNull(savedBankAccounts);
+		assertEquals(10+1, savedBankAccounts.size());
+	}
 	
 }
