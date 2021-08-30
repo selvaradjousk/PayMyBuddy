@@ -76,11 +76,13 @@ public class ContactServiceImpl implements IContactService {
     // ************************************************************************
 
 
-	@Override
-	public ContactDTO deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public ContactDTO deleteById(Integer id) {
+
+        contactRepository.deleteById(id);
+
+        return null;
+    }
 
 	
 	

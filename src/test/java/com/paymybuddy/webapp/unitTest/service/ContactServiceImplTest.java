@@ -102,6 +102,7 @@ class ContactServiceImplTest {
         assertEquals(listContactDTO.size()-1,listContactDTOAfterDelete.size());
     }
     // ************************************************************************ 
+
     
     
 }
