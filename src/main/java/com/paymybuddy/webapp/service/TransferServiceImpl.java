@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.paymybuddy.webapp.dto.TransferDTO;
 import com.paymybuddy.webapp.dto.UserDTO;
 import com.paymybuddy.webapp.model.Transfer;
+import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.repository.TransferRepository;
 import com.paymybuddy.webapp.util.TransferMapper;
+import com.paymybuddy.webapp.util.UserMapper;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -35,6 +39,7 @@ public class TransferServiceImpl implements ITransferService {
 
 	public TransferMapper transferMapper = new TransferMapper();
 
+	public UserMapper userMapper = new UserMapper();
 
 	// *******************************************************************
 	
@@ -56,12 +61,29 @@ public class TransferServiceImpl implements ITransferService {
 	}
 
 
+	// *************This method is a step for pagable template*************
+	
 	@Override
 	public List<TransferDTO> findAllTransferByUser(UserDTO userDTO) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		User user = userMapper.toUserDO(userDTO);
+		
+		List<Transfer> listOfTransfers = transferRepository.findAllByUser(user);
+
+		log.info(" ====> FIND All TRANSFER for a user requested <==== ");
+
+		List<TransferDTO> listOfTransfersDTO = new ArrayList<TransferDTO>();
+
+		for (Transfer transfer : listOfTransfers) {
+			listOfTransfersDTO.add(transferMapper.toTransferDTO(transfer));
+		}
+		log.info(" ====> FIND All TRANSFER for a user Successfull <==== ");
+		return listOfTransfersDTO;
 	}
 
+	// *******************************************************************
+
+	
 
 
 }
