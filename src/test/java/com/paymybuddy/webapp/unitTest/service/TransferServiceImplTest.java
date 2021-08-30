@@ -1,6 +1,7 @@
 package com.paymybuddy.webapp.unitTest.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import org.springframework.test.context.ActiveProfiles;
 import com.paymybuddy.webapp.constant.TransferType;
 import com.paymybuddy.webapp.dto.TransferDTO;
 import com.paymybuddy.webapp.dto.UserDTO;
+import com.paymybuddy.webapp.exception.DataNotConformException;
 import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.service.ITransferService;
 import com.paymybuddy.webapp.service.IUserService;
@@ -53,7 +55,7 @@ class TransferServiceImplTest {
         		.findAllTransfers();
 
         //THEN
-        assertEquals(10, listTransferDTO.size());
+        assertEquals(11, listTransferDTO.size());
     }
 	
 	// *************This method is a step for pagable template*************	
@@ -68,7 +70,7 @@ class TransferServiceImplTest {
       List<TransferDTO> listTransfers = transferService
     		  .findAllTransferByUser(userDTO);
       //THEN
-      assertEquals(3,listTransfers.size());
+      assertEquals(4,listTransfers.size());
   }
 	
 	
@@ -88,7 +90,7 @@ class TransferServiceImplTest {
 
       //THEN
       assertEquals(2, pagesTransferDTO.getContent().size());
-      assertEquals(3, pagesTransferDTO.getTotalElements());
+      assertEquals(4, pagesTransferDTO.getTotalElements());
   }
 
 	// *******************************************************************
@@ -120,9 +122,10 @@ class TransferServiceImplTest {
     				  userBeneficiary.getId()).getWalletAmount();
 
       //THEN
-      assertTrue( newWallet == walletBefore+500.0 );
+      assertEquals(walletBefore+500.0, newWallet);
       assertTrue( transferDTO.getIdTransfer() > 0);
   }
   
-  
+ 
 }
+
