@@ -69,7 +69,7 @@ class TransferServiceImplTest {
 	// *******************************************************************
 
   @Test
-  public void TestLastThreeTransfers(){
+  public void TestLastThreeTransfersByUserPageable(){
 
       //GIVEN
       listUserDTO = userService.findAllUsers();

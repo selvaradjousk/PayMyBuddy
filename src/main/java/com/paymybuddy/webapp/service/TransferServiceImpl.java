@@ -82,7 +82,20 @@ public class TransferServiceImpl implements ITransferService {
 	}
 
 	// *******************************************************************
+	@Override
+	public Page<TransferDTO> findAllTransferByUser(UserDTO userDTO, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+
+	@Override
+	public Page<TransferDTO> lastThreeTransfers(UserDTO userDTO, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 	
 
 
