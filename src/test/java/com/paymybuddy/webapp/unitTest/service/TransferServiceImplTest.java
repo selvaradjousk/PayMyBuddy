@@ -1,6 +1,7 @@
 package com.paymybuddy.webapp.unitTest.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -122,7 +123,10 @@ class TransferServiceImplTest {
     				  userBeneficiary.getId()).getWalletAmount();
 
       //THEN
+      // Balance after debit has expected balance 
       assertEquals(walletBefore+500.0, newWallet);
+      
+      // Transfer operation has been performed one time 
       assertTrue( transferDTO.getIdTransfer() > 0);
   }
   
@@ -155,7 +159,10 @@ class TransferServiceImplTest {
     				  userBeneficiary.getId()).getWalletAmount();
 
       //THEN
+      // Balance after debit has expected balance 
       assertEquals(walletBefore-500.0, newWallet);
+      
+      // Transfer operation has been performed one time 
       assertTrue(transferDTO.getIdTransfer() > 0);
   }
   
@@ -207,7 +214,56 @@ class TransferServiceImplTest {
 
   	// *******************************************************************		
  	
- 	
+	  @Test
+	  public void testSaveTransferUserNull(){
+
+	      //GIVEN
+	      listUserDTO = userService
+	    		  .findAllUsers();
+	      
+	
+	      //WHEN  // THEN
+	      assertThrows(DataNotConformException.class, () -> transferService.addTransfer(
+	    		  "FR 1111 1111 1111",
+	    		  5000.0,
+	    		  TransferType.CREDIT.toString(),
+	    		  null));
+	  }
+	  
+	  	// *******************************************************************
+	  
+	  @Test
+	  public void testSaveTransferDebitExccedsBalance(){
+
+	      //GIVEN
+	      listUserDTO = userService
+	    		  .findAllUsers();
+	      
+	      User userBeneficiary = userMapper
+	    		  .toUserDO(listUserDTO.get(1));
+	      
+	      Double walletBefore = userBeneficiary
+	    		  .getWalletAmount();
+	      
+	      TransferDTO transferDTO = new TransferDTO();
+      
+	      //THEN  //WHEN
+	      assertThrows(DataNotConformException.class, () -> transferService.addTransfer(
+	    		  "FR 1111 1111 1111",
+	    		  5000.0,
+	    		  TransferType.DEBIT.toString(),
+	    		  userBeneficiary));
+	      
+	      Double newWallet = userService.findUserById(userBeneficiary.getId()).getWalletAmount();
+	      
+	      // Account Balance remains unchanged
+	      assertEquals(walletBefore, newWallet);
+	      
+	      // No operation Transfer performed
+	      assertFalse(transferDTO.getIdTransfer() > 0);
+	  }
+	  
+	 	// *******************************************************************		
   
   
 }
