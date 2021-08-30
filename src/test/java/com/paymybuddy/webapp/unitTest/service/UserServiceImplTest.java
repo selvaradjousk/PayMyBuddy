@@ -2,6 +2,7 @@ package com.paymybuddy.webapp.unitTest.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -91,7 +92,7 @@ public class UserServiceImplTest {
 		UserDTO userDTO = new UserDTO();
 		//GIVEN
 		userDTO = userService.findUserByEmail(testEmail);
-		userDTO.setEmail(testEmail);
+		userDTO.setEmail("testEmail@email.com");
 		userDTO.setId(100);
 //		UserDTO dto = new UserDTO("userName", "firstName", testEmail, "password");
 		
@@ -103,8 +104,9 @@ public class UserServiceImplTest {
 		assertNotEquals(0, newUserDTO.getId());
 		assertNotEquals(0, newUserDTO.getId());
     }
-	
-	
+
+	// *******************************************************************
+
 	
 	
 }

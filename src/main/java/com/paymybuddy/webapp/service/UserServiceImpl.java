@@ -1,12 +1,16 @@
 package com.paymybuddy.webapp.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.paymybuddy.webapp.dto.UserDTO;
+import com.paymybuddy.webapp.exception.DataAlreadyExistException;
+import com.paymybuddy.webapp.exception.DataNotConformException;
 import com.paymybuddy.webapp.exception.DataNotFoundException;
 import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.repository.UserRepository;
@@ -101,13 +105,102 @@ public class UserServiceImpl implements IUserService {
     //******************************************************************
     @Override
     public UserDTO saveUser(UserDTO userDTO) {
+
     	log.info(" ====> SAVE User requested <==== ");
-        User userAdd = new User();
-          userAdd = userRepository.save(userMapper.toUserDO(userDTO));
-            log.info(" ====> User SAVED Successfully <==== ");
-            return userMapper.toUserDTO(userAdd);
+ 
+    	User userAdd = new User();
+ 
+    	userAdd = userRepository.save(userMapper.toUserDO(userDTO));
 
+        log.info(" ====> User SAVED Successfully <==== ");
+ 
+        return userMapper.toUserDTO(userAdd);
     }
+    
 
+    //******************************************************************
+    @Override
+    public boolean userExistById(int id) {
+    	log.info(" ====> Check VERIFY userExistById <==== ");
+        return userRepository.existsById(id);
+    }
+    
+    //******************************************************************
+    
+    public UserDTO saveNewUser(UserDTO userDTO, String confirmationPass) {
+ 
+   	log.info(" ====> SAVE NEW User requested <==== ");
+
+        User userAdd = new User();
+
+        checkConfirmationPasswordMatch(userDTO, confirmationPass);
+
+        checkAlphanumericNameEntry(userDTO);
+
+        checkEntryForEmailFormat(userDTO);
+
+        if (userRepository.findUserByEmail(userDTO.getEmail())==null){
+            userDTO.setRoles("ROLE_USER");
+            userDTO.setWalletAmount(0.0);
+            userDTO.setActive(true);
+            userDTO.setCreationDate(LocalDate.now());
+
+
+            log.info(" ====> NEW User PASSWORD: " + userDTO.getPassword() + " <==== ");
+            userAdd = userRepository.save(userMapper.toUserDO(userDTO));
+            log.info(" ====> SAVE NEW User SUCCESSFULL <==== ");
+            return userMapper.toUserDTO(userAdd);
+        }else{
+            throw new DataAlreadyExistException("Email ID not available,"
+            		+ " already taken by existing user !");
+        }
+    }
+    
+    //******************************************************************
+
+ 	/**
+ 	 * @param userDTO
+ 	 */
+ 	private void checkEntryForEmailFormat(UserDTO userDTO) {
+ 		if(checkStringEmail(userDTO.getEmail())==false){
+             throw new DataNotConformException("Please enter EMAIL ID");
+         }
+ 	}
+ 	 //******************************************************************
+ 	/**
+ 	 * @param userDTO
+ 	 */
+ 	private void checkAlphanumericNameEntry(UserDTO userDTO) {
+ 		if(checkStringName(userDTO.getUserName())==false ||
+                         checkStringName(userDTO.getFirstName())==false){
+         	log.info(" ====> ERROR: Names not alphanumeric <==== ");
+             throw new DataNotConformException("Non alphanumeric names not accepted");
+         }
+ 	}
+ 	 //******************************************************************
+ 	/**
+ 	 * @param userDTO
+ 	 * @param confirmationPass
+ 	 */
+ 	private void checkConfirmationPasswordMatch(UserDTO userDTO, String confirmationPass) {
+ 		if(userDTO.getPassword().equals(confirmationPass)==false){
+         	log.info(" ====> ERROR: Password MISMATCH <==== ");
+             throw new DataNotConformException("Password MISMATCH");
+         }
+ 	}
+ 	 //******************************************************************
+ 	
+   public boolean checkStringName(String string) {
+
+        Pattern stringNamePattern = Pattern.compile("[a-zA-Z\\+\\-\\+]{2,100}");
+        return stringNamePattern.matcher(string).matches();
+    }
+    //******************************************************************
+
+    public boolean checkStringEmail(String string) {
+        Pattern stringNamePattern = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+");
+        return stringNamePattern.matcher(string).matches();
+    }
+       
 
 }

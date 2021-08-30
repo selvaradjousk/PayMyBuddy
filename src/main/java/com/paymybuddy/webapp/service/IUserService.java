@@ -32,7 +32,9 @@ public interface IUserService {
 
 	UserDTO saveUser(UserDTO userDTO);
 
-//	public UserDTO saveUser(UserDTO userDTO);
+	boolean userExistById(int id);
+
+	UserDTO saveNewUser(UserDTO userDTO, String confirmationPass);
  
  
  	
