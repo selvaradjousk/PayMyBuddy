@@ -111,6 +111,20 @@ class TransferServiceImplTest {
   
   	// *******************************************************************
   
+  @Test
+  public void testFindAllByTransfersByUserPageable(){
+      //GIVEN
+      listUserDTO = userService.findAllUsers();
+      UserDTO userDTO = listUserDTO.get(1);
+      int page = 0;
+      //WHEN
+      Page<TransferDTO> pagesTransfer = transferService.findAllTransferByUser(userDTO,  PageRequest.of(page,2));
+      //THEN
+      assertEquals(2,pagesTransfer.getContent().size());
+  }
+  
+	// *******************************************************************  
+  
   
   @Test
   public void TestLastThreeTransfersByUserPageable(){
@@ -241,7 +255,7 @@ class TransferServiceImplTest {
 		assertThrows(DataNotConformException.class, ()
 				-> transferService.addTransfer(
 				"FR 1111 1111 1111",
-				0.0,
+				0,
 				TransferType.CREDIT.toString(),
 				userBeneficiary));
 	}
