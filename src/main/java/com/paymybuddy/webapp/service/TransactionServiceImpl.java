@@ -102,14 +102,23 @@ public class TransactionServiceImpl  implements ITransactionService  {
 
 
 	    // ************************************************************************
+	  
 
+	    public Page<TransactionDTO> lastThreeTransactions(
+	    		UserDTO userDTO,
+	    		Pageable pageable) {
 
-		@Override
-		public Page<TransactionDTO> lastThreeTransactions(UserDTO userDTO, Pageable pageable) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-   
+	    	User user = userMapper.toUserDO(userDTO);
+
+	    	Page<TransactionDTO> pagesTransactionDTO = transactionRepository
+	        		.lastThreeTransactions(user, pageable)
+	        		.map(transactionMapper::toTransactionDTO);
+
+	    	return pagesTransactionDTO;
+	    }
+
+	    // ************************************************************************
+	    
 	    
 	
 }
