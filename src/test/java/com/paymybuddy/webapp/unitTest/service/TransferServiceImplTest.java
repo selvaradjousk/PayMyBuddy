@@ -126,7 +126,7 @@ class TransferServiceImplTest {
       assertTrue( transferDTO.getIdTransfer() > 0);
   }
   
-  
+	// *******************************************************************  
   
   @Test
   public void testSaveTransferTypeDebit(){
@@ -160,8 +160,33 @@ class TransferServiceImplTest {
   }
   
   
- 
 
+ 	// *******************************************************************
+ 	@Test
+ 	public void testSaveTransferNotCreditOrDebitType(){
+
+ 	//GIVEN
+ 	listUserDTO = userService
+   		  .findAllUsers();
+     
+ 	User userBeneficiary = userMapper
+   		  .toUserDO(listUserDTO.get(1));
+
+
+ 	//WHEN  // THEN
+ 	assertThrows(DataNotConformException.class, ()
+   		  -> transferService.addTransfer(
+   		  "FR 1111 1111 1111",
+   		  5000.0,
+           "SOMETHING",
+           userBeneficiary));
+ }  
+ 
+ 	// *******************************************************************
+ 	
+ 	
+ 	
+ 	
   
   
 }
