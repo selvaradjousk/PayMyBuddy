@@ -35,6 +35,7 @@ public class ContactServiceImpl implements IContactService {
 	public UserMapper userMapper = new UserMapper();
 	public ContactMapper contactMapper = new ContactMapper();
 
+	  // ************************************************************************
 	@Override
 	public List<ContactDTO> findContactByPayer(UserDTO payerDTO) {
 
@@ -46,8 +47,10 @@ public class ContactServiceImpl implements IContactService {
 		if (contactsList != null) {
 			
 			for (Contact contact : contactsList) {
+				
 				ContactDTO contactDTO = new ContactDTO();
-				contactDTO = contactMapper.toContactDTO(contact);
+				contactDTO = contactMapper
+						.toContactDTO(contact);
 				contactsDTOList.add(contactDTO);
 			}
 			return contactsDTOList;
@@ -56,17 +59,29 @@ public class ContactServiceImpl implements IContactService {
 		}
 	}
 
+
+    // ************************************************************************
+    @Override
+    public ContactDTO addContact(ContactDTO contactDTO) {
+
+        Contact contact = contactMapper
+        		.toContactDO(contactDTO);
+        contactDTO = contactMapper
+        		.toContactDTO(contactRepository.save(contact));
+
+        return contactDTO;
+    }
+    
+    
+    // ************************************************************************
+
+
 	@Override
 	public ContactDTO deleteById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public ContactDTO addContact(ContactDTO contactDTO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	
 }

@@ -80,7 +80,28 @@ class ContactServiceImplTest {
     
     // ************************************************************************
     
-    
+    @Test
+    public void testDeleteContact(){
+    	
+        //GIVEN
+        UserDTO userDTO = userService
+        		.findUserByEmail("testemail1@email.com");
+        
+        List<ContactDTO> listContactDTO = contactService
+        		.findContactByPayer(userDTO);
+        
+        //WHEN
+        contactService.deleteById(listContactDTO.get(1)
+        		.getIdContact());
+        
+        List<ContactDTO> listContactDTOAfterDelete = contactService
+        		.findContactByPayer(userDTO);
+        
+        //THEN
+        assertNotEquals(listContactDTO.size(),listContactDTOAfterDelete.size());
+        assertEquals(listContactDTO.size()-1,listContactDTOAfterDelete.size());
+    }
+    // ************************************************************************ 
     
     
 }
