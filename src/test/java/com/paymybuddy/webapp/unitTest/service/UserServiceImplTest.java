@@ -27,7 +27,7 @@ public class UserServiceImplTest {
     IUserService userService;
     
     String testEmail = "testemail2@email.com";
-
+    
 	// *******************************************************************
 	@DisplayName("Find User By Email  - "
 			+ "GIVEN User Email "
@@ -48,6 +48,22 @@ public class UserServiceImplTest {
 	
 	
 	// *******************************************************************
+	
+	
+	@DisplayName("Find User by Email Null Exception - "
+			+ "GIVEN User ID null "
+			+ "WHEN Requested find user by Email"
+			+ "THEN returns Exception")
+    @Test
+    public void testFindUserByEmailNull(){
+
+		//THEN <== //WHEN <== //GIVEN
+		 assertThrows(NullPointerException.class, () -> userService.findUserByEmail(""));
+    }
+	
+	
+	// *******************************************************************
+	
 	@DisplayName("Find User All User (Service) - "
 			+ "GIVEN User list "
 			+ "WHEN Requested find all user list"
@@ -84,7 +100,10 @@ public class UserServiceImplTest {
 		 assertEquals(userIdDTO.getId(), userDTO.getId());
     }
 	
+	
+
 	// *******************************************************************
+
 	
 	@DisplayName("Save User (update)- "
 			+ "GIVEN User "
