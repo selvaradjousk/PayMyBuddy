@@ -62,9 +62,9 @@ class TransactionServiceImplTest {
 
 	      //WHEN
 	      List<TransactionDTO> listTransactions = transactionService
-	    		  .findAllTransactionByUser(userDTO);
+	    		  .findAllTransactionByPayer(userDTO);
 	      //THEN
-	      assertEquals(4,listTransactions.size());
+	      assertEquals(3,listTransactions.size());
 	  }
 	  	
 

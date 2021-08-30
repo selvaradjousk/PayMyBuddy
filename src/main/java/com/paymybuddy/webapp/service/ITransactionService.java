@@ -9,6 +9,6 @@ public interface ITransactionService {
 
 	List<TransactionDTO> findAllTransactions();
 
-	List<TransactionDTO> findAllTransactionByUser(UserDTO userDTO);
+	List<TransactionDTO> findAllTransactionByPayer(UserDTO userDTO);
 
 }

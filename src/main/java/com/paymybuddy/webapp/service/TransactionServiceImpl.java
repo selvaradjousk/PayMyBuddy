@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.paymybuddy.webapp.dto.TransactionDTO;
 import com.paymybuddy.webapp.dto.UserDTO;
 import com.paymybuddy.webapp.model.Transaction;
+import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.repository.TransactionRepository;
 import com.paymybuddy.webapp.util.TransactionMapper;
 import com.paymybuddy.webapp.util.UserMapper;
@@ -62,12 +63,25 @@ public class TransactionServiceImpl  implements ITransactionService  {
 		return listOfTransactionsDTO;
 	}
 
+	// *************This method is a step for pagable template*************
+	
 	@Override
-	public List<TransactionDTO> findAllTransactionByUser(UserDTO userDTO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public List<TransactionDTO> findAllTransactionByPayer(UserDTO userDTO) {
+		
+		User user = userMapper.toUserDO(userDTO);
+		
+		List<Transaction> listOfTransactions = transactionRepository.findAllByPayer(user);
 
+		log.info(" ====> FIND All TRANSACTION for a user requested <==== ");
+
+		List<TransactionDTO> listOfTransactionsDTO = new ArrayList<TransactionDTO>();
+
+		for (Transaction transaction : listOfTransactions) {
+			listOfTransactionsDTO.add(transactionMapper.toTransactionDTO(transaction));
+		}
+		log.info(" ====> FIND All TRANSACTION for a user Successfull <==== ");
+		return listOfTransactionsDTO;
+	}
 	
 	
 	
