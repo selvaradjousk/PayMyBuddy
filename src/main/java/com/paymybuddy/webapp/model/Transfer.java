@@ -60,13 +60,13 @@ public class Transfer {
     }
     
 	public Transfer(String rib, LocalDate createDate,
-			double amount, String type, User user) {
+			double amount, String type,  User user ) {
 		super();
 		this.rib = rib;
 		this.createDate = createDate;
 		this.amount = amount;
 		this.type = type;
 		this.user = user;
-	}
 
+	}
 }

@@ -50,7 +50,7 @@ public class BankAccountServiceImplTest {
 
 		// THEN
 		assertNotNull(listBankAccount);
-		assertEquals(2, listBankAccount.size());
+		assertEquals(1, listBankAccount.size());
 	}
 	//******************************************************************
 

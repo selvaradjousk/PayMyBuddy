@@ -79,7 +79,7 @@ public class TransferRepositoryTest {
 	}
 
 	// *******************************************************************
-//	  @Sql("classpath:h2sourcedata_moretransfers.sql")
+	//	  @Sql("classpath:h2sourcedata_moretransfers.sql")
 	@Test
 	@DisplayName("SQL SCRIPT TO LOAD & FIND ALL TRANSFERS SIZE- "
 			+ "GIVEN sql script to load more TRANSFERS in H2 Database "
