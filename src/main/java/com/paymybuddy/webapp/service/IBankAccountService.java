@@ -1,6 +1,13 @@
 package com.paymybuddy.webapp.service;
 
+import java.util.List;
+
+import com.paymybuddy.webapp.dto.BankAccountDTO;
+import com.paymybuddy.webapp.dto.UserDTO;
+
 public interface IBankAccountService {
+
+
 
 
 	// **************************** TODOs LIST ***********************************
@@ -15,4 +22,7 @@ public interface IBankAccountService {
 	// --> 
 	// --> 
 	// --> 
+	
+
+	List<BankAccountDTO> findBankAccountByUser(UserDTO userDTO);
 }
