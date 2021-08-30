@@ -2,6 +2,8 @@ package com.paymybuddy.webapp.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.paymybuddy.webapp.model.Transaction;
@@ -16,6 +18,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 	// --> Find list of Transactions By Payer
 
 
-	List<Transaction> findAllByPayer(User payer);
+	List<Transaction> findAllTransactionByPayer(User payer);
+
+	Page<Transaction> findAllTransactionByPayer(User payer, Pageable pageable);
 	
 }

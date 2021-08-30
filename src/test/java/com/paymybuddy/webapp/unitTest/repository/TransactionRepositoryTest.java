@@ -101,7 +101,7 @@ public class TransactionRepositoryTest {
 			testUser = userRespository.findUserByEmail("testemail1@email.com");
 			
 			// WHEN
-			List<Transaction> savedTranactions = transactionRepository.findAllByPayer(testUser);
+			List<Transaction> savedTranactions = transactionRepository.findAllTransactionByPayer(testUser);
 			
 
 			// THEN

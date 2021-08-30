@@ -9,6 +9,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.paymybuddy.webapp.dto.TransactionDTO;
@@ -68,4 +70,20 @@ class TransactionServiceImplTest {
 	  }
 	  	
 
+	  
+	  	// *******************************************************************
+	  
+	  @Test
+	  public void testFindAllByTransactionsByPayerPageable(){
+	      //GIVEN
+	      listUserDTO = userService.findAllUsers();
+	      UserDTO userDTO = listUserDTO.get(1);
+	      int page = 0;
+	      //WHEN
+	      Page<TransactionDTO> pagesTransaction = transactionService.findAllTransactionByPayer(userDTO,  PageRequest.of(page,2));
+	      //THEN
+	      assertEquals(2,pagesTransaction.getContent().size());
+	  }
+	  
+	  
 }

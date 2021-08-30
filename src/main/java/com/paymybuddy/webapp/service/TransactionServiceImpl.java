@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.paymybuddy.webapp.dto.TransactionDTO;
@@ -70,7 +72,7 @@ public class TransactionServiceImpl  implements ITransactionService  {
 		
 		User user = userMapper.toUserDO(userDTO);
 		
-		List<Transaction> listOfTransactions = transactionRepository.findAllByPayer(user);
+		List<Transaction> listOfTransactions = transactionRepository.findAllTransactionByPayer(user);
 
 		log.info(" ====> FIND All TRANSACTION for a user requested <==== ");
 
@@ -82,7 +84,13 @@ public class TransactionServiceImpl  implements ITransactionService  {
 		log.info(" ====> FIND All TRANSACTION for a user Successfull <==== ");
 		return listOfTransactionsDTO;
 	}
-	
-	
+
+	@Override
+	public Page<TransactionDTO> findAllTransactionByPayer(UserDTO userDTO, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 }
