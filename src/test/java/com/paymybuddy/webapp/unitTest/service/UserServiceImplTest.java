@@ -175,6 +175,27 @@ public class UserServiceImplTest {
 	// *******************************************************************	
 	
 	
+	@DisplayName("Save New User invalid empty email field entry input - "
+			+ "GIVEN new User invalid empty email input"
+			+ "WHEN Requested save user"
+			+ "THEN returns Exception")
+    @Test
+    public void testSaveNewUserInputInvalidEmptyEmailFieldentryExceptionThrown(){
+
+        //GIVEN
+        UserDTO userDTO = new UserDTO(
+        		"UseName",
+        		"firstName",
+        		"",
+        		"password");
+
+        //THEN   < ==  //WHEN
+        assertThrows(DataNotConformException.class, () -> userService.saveNewUser(userDTO, "password"));
+    }	
+	
+	// *******************************************************************
+	
+	
 	
 	
 }
