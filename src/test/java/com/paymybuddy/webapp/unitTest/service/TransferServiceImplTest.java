@@ -1,6 +1,7 @@
 package com.paymybuddy.webapp.unitTest.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +14,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.paymybuddy.webapp.constant.TransferType;
 import com.paymybuddy.webapp.dto.TransferDTO;
 import com.paymybuddy.webapp.dto.UserDTO;
+import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.service.ITransferService;
 import com.paymybuddy.webapp.service.IUserService;
+import com.paymybuddy.webapp.util.UserMapper;
 
 @DisplayName("TRANSFER SERVICE - H2 DB TEST ")
 @SpringBootTest
@@ -26,9 +30,10 @@ class TransferServiceImplTest {
     @Autowired
     ITransferService transferService;
     
-    
     @Autowired
     IUserService userService;
+    
+    public UserMapper userMapper = new UserMapper();
     
     List<UserDTO> listUserDTO = new ArrayList<UserDTO>();
     
@@ -88,4 +93,36 @@ class TransferServiceImplTest {
 
 	// *******************************************************************
 
+  @Test
+  public void testSaveTransferCredit(){
+
+      //GIVEN
+      listUserDTO = userService
+    		  .findAllUsers();
+      
+      User userBeneficiary = userMapper
+    		  .toUserDO(listUserDTO.get(1));
+      
+      Double walletBefore = userBeneficiary
+    		  .getWalletAmount();
+      
+      TransferDTO transferDTO = new TransferDTO();
+
+      //WHEN
+      transferDTO = transferService.addTransfer(
+    		  "FR 1111 1111 1111",
+    		  500.0,
+              TransferType.CREDIT.toString(),
+              userBeneficiary);
+      
+      Double newWallet = userService
+    		  .findUserById(
+    				  userBeneficiary.getId()).getWalletAmount();
+
+      //THEN
+      assertTrue( newWallet == walletBefore+500.0 );
+      assertTrue( transferDTO.getIdTransfer() > 0);
+  }
+  
+  
 }

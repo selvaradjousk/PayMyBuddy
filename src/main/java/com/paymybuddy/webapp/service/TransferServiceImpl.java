@@ -114,6 +114,14 @@ public class TransferServiceImpl implements ITransferService {
     }
 
     // ************************************************************************
+    
+	@Override
+	public TransferDTO addTransfer(String rib, double amount, String type, User userBeneficiary) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+    // ************************************************************************
 
 
 

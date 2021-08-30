@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.paymybuddy.webapp.dto.TransferDTO;
 import com.paymybuddy.webapp.dto.UserDTO;
+import com.paymybuddy.webapp.model.User;
 
 public interface ITransferService {
 
@@ -17,6 +18,8 @@ public interface ITransferService {
 	Page<TransferDTO> findAllTransferByUser(UserDTO userDTO, Pageable pageable);
 	
 	Page<TransferDTO> lastThreeTransfers(UserDTO userDTO, Pageable pageable);
+
+	TransferDTO addTransfer(String rib, double amount, String type, User userBeneficiary);
 
 //	TransferDTO addTransfer(String rib, double amount, String type, User user);
 }
