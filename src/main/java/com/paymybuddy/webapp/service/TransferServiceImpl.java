@@ -90,6 +90,29 @@ public class TransferServiceImpl implements ITransferService {
 	}
 
     // ************************************************************************
+	
+	
+	
+	@Override
+	public List<TransferDTO> findAllByUserTypeCredit(UserDTO userDTO) {
+		
+		User user = userMapper.toUserDO(userDTO);
+		
+		List<Transfer> listOfTransfers = transferRepository.findAllByUserTypeCredit(user);
+
+		log.info(" ====> FIND All TRANSFER for a user requested <==== ");
+
+		List<TransferDTO> listOfTransfersDTO = new ArrayList<TransferDTO>();
+
+		for (Transfer transfer : listOfTransfers) {
+			listOfTransfersDTO.add(transferMapper.toTransferDTO(transfer));
+		}
+		log.info(" ====> FIND All TRANSFER for a user Successfull <==== ");
+		return listOfTransfersDTO;
+	}
+	
+    // ************************************************************************	
+	
 
   @Override
   public Page<TransferDTO> findAllTransferByUser(UserDTO userDTO, Pageable pageable) {

@@ -21,5 +21,7 @@ public interface ITransferService {
 
 	TransferDTO addTransfer(String rib, double amount, String type, User userBeneficiary);
 
+	List<TransferDTO> findAllByUserTypeCredit(UserDTO userDTO);
+
 //	TransferDTO addTransfer(String rib, double amount, String type, User user);
 }

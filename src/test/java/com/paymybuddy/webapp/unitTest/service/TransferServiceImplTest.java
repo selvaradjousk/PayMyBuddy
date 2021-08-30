@@ -73,10 +73,29 @@ class TransferServiceImplTest {
       //THEN
       assertEquals(4,listTransfers.size());
   }
-	
+  
+  
 	
 	// *******************************************************************
+  @Test
+  public void testfindAllTransferByUserCreditType(){
 
+  	//GIVEN
+      listUserDTO = userService.findAllUsers();
+      UserDTO userDTO = listUserDTO.get(1);
+
+      //WHEN
+      List<TransferDTO> listTransfers = transferService
+    		  .findAllByUserTypeCredit(userDTO);
+      //THEN
+      assertEquals(1,listTransfers.size());
+  }
+	
+  
+  	// *******************************************************************
+
+
+  
   @Test
   public void TestLastThreeTransfersByUserPageable(){
 
