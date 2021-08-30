@@ -71,13 +71,30 @@ public class BankAccountServiceImpl implements IBankAccountService{
         return listBankAccountDTO  ;
 	}
 
-
+    //******************************************************************
 	@Override
 	public BankAccountDTO addBankAccount(String rib, UserDTO userDTO) {
-		// TODO Auto-generated method stub
-		return null;
+
+    	log.info(" ====> BANK Account CREATION requested <==== ");
+    	
+        User user = userMapper.toUserDO(userDTO);
+
+        BankAccount newBankAccount = new BankAccount(user,rib);
+
+        BankAccount bankAccountAdd = bankAccountRepository
+        		.save(newBankAccount);
+
+        BankAccountDTO bankAccountDTO = bankAccountMapper
+        		.toBankAccountDTO(bankAccountAdd);
+
+        log.info(" ====> BANK Account CREATION performed"
+        		+ " sucessfully <==== ");
+
+        return bankAccountDTO;
 	}
 	
-	
+    //******************************************************************
+
+
 	
 }

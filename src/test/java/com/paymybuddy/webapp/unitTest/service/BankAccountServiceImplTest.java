@@ -1,6 +1,7 @@
 package com.paymybuddy.webapp.unitTest.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
@@ -49,7 +50,7 @@ public class BankAccountServiceImplTest {
 
 		// THEN
 		assertNotNull(listBankAccount);
-		assertEquals(1, listBankAccount.size());
+		assertEquals(2, listBankAccount.size());
 	}
 	//******************************************************************
 
@@ -73,6 +74,8 @@ public class BankAccountServiceImplTest {
 				.addBankAccount(rib, userDTO);
 		
 		// THEN
+		
+		assertNotNull(bankAccountAddDTO);
 		assertEquals(newBankAccountDTO.getRib(), bankAccountAddDTO.getRib());
 
 	}
