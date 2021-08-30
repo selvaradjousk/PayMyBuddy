@@ -30,6 +30,8 @@ public interface IUserService {
  	 */
  	public UserDTO findUserById(Integer id);
 
+	UserDTO saveUser(UserDTO userDTO);
+
 //	public UserDTO saveUser(UserDTO userDTO);
  
  

@@ -26,6 +26,7 @@ class TransferServiceImplTest {
     @Autowired
     ITransferService transferService;
     
+    
     @Autowired
     IUserService userService;
     
@@ -87,6 +88,4 @@ class TransferServiceImplTest {
 
 	// *******************************************************************
 
-
-  
 }

@@ -97,22 +97,17 @@ public class UserServiceImpl implements IUserService {
         return userMapper.toUserDTO(user);
 	}
 
-//
-//    @Override
-//   public UserDTO saveUser(UserDTO userDTO) {
-//
-//    	log.info("SAVE User requested ");
-//
-//  		User userAdd = new User();
-//  			userAdd = userRepository.save(userMapper.toUserDO(userDTO));
-//
-//  		log.info("User SAVED Successfully ");
-//
-//  		return userMapper.toUserDTO(userAdd);
-//   }
-//	
-	
-	// *******************************************************************
+
+    //******************************************************************
+    @Override
+    public UserDTO saveUser(UserDTO userDTO) {
+    	log.info(" ====> SAVE User requested <==== ");
+        User userAdd = new User();
+          userAdd = userRepository.save(userMapper.toUserDO(userDTO));
+            log.info(" ====> User SAVED Successfully <==== ");
+            return userMapper.toUserDTO(userAdd);
+
+    }
 
 
 }

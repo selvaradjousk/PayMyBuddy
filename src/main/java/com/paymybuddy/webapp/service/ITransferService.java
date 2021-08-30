@@ -17,4 +17,6 @@ public interface ITransferService {
 	Page<TransferDTO> findAllTransferByUser(UserDTO userDTO, Pageable pageable);
 	
 	Page<TransferDTO> lastThreeTransfers(UserDTO userDTO, Pageable pageable);
+
+//	TransferDTO addTransfer(String rib, double amount, String type, User user);
 }
