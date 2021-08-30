@@ -70,6 +70,13 @@ public class BankAccountServiceImpl implements IBankAccountService{
 
         return listBankAccountDTO  ;
 	}
+
+
+	@Override
+	public BankAccountDTO addBankAccount(String rib, UserDTO userDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

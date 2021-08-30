@@ -13,6 +13,8 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.paymybuddy.webapp.dto.BankAccountDTO;
 import com.paymybuddy.webapp.dto.UserDTO;
+import com.paymybuddy.webapp.model.BankAccount;
+import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.service.IBankAccountService;
 import com.paymybuddy.webapp.service.IUserService;
 import com.paymybuddy.webapp.util.BankAccountMapper;
@@ -50,5 +52,31 @@ public class BankAccountServiceImplTest {
 		assertEquals(1, listBankAccount.size());
 	}
 	//******************************************************************
+
+	@Test
+	public void testAddAccount() {
+		
+		// GIVEN
+		UserDTO userDTO = userService
+				.findUserByEmail("testemail2@email.com");
+		
+		User user = userMapper.toUserDO(userDTO);
+		String rib = "fr 1111 1111 1111 1111";
+		
+		// WHEN
+		BankAccount newBankAccount = new BankAccount(user, rib);
+		
+		BankAccountDTO newBankAccountDTO = bankAccountMapper
+				.toBankAccountDTO(newBankAccount);
+		
+		BankAccountDTO bankAccountAddDTO = bankAccountService
+				.addBankAccount(rib, userDTO);
+		
+		// THEN
+		assertEquals(newBankAccountDTO.getRib(), bankAccountAddDTO.getRib());
+
+	}
+	//******************************************************************
+	
 	
 }

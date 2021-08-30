@@ -25,4 +25,8 @@ public interface IBankAccountService {
 	
 
 	List<BankAccountDTO> findBankAccountByUser(UserDTO userDTO);
+	
+	BankAccountDTO addBankAccount(String rib, UserDTO userDTO );
+
+	
 }
