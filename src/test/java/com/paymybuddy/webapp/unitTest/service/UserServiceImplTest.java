@@ -322,5 +322,26 @@ public class UserServiceImplTest {
 	// *******************************************************************
 	
 	
+	@DisplayName("Save New User Non AlphaNumeric Characters firstname input - "
+			+ "GIVEN new User input invalid"
+			+ "WHEN Requested save user"
+			+ "THEN returns Exception")
+    @Test
+    public void testSaveNewUserFirstNameWithNonAlphaNumericCharactersInputExceptionThrown(){
+
+        //GIVEN
+        UserDTO userDTO = new UserDTO(
+        		"UserName",
+        		"3^çé??????",
+        		"email@email.com",
+        		"password");
+
+        //THEN   < ==  //WHEN
+        assertThrows(DataNotConformException.class, () -> userService.saveNewUser(userDTO, "password"));
+    }
+
+	// *******************************************************************
+	
+	
 	
 }
