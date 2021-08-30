@@ -14,7 +14,7 @@ import com.paymybuddy.webapp.util.UserMapper;
 
 import lombok.extern.log4j.Log4j2;
 
-
+@Log4j2
 @Service
 public class TransactionServiceImpl  implements ITransactionService  {
 
@@ -42,16 +42,25 @@ public class TransactionServiceImpl  implements ITransactionService  {
 
 	public UserMapper userMapper = new UserMapper();
 
-
 	// *******************************************************************
-
 	
 	@Override
 	public List<TransactionDTO> findAllTransactions() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Transaction> listOfTransactions = transactionRepository.findAll();
+
+		log.info(" ====> FIND All TRANSACTION requested <==== ");
+		
+		List<TransactionDTO> listOfTransactionsDTO = new ArrayList<TransactionDTO>();
+
+		for (Transaction transaction : listOfTransactions) {
+			listOfTransactionsDTO.add(transactionMapper.toTransactionDTO(transaction));
+		}
+
+		log.info(" ====> FIND All TRANSACTION Successfull <==== ");
+
+		return listOfTransactionsDTO;
 	}
-	
+
 	
 	
 	
