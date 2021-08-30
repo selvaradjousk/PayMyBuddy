@@ -259,6 +259,25 @@ public class UserServiceImplTest {
 	// *******************************************************************
 	
 	
+	@DisplayName("Save New User Existing email format input - "
+			+ "GIVEN new User existing email input"
+			+ "WHEN Requested save user"
+			+ "THEN returns Exception")
+    @Test
+    public void testSaveNewUserExistingEmailInputExceptionThrown(){
+
+        //GIVEN
+        UserDTO userDTO = new UserDTO(
+        		"UseName",
+        		"FirstName",
+        		"testemail2@email.com",
+        		"password");
+
+        //THEN   < ==  //WHEN
+        assertThrows(DataAlreadyExistException.class, () -> userService.saveNewUser(userDTO, "password"));
+    }
+
+	// *******************************************************************	
 	
 	
 	
