@@ -32,10 +32,19 @@ public class TransferServiceImpl implements ITransferService {
 	@Autowired
 	TransferRepository transferRepository;
 
+
+	public TransferMapper transferMapper = new TransferMapper();
+
 	@Override
 	public List<TransferDTO> findAllTransfers() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Transfer> listOfTransfers = transferRepository.findAll();
+
+		List<TransferDTO> listOfTransfersDTO = new ArrayList<TransferDTO>();
+
+		for (Transfer transfer : listOfTransfers) {
+			listOfTransfersDTO.add(transferMapper.toTransferDTO(transfer));
+		}
+		return listOfTransfersDTO;
 	}
 
 
