@@ -39,7 +39,7 @@ class ContactServiceImplTest {
         UserDTO userDTO = userService.findUserByEmail("testemail2@email.com");
         List<ContactDTO> listContactDTO = contactService.findContactByPayer(userDTO);
         assertNotNull(listContactDTO);
-        assertEquals(4, listContactDTO.size());
+        assertEquals(3, listContactDTO.size());
     }
     // ************************************************************************
 }
