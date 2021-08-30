@@ -81,19 +81,41 @@ public class TransferServiceImpl implements ITransferService {
 		return listOfTransfersDTO;
 	}
 
-	// *******************************************************************
-	@Override
-	public Page<TransferDTO> findAllTransferByUser(UserDTO userDTO, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    // ************************************************************************
+
+  @Override
+  public Page<TransferDTO> findAllTransferByUser(UserDTO userDTO, Pageable pageable) {
 
 
-	@Override
-	public Page<TransferDTO> lastThreeTransfers(UserDTO userDTO, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+      User user = userMapper.toUserDO(userDTO);
+
+      Page<TransferDTO> pagesTransferDTO = transferRepository
+      		.findAllTransferByUser(user, pageable)
+      		.map(transferMapper::toTransferDTO);
+
+      return pagesTransferDTO;
+  }
+
+
+
+    // ************************************************************************
+    @Override
+    public Page<TransferDTO> lastThreeTransfers(
+    		UserDTO userDTO,
+    		Pageable pageable) {
+
+    	User user = userMapper.toUserDO(userDTO);
+
+    	Page<TransferDTO> pagesTransferDTO = transferRepository
+        		.lastThreeTransfers(user, pageable)
+        		.map(transferMapper::toTransferDTO);
+
+    	return pagesTransferDTO;
+    }
+
+    // ************************************************************************
+
+
 
 	
 	

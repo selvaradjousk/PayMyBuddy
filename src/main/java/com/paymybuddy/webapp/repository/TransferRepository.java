@@ -7,8 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.paymybuddy.webapp.dto.TransferDTO;
-import com.paymybuddy.webapp.dto.UserDTO;
 import com.paymybuddy.webapp.model.Transfer;
 import com.paymybuddy.webapp.model.User;
 
@@ -35,5 +33,8 @@ public interface TransferRepository extends JpaRepository<Transfer, Integer> {
 	@Query("Select t from Transfer t where t.user = :user and t.type='DEBIT'")
 	List<Transfer> findAllByUserTypeDebit(User user);
 
+	Page<Transfer> findAllTransferByUser(User user, Pageable pageable);
 
+	@Query("SELECT t FROM Transfer t WHERE t.user= :user  ORDER BY date desc")
+	Page<Transfer> lastThreeTransfers(User user, Pageable pageable);
 }
