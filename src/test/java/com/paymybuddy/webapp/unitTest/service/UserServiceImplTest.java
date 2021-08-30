@@ -237,6 +237,27 @@ public class UserServiceImplTest {
     }
 	
 	// *******************************************************************
+
+	
+	@DisplayName("Save New User invalid email format input - "
+			+ "GIVEN new User invalid email input"
+			+ "WHEN Requested save user"
+			+ "THEN returns Exception")
+    @Test
+    public void testSaveNewUserInvalidEmailInputExceptionThrown(){
+
+        //GIVEN
+        UserDTO userDTO = new UserDTO(
+        		"UseName",
+        		"FirstName",
+        		"email1.com",
+        		"password");
+
+        //THEN   < ==  //WHEN
+        assertThrows(DataNotConformException.class, () -> userService.saveNewUser(userDTO, "password"));
+    }	
+	// *******************************************************************
+	
 	
 	
 	
