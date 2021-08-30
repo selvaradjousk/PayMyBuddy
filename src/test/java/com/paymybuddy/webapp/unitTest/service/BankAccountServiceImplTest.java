@@ -80,6 +80,28 @@ public class BankAccountServiceImplTest {
 
 	}
 	//******************************************************************
-	
+
+	@Test
+	public void testDeleteAccount() {
+
+		// GIVEN
+		UserDTO userDTO = userService
+				.findUserByEmail("testemail2@email.com");
+		
+		// WHEN
+		List<BankAccountDTO> listBankAccountDTOBefore = bankAccountService
+				.findBankAccountByUser(userDTO);
+		
+		bankAccountService.deleteBankAccount(listBankAccountDTOBefore
+				.get(1).getIdBankAccount());
+		
+		List<BankAccountDTO> listBankAccountDTOAfter = bankAccountService
+				.findBankAccountByUser(userDTO);
+		
+		// THEN
+		assertNotEquals(listBankAccountDTOBefore.size(), listBankAccountDTOAfter.size());
+		assertEquals(listBankAccountDTOAfter.size() + 1, listBankAccountDTOBefore.size());
+	}
+	//******************************************************************
 	
 }

@@ -28,5 +28,5 @@ public interface IBankAccountService {
 	
 	BankAccountDTO addBankAccount(String rib, UserDTO userDTO );
 
-	
+	void deleteBankAccount(Integer id);
 }
