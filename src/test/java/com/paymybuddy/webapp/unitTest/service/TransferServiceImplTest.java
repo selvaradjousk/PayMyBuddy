@@ -96,7 +96,7 @@ class TransferServiceImplTest {
 	// *******************************************************************
 
   @Test
-  public void testSaveTransferCredit(){
+  public void testSaveTransferTypeCredit(){
 
       //GIVEN
       listUserDTO = userService
@@ -126,6 +126,43 @@ class TransferServiceImplTest {
       assertTrue( transferDTO.getIdTransfer() > 0);
   }
   
+  
+  
+  @Test
+  public void testSaveTransferTypeDebit(){
+
+      //GIVEN
+      listUserDTO = userService
+    		  .findAllUsers();
+      
+      User userBeneficiary = userMapper
+    		  .toUserDO(listUserDTO.get(1));
+      
+      Double walletBefore = userBeneficiary
+    		  .getWalletAmount();
+      
+      TransferDTO transferDTO = new TransferDTO();
+
+      //WHEN
+      transferDTO = transferService.addTransfer(
+    		  "FR 1111 1111 1111",
+    		  500.0,
+              TransferType.DEBIT.toString(),
+              userBeneficiary);
+      
+      Double newWallet = userService
+    		  .findUserById(
+    				  userBeneficiary.getId()).getWalletAmount();
+
+      //THEN
+      assertEquals(walletBefore-500.0, newWallet);
+      assertTrue(transferDTO.getIdTransfer() > 0);
+  }
+  
+  
  
+
+  
+  
 }
 
