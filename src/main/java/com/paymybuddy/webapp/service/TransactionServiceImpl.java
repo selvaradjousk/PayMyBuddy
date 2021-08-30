@@ -85,12 +85,22 @@ public class TransactionServiceImpl  implements ITransactionService  {
 		return listOfTransactionsDTO;
 	}
 
-	@Override
-	public Page<TransactionDTO> findAllTransactionByPayer(UserDTO userDTO, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    // ************************************************************************
+	
+	  @Override
+	  public Page<TransactionDTO> findAllTransactionByPayer(UserDTO userDTO, Pageable pageable) {
 
 
+	      User payer = userMapper.toUserDO(userDTO);
+
+	      Page<TransactionDTO> pagesTransactionDTO = transactionRepository
+	      		.findAllTransactionByPayer(payer, pageable)
+	      		.map(transactionMapper::toTransactionDTO);
+
+	      return pagesTransactionDTO;
+	  }
+
+
+	    // ************************************************************************
 	
 }
