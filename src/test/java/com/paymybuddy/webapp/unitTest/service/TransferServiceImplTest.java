@@ -184,7 +184,28 @@ class TransferServiceImplTest {
  
  	// *******************************************************************
  	
- 	
+  
+	@Test
+	public void testSaveTransferAmountZero(){
+
+	//GIVEN
+		listUserDTO = userService
+		  .findAllUsers();
+
+		User userBeneficiary = userMapper
+		  .toUserDO(listUserDTO.get(1));
+
+	//WHEN  // THEN
+		assertThrows(DataNotConformException.class, ()
+				-> transferService.addTransfer(
+				"FR 1111 1111 1111",
+				0.0,
+				TransferType.CREDIT.toString(),
+				userBeneficiary));
+	}
+	
+
+  	// *******************************************************************		
  	
  	
   
