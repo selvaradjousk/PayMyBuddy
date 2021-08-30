@@ -95,11 +95,16 @@ public class BankAccountServiceImpl implements IBankAccountService{
 
     //******************************************************************
 
-	@Override
-	public void deleteBankAccount(Integer id) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void deleteBankAccount(Integer id) {
+
+        log.info(" ====> BANK Account DELETION requested <==== ");
+
+        bankAccountRepository.deleteById(id);
+
+        log.info(" ====> BANK Account DELETION sucessfull <==== ");
+    }
+    //*******************************************************************
 
 
 
