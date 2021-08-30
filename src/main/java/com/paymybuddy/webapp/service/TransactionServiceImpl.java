@@ -102,5 +102,14 @@ public class TransactionServiceImpl  implements ITransactionService  {
 
 
 	    // ************************************************************************
+
+
+		@Override
+		public Page<TransactionDTO> lastThreeTransactions(UserDTO userDTO, Pageable pageable) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+   
+	    
 	
 }

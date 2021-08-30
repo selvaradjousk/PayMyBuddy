@@ -86,4 +86,25 @@ class TransactionServiceImplTest {
 	  }
 	  
 	  
+		// *******************************************************************  
+	  
+	  
+	  @Test
+	  public void TestLastThreeTransactionsByUserPageable(){
+
+	      //GIVEN
+	      listUserDTO = userService.findAllUsers();
+	      UserDTO userDTO = listUserDTO.get(1);
+	      int page = 0;
+
+	      //WHEN
+	      Page<TransactionDTO> pagesTransactionDTO = transactionService
+	    		  .lastThreeTransactions(userDTO,  PageRequest.of(page,2));
+
+	      //THEN
+	      assertEquals(2, pagesTransactionDTO.getContent().size());
+	      assertEquals(3, pagesTransactionDTO.getTotalElements());
+	  }
+	  
+	  
 }
