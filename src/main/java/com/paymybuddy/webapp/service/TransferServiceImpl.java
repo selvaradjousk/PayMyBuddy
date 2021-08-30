@@ -35,16 +35,31 @@ public class TransferServiceImpl implements ITransferService {
 
 	public TransferMapper transferMapper = new TransferMapper();
 
+
+	// *******************************************************************
+	
 	@Override
 	public List<TransferDTO> findAllTransfers() {
 		List<Transfer> listOfTransfers = transferRepository.findAll();
 
+		log.info(" ====> FIND All TRANSFER requested <==== ");
+		
 		List<TransferDTO> listOfTransfersDTO = new ArrayList<TransferDTO>();
 
 		for (Transfer transfer : listOfTransfers) {
 			listOfTransfersDTO.add(transferMapper.toTransferDTO(transfer));
 		}
+
+		log.info(" ====> FIND All TRANSFER Successfull <==== ");
+
 		return listOfTransfersDTO;
+	}
+
+
+	@Override
+	public List<TransferDTO> findAllTransferByUser(UserDTO userDTO) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
