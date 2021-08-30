@@ -1,8 +1,10 @@
 package com.paymybuddy.webapp.unitTest.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -41,5 +43,44 @@ class ContactServiceImplTest {
         assertNotNull(listContactDTO);
         assertEquals(3, listContactDTO.size());
     }
+    
+    
+    
     // ************************************************************************
+
+    @Test
+    public void testAddContact(){
+
+    	//GIVEN
+        UserDTO userDTO = userService
+        		.findUserByEmail("testemail2@email.com");
+        
+        List<ContactDTO> listContactDTO = contactService
+        		.findContactByPayer(userDTO);
+        
+        UserDTO userContactDTO = userService
+        		.findUserById(2);
+ 
+        //WHEN
+        ContactDTO contactDTO = new ContactDTO(
+        		LocalDate.now(),
+        		userMapper.toUserDO(userContactDTO),
+        		userMapper.toUserDO(userDTO));
+        
+        contactService.addContact(contactDTO);
+        
+        List<ContactDTO> listContactDTOAfterAdd = contactService
+        		.findContactByPayer(userDTO);
+ 
+        //THEN
+        assertNotEquals(listContactDTO.size(),listContactDTOAfterAdd.size());
+        assertEquals(listContactDTO.size()+1,listContactDTOAfterAdd.size());
+    }
+    
+    
+    // ************************************************************************
+    
+    
+    
+    
 }

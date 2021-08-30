@@ -67,4 +67,6 @@ public class ContactServiceImpl implements IContactService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 }
