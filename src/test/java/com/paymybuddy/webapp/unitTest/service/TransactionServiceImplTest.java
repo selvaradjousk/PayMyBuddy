@@ -52,6 +52,20 @@ class TransactionServiceImplTest {
         assertEquals(10, listTransactionDTO.size());
     }
 	
-	
+	// *************This method is a step for pagable template*************	
+	  @Test
+	  public void testfindAllTransactionByUser(){
+
+	  	//GIVEN
+	      listUserDTO = userService.findAllUsers();
+	      UserDTO userDTO = listUserDTO.get(1);
+
+	      //WHEN
+	      List<TransactionDTO> listTransactions = transactionService
+	    		  .findAllTransactionByUser(userDTO);
+	      //THEN
+	      assertEquals(4,listTransactions.size());
+	  }
+	  	
 
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.paymybuddy.webapp.dto.TransactionDTO;
+import com.paymybuddy.webapp.dto.UserDTO;
 import com.paymybuddy.webapp.model.Transaction;
 import com.paymybuddy.webapp.repository.TransactionRepository;
 import com.paymybuddy.webapp.util.TransactionMapper;
@@ -59,6 +60,12 @@ public class TransactionServiceImpl  implements ITransactionService  {
 		log.info(" ====> FIND All TRANSACTION Successfull <==== ");
 
 		return listOfTransactionsDTO;
+	}
+
+	@Override
+	public List<TransactionDTO> findAllTransactionByUser(UserDTO userDTO) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
