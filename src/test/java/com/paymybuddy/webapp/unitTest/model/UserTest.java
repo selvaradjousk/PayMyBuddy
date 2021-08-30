@@ -2,6 +2,8 @@ package com.paymybuddy.webapp.unitTest.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,16 +13,22 @@ import com.paymybuddy.webapp.dto.UserDTO;
 class UserTest {
 
 	UserDTO toTest1 = new UserDTO(
-            "testUserName",
-            "testFirstName",
-            "myEmail",
-            "myPassword");
+			"userName",
+			"firstName",
+			"myEmail",
+			"password");
 	
 	UserDTO toTest2 = new UserDTO(
-            "testUserName",
-            "testFirstName",
-            "myEmail",
-            "myPassword");
+			"userName",
+			"firstName",
+			"myEmail",
+			"password");
+	
+//	UserDTO toTest2 = new UserDTO(
+//            "testUserName",
+//            "testFirstName",
+//            "myEmail",
+//            "myPassword");
 	
 	
 	@Test

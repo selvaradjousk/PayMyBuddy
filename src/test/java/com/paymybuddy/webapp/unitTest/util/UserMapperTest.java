@@ -14,28 +14,33 @@ class UserMapperTest {
 
 	@Test
     public void testToEntity() {
-	UserDTO dto = new UserDTO("userName", "firstName", "email", "password");
+	UserDTO dto = new UserDTO(
+			"testUserName",
+	            "testFirstName",
+				"myEmail",
+				"password");
 	
 	UserMapper mapper = new UserMapper();
 	User entity = mapper.toUserDO(dto);
 	
-	assertEquals(entity.toString(), dto.toString());
+//	assertEquals(entity.toString(), dto.toString());
+	assertEquals(entity.getEmail(), dto.getEmail());
 	}
 	
 	@Test
     public void testToDTO() {
 	User entity = new User(
-    		100,
-            "testUserName",
-            "testFirstName",
-            "testLastName",
-            "myEmail",
-            "myPassword",
-            LocalDate.parse("2021-08-26"),
-            LocalDate.parse("2021-08-26"),
-            "admin",
-            true,
-            1000.0);
+			100,
+	           "testUserName",
+	            "testFirstName",
+	            "testLastName",
+			"myEmail",
+			"password",
+			LocalDate.parse("2021-08-28"),
+			LocalDate.parse("2021-08-28"),
+			"admin",
+			true,
+			1000.0);
 	
 	UserMapper mapper = new UserMapper();
 	UserDTO dto = mapper.toUserDTO(entity);

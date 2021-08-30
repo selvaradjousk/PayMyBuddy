@@ -14,7 +14,7 @@ class TransferTest {
 	
 
 	User testUser1 = new User(
-    		100,
+			100,
             "testUserName",
             "testFirstName",
             "testLastName",

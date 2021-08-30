@@ -68,11 +68,13 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public UserDTO findUserByEmail(String email) {
 
-		log.info(" ====> FIND USER by EMAIL requested <==== ");
+		log.info(" ====> FIND USER by EMAIL requested <==== " + email);
 
 		User user = userRepository.findUserByEmail(email);
 
+		log.info(" ====> Email <==== "+ user.getEmail());
 		log.info(" ====> FIND USER by EMAIL Sucessfull <==== ");
+		log.info(" ====> Email <==== "+ user.getEmail());
 
 		return userMapper.toUserDTO(user);
 	}
@@ -82,12 +84,12 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public UserDTO findUserById(Integer id) {
 
-		log.info(" ====> FIND USER by ID requested <==== ");
+		log.info("FIND USER by ID requested ");
 
 		User user = userRepository.findUserById(id);
 
         if (user == null) {
-            log.info(" ====> FIND USER by ID - user NOT FOUND<==== ");
+        log.info(" FIND USER by ID - user NOT FOUND ");
             throw new DataNotFoundException(
             		"ERROR: User By ID - NOT FOUND");
         }
@@ -95,13 +97,21 @@ public class UserServiceImpl implements IUserService {
         return userMapper.toUserDTO(user);
 	}
 
-
-	@Override
-	public UserDTO saveUser(UserDTO userDTO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+//
+//    @Override
+//   public UserDTO saveUser(UserDTO userDTO) {
+//
+//    	log.info("SAVE User requested ");
+//
+//  		User userAdd = new User();
+//  			userAdd = userRepository.save(userMapper.toUserDO(userDTO));
+//
+//  		log.info("User SAVED Successfully ");
+//
+//  		return userMapper.toUserDTO(userAdd);
+//   }
+//	
+	
 	// *******************************************************************
 
 

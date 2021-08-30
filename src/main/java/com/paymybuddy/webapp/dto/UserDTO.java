@@ -23,6 +23,8 @@ public class UserDTO {
 	// --> What needed to store is entity & which needed to 'show' on web page is DTO
 	// --> https://www.amitph.com/spring-entity-to-dto/
 	
+
+
 	@Setter @Getter
     private int id;
 
@@ -58,6 +60,22 @@ public class UserDTO {
 		this.password = password;
 	}
 
+//	public UserDTO(int id, String userName, String firstName, String lastName, String email, String password,
+//			LocalDate creationDate, LocalDate modificationDate, String roles, boolean active, Double walletAmount) {
+//		super();
+//		this.id = id;
+//		this.userName = userName;
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.email = email;
+//		this.password = password;
+//		this.creationDate = creationDate;
+//		this.modificationDate = modificationDate;
+//		this.roles = roles;
+//		this.active = active;
+//		this.walletAmount = walletAmount;
+//	}	
+	
     public String getUserName() {
         return userName;
     }
@@ -67,6 +85,14 @@ public class UserDTO {
     }
 
     public String getFirstName() {
+        return firstName;
+    }
+
+    public void setLasttName(String firstName) {
+        this.firstName = firstName;
+    }
+    
+    public String getLastName() {
         return firstName;
     }
 

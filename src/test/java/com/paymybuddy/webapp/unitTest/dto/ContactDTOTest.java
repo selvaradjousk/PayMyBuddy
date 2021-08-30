@@ -25,7 +25,7 @@ class ContactDTOTest {
             "admin",
             true,
             1000.0);
-	
+
 	User testUser2 = new User(
     		100,
             "testUserName",

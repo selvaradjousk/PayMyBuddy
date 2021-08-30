@@ -14,3 +14,4 @@ public class ContactServiceImpl {
 	// --> addContact(contactDTO) served by userRepository.save(contact))
 	// --> deleteContact(email) served by contactRepository.deleteByEmail()
 }
+
