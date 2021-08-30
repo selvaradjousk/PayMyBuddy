@@ -133,7 +133,16 @@ public class UserServiceImpl implements IUserService {
 
         User userAdd = new User();
 
-        checkConfirmationPasswordMatch(userDTO, confirmationPass);
+ 		if(userDTO.getPassword().equals(confirmationPass)==false){
+         	log.info(" ====> ERROR: Password MISMATCH <==== ");
+             throw new DataNotConformException("Password MISMATCH");
+         }
+ 		
+ 		
+ 		if(userDTO.getPassword().equals("")==true){
+         	log.info(" ====> ERROR: Password FIELD EMPTY <==== ");
+             throw new DataNotConformException("Password NEEDED");
+         }
 
         checkAlphanumericNameEntry(userDTO);
 
@@ -178,16 +187,16 @@ public class UserServiceImpl implements IUserService {
          }
  	}
  	 //******************************************************************
- 	/**
- 	 * @param userDTO
- 	 * @param confirmationPass
- 	 */
- 	private void checkConfirmationPasswordMatch(UserDTO userDTO, String confirmationPass) {
- 		if(userDTO.getPassword().equals(confirmationPass)==false){
-         	log.info(" ====> ERROR: Password MISMATCH <==== ");
-             throw new DataNotConformException("Password MISMATCH");
-         }
- 	}
+// 	/**
+// 	 * @param userDTO
+// 	 * @param confirmationPass
+// 	 */
+// 	private void checkConfirmationPasswordMatch(UserDTO userDTO, String confirmationPass) {
+// 		if(userDTO.getPassword().equals(confirmationPass)==true){
+//         	log.info(" ====> ERROR: Password MISMATCH <==== ");
+//             throw new DataNotConformException("Password MISMATCH");
+//         }
+// 	}
  	 //******************************************************************
  	
    public boolean checkStringName(String string) {
