@@ -173,6 +173,10 @@ public class TransactionServiceImpl  implements ITransactionService  {
         	
         	// Check length of the description field
             checkDescriptionLengthGreaterThan30Characters(transactionDTO);
+            
+        	// Check length of the description field
+            checkDescriptionLengthEmpty(transactionDTO);
+            
 
         	// Check amount field has value greater than zero
             checkTransactionAmountGreaterThanZero(transactionDTO);
@@ -388,12 +392,13 @@ public class TransactionServiceImpl  implements ITransactionService  {
         // ************************************************************************        
         
     	
+
     	/**
-         * Check description length greater than 30 characters.
+         * Check payer not null.
          *
          * @param transactionDTO the transaction DTO
          */
-    	private void checkPayerNotNull(
+        private void checkPayerNotNull(
     			TransactionDTO transactionDTO) {
 
     		if (transactionDTO.getPayer() == null) {
@@ -407,12 +412,13 @@ public class TransactionServiceImpl  implements ITransactionService  {
     	
         
     	
+
     	/**
-         * Check description length greater than 30 characters.
+         * Check beneficiary not null.
          *
          * @param transactionDTO the transaction DTO
          */
-    	private void checkBeneficiaryNotNull(
+        private void checkBeneficiaryNotNull(
     			TransactionDTO transactionDTO) {
 
     		if (transactionDTO.getBeneficiary() == null) {
@@ -422,7 +428,21 @@ public class TransactionServiceImpl  implements ITransactionService  {
     		}
     	}
         // ************************************************************************  
-    	
+        /**
+         * Check description length greater than 30 characters.
+         *
+         * @param transactionDTO the transaction DTO
+         */
+    	private void checkDescriptionLengthEmpty(
+    			TransactionDTO transactionDTO) {
+
+    		if (transactionDTO.getDescription().length() == 0) {
+
+    		    throw new DataNotConformException(
+    		    		"description should be entered");
+    		}
+    	}
+        // ************************************************************************     	
     	
     	
     	/**

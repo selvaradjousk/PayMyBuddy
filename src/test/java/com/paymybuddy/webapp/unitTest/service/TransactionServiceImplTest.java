@@ -166,7 +166,7 @@ class TransactionServiceImplTest {
 	        User userBeneficiary = userMapper.toUserDO(listUserDTO.get(2));
 	        
 	      //WHEN
-	        final TransactionDTO transactionDTO= new TransactionDTO( null, userBeneficiary, 0,"justLikeThat");
+	        final TransactionDTO transactionDTO= new TransactionDTO( null, userBeneficiary, 10.0,"justLikeThat");
 
 	        //WHEN
 	        assertThrows(DataNotConformException.class, ()
@@ -186,7 +186,28 @@ class TransactionServiceImplTest {
 	        User userPayer = userMapper.toUserDO(listUserDTO.get(1));
 	        
 	      //WHEN
-	        final TransactionDTO transactionDTO= new TransactionDTO( userPayer, null, 0,"justLikeThat");
+	        final TransactionDTO transactionDTO= new TransactionDTO( userPayer, null, 10.0,"justLikeThat");
+
+	        //WHEN
+	        assertThrows(DataNotConformException.class, ()
+					-> transactionService.addTransaction(transactionDTO));
+
+	    }   	   
+	   
+	   
+		// ******************************************************************* 
+	   
+	   @Test
+	    public void testAddTransactionForDescriptionNull(){
+
+		   //GIVEN
+	        listUserDTO = userService.findAllUsers();
+	        User userPayer = userMapper.toUserDO(listUserDTO.get(1));
+	        listUserDTO = userService.findAllUsers();
+	        User userBeneficiary = userMapper.toUserDO(listUserDTO.get(2));
+	        
+	      //WHEN
+	        final TransactionDTO transactionDTO= new TransactionDTO( userPayer, userBeneficiary, 0,"");
 
 	        //WHEN
 	        assertThrows(DataNotConformException.class, ()
