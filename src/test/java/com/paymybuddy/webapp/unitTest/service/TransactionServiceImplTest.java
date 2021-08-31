@@ -135,5 +135,23 @@ class TransactionServiceImplTest {
 	        assertEquals(  walleBeneficiarytBefore+100,  walleBeneficiarytAfter);
 	    }
 	   
-  
+	   @Test
+	    public void testAddTransactionForZero(){
+
+		   //GIVEN
+	        listUserDTO = userService.findAllUsers();
+	        User userPayer = userMapper.toUserDO(listUserDTO.get(1));
+	        User userBeneficiary = userMapper.toUserDO(listUserDTO.get(2));
+	        
+	      //WHEN
+	        final TransactionDTO transactionDTO= new TransactionDTO( userPayer, userBeneficiary, 0,"justLikeThat");
+
+	        //WHEN
+	        assertThrows(BalanceNotSufficientException.class, ()
+					-> transactionService.addTransaction(transactionDTO));
+
+	    }   
+	   
+	   
+	   
 }
