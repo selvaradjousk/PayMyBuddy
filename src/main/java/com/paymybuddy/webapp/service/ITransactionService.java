@@ -49,4 +49,6 @@ public interface ITransactionService {
 	Page<TransactionDTO> lastThreeTransactions(
 			UserDTO userDTO, Pageable pageable);
 
+	TransactionDTO addTransaction(TransactionDTO transactionDTO);
+
 }

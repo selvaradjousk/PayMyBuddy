@@ -158,4 +158,10 @@ public class TransactionServiceImpl  implements ITransactionService  {
 	    	return pagesTransactionDTO;
 	    }
 
+		@Override
+		public TransactionDTO addTransaction(TransactionDTO transactionDTO) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 }

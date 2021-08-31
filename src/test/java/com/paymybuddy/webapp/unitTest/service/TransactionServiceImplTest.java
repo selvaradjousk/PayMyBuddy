@@ -1,6 +1,7 @@
 package com.paymybuddy.webapp.unitTest.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -109,5 +110,25 @@ class TransactionServiceImplTest {
 	  }
 	  
 		// ******************************************************************* 	 
+	  
+	   @Test
+	    public void testAddTransaction(){
 
+		   //GIVEN
+	        listUserDTO = userService.findAllUsers();
+	        User userPayer = userMapper.toUserDO(listUserDTO.get(1));
+	        User userBeneficiary = userMapper.toUserDO(listUserDTO.get(2));
+	        Double wallePayertBefore = userPayer.getWalletAmount();
+	        Double walleBeneficiarytBefore = userBeneficiary.getWalletAmount();
+	        TransactionDTO transactionDTO = new TransactionDTO( userPayer, userBeneficiary, 100.0,"justLikeThat");
+
+	        //WHEN
+	        transactionDTO = transactionService.addTransaction(transactionDTO);
+	        Double wallePayertAfter = userPayer.getWalletAmount();
+	        Double walleBeneficiarytAfter = userBeneficiary.getWalletAmount();
+
+	        //THEN
+	        assertNotEquals(wallePayertBefore, wallePayertAfter);
+	        assertEquals(  walleBeneficiarytBefore+100,  walleBeneficiarytAfter);
+	    }
 }
