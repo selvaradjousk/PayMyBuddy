@@ -428,12 +428,13 @@ public class TransactionServiceImpl  implements ITransactionService  {
     		}
     	}
         // ************************************************************************  
-        /**
-         * Check description length greater than 30 characters.
+
+    	/**
+         * Check description length empty.
          *
          * @param transactionDTO the transaction DTO
          */
-    	private void checkDescriptionLengthEmpty(
+        private void checkDescriptionLengthEmpty(
     			TransactionDTO transactionDTO) {
 
     		if (transactionDTO.getDescription().length() == 0) {

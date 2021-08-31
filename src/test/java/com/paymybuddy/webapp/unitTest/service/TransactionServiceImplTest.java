@@ -156,6 +156,26 @@ class TransactionServiceImplTest {
 
 	    }   
 	   
+
+		// ******************************************************************* 	 
+	   
+	   @Test
+	    public void testAddTransactionAmountForNegative(){
+
+		   //GIVEN
+	        listUserDTO = userService.findAllUsers();
+	        User userPayer = userMapper.toUserDO(listUserDTO.get(1));
+	        User userBeneficiary = userMapper.toUserDO(listUserDTO.get(2));
+	        
+	      //WHEN
+	        final TransactionDTO transactionDTO= new TransactionDTO( userPayer, userBeneficiary, -50.0,"justLikeThat");
+
+	        //WHEN
+	        assertThrows(BalanceNotSufficientException.class, ()
+					-> transactionService.addTransaction(transactionDTO));
+
+	    }  
+	   
 		// ******************************************************************* 	 
 	   
 	   @Test
@@ -217,5 +237,8 @@ class TransactionServiceImplTest {
 	   
 	   
 		// ******************************************************************* 
+	   
+	   
+	
 	   
 }
