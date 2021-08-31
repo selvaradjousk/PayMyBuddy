@@ -18,6 +18,7 @@ import org.springframework.test.context.ActiveProfiles;
 import com.paymybuddy.webapp.dto.TransactionDTO;
 import com.paymybuddy.webapp.dto.UserDTO;
 import com.paymybuddy.webapp.exception.BalanceNotSufficientException;
+import com.paymybuddy.webapp.exception.DataNotConformException;
 import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.service.ITransactionService;
 import com.paymybuddy.webapp.service.IUserService;
@@ -135,6 +136,9 @@ class TransactionServiceImplTest {
 	        assertEquals(  walleBeneficiarytBefore+100,  walleBeneficiarytAfter);
 	    }
 	   
+
+		// ******************************************************************* 	 
+	   
 	   @Test
 	    public void testAddTransactionForZero(){
 
@@ -152,6 +156,27 @@ class TransactionServiceImplTest {
 
 	    }   
 	   
+		// ******************************************************************* 	 
+	   
+	   @Test
+	    public void testAddTransactionForPayerNull(){
+
+		   //GIVEN
+	        listUserDTO = userService.findAllUsers();
+	        User userBeneficiary = userMapper.toUserDO(listUserDTO.get(2));
+	        
+	      //WHEN
+	        final TransactionDTO transactionDTO= new TransactionDTO( null, userBeneficiary, 0,"justLikeThat");
+
+	        //WHEN
+	        assertThrows(DataNotConformException.class, ()
+					-> transactionService.addTransaction(transactionDTO));
+
+	    }   	   
+	   
+	   
+		// ******************************************************************* 	 
+	 	   
 	   
 	   
 }

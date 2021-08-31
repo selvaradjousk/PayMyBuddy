@@ -165,6 +165,9 @@ public class TransactionServiceImpl  implements ITransactionService  {
         @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false, rollbackFor = RuntimeException.class)
         public TransactionDTO addTransaction(TransactionDTO transactionDTO) {
 
+        	// Check payer field not null
+        	checkPayerNotNull(transactionDTO);
+        	
         	// Check length of the description field
             checkDescriptionLengthGreaterThan30Characters(transactionDTO);
 
@@ -381,7 +384,25 @@ public class TransactionServiceImpl  implements ITransactionService  {
     	}
         // ************************************************************************        
         
-        
+    	
+    	/**
+         * Check description length greater than 30 characters.
+         *
+         * @param transactionDTO the transaction DTO
+         */
+    	private void checkPayerNotNull(
+    			TransactionDTO transactionDTO) {
+
+    		if (transactionDTO.getPayer() == null) {
+
+    		    throw new DataNotConformException(
+    		    		"user - Payer cannot be null");
+    		}
+    	}
+        // ************************************************************************  
+    	
+    	
+    	
     	/**
 	     * Mapped transaction DTO.
 	     *
