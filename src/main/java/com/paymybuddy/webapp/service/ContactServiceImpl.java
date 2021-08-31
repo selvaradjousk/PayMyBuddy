@@ -26,16 +26,29 @@ import com.paymybuddy.webapp.util.UserMapper;
 // --> addContact(contactDTO) served by userRepository.save(contact))
 // --> deleteContact(email) served by contactRepository.deleteByEmail()
 
+/**
+ * The Class ContactServiceImpl.
+ */
 @Service
 public class ContactServiceImpl implements IContactService {
 
+	/** The contact repository. */
 	@Autowired
 	ContactRepository contactRepository;
 
+	/** The user mapper. */
 	public UserMapper userMapper = new UserMapper();
+	
+	/** The contact mapper. */
 	public ContactMapper contactMapper = new ContactMapper();
 
-	  // ************************************************************************
+	  /**
+  	 * Find contact by payer.
+  	 *
+  	 * @param payerDTO the payer DTO
+  	 * @return the list
+  	 */
+  	// ************************************************************************
 	@Override
 	public List<ContactDTO> findContactByPayer(UserDTO payerDTO) {
 
@@ -45,9 +58,9 @@ public class ContactServiceImpl implements IContactService {
 				.findListContactByPayer(payer);
 
 		if (contactsList != null) {
-			
+
 			for (Contact contact : contactsList) {
-				
+
 				ContactDTO contactDTO = new ContactDTO();
 				contactDTO = contactMapper
 						.toContactDTO(contact);
@@ -60,6 +73,12 @@ public class ContactServiceImpl implements IContactService {
 	}
 
 
+    /**
+     * Adds the contact.
+     *
+     * @param contactDTO the contact DTO
+     * @return the contact DTO
+     */
     // ************************************************************************
     @Override
     public ContactDTO addContact(ContactDTO contactDTO) {
@@ -71,11 +90,17 @@ public class ContactServiceImpl implements IContactService {
 
         return contactDTO;
     }
-    
-    
+
+
     // ************************************************************************
 
 
+    /**
+     * Delete by id.
+     *
+     * @param id the id
+     * @return the contact DTO
+     */
     @Override
     public ContactDTO deleteById(Integer id) {
 
@@ -84,6 +109,5 @@ public class ContactServiceImpl implements IContactService {
         return null;
     }
 
-	
 	
 }

@@ -5,12 +5,21 @@ import org.springframework.stereotype.Component;
 import com.paymybuddy.webapp.dto.TransactionDTO;
 import com.paymybuddy.webapp.model.Transaction;
 
+/**
+ * The Class TransactionMapper.
+ */
 @Component
 public class TransactionMapper {
 
 //	LocalDate creationDate = LocalDate.now();	
 	
-	  public Transaction toTransactionDO(TransactionDTO transactionDTO) {
+	  /**
+ * To transaction DO.
+ *
+ * @param transactionDTO the transaction DTO
+ * @return the transaction
+ */
+public Transaction toTransactionDO(TransactionDTO transactionDTO) {
 
 	        Transaction transaction = new Transaction();
 
@@ -25,7 +34,13 @@ public class TransactionMapper {
 	        return transaction;
 	    }
 
-	    public TransactionDTO toTransactionDTO(Transaction transaction) {
+	    /**
+    	 * To transaction DTO.
+    	 *
+    	 * @param transaction the transaction
+    	 * @return the transaction DTO
+    	 */
+    	public TransactionDTO toTransactionDTO(Transaction transaction) {
 
 	        TransactionDTO transactionDTO = new TransactionDTO();
 

@@ -5,12 +5,21 @@ import org.springframework.stereotype.Component;
 import com.paymybuddy.webapp.dto.TransferDTO;
 import com.paymybuddy.webapp.model.Transfer;
 
+/**
+ * The Class TransferMapper.
+ */
 @Component
 public class TransferMapper {
 
 //	LocalDate createDate = LocalDate.now();	
 
-    public Transfer toTransferDO(TransferDTO transferDTO) {
+    /**
+ * To transfer DO.
+ *
+ * @param transferDTO the transfer DTO
+ * @return the transfer
+ */
+public Transfer toTransferDO(TransferDTO transferDTO) {
         Transfer transfer = new Transfer();
 
         transfer.setIdTransfer(transferDTO.getIdTransfer());
@@ -23,6 +32,12 @@ public class TransferMapper {
         return transfer;
      }
 
+    /**
+     * To transfer DTO.
+     *
+     * @param transfer the transfer
+     * @return the transfer DTO
+     */
     public TransferDTO toTransferDTO(Transfer transfer) {
         TransferDTO transferDTO = new TransferDTO();
 

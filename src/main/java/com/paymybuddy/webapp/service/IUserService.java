@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.paymybuddy.webapp.dto.UserDTO;
 
+/**
+ * The Interface IUserService.
+ */
 public interface IUserService {
 
 	/**
@@ -30,11 +33,32 @@ public interface IUserService {
  	 */
  	public UserDTO findUserById(Integer id);
 
+	/**
+	 * Save user.
+	 *
+	 * @param userDTO the user DTO
+	 * @return the user DTO
+	 */
 	UserDTO saveUser(UserDTO userDTO);
 
+	/**
+	 * User exist by id.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 */
 	boolean userExistById(int id);
 
-	UserDTO saveNewUser(UserDTO userDTO, String confirmationPass);
+	/**
+	 * Save new user.
+	 *
+	 * @param userDTO the user DTO
+	 * @param confirmationPass the confirmation pass
+	 * @return the user DTO
+	 */
+	UserDTO saveNewUser(
+			UserDTO userDTO,
+			String confirmationPass);
  
  
  	

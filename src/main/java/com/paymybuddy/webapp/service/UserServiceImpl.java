@@ -29,13 +29,19 @@ import lombok.extern.log4j.Log4j2;
 // --> check password match on confirm password
 // --> input fields validation done in the respective DO with annotations
 
+/**
+ * The Class UserServiceImpl.
+ */
+/** The Constant log. */
 @Log4j2	
 @Service
 public class UserServiceImpl implements IUserService {
 
+	/** The user repository. */
 	@Autowired
 	private UserRepository userRepository;
 
+    /** The user mapper. */
     public UserMapper userMapper = new UserMapper();
 
 
@@ -77,7 +83,9 @@ public class UserServiceImpl implements IUserService {
 		User user = userRepository.findUserByEmail(email);
 
 		log.info(" ====> Email <==== "+ user.getEmail());
+
 		log.info(" ====> FIND USER by EMAIL Sucessfull <==== ");
+
 		log.info(" ====> Email <==== "+ user.getEmail());
 
 		return userMapper.toUserDTO(user);
@@ -85,6 +93,12 @@ public class UserServiceImpl implements IUserService {
 	// *******************************************************************
 
 
+	/**
+	 * Find user by id.
+	 *
+	 * @param id the id
+	 * @return the user DTO
+	 */
 	@Override
 	public UserDTO findUserById(Integer id) {
 
@@ -102,6 +116,12 @@ public class UserServiceImpl implements IUserService {
 	}
 
 
+    /**
+     * Save user.
+     *
+     * @param userDTO the user DTO
+     * @return the user DTO
+     */
     //******************************************************************
     @Override
     public UserDTO saveUser(UserDTO userDTO) {
@@ -118,15 +138,30 @@ public class UserServiceImpl implements IUserService {
     }
     
 
+    /**
+     * User exist by id.
+     *
+     * @param id the id
+     * @return true, if successful
+     */
     //******************************************************************
     @Override
     public boolean userExistById(int id) {
+
     	log.info(" ====> Check VERIFY userExistById <==== ");
-        return userRepository.existsById(id);
+
+    	return userRepository.existsById(id);
     }
     
     //******************************************************************
     
+    /**
+     * Save new user.
+     *
+     * @param userDTO the user DTO
+     * @param confirmationPass the confirmation pass
+     * @return the user DTO
+     */
     public UserDTO saveNewUser(UserDTO userDTO, String confirmationPass) {
  
    	log.info(" ====> SAVE NEW User requested <==== ");
@@ -134,14 +169,18 @@ public class UserServiceImpl implements IUserService {
         User userAdd = new User();
 
  		if(userDTO.getPassword().equals(confirmationPass)==false){
-         	log.info(" ====> ERROR: Password MISMATCH <==== ");
-             throw new DataNotConformException("Password MISMATCH");
+
+ 			log.info(" ====> ERROR: Password MISMATCH <==== ");
+
+ 			throw new DataNotConformException("Password MISMATCH");
          }
- 		
- 		
+
+
  		if(userDTO.getPassword().equals("")==true){
+
          	log.info(" ====> ERROR: Password FIELD EMPTY <==== ");
-             throw new DataNotConformException("Password NEEDED");
+
+         	throw new DataNotConformException("Password NEEDED");
          }
 
         checkAlphanumericNameEntry(userDTO);
@@ -149,6 +188,7 @@ public class UserServiceImpl implements IUserService {
         checkEntryForEmailFormat(userDTO);
 
         if (userRepository.findUserByEmail(userDTO.getEmail())==null){
+
             userDTO.setRoles("ROLE_USER");
             userDTO.setWalletAmount(0.0);
             userDTO.setActive(true);
@@ -156,37 +196,54 @@ public class UserServiceImpl implements IUserService {
 
 
             log.info(" ====> NEW User PASSWORD: " + userDTO.getPassword() + " <==== ");
+
             userAdd = userRepository.save(userMapper.toUserDO(userDTO));
+
             log.info(" ====> SAVE NEW User SUCCESSFULL <==== ");
+
             return userMapper.toUserDTO(userAdd);
         }else{
             throw new DataAlreadyExistException("Email ID not available,"
             		+ " already taken by existing user !");
         }
     }
-    
+
     //******************************************************************
 
  	/**
- 	 * @param userDTO
- 	 */
+     * Check entry for email format.
+     *
+     * @param userDTO the user DTO
+     */
  	private void checkEntryForEmailFormat(UserDTO userDTO) {
+
  		if(checkStringEmail(userDTO.getEmail())==false){
+
              throw new DataNotConformException("Please enter EMAIL ID");
          }
  	}
- 	 //******************************************************************
+
+
+ 	//******************************************************************
  	/**
- 	 * @param userDTO
- 	 */
+ 	  * Check alphanumeric name entry.
+ 	  *
+ 	  * @param userDTO the user DTO
+ 	  */
  	private void checkAlphanumericNameEntry(UserDTO userDTO) {
+
  		if(checkStringName(userDTO.getUserName())==false ||
                          checkStringName(userDTO.getFirstName())==false){
+
          	log.info(" ====> ERROR: Names not alphanumeric <==== ");
-             throw new DataNotConformException("Non alphanumeric names not accepted");
+
+             throw new DataNotConformException(
+            		 "Non alphanumeric names not accepted");
          }
  	}
- 	 //******************************************************************
+
+
+ 	//******************************************************************
 // 	/**
 // 	 * @param userDTO
 // 	 * @param confirmationPass
@@ -198,18 +255,36 @@ public class UserServiceImpl implements IUserService {
 //         }
 // 	}
  	 //******************************************************************
- 	
-   public boolean checkStringName(String string) {
 
-        Pattern stringNamePattern = Pattern.compile("[a-zA-Z\\+\\-\\+]{2,100}");
+   /**
+ 	  * Check string name.
+ 	  *
+ 	  * @param string the string
+ 	  * @return true, if successful
+ 	  */
+ 	 public boolean checkStringName(String string) {
+
+        Pattern stringNamePattern = Pattern.compile(
+        		"[a-zA-Z\\+\\-\\+]{2,100}");
+
         return stringNamePattern.matcher(string).matches();
     }
     //******************************************************************
 
+    /**
+     * Check string email.
+     *
+     * @param string the string
+     * @return true, if successful
+     */
     public boolean checkStringEmail(String string) {
-        Pattern stringNamePattern = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+");
+        Pattern stringNamePattern = Pattern.compile(
+        		"(?:\\w|[\\-_])"
+        		+ "+(?:\\.(?:\\w|[\\-_])"
+        		+ "+)*\\@(?:\\w|[\\-_])"
+        		+ "+(?:\\.(?:\\w|[\\-_])+)+");
         return stringNamePattern.matcher(string).matches();
     }
-       
+
 
 }

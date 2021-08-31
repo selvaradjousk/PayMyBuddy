@@ -24,6 +24,7 @@ import com.paymybuddy.webapp.util.UserMapper;
 
 import lombok.extern.log4j.Log4j2;
 
+/** The Constant log. */
 @Log4j2
 @Service
 public class TransferServiceImpl implements ITransferService {
@@ -39,24 +40,34 @@ public class TransferServiceImpl implements ITransferService {
 	// --> Before validation of Transfer, Transaction approval done by checking the
 	// account balance amount
 
+	/** The transfer repository. */
 	@Autowired
 	TransferRepository transferRepository;
 
+    /** The user service. */
     @Autowired
     IUserService userService;
-	
+
+	/** The transfer mapper. */
 	public TransferMapper transferMapper = new TransferMapper();
 
+	/** The user mapper. */
 	public UserMapper userMapper = new UserMapper();
 
 	// *******************************************************************
-	
+
+	/**
+	 * Find all transfers.
+	 *
+	 * @return the list
+	 */
 	@Override
 	public List<TransferDTO> findAllTransfers() {
+
 		List<Transfer> listOfTransfers = transferRepository.findAll();
 
 		log.info(" ====> FIND All TRANSFER requested <==== ");
-		
+
 		List<TransferDTO> listOfTransfersDTO = new ArrayList<TransferDTO>();
 
 		for (Transfer transfer : listOfTransfers) {
@@ -71,6 +82,12 @@ public class TransferServiceImpl implements ITransferService {
 
 	// *************This method is a step for pagable template*************
 	
+	/**
+	 * Find all transfer by user.
+	 *
+	 * @param userDTO the user DTO
+	 * @return the list
+	 */
 	@Override
 	public List<TransferDTO> findAllTransferByUser(UserDTO userDTO) {
 		
@@ -93,7 +110,13 @@ public class TransferServiceImpl implements ITransferService {
 	
 	
 	
-	@Override
+	/**
+     * Find all by user type credit.
+     *
+     * @param userDTO the user DTO
+     * @return the list
+     */
+    @Override
 	public List<TransferDTO> findAllByUserTypeCredit(UserDTO userDTO) {
 		
 		User user = userMapper.toUserDO(userDTO);
@@ -114,12 +137,17 @@ public class TransferServiceImpl implements ITransferService {
     // ************************************************************************	
 	
 
-		
-	@Override
+	/**
+     * Find all by user type debit.
+     *
+     * @param userDTO the user DTO
+     * @return the list
+     */
+    @Override
 	public List<TransferDTO> findAllByUserTypeDebit(UserDTO userDTO) {
-		
+
 		User user = userMapper.toUserDO(userDTO);
-		
+
 		List<Transfer> listOfTransfers = transferRepository.findAllByUserTypeDebit(user);
 
 		log.info(" ====> FIND All TRANSFER for a user requested <==== ");
@@ -132,12 +160,18 @@ public class TransferServiceImpl implements ITransferService {
 		log.info(" ====> FIND All TRANSFER for a user Successfull <==== ");
 		return listOfTransfersDTO;
 	}
-	
-    // ************************************************************************	
-	
-  @Override
-  public Page<TransferDTO> findAllTransferByUser(UserDTO userDTO, Pageable pageable) {
 
+    // ************************************************************************	
+
+  /**
+     * Find all transfer by user.
+     *
+     * @param userDTO the user DTO
+     * @param pageable the pageable
+     * @return the page
+     */
+    @Override
+  public Page<TransferDTO> findAllTransferByUser(UserDTO userDTO, Pageable pageable) {
 
       User user = userMapper.toUserDO(userDTO);
 
@@ -148,8 +182,13 @@ public class TransferServiceImpl implements ITransferService {
       return pagesTransferDTO;
   }
 
-
-
+    /**
+     * Last three transfers.
+     *
+     * @param userDTO the user DTO
+     * @param pageable the pageable
+     * @return the page
+     */
     // ************************************************************************
     @Override
     public Page<TransferDTO> lastThreeTransfers(
@@ -166,7 +205,16 @@ public class TransferServiceImpl implements ITransferService {
     }
 
     // ************************************************************************
-    
+
+    /**
+     * Adds the transfer.
+     *
+     * @param rib the rib
+     * @param amount the amount
+     * @param type the type
+     * @param user the user
+     * @return the transfer DTO
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
     public TransferDTO addTransfer(
@@ -200,11 +248,13 @@ public class TransferServiceImpl implements ITransferService {
             		+ " data problem !");
         }
     }
-    
+
     // *************************************************************************
   	/**
-  	 * @param transfer
-  	 */
+     * Saving credit account operation.
+     *
+     * @param transfer the transfer
+     */
   	private void savingCreditAccountOperation(Transfer transfer) {
   		Double newWallet =  (double)Math.round((transfer
   				.getUser()
@@ -223,8 +273,10 @@ public class TransferServiceImpl implements ITransferService {
 
       // ************************************************************************
   	/**
-  	 * @param transfer
-  	 */
+       * Saving debit account operation.
+       *
+       * @param transfer the transfer
+       */
   	private void savingDebitAccountOperation(Transfer transfer) {
   		if (walletOperation(transfer)) {
   		    Double newWallet =  (double)Math.round((transfer
@@ -237,24 +289,23 @@ public class TransferServiceImpl implements ITransferService {
 
   		    transferRepository.save(transfer);
 
-
   		    userService.saveUser(userMapper
   		    		.toUserDTO(transfer.getUser()));
-
 
   		} else {
   		    throw new DataNotConformException("the amount exceeds the wallet");
   		}
   	}
-
-      
-    
-  	
-  	
   	
 
       // ************************************************************************
-      
+
+      /**
+       * Wallet operation.
+       *
+       * @param transfer the transfer
+       * @return the boolean
+       */
       private Boolean walletOperation(Transfer transfer) {
 
       	if ( transfer.getAmount() == 0) {
@@ -271,6 +322,12 @@ public class TransferServiceImpl implements ITransferService {
           }
       }
 
+      /**
+       * Tranfer data verification.
+       *
+       * @param transfer the transfer
+       * @return the boolean
+       */
       // ************verification data transfer valid **************************
       private Boolean tranferDataVerification(Transfer transfer){
 
@@ -286,10 +343,12 @@ public class TransferServiceImpl implements ITransferService {
 
       // ************************************************************************
   	/**
-  	 * @param transfer
-  	 * @param resultat
-  	 * @return
-  	 */
+       * Check if operation type is within credit or debit.
+       *
+       * @param transfer the transfer
+       * @param resultat the resultat
+       * @return the boolean
+       */
   	private Boolean checkIfOperationTypeIsWithinCreditOrDebit(Transfer transfer, Boolean resultat) {
   		String type = transfer.getType();
           if ( type.equals("CREDIT") || type.equals("DEBIT")) {
@@ -301,10 +360,12 @@ public class TransferServiceImpl implements ITransferService {
 
       // ************************************************************************
   	/**
-  	 * @param transfer
-  	 * @param resultat
-  	 * @return
-  	 */
+       * Check if user exist and not null.
+       *
+       * @param transfer the transfer
+       * @param resultat the resultat
+       * @return the boolean
+       */
   	private Boolean checkIfUserExistAndNotNull(Transfer transfer, Boolean resultat) {
   		if (transfer.getUser() !=null) {
               if (userService.userExistById(transfer
@@ -319,10 +380,12 @@ public class TransferServiceImpl implements ITransferService {
 
       // ************************************************************************
   	/**
-  	 * @param transfer
-  	 * @param resultat
-  	 * @return
-  	 */
+       * Check if transfer value more than zero.
+       *
+       * @param transfer the transfer
+       * @param resultat the resultat
+       * @return the boolean
+       */
   	private Boolean checkIfTransferValueMoreThanZero(
   			Transfer transfer,
   			Boolean resultat) {
@@ -332,17 +395,6 @@ public class TransferServiceImpl implements ITransferService {
   		return resultat;
   	}
 
-      // ************************************************************************ 
-    
-	
-
-
     // ************************************************************************
-
-
-
-	
-	
-
 
 }

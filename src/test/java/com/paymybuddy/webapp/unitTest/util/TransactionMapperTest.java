@@ -28,15 +28,23 @@ import com.paymybuddy.webapp.util.TransactionMapper;
 	            true,
 	            1000.0);
 
+//		@Test
+//	    public void testToEntity() {
+//		TransactionDTO dto = new TransactionDTO(
+//				user,
+//				user,
+//				1000.0,
+//				"testDescription",
+//				LocalDate.parse("2021-08-26"),
+//				0.25);
+		
 		@Test
 	    public void testToEntity() {
 		TransactionDTO dto = new TransactionDTO(
 				user,
 				user,
 				1000.0,
-				"testDescription",
-				LocalDate.parse("2021-08-26"),
-				0.25);
+				"testDescription");
 		
 		TransactionMapper mapper = new TransactionMapper();
 		Transaction entity = mapper.toTransactionDO(dto);

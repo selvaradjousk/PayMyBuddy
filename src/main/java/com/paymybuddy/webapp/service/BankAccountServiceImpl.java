@@ -16,6 +16,8 @@ import com.paymybuddy.webapp.util.UserMapper;
 
 import lombok.extern.log4j.Log4j2;
 
+// TODO: Auto-generated Javadoc
+/** The Constant log. */
 @Log4j2
 @Service
 public class BankAccountServiceImpl implements IBankAccountService{
@@ -30,13 +32,24 @@ public class BankAccountServiceImpl implements IBankAccountService{
 
 
 
-    @Autowired
+    /** The bank account repository. */
+	@Autowired
     BankAccountRepository bankAccountRepository;
 
+	/** The user mapper. */
 	public UserMapper userMapper = new UserMapper();
+    
+    /** The bank account mapper. */
     public BankAccountMapper bankAccountMapper
     = new BankAccountMapper();
 
+    /**
+     * Instantiates a new bank account service impl.
+     *
+     * @param bankAccountRepository the bank account repository
+     * @param userMapper the user mapper
+     * @param bankAccountMapper the bank account mapper
+     */
     public BankAccountServiceImpl(
     		BankAccountRepository bankAccountRepository,
     		UserMapper userMapper,
@@ -48,6 +61,12 @@ public class BankAccountServiceImpl implements IBankAccountService{
 	}
 
 
+    /**
+     * Find bank account by user.
+     *
+     * @param userDTO the user DTO
+     * @return the list
+     */
     @Override
 	public List<BankAccountDTO> findBankAccountByUser(UserDTO userDTO) {
 
@@ -71,6 +90,13 @@ public class BankAccountServiceImpl implements IBankAccountService{
         return listBankAccountDTO  ;
 	}
 
+    /**
+     * Adds the bank account.
+     *
+     * @param rib the rib
+     * @param userDTO the user DTO
+     * @return the bank account DTO
+     */
     //******************************************************************
 	@Override
 	public BankAccountDTO addBankAccount(String rib, UserDTO userDTO) {
@@ -95,6 +121,11 @@ public class BankAccountServiceImpl implements IBankAccountService{
 
     //******************************************************************
 
+    /**
+     * Delete bank account.
+     *
+     * @param id the id
+     */
     @Override
     public void deleteBankAccount(Integer id) {
 
@@ -106,7 +137,4 @@ public class BankAccountServiceImpl implements IBankAccountService{
     }
     //*******************************************************************
 
-
-
-	
 }

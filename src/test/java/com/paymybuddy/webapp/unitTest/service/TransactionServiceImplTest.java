@@ -1,6 +1,7 @@
 package com.paymybuddy.webapp.unitTest.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.paymybuddy.webapp.dto.TransactionDTO;
 import com.paymybuddy.webapp.dto.UserDTO;
+import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.service.ITransactionService;
 import com.paymybuddy.webapp.service.IUserService;
 import com.paymybuddy.webapp.util.UserMapper;
@@ -106,5 +108,6 @@ class TransactionServiceImplTest {
 	      assertEquals(3, pagesTransactionDTO.getTotalElements());
 	  }
 	  
-	  
+		// ******************************************************************* 	 
+
 }

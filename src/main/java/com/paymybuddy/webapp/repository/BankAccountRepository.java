@@ -7,6 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.paymybuddy.webapp.model.BankAccount;
 import com.paymybuddy.webapp.model.User;
 
+/**
+ * The Interface BankAccountRepository.
+ */
 public interface BankAccountRepository extends JpaRepository<BankAccount, Integer> {
 
 
@@ -17,5 +20,11 @@ public interface BankAccountRepository extends JpaRepository<BankAccount, Intege
 	// --> addBankAccount(String rib, userDTO): bankAccountDTO served by Mapper toBankAccountDTO
 	// --> deleteBankAccount(rib) served by bankAccountRepository.deleteById(id)
 
+	/**
+	 * Find bank account by user.
+	 *
+	 * @param user the user
+	 * @return the list
+	 */
 	List<BankAccount> findBankAccountByUser(User user);
 }

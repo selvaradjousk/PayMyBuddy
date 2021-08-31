@@ -1,5 +1,6 @@
 package com.paymybuddy.webapp.exception;
 
+
 /**
  * Data Data Not Found Exception Class.
  * @author Senthil

@@ -1,18 +1,25 @@
 package com.paymybuddy.webapp.util;
 
-import java.time.LocalDate;
-
 import org.springframework.stereotype.Component;
 
 import com.paymybuddy.webapp.dto.UserDTO;
 import com.paymybuddy.webapp.model.User;
 
+/**
+ * The Class UserMapper.
+ */
 @Component
 public class UserMapper {
 
 //    LocalDate creationDate = LocalDate.now();
 
-    public UserDTO toUserDTO(User user) {
+    /**
+ * To user DTO.
+ *
+ * @param user the user
+ * @return the user DTO
+ */
+public UserDTO toUserDTO(User user) {
             UserDTO userDTO = new UserDTO();
             userDTO.setId(user.getId());
             userDTO.setUserName(user.getUserName());
@@ -30,6 +37,12 @@ public class UserMapper {
             return userDTO;
     }
 
+    /**
+     * To user DO.
+     *
+     * @param userDTO the user DTO
+     * @return the user
+     */
     public User toUserDO(UserDTO userDTO) {
         User user = new User();
         user.setId(userDTO.getId());

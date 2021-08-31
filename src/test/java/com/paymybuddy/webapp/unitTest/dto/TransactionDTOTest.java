@@ -39,21 +39,33 @@ class TransactionDTOTest {
             1000.0);
 
 	
+//	TransactionDTO toTest1 = new TransactionDTO(
+//			testUser1,
+//            testUser2,
+//            1000.0,
+//            "description",
+//            LocalDate.parse("2019-12-31"),
+//            0.25);
+//	
+//	TransactionDTO toTest2 = new TransactionDTO(
+//			testUser1,
+//            testUser2,
+//            1000.0,
+//            "description",
+//            LocalDate.parse("2019-12-31"),
+//            0.25);
+//	
 	TransactionDTO toTest1 = new TransactionDTO(
 			testUser1,
             testUser2,
             1000.0,
-            "description",
-            LocalDate.parse("2019-12-31"),
-            0.25);
+            "description");
 	
 	TransactionDTO toTest2 = new TransactionDTO(
 			testUser1,
             testUser2,
             1000.0,
-            "description",
-            LocalDate.parse("2019-12-31"),
-            0.25);
+            "description");
 
 
 	

@@ -25,40 +25,118 @@ import lombok.Setter;
 
 
 
+/**
+ * The Class Transfer.
+ */
 @Entity
 @Table(name="transfer")
 public class Transfer {
 
+	/** The id transfer. */
 	@Id
-    @Getter @Setter
+    
+    /**
+     * Gets the id transfer.
+     *
+     * @return the id transfer
+     */
+    @Getter 
+ /**
+  * Sets the id transfer.
+  *
+  * @param idTransfer the new id transfer
+  */
+ @Setter
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name= "id_transfer", nullable = false)
     private int idTransfer;
 
-    @Getter @Setter
+    /**
+     * Gets the rib.
+     *
+     * @return the rib
+     */
+    @Getter /**
+  * Sets the rib.
+  *
+  * @param rib the new rib
+  */
+ @Setter
     @Column(name= "rib", nullable = false)
     private String rib;
 
-    @Getter @Setter
+    /**
+     * Gets the creates the date.
+     *
+     * @return the creates the date
+     */
+    @Getter /**
+  * Sets the creates the date.
+  *
+  * @param createDate the new creates the date
+  */
+ @Setter
     @Column(name= "date", nullable = false)
     private LocalDate createDate = LocalDate.now();
 
-    @Getter @Setter
+    /**
+     * Gets the amount.
+     *
+     * @return the amount
+     */
+    @Getter /**
+  * Sets the amount.
+  *
+  * @param amount the new amount
+  */
+ @Setter
     @Column(name= "amount", nullable = false)
     private double amount;
 
-    @Getter @Setter
+    /**
+     * Gets the type.
+     *
+     * @return the type
+     */
+    @Getter /**
+  * Sets the type.
+  *
+  * @param type the new type
+  */
+ @Setter
     @Column(name="type", columnDefinition = "enum('CREDIT','DEBIT')")
     private String type;
 
-    @Getter @Setter
+    /**
+     * Gets the user.
+     *
+     * @return the user
+     */
+    @Getter /**
+  * Sets the user.
+  *
+  * @param user the new user
+  */
+ @Setter
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    /**
+     * Instantiates a new transfer.
+     */
     public Transfer() {
     }
     
+	/**
+	 * Instantiates a new transfer.
+	 *
+	 * @param rib the rib
+	 * @param createDate the create date
+	 * @param amount the amount
+	 * @param type the type
+	 * @param user the user
+	 */
 	public Transfer(String rib, LocalDate createDate,
 			double amount, String type,  User user ) {
 		super();

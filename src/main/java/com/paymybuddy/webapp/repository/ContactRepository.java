@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.paymybuddy.webapp.model.Contact;
 import com.paymybuddy.webapp.model.User;
 
+/**
+ * The Interface ContactRepository.
+ */
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, Integer> {
 
@@ -23,10 +26,29 @@ public interface ContactRepository extends JpaRepository<Contact, Integer> {
 	// --> Add a contact
 	// --> Delete a contact
 	
+	/**
+	 * Find list contact by payer.
+	 *
+	 * @param payer the payer
+	 * @return the list
+	 */
 	List<Contact> findListContactByPayer(User payer);
 	
+	/**
+	 * Find list contact by contact.
+	 *
+	 * @param contact the contact
+	 * @return the list
+	 */
 	List<Contact> findListContactByContact(User contact);
 	
+	/**
+	 * Find contact by payer.
+	 *
+	 * @param Payer the payer
+	 * @param pageable the pageable
+	 * @return the page
+	 */
 	Page<Contact> findContactByPayer(User Payer, Pageable pageable);
 	
 	
