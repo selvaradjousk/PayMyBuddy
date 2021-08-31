@@ -167,6 +167,9 @@ public class TransactionServiceImpl  implements ITransactionService  {
 
         	// Check payer field not null
         	checkPayerNotNull(transactionDTO);
+
+        	// Check beneficiary field not null
+        	checkBeneficiaryNotNull(transactionDTO);
         	
         	// Check length of the description field
             checkDescriptionLengthGreaterThan30Characters(transactionDTO);
@@ -397,6 +400,25 @@ public class TransactionServiceImpl  implements ITransactionService  {
 
     		    throw new DataNotConformException(
     		    		"user - Payer cannot be null");
+    		}
+    	}
+    	
+        // ************************************************************************  
+    	
+        
+    	
+    	/**
+         * Check description length greater than 30 characters.
+         *
+         * @param transactionDTO the transaction DTO
+         */
+    	private void checkBeneficiaryNotNull(
+    			TransactionDTO transactionDTO) {
+
+    		if (transactionDTO.getBeneficiary() == null) {
+
+    		    throw new DataNotConformException(
+    		    		"user - Beneficiary cannot be null");
     		}
     	}
         // ************************************************************************  

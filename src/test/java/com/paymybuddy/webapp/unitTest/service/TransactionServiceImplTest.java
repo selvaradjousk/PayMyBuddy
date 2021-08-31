@@ -178,5 +178,23 @@ class TransactionServiceImplTest {
 		// ******************************************************************* 	 
 	 	   
 	   
+	   @Test
+	    public void testAddTransactionForBeneficiaryNull(){
+
+		   //GIVEN
+	        listUserDTO = userService.findAllUsers();
+	        User userPayer = userMapper.toUserDO(listUserDTO.get(1));
+	        
+	      //WHEN
+	        final TransactionDTO transactionDTO= new TransactionDTO( userPayer, null, 0,"justLikeThat");
+
+	        //WHEN
+	        assertThrows(DataNotConformException.class, ()
+					-> transactionService.addTransaction(transactionDTO));
+
+	    }   	   
+	   
+	   
+		// ******************************************************************* 
 	   
 }
