@@ -2,7 +2,7 @@ package com.paymybuddy.webapp.unitTest.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.paymybuddy.webapp.dto.TransactionDTO;
 import com.paymybuddy.webapp.dto.UserDTO;
+import com.paymybuddy.webapp.exception.BalanceNotSufficientException;
 import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.service.ITransactionService;
 import com.paymybuddy.webapp.service.IUserService;
@@ -93,7 +94,7 @@ class TransactionServiceImplTest {
 	  
 	  
 	  @Test
-	  public void TestLastThreeTransactionsByUserPageable(){
+	  public void testLastThreeTransactionsByUserPageable(){
 
 	      //GIVEN
 	      listUserDTO = userService.findAllUsers();
@@ -120,7 +121,9 @@ class TransactionServiceImplTest {
 	        User userBeneficiary = userMapper.toUserDO(listUserDTO.get(2));
 	        Double wallePayertBefore = userPayer.getWalletAmount();
 	        Double walleBeneficiarytBefore = userBeneficiary.getWalletAmount();
-	        TransactionDTO transactionDTO = new TransactionDTO( userPayer, userBeneficiary, 100.0,"justLikeThat");
+	        
+	        TransactionDTO transactionDTO = new TransactionDTO();
+	        transactionDTO = new TransactionDTO( userPayer, userBeneficiary, 100.0,"justLikeThat");
 
 	        //WHEN
 	        transactionDTO = transactionService.addTransaction(transactionDTO);
@@ -131,4 +134,6 @@ class TransactionServiceImplTest {
 	        assertNotEquals(wallePayertBefore, wallePayertAfter);
 	        assertEquals(  walleBeneficiarytBefore+100,  walleBeneficiarytAfter);
 	    }
+	   
+  
 }
