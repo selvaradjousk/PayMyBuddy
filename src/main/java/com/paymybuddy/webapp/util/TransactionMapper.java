@@ -1,7 +1,5 @@
 package com.paymybuddy.webapp.util;
 
-import java.time.LocalDate;
-
 import org.springframework.stereotype.Component;
 
 import com.paymybuddy.webapp.dto.TransactionDTO;
@@ -13,7 +11,7 @@ import com.paymybuddy.webapp.model.Transaction;
 @Component
 public class TransactionMapper {
 
-	LocalDate creationDate = LocalDate.now();	
+//	LocalDate creationDate = LocalDate.now();	
 	
 	  /**
  * To transaction DO.

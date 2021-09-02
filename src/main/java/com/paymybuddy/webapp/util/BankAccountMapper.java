@@ -1,7 +1,5 @@
 package com.paymybuddy.webapp.util;
 
-import java.time.LocalDate;
-
 import org.springframework.stereotype.Component;
 
 import com.paymybuddy.webapp.dto.BankAccountDTO;
@@ -13,7 +11,7 @@ import com.paymybuddy.webapp.model.BankAccount;
 @Component
 public class BankAccountMapper {
 
-    LocalDate createDate = LocalDate.now();
+//    LocalDate createDate = LocalDate.now();
 	  /**
   	 * To bank account DO.
   	 *

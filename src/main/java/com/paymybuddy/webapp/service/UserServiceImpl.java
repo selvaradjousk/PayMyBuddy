@@ -128,9 +128,9 @@ public class UserServiceImpl implements IUserService {
 
     	log.info(" ====> SAVE User requested <==== ");
  
-    	User userAdd = new User();
+//    	User userAdd = new User();
  
-    	userAdd = userRepository.save(userMapper.toUserDO(userDTO));
+    	User userAdd = userRepository.save(userMapper.toUserDO(userDTO));
 
         log.info(" ====> User SAVED Successfully <==== ");
  
@@ -166,7 +166,7 @@ public class UserServiceImpl implements IUserService {
  
    	log.info(" ====> SAVE NEW User requested <==== ");
 
-        User userAdd = new User();
+//        User userAdd = new User();
 
  		if(userDTO.getPassword().equals(confirmationPass)==false){
 
@@ -197,7 +197,7 @@ public class UserServiceImpl implements IUserService {
 
             log.info(" ====> NEW User PASSWORD: " + userDTO.getPassword() + " <==== ");
 
-            userAdd = userRepository.save(userMapper.toUserDO(userDTO));
+            User userAdd = userRepository.save(userMapper.toUserDO(userDTO));
 
             log.info(" ====> SAVE NEW User SUCCESSFULL <==== ");
 

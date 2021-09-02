@@ -1,7 +1,5 @@
 package com.paymybuddy.webapp.util;
 
-import java.time.LocalDate;
-
 import org.springframework.stereotype.Component;
 
 import com.paymybuddy.webapp.dto.TransferDTO;
@@ -13,7 +11,7 @@ import com.paymybuddy.webapp.model.Transfer;
 @Component
 public class TransferMapper {
 
-	LocalDate createDate = LocalDate.now();	
+//	LocalDate createDate = LocalDate.now();	
 
     /**
  * To transfer DO.

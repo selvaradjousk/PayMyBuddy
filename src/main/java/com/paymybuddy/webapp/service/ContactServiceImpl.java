@@ -61,8 +61,8 @@ public class ContactServiceImpl implements IContactService {
 
 			for (Contact contact : contactsList) {
 
-				ContactDTO contactDTO = new ContactDTO();
-				contactDTO = contactMapper
+//				ContactDTO contactDTO = new ContactDTO();
+				ContactDTO contactDTO = contactMapper
 						.toContactDTO(contact);
 				contactsDTOList.add(contactDTO);
 			}

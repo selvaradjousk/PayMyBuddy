@@ -1,8 +1,6 @@
 package com.paymybuddy.webapp.util;
 
 
-import java.time.LocalDate;
-
 import org.springframework.stereotype.Component;
 
 import com.paymybuddy.webapp.dto.ContactDTO;
@@ -14,7 +12,7 @@ import com.paymybuddy.webapp.model.Contact;
 @Component
 public class ContactMapper {
 
-	LocalDate creationDate = LocalDate.now();	
+//	LocalDate creationDate = LocalDate.now();	
 	
     /**
  * To contact DO.

@@ -336,9 +336,9 @@ public class TransactionServiceImpl  implements ITransactionService  {
          */
     	private Transaction saveTransactionOperation(TransactionDTO transactionDTO) {
 
-    		    Transaction transaction = new Transaction();
+//    		    Transaction transaction = new Transaction();
 
-    		    transaction = transactionMapper
+    		    Transaction transaction = transactionMapper
     		    		.toTransactionDO(transactionDTO);
     		    transactionRepository.save(transaction);
     		return transaction;
@@ -453,8 +453,8 @@ public class TransactionServiceImpl  implements ITransactionService  {
 	     * @return the transaction DTO
 	     */
     	public TransactionDTO mappedTransactionDTO(Transaction transaction) {
-    		TransactionDTO transactionDTO = new TransactionDTO();
-            transactionDTO = transactionMapper.toTransactionDTO(transaction);
+//    		TransactionDTO transactionDTO = new TransactionDTO();
+    		TransactionDTO transactionDTO = transactionMapper.toTransactionDTO(transaction);
             return transactionDTO;
     	}        
 	
