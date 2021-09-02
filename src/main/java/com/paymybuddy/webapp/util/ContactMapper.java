@@ -12,7 +12,7 @@ import com.paymybuddy.webapp.model.Contact;
 @Component
 public class ContactMapper {
 
-//	LocalDate creationDate = LocalDate.now();	
+//	LocalDate creationDate = LocalDate.now();
 	
     /**
  * To contact DO.
@@ -24,14 +24,14 @@ public Contact toContactDO(ContactDTO contactDTO) {
 
         Contact contact = new Contact();
 
-        if (contactDTO !=null){
+        if (contactDTO != null){
         contact.setIdContact(contactDTO.getIdContact());
         contact.setCreationDate(contactDTO.getCreationDate());
         contact.setPayer(contactDTO.getPayer());
         contact.setContact(contactDTO.getContact());
 
         return contact;
-        } else{
+        } else {
         return null;
         }
      }
@@ -46,15 +46,15 @@ public Contact toContactDO(ContactDTO contactDTO) {
 
         ContactDTO contactDTO = new ContactDTO();
 
-        if (contact !=null){
+        if (contact != null) {
         contactDTO.setIdContact(contact.getIdContact());
         contactDTO.setCreationDate(contact.getCreationDate());
         contactDTO.setPayer(contact.getPayer());
         contactDTO.setContact(contact.getContact());
 
         return contactDTO;
-        
-        } else{
+
+        } else {
         return null;
         }
     }

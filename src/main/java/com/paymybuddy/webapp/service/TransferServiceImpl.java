@@ -24,12 +24,16 @@ import com.paymybuddy.webapp.util.UserMapper;
 
 import lombok.extern.log4j.Log4j2;
 
-/** The Constant log. */
+
+
+/**
+ * The Class TransferServiceImpl.
+ */
 @Log4j2
 @Service
 public class TransferServiceImpl implements ITransferService {
 
-	// **************************** TODOs LIST ***********************************
+	// **************************** TODOs LIST ***************************
 
 	// Method:
 	// --> getAllTransfers(): List(TransfersDTO) served by
@@ -37,24 +41,46 @@ public class TransferServiceImpl implements ITransferService {
 	// --> getAllTransfersByUser(UserDTO); TransferDTO by pages
 	// --> addTransfer(transferDTO): transferDTO
 	// --> pagination of transfer list
-	// --> Before validation of Transfer, Transaction approval done by checking the
-	// account balance amount
+	// --> Before validation of Transfer, Transaction approval
+	//  done by checking the account balance amount
 
 	/** The transfer repository. */
 	@Autowired
 	TransferRepository transferRepository;
 
-    /** The user service. */
+	/** The user service. */
     @Autowired
     IUserService userService;
 
 	/** The transfer mapper. */
-	public TransferMapper transferMapper = new TransferMapper();
+	private TransferMapper transferMapper = new TransferMapper();
 
 	/** The user mapper. */
-	public UserMapper userMapper = new UserMapper();
+	private UserMapper userMapper = new UserMapper();
 
-	// *******************************************************************
+
+
+    /**
+     * Instantiates a new transfer service impl.
+     *
+     * @param transferRepository the transfer repository
+     * @param userService the user service
+     * @param transferMapper the transfer mapper
+     * @param userMapper the user mapper
+     */
+    public TransferServiceImpl(
+    		TransferRepository transferRepositoryy,
+    		IUserService userServicee,
+			TransferMapper transferMapperr,
+			UserMapper userMapperr) {
+		super();
+		this.transferRepository = transferRepositoryy;
+		this.userService = userServicee;
+		this.transferMapper = transferMapperr;
+		this.userMapper = userMapperr;
+	}
+
+    // *******************************************************************
 
 	/**
 	 * Find all transfers.
@@ -81,7 +107,7 @@ public class TransferServiceImpl implements ITransferService {
 
 
 	// *************This method is a step for pagable template*************
-	
+
 	/**
 	 * Find all transfer by user.
 	 *
@@ -89,11 +115,13 @@ public class TransferServiceImpl implements ITransferService {
 	 * @return the list
 	 */
 	@Override
-	public List<TransferDTO> findAllTransferByUser(UserDTO userDTO) {
+	public List<TransferDTO> findAllTransferByUser(
+			final UserDTO userDTO) {
 		
 		User user = userMapper.toUserDO(userDTO);
 		
-		List<Transfer> listOfTransfers = transferRepository.findAllByUser(user);
+		List<Transfer> listOfTransfers = transferRepository
+				.findAllByUser(user);
 
 		log.info(" ====> FIND All TRANSFER for a user requested <==== ");
 
@@ -106,10 +134,10 @@ public class TransferServiceImpl implements ITransferService {
 		return listOfTransfersDTO;
 	}
 
-    // ************************************************************************
-	
-	
-	
+    // *********************************************************************
+
+
+
 	/**
      * Find all by user type credit.
      *
@@ -117,11 +145,13 @@ public class TransferServiceImpl implements ITransferService {
      * @return the list
      */
     @Override
-	public List<TransferDTO> findAllByUserTypeCredit(UserDTO userDTO) {
+	public List<TransferDTO> findAllByUserTypeCredit(
+			final UserDTO userDTO) {
 		
 		User user = userMapper.toUserDO(userDTO);
 		
-		List<Transfer> listOfTransfers = transferRepository.findAllByUserTypeCredit(user);
+		List<Transfer> listOfTransfers = transferRepository
+				.findAllByUserTypeCredit(user);
 
 		log.info(" ====> FIND All TRANSFER for a user requested <==== ");
 
@@ -133,9 +163,9 @@ public class TransferServiceImpl implements ITransferService {
 		log.info(" ====> FIND All TRANSFER for a user Successfull <==== ");
 		return listOfTransfersDTO;
 	}
-	
-    // ************************************************************************	
-	
+
+    // *********************************************************************
+
 
 	/**
      * Find all by user type debit.
@@ -144,24 +174,26 @@ public class TransferServiceImpl implements ITransferService {
      * @return the list
      */
     @Override
-	public List<TransferDTO> findAllByUserTypeDebit(UserDTO userDTO) {
+	public List<TransferDTO> findAllByUserTypeDebit(final UserDTO userDTO) {
 
 		User user = userMapper.toUserDO(userDTO);
 
-		List<Transfer> listOfTransfers = transferRepository.findAllByUserTypeDebit(user);
+		List<Transfer> listOfTransfers = transferRepository
+				.findAllByUserTypeDebit(user);
 
 		log.info(" ====> FIND All TRANSFER for a user requested <==== ");
 
 		List<TransferDTO> listOfTransfersDTO = new ArrayList<TransferDTO>();
 
 		for (Transfer transfer : listOfTransfers) {
-			listOfTransfersDTO.add(transferMapper.toTransferDTO(transfer));
+			listOfTransfersDTO.add(transferMapper
+					.toTransferDTO(transfer));
 		}
 		log.info(" ====> FIND All TRANSFER for a user Successfull <==== ");
 		return listOfTransfersDTO;
 	}
 
-    // ************************************************************************	
+    // *********************************************************************	
 
   /**
      * Find all transfer by user.
@@ -171,7 +203,9 @@ public class TransferServiceImpl implements ITransferService {
      * @return the page
      */
     @Override
-  public Page<TransferDTO> findAllTransferByUser(UserDTO userDTO, Pageable pageable) {
+  public Page<TransferDTO> findAllTransferByUser(
+		  final UserDTO userDTO,
+		  final Pageable pageable) {
 
       User user = userMapper.toUserDO(userDTO);
 
@@ -189,11 +223,11 @@ public class TransferServiceImpl implements ITransferService {
      * @param pageable the pageable
      * @return the page
      */
-    // ************************************************************************
+    // *********************************************************************
     @Override
     public Page<TransferDTO> lastThreeTransfers(
-    		UserDTO userDTO,
-    		Pageable pageable) {
+    		final UserDTO userDTO,
+    		final Pageable pageable) {
 
     	User user = userMapper.toUserDO(userDTO);
 
@@ -204,7 +238,7 @@ public class TransferServiceImpl implements ITransferService {
     	return pagesTransferDTO;
     }
 
-    // ************************************************************************
+    // *********************************************************************
 
     /**
      * Adds the transfer.
@@ -218,21 +252,20 @@ public class TransferServiceImpl implements ITransferService {
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
     public TransferDTO addTransfer(
-    		String rib,
-    		double amount,
-    		String type,
-    		User user) {
-        
+    		final String rib,
+    		final double amount,
+    		final String type,
+    		final User user) {
+
         Transfer transfer = new Transfer(
         		rib,
         		LocalDate.now(),
         		amount,
         		type,
         		user);
-        
+
         if (tranferDataVerification(transfer)) {
-        	
-              
+
                     if (transfer
                     		.getType()
                     		.equals(TransferType.CREDIT.toString())) {
@@ -243,23 +276,23 @@ public class TransferServiceImpl implements ITransferService {
                 return transferMapper
                 		.toTransferDTO(transfer);
 
-        }else{
+        } else {
             throw new DataNotConformException("invalid transfer,"
             		+ " data problem !");
         }
     }
 
-    // *************************************************************************
+    // **********************************************************************
   	/**
      * Saving credit account operation.
      *
      * @param transfer the transfer
      */
-  	private void savingCreditAccountOperation(Transfer transfer) {
-  		Double newWallet =  (double)Math.round((transfer
+  	private void savingCreditAccountOperation(final Transfer transfer) {
+  		Double newWallet =  (double) Math.round((transfer
   				.getUser()
   				.getWalletAmount()
-  				+ transfer.getAmount())*100)/100;
+  				+ transfer.getAmount()) * 100) / 100;
 
   		transfer.getUser().setWalletAmount(newWallet);
 
@@ -271,19 +304,19 @@ public class TransferServiceImpl implements ITransferService {
 
   	}
 
-      // ************************************************************************
+      // *********************************************************************
   	/**
        * Saving debit account operation.
        *
        * @param transfer the transfer
        */
-  	private void savingDebitAccountOperation(Transfer transfer) {
+  	private void savingDebitAccountOperation(final Transfer transfer) {
   		if (walletOperation(transfer)) {
-  		    Double newWallet =  (double)Math.round((transfer
+  		    Double newWallet =  (double) Math.round((transfer
   		    		.getUser()
   		    		.getWalletAmount() - transfer
-  		    		.getAmount())*100)/100;
-  		    
+  		    		.getAmount()) * 100) / 100;
+
   		    transfer.getUser().setWalletAmount(newWallet);
   		    transfer.getUser().setModificationDate(LocalDate.now());
 
@@ -296,9 +329,9 @@ public class TransferServiceImpl implements ITransferService {
   		    throw new DataNotConformException("the amount exceeds the wallet");
   		}
   	}
-  	
 
-      // ************************************************************************
+
+      // *********************************************************************
 
       /**
        * Wallet operation.
@@ -306,18 +339,19 @@ public class TransferServiceImpl implements ITransferService {
        * @param transfer the transfer
        * @return the boolean
        */
-      private Boolean walletOperation(Transfer transfer) {
+      private Boolean walletOperation(final Transfer transfer) {
 
       	if ( transfer.getAmount() == 0) {
-              throw new DataNotFoundException("Wallet balance cant be less than 1");
+              throw new DataNotFoundException(
+            		  "Wallet balance cant be less than 1");
           }
 
       	double wallet = transfer.getUser().getWalletAmount();
           double amount = transfer.getAmount();
 
-          if( wallet - amount >= 0) {
+          if ( wallet - amount >= 0) {
               return true;
-          }else {
+          } else {
               return false;
           }
       }
@@ -328,73 +362,80 @@ public class TransferServiceImpl implements ITransferService {
        * @param transfer the transfer
        * @return the boolean
        */
-      // ************verification data transfer valid **************************
-      private Boolean tranferDataVerification(Transfer transfer){
+      // ************verification data transfer valid ************************
+      private Boolean tranferDataVerification(final Transfer transfer) {
 
-      	Boolean resultat = true;
-          resultat = checkIfTransferValueMoreThanZero(transfer, resultat);
+      	Boolean result = true;
+          result = checkIfTransferValueMoreThanZero(transfer, result);
 
-          resultat = checkIfUserExistAndNotNull(transfer, resultat);
+          result = checkIfUserExistAndNotNull(transfer, result);
 
-          resultat = checkIfOperationTypeIsWithinCreditOrDebit(transfer, resultat);
+          result = checkIfOperationTypeIsWithinCreditOrDebit(transfer, result);
 
-          return resultat;
+          return result;
       }
 
-      // ************************************************************************
+      // **********************************************************************
   	/**
        * Check if operation type is within credit or debit.
        *
        * @param transfer the transfer
-       * @param resultat the resultat
+       * @param result the result
        * @return the boolean
        */
-  	private Boolean checkIfOperationTypeIsWithinCreditOrDebit(Transfer transfer, Boolean resultat) {
+  	private Boolean checkIfOperationTypeIsWithinCreditOrDebit(
+  			final Transfer transfer,
+  			Boolean result) {
+
   		String type = transfer.getType();
           if ( type.equals("CREDIT") || type.equals("DEBIT")) {
-          }else{
-              resultat=false;
+          } else {
+              result = false;
           }
-  		return resultat;
+  		return result;
   	}
 
-      // ************************************************************************
+      // **********************************************************************
   	/**
        * Check if user exist and not null.
        *
        * @param transfer the transfer
-       * @param resultat the resultat
+       * @param result the result
        * @return the boolean
        */
-  	private Boolean checkIfUserExistAndNotNull(Transfer transfer, Boolean resultat) {
-  		if (transfer.getUser() !=null) {
-              if (userService.userExistById(transfer
-              		.getUser().getId()) == false) {
-                  resultat = false;
+  	private Boolean checkIfUserExistAndNotNull(
+  			final Transfer transfer,
+  			Boolean result) {
+
+  		if (transfer.getUser() != null) {
+              if (userService.userExistById(
+            		  transfer.getUser().getId()) == false) {
+                  result = false;
                   }
-          }else {
-              resultat = false;
+          } else {
+              result = false;
           }
-  		return resultat;
+  		return result;
   	}
 
-      // ************************************************************************
+      // ***********************************************************************
   	/**
        * Check if transfer value more than zero.
        *
        * @param transfer the transfer
-       * @param resultat the resultat
+       * @param result the result
        * @return the boolean
        */
   	private Boolean checkIfTransferValueMoreThanZero(
-  			Transfer transfer,
-  			Boolean resultat) {
+  			final Transfer transfer,
+  			Boolean result) {
 
   		if (transfer.getAmount() <= 0 ) {
-              resultat = false;};
-  		return resultat;
+  			result = false;
+  			};
+  		return result;
   	}
 
-    // ************************************************************************
+    // *********************************************************************
 
 }

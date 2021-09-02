@@ -11,7 +11,7 @@ import com.paymybuddy.webapp.model.Transfer;
 @Component
 public class TransferMapper {
 
-//	LocalDate createDate = LocalDate.now();	
+//	LocalDate createDate = LocalDate.now();
 
     /**
  * To transfer DO.
@@ -19,9 +19,9 @@ public class TransferMapper {
  * @param transferDTO the transfer DTO
  * @return the transfer
  */
-public Transfer toTransferDO(TransferDTO transferDTO) {
+public Transfer toTransferDO(final TransferDTO transferDTO) {
         Transfer transfer = new Transfer();
-        if (transferDTO !=null){
+        if (transferDTO != null) {
         transfer.setIdTransfer(transferDTO.getIdTransfer());
         transfer.setRib(transferDTO.getRib());
         transfer.setCreateDate(transferDTO.getCreateDate());
@@ -30,7 +30,7 @@ public Transfer toTransferDO(TransferDTO transferDTO) {
         transfer.setUser(transferDTO.getUser());
 
         return transfer;
-        	} else{
+        	} else {
         		return null;
         	}
      }
@@ -41,10 +41,10 @@ public Transfer toTransferDO(TransferDTO transferDTO) {
      * @param transfer the transfer
      * @return the transfer DTO
      */
-    public TransferDTO toTransferDTO(Transfer transfer) {
+    public TransferDTO toTransferDTO(final Transfer transfer) {
         TransferDTO transferDTO = new TransferDTO();
 
-        if (transfer !=null){
+        if (transfer != null) {
         transferDTO.setIdTransfer(transfer.getIdTransfer());
         transferDTO.setRib(transferDTO.getRib());
         transferDTO.setCreateDate(transfer.getCreateDate());
@@ -53,7 +53,7 @@ public Transfer toTransferDO(TransferDTO transferDTO) {
         transferDTO.setUser(transfer.getUser());
 
         return transferDTO;
-        } else{
+        } else {
             return null;
             }
     }

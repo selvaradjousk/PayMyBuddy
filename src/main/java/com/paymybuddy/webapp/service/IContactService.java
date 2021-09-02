@@ -17,7 +17,7 @@ public interface IContactService {
 	 * @return the contact DTO
 	 */
 	ContactDTO deleteById(Integer id);
-	
+
 	/**
 	 * Find contact by payer.
 	 *
@@ -25,7 +25,7 @@ public interface IContactService {
 	 * @return the list
 	 */
 	List<ContactDTO> findContactByPayer(UserDTO ownerDTO);
-	
+
 	/**
 	 * Adds the contact.
 	 *
@@ -33,6 +33,5 @@ public interface IContactService {
 	 * @return the contact DTO
 	 */
 	ContactDTO addContact(ContactDTO contactDTO);
-	
-	
+
 }

@@ -12,15 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
-//**************************** TODOs LIST ***********************************
+//**************************** TODOs LIST ************************
 
 //Method: c
 //--> Checkstyle => java doc, hidden fields, blank spaces
 //--> validation field constraints -> not null, not blank, unique,
 //--> updating ER (Entity Relationship types) - associations
-
-
-
 
 /**
  * The Class Transaction.
@@ -34,21 +31,21 @@ public class Transaction {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name= "id_transaction", nullable = false)
 	private int idTransaction;
-	
+
 	/** The payer. */
 	@ManyToOne
 	@JoinColumn(name = "payer_id", nullable = false)
 	private User payer;
-	
+
 	/** The beneficiary. */
 	@ManyToOne
 	@JoinColumn(name= "beneficiary_id", nullable = false)
 	private User beneficiary;
-	
+
 	/** The amount. */
 	@Column(name= "amount", nullable = false)
 	private double amount;
-	
+
 	/** The description. */
 	@Column(name= "description", length = 150,nullable = false)
 	private String description;
@@ -60,14 +57,14 @@ public class Transaction {
 	/** The commision. */
 	@Column(name= "commision")
 	private double commision;
-	
+
 	/**
 	 * Instantiates a new transaction.
 	 */
 	public Transaction() {
 		super();
 	}
-	
+
 
 	/**
 	 * Instantiates a new transaction.
@@ -240,5 +237,4 @@ public class Transaction {
 				+ ", creationDate=" + creationDate
 				+ ", commision=" + commision + "]";
 	}
-
 }

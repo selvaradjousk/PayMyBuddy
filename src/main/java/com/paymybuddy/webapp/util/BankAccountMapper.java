@@ -21,13 +21,13 @@ public class BankAccountMapper {
   	public BankAccount toBankAccountDO(BankAccountDTO bankAccountDTO) {
 	        BankAccount bankAccount = new BankAccount();
 
-	        if (bankAccountDTO !=null){
+	        if (bankAccountDTO != null) {
 	        bankAccount.setIdBankAccount(bankAccountDTO.getIdBankAccount());
 	        bankAccount.setUser(bankAccountDTO.getUser());
 	        bankAccount.setRib(bankAccountDTO.getRib());
 	        return bankAccount;
-	        
-	        } else{
+
+	        } else {
 	            return null;
 	        }
 	    }
@@ -40,16 +40,15 @@ public class BankAccountMapper {
     	 */
     	public BankAccountDTO toBankAccountDTO(BankAccount bankAccount) {
 	        BankAccountDTO bankAccountDTO = new BankAccountDTO();
-	        
-	        if (bankAccount !=null){
+
+	        if (bankAccount != null) {
 	        bankAccountDTO.setIdBankAccount(bankAccount.getIdBankAccount());
 	        bankAccountDTO.setUser(bankAccount.getUser());
 	        bankAccountDTO.setRib(bankAccount.getRib());
 	        return bankAccountDTO;
-	        
-	        } else{
+
+	        } else {
 	        	return null;
 	        }
     	}
-
 }

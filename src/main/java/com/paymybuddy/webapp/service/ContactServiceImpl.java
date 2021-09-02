@@ -19,10 +19,14 @@ import com.paymybuddy.webapp.util.UserMapper;
 
 // Method: c
 
-// --> getAllContactsByUser(String email) served by contactRepository.findAll()
-// --> getContactByEmail(String email) served by userRepository.findByEmail(email)
-// --> getContactNotConnected(userDTO) served by userRepository.listUserNotConnected(user)
-// --> getContactConnected(userDTO) served by userRepository.listUserConnected(user)
+// --> getAllContactsByUser(String email) served by contactRepository
+//										.findAll()
+// --> getContactByEmail(String email) served by userRepository
+// 										.findByEmail(email)
+// --> getContactNotConnected(userDTO) served by userRepository
+//										.listUserNotConnected(user)
+// --> getContactConnected(userDTO) served by userRepository
+// 										.listUserConnected(user)
 // --> addContact(contactDTO) served by userRepository.save(contact))
 // --> deleteContact(email) served by contactRepository.deleteByEmail()
 
@@ -37,10 +41,10 @@ public class ContactServiceImpl implements IContactService {
 	ContactRepository contactRepository;
 
 	/** The user mapper. */
-	public UserMapper userMapper = new UserMapper();
+	private UserMapper userMapper = new UserMapper();
 	
 	/** The contact mapper. */
-	public ContactMapper contactMapper = new ContactMapper();
+	private ContactMapper contactMapper = new ContactMapper();
 
 	  /**
   	 * Find contact by payer.
@@ -109,5 +113,4 @@ public class ContactServiceImpl implements IContactService {
         return null;
     }
 
-	
 }

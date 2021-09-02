@@ -17,15 +17,14 @@ import com.paymybuddy.webapp.model.User;
 public interface ContactRepository extends JpaRepository<Contact, Integer> {
 
 
-	// **************************** TODOs LIST ***********************************
-	
+	// **************************** TODOs LIST **************************
 	// Method: c
 	// --> list all contacts
 	// --> list all contacts connected to a user
 	// --> list all contacts not yet connected to a user
 	// --> Add a contact
 	// --> Delete a contact
-	
+
 	/**
 	 * Find list contact by payer.
 	 *
@@ -33,7 +32,7 @@ public interface ContactRepository extends JpaRepository<Contact, Integer> {
 	 * @return the list
 	 */
 	List<Contact> findListContactByPayer(User payer);
-	
+
 	/**
 	 * Find list contact by contact.
 	 *
@@ -41,7 +40,7 @@ public interface ContactRepository extends JpaRepository<Contact, Integer> {
 	 * @return the list
 	 */
 	List<Contact> findListContactByContact(User contact);
-	
+
 	/**
 	 * Find contact by payer.
 	 *
@@ -50,11 +49,5 @@ public interface ContactRepository extends JpaRepository<Contact, Integer> {
 	 * @return the page
 	 */
 	Page<Contact> findContactByPayer(User Payer, Pageable pageable);
-	
-	
-	
-	
-	
-	
-	
+
 }

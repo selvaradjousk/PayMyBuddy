@@ -5,20 +5,10 @@ import java.util.List;
 import com.paymybuddy.webapp.dto.BankAccountDTO;
 import com.paymybuddy.webapp.dto.UserDTO;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface IBankAccountService.
  */
 public interface IBankAccountService {
-
-
-	// **************************** TODOs LIST ***********************************
-	
-	// Method: c
-	// -->
-	// --> 
-	// --> 
-
 
 	/**
 	 * Find bank account by user.
@@ -35,7 +25,7 @@ public interface IBankAccountService {
 	 * @param userDTO the user DTO
 	 * @return the bank account DTO
 	 */
-	BankAccountDTO addBankAccount(String rib, UserDTO userDTO );
+	BankAccountDTO addBankAccount(String rib, UserDTO userDTO);
 
 	/**
 	 * Delete bank account.

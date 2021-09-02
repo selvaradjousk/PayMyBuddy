@@ -20,7 +20,7 @@ public class UserMapper {
  * @param user the user
  * @return the user DTO
  */
-public UserDTO toUserDTO(User user) {
+public UserDTO toUserDTO(final User user) {
     	if (user != null) {
 			UserDTO userDTO = new UserDTO();
             userDTO.setId(user.getId());
@@ -35,7 +35,7 @@ public UserDTO toUserDTO(User user) {
             userDTO.setWalletAmount(user.getWalletAmount());
 
             return userDTO;
-        }else{
+        } else {
             throw new DataNotConformException(" USER CANNOT BE NULL");
         }
     }
@@ -46,7 +46,7 @@ public UserDTO toUserDTO(User user) {
      * @param userDTO the user DTO
      * @return the user
      */
-    public User toUserDO(UserDTO userDTO) {
+    public User toUserDO(final UserDTO userDTO) {
         if(userDTO != null) {
     	User user = new User();
         user.setId(userDTO.getId());
@@ -60,8 +60,8 @@ public UserDTO toUserDTO(User user) {
         user.setActive(userDTO.isActive());
         user.setWalletAmount(userDTO.getWalletAmount());
             return user;
-        } else{
+        } else {
             return null;
-        }           
+        }
     }
 }

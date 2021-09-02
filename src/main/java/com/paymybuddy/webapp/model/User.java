@@ -9,15 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 //**************************** TODOs LIST ***********************************
 
 //Method: c
 //--> Checkstyle => java doc, hidden fields, blank spaces
 //--> validation field constraints -> not null, not blank, unique,
 //--> updating ER (Entity Relationship types) - associations
-
-
 
 /**
  * The Class User.
@@ -77,7 +74,6 @@ public class User {
      */
     public User() {
     }
-    
 
     /**
      * Instantiates a new user.
@@ -209,7 +205,6 @@ public class User {
         this.email = email;
     }
 
-
     /**
      * Gets the password.
      *
@@ -264,7 +259,6 @@ public class User {
         this.creationDate = creationDate;
     }
 
-
     /**
      * Gets the roles.
      *
@@ -318,7 +312,6 @@ public class User {
     public void setWalletAmount(Double walletAmount) {
     	 this.walletAmount = walletAmount;
     }
-    
 
     /**
      * To string.

@@ -28,7 +28,7 @@ public interface ITransferService {
 	 * @return the list
 	 */
 	List<TransferDTO> findAllTransferByUser(UserDTO userDTO);
-	
+
 	/**
 	 * Find all transfer by user.
 	 *
@@ -38,7 +38,7 @@ public interface ITransferService {
 	 */
 	Page<TransferDTO> findAllTransferByUser(
 			UserDTO userDTO, Pageable pageable);
-	
+
 	/**
 	 * Last three transfers.
 	 *
@@ -80,5 +80,6 @@ public interface ITransferService {
 	 */
 	List<TransferDTO> findAllByUserTypeDebit(UserDTO userDTO);
 
-//	TransferDTO addTransfer(String rib, double amount, String type, User user);
+//	TransferDTO addTransfer(String rib, double amount,
+	// String type, User user);
 }

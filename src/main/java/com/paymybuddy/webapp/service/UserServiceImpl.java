@@ -20,20 +20,21 @@ import lombok.extern.log4j.Log4j2;
 
 // **************************** TODOs LIST ***********************************
 
-// Method: 
+// Method:
 // --> getAllUsers(String email) served by userRepository.findAll()
-// --> addNewUser(userDTO) 
-// 			check for user exist already by userRepository.findUserByEmail(email)
+// --> addNewUser(userDTO)
+// 			check for user exist already by
+// userRepository.findUserByEmail(email)
 //			add served by userMapper.toUserDTO(user)
 // --> check for email validity
 // --> check password match on confirm password
-// --> input fields validation done in the respective DO with annotations
+// --> input fields validation done in the
+// respective DO with annotations
 
 /**
  * The Class UserServiceImpl.
  */
-/** The Constant log. */
-@Log4j2	
+@Log4j2
 @Service
 public class UserServiceImpl implements IUserService {
 
@@ -41,8 +42,22 @@ public class UserServiceImpl implements IUserService {
 	@Autowired
 	private UserRepository userRepository;
 
-    /** The user mapper. */
-    public UserMapper userMapper = new UserMapper();
+    /**
+     * Instantiates a new user service impl.
+     *
+     * @param userRepository the user repository
+     * @param userMapper the user mapper
+     */
+    public UserServiceImpl(
+    		UserRepository userRepositoryy,
+    		UserMapper userMapperr) {
+		super();
+		this.userRepository = userRepositoryy;
+		this.userMapper = userMapperr;
+	}
+
+	/** The user mapper. */
+    private UserMapper userMapper = new UserMapper();
 
 
     // *******************************************************************
@@ -64,7 +79,7 @@ public class UserServiceImpl implements IUserService {
         	listOfUsersDTO.add(userMapper.toUserDTO(user));
         }
         log.info(" ====> FIND All USER Successfull <==== ");
-        return listOfUsersDTO;        
+        return listOfUsersDTO; 
 	}
 
 
@@ -76,22 +91,21 @@ public class UserServiceImpl implements IUserService {
 	 * @return the user DTO
 	 */
 	@Override
-	public UserDTO findUserByEmail(String email) {
+	public UserDTO findUserByEmail(final String email) {
 
 		log.info(" ====> FIND USER by EMAIL requested <==== " + email);
 
 		User user = userRepository.findUserByEmail(email);
 
-		log.info(" ====> Email <==== "+ user.getEmail());
+		log.info(" ====> Email <==== " + user.getEmail());
 
 		log.info(" ====> FIND USER by EMAIL Sucessfull <==== ");
 
-		log.info(" ====> Email <==== "+ user.getEmail());
+		log.info(" ====> Email <==== " + user.getEmail());
 
 		return userMapper.toUserDTO(user);
 	}
 	// *******************************************************************
-
 
 	/**
 	 * Find user by id.
@@ -100,7 +114,7 @@ public class UserServiceImpl implements IUserService {
 	 * @return the user DTO
 	 */
 	@Override
-	public UserDTO findUserById(Integer id) {
+	public UserDTO findUserById(final Integer id) {
 
 		log.info("FIND USER by ID requested ");
 
@@ -124,19 +138,19 @@ public class UserServiceImpl implements IUserService {
      */
     //******************************************************************
     @Override
-    public UserDTO saveUser(UserDTO userDTO) {
+    public UserDTO saveUser(final UserDTO userDTO) {
 
     	log.info(" ====> SAVE User requested <==== ");
- 
+
 //    	User userAdd = new User();
- 
+
     	User userAdd = userRepository.save(userMapper.toUserDO(userDTO));
 
         log.info(" ====> User SAVED Successfully <==== ");
- 
+
         return userMapper.toUserDTO(userAdd);
     }
-    
+
 
     /**
      * User exist by id.
@@ -146,15 +160,15 @@ public class UserServiceImpl implements IUserService {
      */
     //******************************************************************
     @Override
-    public boolean userExistById(int id) {
+    public boolean userExistById(final int id) {
 
     	log.info(" ====> Check VERIFY userExistById <==== ");
 
     	return userRepository.existsById(id);
     }
-    
+
     //******************************************************************
-    
+
     /**
      * Save new user.
      *
@@ -162,13 +176,13 @@ public class UserServiceImpl implements IUserService {
      * @param confirmationPass the confirmation pass
      * @return the user DTO
      */
-    public UserDTO saveNewUser(UserDTO userDTO, String confirmationPass) {
- 
+    public UserDTO saveNewUser(final UserDTO userDTO, final String confirmationPass) {
+
    	log.info(" ====> SAVE NEW User requested <==== ");
 
 //        User userAdd = new User();
 
- 		if(userDTO.getPassword().equals(confirmationPass)==false){
+ 		if (userDTO.getPassword().equals(confirmationPass) == false){
 
  			log.info(" ====> ERROR: Password MISMATCH <==== ");
 
@@ -176,7 +190,7 @@ public class UserServiceImpl implements IUserService {
          }
 
 
- 		if(userDTO.getPassword().equals("")==true){
+ 		if (userDTO.getPassword().equals("") == true){
 
          	log.info(" ====> ERROR: Password FIELD EMPTY <==== ");
 
@@ -187,7 +201,7 @@ public class UserServiceImpl implements IUserService {
 
         checkEntryForEmailFormat(userDTO);
 
-        if (userRepository.findUserByEmail(userDTO.getEmail())==null){
+        if (userRepository.findUserByEmail(userDTO.getEmail()) == null) {
 
             userDTO.setRoles("ROLE_USER");
             userDTO.setWalletAmount(0.0);
@@ -195,14 +209,15 @@ public class UserServiceImpl implements IUserService {
             userDTO.setCreationDate(LocalDate.now());
 
 
-            log.info(" ====> NEW User PASSWORD: " + userDTO.getPassword() + " <==== ");
+            log.info(" ====> NEW User PASSWORD: "
+            + userDTO.getPassword() + " <==== ");
 
             User userAdd = userRepository.save(userMapper.toUserDO(userDTO));
 
             log.info(" ====> SAVE NEW User SUCCESSFULL <==== ");
 
             return userMapper.toUserDTO(userAdd);
-        }else{
+        } else {
             throw new DataAlreadyExistException("Email ID not available,"
             		+ " already taken by existing user !");
         }
@@ -215,9 +230,9 @@ public class UserServiceImpl implements IUserService {
      *
      * @param userDTO the user DTO
      */
- 	private void checkEntryForEmailFormat(UserDTO userDTO) {
+ 	private void checkEntryForEmailFormat(final UserDTO userDTO) {
 
- 		if(checkStringEmail(userDTO.getEmail())==false){
+ 		if (checkStringEmail(userDTO.getEmail()) == false) {
 
              throw new DataNotConformException("Please enter EMAIL ID");
          }
@@ -230,10 +245,10 @@ public class UserServiceImpl implements IUserService {
  	  *
  	  * @param userDTO the user DTO
  	  */
- 	private void checkAlphanumericNameEntry(UserDTO userDTO) {
+ 	private void checkAlphanumericNameEntry(final UserDTO userDTO) {
 
- 		if(checkStringName(userDTO.getUserName())==false ||
-                         checkStringName(userDTO.getFirstName())==false){
+ 		if (checkStringName(userDTO.getUserName()) == false ||
+                         checkStringName(userDTO.getFirstName()) == false) {
 
          	log.info(" ====> ERROR: Names not alphanumeric <==== ");
 
@@ -248,7 +263,8 @@ public class UserServiceImpl implements IUserService {
 // 	 * @param userDTO
 // 	 * @param confirmationPass
 // 	 */
-// 	private void checkConfirmationPasswordMatch(UserDTO userDTO, String confirmationPass) {
+// 	private void checkConfirmationPasswordMatch
+ 	// (UserDTO userDTO, String confirmationPass) {
 // 		if(userDTO.getPassword().equals(confirmationPass)==true){
 //         	log.info(" ====> ERROR: Password MISMATCH <==== ");
 //             throw new DataNotConformException("Password MISMATCH");
@@ -262,7 +278,7 @@ public class UserServiceImpl implements IUserService {
  	  * @param string the string
  	  * @return true, if successful
  	  */
- 	 public boolean checkStringName(String string) {
+ 	 public boolean checkStringName(final String string) {
 
         Pattern stringNamePattern = Pattern.compile(
         		"[a-zA-Z\\+\\-\\+]{2,100}");
@@ -277,7 +293,7 @@ public class UserServiceImpl implements IUserService {
      * @param string the string
      * @return true, if successful
      */
-    public boolean checkStringEmail(String string) {
+    public boolean checkStringEmail(final String string) {
         Pattern stringNamePattern = Pattern.compile(
         		"(?:\\w|[\\-_])"
         		+ "+(?:\\.(?:\\w|[\\-_])"

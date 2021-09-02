@@ -11,15 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
-//**************************** TODOs LIST ***********************************
+//**************************** TODOs LIST ***************************
 
 //Method: c
 //--> Checkstyle => java doc, hidden fields, blank spaces
 //--> validation field constraints -> not null, not blank, unique,
 //--> updating ER (Entity Relationship types) - associations
-
-
 
 /**
  * The Class Contact.
@@ -27,7 +24,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name="contact")
 public class Contact {
-
 
     /** The id contact. */
     @Id
@@ -49,14 +45,13 @@ public class Contact {
     @JoinColumn(name= "contact_id")
     private User contact;
 
-
       /**
        * Instantiates a new contact.
        */
       public Contact() {
         super();
     }
-      
+
 	/**
 	 * Instantiates a new contact.
 	 *
@@ -85,7 +80,6 @@ public class Contact {
     public Integer getIdContact() {
   		return idContact;
   	}
-
 
 	/**
 	 * Gets the creation date.

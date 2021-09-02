@@ -15,18 +15,20 @@ import com.paymybuddy.webapp.model.User;
  */
 public interface TransferRepository extends JpaRepository<Transfer, Integer> {
 
-	// **************************** TODOs LIST ***********************************
+	// **************************** TODOs LIST ******************************
 
 	// Method: c
 	// --> find all transfer by user
-	// --> find all transaction by user - Type credit ---> TODO have to change id
-	//                                            presence in constructor of model
-	// --> find all transaction by user - Type debit ---> TODO have to change id
-	//                                            presence in constructor of model
+	// --> find all transaction by user - Type credit ---> TODO have to
+	//                  change id presence in constructor of model
+	// --> find all transaction by user - Type debit ---> TODO
+	//                   have to change id presence in constructor of model
 	// --> find all transaction by user - Pageable ---> TODO
 	// --> https://www.baeldung.com/spring-data-jpa-query (Pageable)
-	// https://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-part-seven-pagination/
-	// https://www.javacodegeeks.com/2019/02/pagination-sorting-spring-data-jpa.html
+	// https://www.petrikainulainen.net/programming/
+	// spring-framework/spring-data-jpa-tutorial-part-seven-pagination/
+	// https://www.javacodegeeks.com/2019/02/
+	// pagination-sorting-spring-data-jpa.html
 
 	/**
 	 * Find all by user.
@@ -42,7 +44,8 @@ public interface TransferRepository extends JpaRepository<Transfer, Integer> {
 	 * @param user the user
 	 * @return the list
 	 */
-	@Query("Select t from Transfer t where t.user = :user and t.type='CREDIT'")
+	@Query("Select t from Transfer t"
+			+ " where t.user = :user and t.type='CREDIT'")
 	List<Transfer> findAllByUserTypeCredit(User user);
 
 	/**
@@ -51,7 +54,8 @@ public interface TransferRepository extends JpaRepository<Transfer, Integer> {
 	 * @param user the user
 	 * @return the list
 	 */
-	@Query("Select t from Transfer t where t.user = :user and t.type='DEBIT'")
+	@Query("Select t from Transfer t"
+			+ " where t.user = :user and t.type='DEBIT'")
 	List<Transfer> findAllByUserTypeDebit(User user);
 
 	/**

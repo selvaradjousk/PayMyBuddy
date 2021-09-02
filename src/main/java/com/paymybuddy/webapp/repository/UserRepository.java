@@ -7,32 +7,34 @@ import org.springframework.stereotype.Repository;
 
 import com.paymybuddy.webapp.model.User;
 
+/**
+ * The Interface UserRepository.
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-
 	// **************************** TODOs LIST ***********************************
-	
+
 	// Method: c
 	// --> User findUserById(Integer id);
 	// --> User findByEmail(String email)
 	// --> User findByUserName(String userName);
 	// --> User findByEmailAndPassword(String email, String password);
 	// --> Optional<User> findByEmail(String email);
-	// --> Page<User> listUserNotContact(User payer, @Param("x")String keyWord , Pageable pageable)
-	// --> Page<User> listUserAlreadyContact(User beneficiary, @Param("x")String keyWord , Pageable pageable)
+	// --> Page<User> listUserNotContact(User payer,
+	// @Param("x")String keyWord , Pageable pageable)
+	// --> Page<User> listUserAlreadyContact(User beneficiary,
+	// @Param("x")String keyWord , Pageable pageable)
 	// --> 
-	
-	
+
 	/**
 	 * Find by email.
 	 *
 	 * @param email the email
 	 * @return the user
 	 */
-	public User findUserByEmail(String email);
-	
-	
+	User findUserByEmail(String email);
+
 	/**
 	 * Find by email.
 	 *
@@ -41,14 +43,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	 */
 	Optional<User> findByEmail(String email);
 
-
 	/**
 	 * Find user by id.
 	 *
 	 * @param id the id
 	 * @return the user
 	 */
-	public User findUserById(Integer id);
+	User findUserById(Integer id);
 
 	/**
 	 * Find by user name.
@@ -58,17 +59,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	 */
 	User findByUserName(String userName);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 // Custom JPQL Queries with @Query

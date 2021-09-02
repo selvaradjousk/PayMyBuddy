@@ -16,18 +16,22 @@ import com.paymybuddy.webapp.util.UserMapper;
 
 import lombok.extern.log4j.Log4j2;
 
-// TODO: Auto-generated Javadoc
-/** The Constant log. */
+
+/**
+ * The Class BankAccountServiceImpl.
+ */
 @Log4j2
 @Service
-public class BankAccountServiceImpl implements IBankAccountService{
+public class BankAccountServiceImpl implements IBankAccountService {
 
 
 	// **************************** TODOs LIST ***********************************
 	
 	// Method:
-	// --> getAllBankAccountByUser(UserDTO) served by bankAccountRepository.findBankAccountByUser(user) : listBankAccountDTO
-	// --> addBankAccount(String rib, userDTO): bankAccountDTO served by Mapper toBankAccountDTO
+	// --> getAllBankAccountByUser(UserDTO) served by
+	// bankAccountRepository.findBankAccountByUser(user) : listBankAccountDTO
+	// --> addBankAccount(String rib, userDTO): bankAccountDTO
+	// served by Mapper toBankAccountDTO
 	// --> deleteBankAccount(rib) served by bankAccountRepository.deleteById(id)
 
 
@@ -37,10 +41,10 @@ public class BankAccountServiceImpl implements IBankAccountService{
     BankAccountRepository bankAccountRepository;
 
 	/** The user mapper. */
-	public UserMapper userMapper = new UserMapper();
+	private UserMapper userMapper = new UserMapper();
     
     /** The bank account mapper. */
-    public BankAccountMapper bankAccountMapper
+    private BankAccountMapper bankAccountMapper
     = new BankAccountMapper();
 
     /**
@@ -51,13 +55,13 @@ public class BankAccountServiceImpl implements IBankAccountService{
      * @param bankAccountMapper the bank account mapper
      */
     public BankAccountServiceImpl(
-    		BankAccountRepository bankAccountRepository,
-    		UserMapper userMapper,
-			BankAccountMapper bankAccountMapper) {
+    		BankAccountRepository bankAccountRepositoryy,
+    		UserMapper userMapperr,
+			BankAccountMapper bankAccountMapperr) {
 		super();
-		this.bankAccountRepository = bankAccountRepository;
-		this.userMapper = userMapper;
-		this.bankAccountMapper = bankAccountMapper;
+		this.bankAccountRepository = bankAccountRepositoryy;
+		this.userMapper = userMapperr;
+		this.bankAccountMapper = bankAccountMapperr;
 	}
 
 
@@ -68,7 +72,8 @@ public class BankAccountServiceImpl implements IBankAccountService{
      * @return the list
      */
     @Override
-	public List<BankAccountDTO> findBankAccountByUser(UserDTO userDTO) {
+	public List<BankAccountDTO> findBankAccountByUser(
+			final UserDTO userDTO) {
 
         log.info(" ====> FIND BANK Acccount by USER requested <==== ");
 
@@ -87,7 +92,7 @@ public class BankAccountServiceImpl implements IBankAccountService{
         }
         log.info(" ====> BANK Account by USER listing successfully <==== ");
 
-        return listBankAccountDTO  ;
+        return listBankAccountDTO;
 	}
 
     /**
@@ -99,7 +104,9 @@ public class BankAccountServiceImpl implements IBankAccountService{
      */
     //******************************************************************
 	@Override
-	public BankAccountDTO addBankAccount(String rib, UserDTO userDTO) {
+	public BankAccountDTO addBankAccount(
+			final String rib,
+			final UserDTO userDTO) {
 
     	log.info(" ====> BANK Account CREATION requested <==== ");
     	
@@ -127,7 +134,7 @@ public class BankAccountServiceImpl implements IBankAccountService{
      * @param id the id
      */
     @Override
-    public void deleteBankAccount(Integer id) {
+    public void deleteBankAccount(final Integer id) {
 
         log.info(" ====> BANK Account DELETION requested <==== ");
 

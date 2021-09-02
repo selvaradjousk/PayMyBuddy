@@ -14,7 +14,7 @@ public interface IUserService {
 	 *
 	 * @return the list
 	 */
-	public List<UserDTO> findAllUsers();
+	List<UserDTO> findAllUsers();
 
 	/**
 	 * Find user by email.
@@ -22,16 +22,15 @@ public interface IUserService {
 	 * @param email the email
 	 * @return the user DTO
 	 */
-	public UserDTO findUserByEmail(String email);
-	
-	
+	UserDTO findUserByEmail(String email);
+
 	 /**
  	 * Find user by id.
  	 *
  	 * @param id the id
  	 * @return the user DTO
  	 */
- 	public UserDTO findUserById(Integer id);
+ 	UserDTO findUserById(Integer id);
 
 	/**
 	 * Save user.
@@ -59,7 +58,5 @@ public interface IUserService {
 	UserDTO saveNewUser(
 			UserDTO userDTO,
 			String confirmationPass);
- 
- 
- 	
+
 }
