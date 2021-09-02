@@ -1,5 +1,7 @@
 package com.paymybuddy.webapp.util;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Component;
 
 import com.paymybuddy.webapp.dto.TransferDTO;
@@ -11,7 +13,7 @@ import com.paymybuddy.webapp.model.Transfer;
 @Component
 public class TransferMapper {
 
-//	LocalDate createDate = LocalDate.now();	
+	LocalDate createDate = LocalDate.now();	
 
     /**
  * To transfer DO.
@@ -21,7 +23,7 @@ public class TransferMapper {
  */
 public Transfer toTransferDO(TransferDTO transferDTO) {
         Transfer transfer = new Transfer();
-
+        if (transferDTO !=null){
         transfer.setIdTransfer(transferDTO.getIdTransfer());
         transfer.setRib(transferDTO.getRib());
         transfer.setCreateDate(transferDTO.getCreateDate());
@@ -30,6 +32,9 @@ public Transfer toTransferDO(TransferDTO transferDTO) {
         transfer.setUser(transferDTO.getUser());
 
         return transfer;
+        	} else{
+        		return null;
+        	}
      }
 
     /**
@@ -41,6 +46,7 @@ public Transfer toTransferDO(TransferDTO transferDTO) {
     public TransferDTO toTransferDTO(Transfer transfer) {
         TransferDTO transferDTO = new TransferDTO();
 
+        if (transfer !=null){
         transferDTO.setIdTransfer(transfer.getIdTransfer());
         transferDTO.setRib(transferDTO.getRib());
         transferDTO.setCreateDate(transfer.getCreateDate());
@@ -49,5 +55,8 @@ public Transfer toTransferDO(TransferDTO transferDTO) {
         transferDTO.setUser(transfer.getUser());
 
         return transferDTO;
+        } else{
+            return null;
+            }
     }
 }

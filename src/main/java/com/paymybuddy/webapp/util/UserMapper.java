@@ -1,8 +1,11 @@
 package com.paymybuddy.webapp.util;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Component;
 
 import com.paymybuddy.webapp.dto.UserDTO;
+import com.paymybuddy.webapp.exception.DataNotConformException;
 import com.paymybuddy.webapp.model.User;
 
 /**
@@ -11,7 +14,7 @@ import com.paymybuddy.webapp.model.User;
 @Component
 public class UserMapper {
 
-//    LocalDate creationDate = LocalDate.now();
+    LocalDate creationDate = LocalDate.now();
 
     /**
  * To user DTO.
@@ -20,7 +23,8 @@ public class UserMapper {
  * @return the user DTO
  */
 public UserDTO toUserDTO(User user) {
-            UserDTO userDTO = new UserDTO();
+    	if (user != null) {
+			UserDTO userDTO = new UserDTO();
             userDTO.setId(user.getId());
             userDTO.setUserName(user.getUserName());
             userDTO.setFirstName(user.getFirstName());
@@ -32,9 +36,10 @@ public UserDTO toUserDTO(User user) {
             userDTO.setActive(user.isActive());
             userDTO.setWalletAmount(user.getWalletAmount());
 
-
-
             return userDTO;
+        }else{
+            throw new DataNotConformException(" USER CANNOT BE NULL");
+        }
     }
 
     /**
@@ -44,7 +49,8 @@ public UserDTO toUserDTO(User user) {
      * @return the user
      */
     public User toUserDO(UserDTO userDTO) {
-        User user = new User();
+        if(userDTO != null) {
+    	User user = new User();
         user.setId(userDTO.getId());
         user.setUserName(userDTO.getUserName());
         user.setFirstName(userDTO.getFirstName());
@@ -56,5 +62,8 @@ public UserDTO toUserDTO(User user) {
         user.setActive(userDTO.isActive());
         user.setWalletAmount(userDTO.getWalletAmount());
             return user;
+        } else{
+            return null;
+        }           
     }
 }

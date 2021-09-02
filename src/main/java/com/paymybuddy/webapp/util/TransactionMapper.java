@@ -1,5 +1,7 @@
 package com.paymybuddy.webapp.util;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Component;
 
 import com.paymybuddy.webapp.dto.TransactionDTO;
@@ -11,7 +13,7 @@ import com.paymybuddy.webapp.model.Transaction;
 @Component
 public class TransactionMapper {
 
-//	LocalDate creationDate = LocalDate.now();	
+	LocalDate creationDate = LocalDate.now();	
 	
 	  /**
  * To transaction DO.
@@ -23,6 +25,7 @@ public Transaction toTransactionDO(TransactionDTO transactionDTO) {
 
 	        Transaction transaction = new Transaction();
 
+	        if (transactionDTO !=null){
 	        transaction.setIdTransaction(transactionDTO.getIdTransaction());
 	        transaction.setPayer(transactionDTO.getPayer());
 	        transaction.setBeneficiary(transactionDTO.getBeneficiary());
@@ -32,6 +35,9 @@ public Transaction toTransactionDO(TransactionDTO transactionDTO) {
 	        transaction.setCommision(transactionDTO.getCommision());
 
 	        return transaction;
+	        } else{
+	        return null;
+	        }
 	    }
 
 	    /**
@@ -43,7 +49,8 @@ public Transaction toTransactionDO(TransactionDTO transactionDTO) {
     	public TransactionDTO toTransactionDTO(Transaction transaction) {
 
 	        TransactionDTO transactionDTO = new TransactionDTO();
-
+	        
+	        if (transaction !=null){
 	        transactionDTO.setIdTransaction(transaction.getIdTransaction());
 	        transactionDTO.setPayer(transaction.getPayer());
 	        transactionDTO.setBeneficiary(transaction.getBeneficiary());
@@ -53,5 +60,8 @@ public Transaction toTransactionDO(TransactionDTO transactionDTO) {
 	        transactionDTO.setCommision(transaction.getCommision());
 
 	        return transactionDTO;
+	        } else{
+	        return null;
+	        }
 	    }
 }
