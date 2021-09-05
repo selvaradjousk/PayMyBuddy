@@ -134,13 +134,28 @@ class HomeControllerWebMvcTest {
 
 			mockMvc.perform(get("/logout"))
 			.andExpect(status().is(302))
-			 .andExpect(redirectedUrl("/login"));
+			 .andExpect(redirectedUrl("/login"))
+			 .andExpect(status().isFound());
 			
 		}
 	    
 		// ********************************************************************
-		
-		
+		   
+		@DisplayName("INDEX page Url request without authentication redirect /login - "
+				+ "GIVEN home url /index "
+				+ "WHEN Requested GET /index page"
+				+ "THEN returns expected reponse redirect to / login")   
+		@Test
+		public void testIndexUrlWithoutLoginRedirectToLoginUrl() throws Exception {
+
+			mockMvc.perform(get("/index"))
+			.andExpect(status().is(302))
+			.andExpect(redirectedUrl("http://localhost/login"));
+		}
+
+	
+		// ********************************************************************
+	   		
 		
     
     
