@@ -178,7 +178,7 @@ class HomeControllerWebMvcTest {
 
 		@DisplayName("LOGIN page Url request without authentication 200 OK - "
 				+ "GIVEN home url /login "
-				+ "WHEN Requested GET /index page"
+				+ "WHEN Requested GET /login page"
 				+ "THEN returns expected reponse 200 OK http response")  
 		@Test
 		public void testLoginUrlWithoutLoginRedirectToLoginUrl() throws Exception {
@@ -193,7 +193,7 @@ class HomeControllerWebMvcTest {
     
 		@DisplayName("LOGIN page Url request with authentication 200 OK - "
 				+ "GIVEN home url /login "
-				+ "WHEN Requested GET /index page"
+				+ "WHEN Requested GET login page"
 				+ "THEN returns expected reponse 200 OK http response")  
 		@WithMockUser("testemail1@email.com")
 		@Test
