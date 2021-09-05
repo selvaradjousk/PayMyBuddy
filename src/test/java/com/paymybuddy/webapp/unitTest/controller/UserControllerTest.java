@@ -185,44 +185,65 @@ class UserControllerTest {
 		
 		
 		// ********************************************************************
-		
-
-			@DisplayName("REGISTER POST request empty Passwords input Response - 302 - Password NEEDED "
-					+ "GIVEN POST request url /register empty Passwords"
-					+ "WHEN Requested POST /register "
-					+ "THEN returns expected 302 redirect /register http response -  Password NEEDED") 
-			@Test
-			public void testAddNewUserPostRequestEmptyPasswords() throws Exception {
-			     mockMvc.perform(post("/register")
-			             .param("firstName","testFirstname")
-			             .param("lastName", "testLastname")
-			             .param("email", "testemail@email.com")
-			             .param("password", "")
-			             .param("confirmation", ""))
-			     		.andExpect(status().isFound())
-			     		.andExpect(model().hasNoErrors())
-			     		.andExpect(view().name("redirect:/register?&firstName=testFirstname&lastName=testLastname&email=testemail@email.com&password=&confirmation=&errorMessage=Password NEEDED"));
-		 }
-			
-			// ********************************************************************
-			
-
-				@DisplayName("REGISTER POST request all empty input Response - 302 - Password NEEDED "
-						+ "GIVEN POST request url /register all empty input"
-						+ "WHEN Requested POST /register "
-						+ "THEN returns expected 302 redirect /register http response -  Password NEEDED") 
-				@Test
-				public void testAddNewUserPostRequestAllEmpty() throws Exception {
-				     mockMvc.perform(post("/register")
-				             .param("firstName","")
-				             .param("lastName", "")
-				             .param("email", "testemail@email.com")
-				             .param("password", "")
-				             .param("confirmation", ""))
-				     		.andExpect(status().isFound())
-				     		.andExpect(model().hasNoErrors())
-				     		.andExpect(view().name("redirect:/register?&firstName=&lastName=&email=testemail@email.com&password=&confirmation=&errorMessage=Password NEEDED"));
-			 }				
-		
 	
+
+		@DisplayName("REGISTER POST request empty Passwords input Response - 302 - Password NEEDED "
+				+ "GIVEN POST request url /register empty Passwords"
+				+ "WHEN Requested POST /register "
+				+ "THEN returns expected 302 redirect /register http response -  Password NEEDED") 
+		@Test
+		public void testAddNewUserPostRequestEmptyPasswords() throws Exception {
+		     mockMvc.perform(post("/register")
+		             .param("firstName","testFirstname")
+		             .param("lastName", "testLastname")
+		             .param("email", "testemail@email.com")
+		             .param("password", "")
+		             .param("confirmation", ""))
+		     		.andExpect(status().isFound())
+		     		.andExpect(model().hasNoErrors())
+		     		.andExpect(view().name("redirect:/register?&firstName=testFirstname&lastName=testLastname&email=testemail@email.com&password=&confirmation=&errorMessage=Password NEEDED"));
+	 }
+		
+		// ********************************************************************
+	
+
+		@DisplayName("REGISTER POST request all empty input Response - 302 - Password NEEDED "
+				+ "GIVEN POST request url /register all empty input"
+				+ "WHEN Requested POST /register "
+				+ "THEN returns expected 302 redirect /register http response -  Password NEEDED") 
+		@Test
+		public void testAddNewUserPostRequestAllEmpty() throws Exception {
+		     mockMvc.perform(post("/register")
+		             .param("firstName","")
+		             .param("lastName", "")
+		             .param("email", "testemail@email.com")
+		             .param("password", "")
+		             .param("confirmation", ""))
+		     		.andExpect(status().isFound())
+		     		.andExpect(model().hasNoErrors())
+		     		.andExpect(view().name("redirect:/register?&firstName=&lastName=&email=testemail@email.com&password=&confirmation=&errorMessage=Password NEEDED"));
+	 }				
+
+		// ********************************************************************
+		
+
+		@DisplayName("REGISTER POST request Wrong email Format input Response - 302 - ENTER EMAIL ID "
+				+ "GIVEN POST request url /register Wrong email Format input"
+				+ "WHEN Requested POST /register "
+				+ "THEN returns expected 302 redirect /register http response -  Please Enter Email ID") 
+		@Test
+		public void testAddNewUserPostRequestemailFormatWrong() throws Exception {
+		     mockMvc.perform(post("/register")
+		             .param("firstName","testFirstname")
+		             .param("lastName", "testLastname")
+		             .param("email", "testemailemail.com")
+		             .param("password", "testpassword")
+		             .param("confirmation", "testpassword"))
+		     		.andExpect(status().isFound())
+		     		.andExpect(model().hasNoErrors())
+		     		.andExpect(view().name("redirect:/register?&firstName=testFirstname&lastName=testLastname&email=testemailemail.com&password=testpassword&confirmation=testpassword&errorMessage=Please enter EMAIL ID"));
+	 }
+		
+			
+			
 }
