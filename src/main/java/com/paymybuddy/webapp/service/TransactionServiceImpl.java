@@ -3,6 +3,7 @@ package com.paymybuddy.webapp.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -185,8 +186,24 @@ public class TransactionServiceImpl  implements ITransactionService  {
 	    	return pagesTransactionDTO;
 	    }
 
-	    // ********************************************************************
 
+  	  // ************************************************************************
+
+    	@Override
+    	public Page<TransactionDTO> lastThreeTransactionsBeneficiary(UserDTO userDTO, Pageable pageable) {
+
+          User user = userMapper.toUserDO(userDTO);
+          Page<Transaction> pagesTransaction =transactionRepository.lastThreeTransactionsBeneficiary(user, pageable);
+              Page<TransactionDTO> pagesTransactionDTO= pagesTransaction.map(new Function<Transaction, TransactionDTO>() {
+                  @Override
+                  public TransactionDTO apply(Transaction transaction) {
+                      return mappedTransactionDTO(transaction);
+                  }
+              });
+          return pagesTransactionDTO;
+    	}
+	    // ************************************************************************
+  	 
     	/**
          * Adds the transaction.
          *

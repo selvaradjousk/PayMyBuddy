@@ -56,5 +56,15 @@ public interface ITransactionService {
 	 * @return the transaction DTO
 	 */
 	TransactionDTO addTransaction(TransactionDTO transactionDTO);
+	
+	
+	/**
+	 * Last three transactions beneficiary.
+	 *
+	 * @param userDTO the user DTO
+	 * @param pageable the pageable
+	 * @return the page
+	 */
+	Page<TransactionDTO> lastThreeTransactionsBeneficiary(UserDTO userDTO, Pageable pageable);
 
 }
