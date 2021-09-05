@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -155,7 +156,24 @@ class HomeControllerWebMvcTest {
 
 	
 		// ********************************************************************
-	   		
+		
+		@DisplayName("INDEX page Url request with authentication redirect /login - "
+				+ "GIVEN home url /index "
+				+ "WHEN Requested GET /index page"
+				+ "THEN returns expected reponse redirect to / login")   
+		@WithMockUser(username="testemail1@email.com", roles={"ADMIN"} )
+		@Test
+		public void testIndexUrlWithLoginStatusOK() throws Exception {
+
+			mockMvc.perform(get("/index"))
+			.andExpect(status().isOk())
+	        .andExpect(model().hasNoErrors())
+	        .andExpect(view().name("login"));
+			
+		}
+	    
+		// ********************************************************************
+			   		
 		
     
     
