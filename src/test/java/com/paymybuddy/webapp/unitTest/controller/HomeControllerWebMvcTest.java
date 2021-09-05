@@ -109,6 +109,21 @@ class HomeControllerWebMvcTest {
 
 		// ********************************************************************
 		
+		@DisplayName("LOGOUT Url request without authentication redirect /login - "
+				+ "GIVEN home url /logout "
+				+ "WHEN Requested GET /logout page"
+				+ "THEN returns expected reponse redirect to / login")
+		@Test
+		public void testLogoutUrlWithoutLoginRedirectToLoginUrl() throws Exception {
+
+			mockMvc.perform(get("/logout"))
+			.andExpect(status().is(302))
+			.andExpect(redirectedUrl("/login"));
+		}
+
+		// ********************************************************************
+		
+		
 		
 		
 		
