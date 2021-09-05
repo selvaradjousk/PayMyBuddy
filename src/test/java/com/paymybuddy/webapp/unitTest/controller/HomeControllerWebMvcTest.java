@@ -1,6 +1,7 @@
 package com.paymybuddy.webapp.unitTest.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -60,6 +61,10 @@ class HomeControllerWebMvcTest {
 	  
 		// ********************************************************************
 
+		@DisplayName("HOME Url request Without Authentication - "
+			+ "GIVEN home url /home "
+			+ "WHEN Requested GET /home page without authentication"
+			+ "THEN returns expected redirect to (http://localhost/login)")
 		@Test
 		public void testHomeUrlWithoutAuthentication() throws Exception {
 
@@ -69,6 +74,10 @@ class HomeControllerWebMvcTest {
 
 		// ********************************************************************
 
+		@DisplayName("HOME Url request With Authentication - "
+			+ "GIVEN home url /home "
+			+ "WHEN Requested GET /home page with authentication"
+			+ "THEN returns expected Http Response : 200 OK")
 		@WithMockUser("testemail1@email.com")
 		@Test
 		public void testHomeUrlWithLoginStatusOK() throws Exception {
@@ -79,6 +88,30 @@ class HomeControllerWebMvcTest {
 		}
 	    
 		// ********************************************************************		
+
+		@DisplayName("HOME Url request check Attributes Exists - "
+			+ "GIVEN home url /home "
+			+ "WHEN Requested GET /home page & check for attributes"
+			+ "THEN returns expected reponse on attibutes exists")
+		@WithMockUser("testemail1@email.com")
+		@Test
+		public void testHomeAttributesExists() throws Exception {
+	        mockMvc.perform(get("/home"))
+	        .andExpect(status().isOk())
+	        .andExpect(model().attributeExists(
+	        		"currentPage",
+	        		"firstName",
+	        		"wallet",
+	                "transfers",
+	        		"transactions",
+	        		"contacts"));
+		}
+
+		// ********************************************************************
+		
+		
+		
+		
 		
     
     
