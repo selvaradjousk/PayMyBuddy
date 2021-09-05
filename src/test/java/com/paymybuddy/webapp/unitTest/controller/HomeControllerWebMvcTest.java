@@ -236,5 +236,20 @@ class HomeControllerWebMvcTest {
 
 			}
 			
+			// ********************************************************************
 			
+			@DisplayName("SAVE login data Url request with authentication + admin status Response 200 OK -  - "
+					+ "GIVEN home url /save "
+					+ "WHEN Requested GET /save with auth admin"
+					+ "THEN returns expected Response 200 OK ")
+		    @WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+		    @Test
+		    public void saveTest() throws Exception {
+		        mockMvc.perform(get("/save"))
+		                .andExpect(status().isOk())
+		                .andExpect(model().hasNoErrors())
+		                .andExpect(view().name("login"));
+		    }
+			
+			// ********************************************************************
 }
