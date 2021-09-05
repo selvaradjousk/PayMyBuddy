@@ -203,7 +203,26 @@ class UserControllerTest {
 			     		.andExpect(model().hasNoErrors())
 			     		.andExpect(view().name("redirect:/register?&firstName=testFirstname&lastName=testLastname&email=testemail@email.com&password=&confirmation=&errorMessage=Password NEEDED"));
 		 }
-				
+			
+			// ********************************************************************
+			
+
+				@DisplayName("REGISTER POST request all empty input Response - 302 - Password NEEDED "
+						+ "GIVEN POST request url /register all empty input"
+						+ "WHEN Requested POST /register "
+						+ "THEN returns expected 302 redirect /register http response -  Password NEEDED") 
+				@Test
+				public void testAddNewUserPostRequestAllEmpty() throws Exception {
+				     mockMvc.perform(post("/register")
+				             .param("firstName","")
+				             .param("lastName", "")
+				             .param("email", "testemail@email.com")
+				             .param("password", "")
+				             .param("confirmation", ""))
+				     		.andExpect(status().isFound())
+				     		.andExpect(model().hasNoErrors())
+				     		.andExpect(view().name("redirect:/register?&firstName=&lastName=&email=testemail@email.com&password=&confirmation=&errorMessage=Password NEEDED"));
+			 }				
 		
 	
 }
