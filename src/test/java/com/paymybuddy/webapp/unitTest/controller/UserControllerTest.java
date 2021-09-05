@@ -163,6 +163,27 @@ class UserControllerTest {
  }
 	
 	
+	// ********************************************************************
 	
+
+		@DisplayName("REGISTER POST request empty Confirmation Password input Response - 302 - Password Mismatch "
+				+ "GIVEN POST request url /register empty Confirmation Password"
+				+ "WHEN Requested POST /register "
+				+ "THEN returns expected 302 redirect /register http response -  Password Mismatch") 
+		@Test
+		public void testAddNewUserPostRequestEmptyConfirmationPassword() throws Exception {
+		     mockMvc.perform(post("/register")
+		             .param("firstName","testFirstname")
+		             .param("lastName", "testLastname")
+		             .param("email", "testemail@email.com")
+		             .param("password", "testpassword")
+		             .param("confirmation", ""))
+		     		.andExpect(status().isFound())
+		     		.andExpect(model().hasNoErrors())
+		     		.andExpect(view().name("redirect:/register?&firstName=testFirstname&lastName=testLastname&email=testemail@email.com&password=testpassword&confirmation=&errorMessage=Password MISMATCH"));
+	 }
+		
+		
+		
 	
 }
