@@ -174,7 +174,21 @@ class HomeControllerWebMvcTest {
 	    
 		// ********************************************************************
 			   		
-		
+
+		@DisplayName("LOGIN page Url request without authentication 200 OK - "
+				+ "GIVEN home url /login "
+				+ "WHEN Requested GET /index page"
+				+ "THEN returns expected reponse 200 OK http response")  
+		@Test
+		public void testLoginUrlWithoutLoginRedirectToLoginUrl() throws Exception {
+
+			mockMvc.perform(get("/login"))
+			.andExpect(view().name("login"))
+			.andExpect(model().hasNoErrors())
+			.andExpect(status().isOk());
+		}
+
+		// ********************************************************************
     
     
     
