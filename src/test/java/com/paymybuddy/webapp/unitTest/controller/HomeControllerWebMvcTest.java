@@ -207,5 +207,18 @@ class HomeControllerWebMvcTest {
 
 
 		// ********************************************************************
-    
+
+			@DisplayName("SAVE login data Url request without authentication - redirectedUrl(http://localhost/login) - "
+					+ "GIVEN home url /save "
+					+ "WHEN Requested GET /save page"
+					+ "THEN returns expected reponse - redirectedUrl(http://localhost/login)")  
+		@Test
+		public void testSaveUrlWithoutLoginRedirectToLoginUrl() throws Exception {
+
+			mockMvc.perform(get("/save"))
+			.andExpect(redirectedUrl("http://localhost/login"));
+		}
+
+		// ********************************************************************
+		
 }
