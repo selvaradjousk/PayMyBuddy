@@ -244,6 +244,26 @@ class UserControllerTest {
 		     		.andExpect(view().name("redirect:/register?&firstName=testFirstname&lastName=testLastname&email=testemailemail.com&password=testpassword&confirmation=testpassword&errorMessage=Please enter EMAIL ID"));
 	 }
 		
+		// ********************************************************************
+		
+
+		@DisplayName("REGISTER POST request Wrong email Format no domain name input Response - 302 - ENTER EMAIL ID "
+				+ "GIVEN POST request url /register Wrong email Format no domain name input"
+				+ "WHEN Requested POST /register "
+				+ "THEN returns expected 302 redirect /register http response -  Please Enter Email ID") 
+		@Test
+		public void testAddNewUserPostRequestemailFormatWrongwithomDomainName() throws Exception {
+		     mockMvc.perform(post("/register")
+		             .param("firstName","testFirstname")
+		             .param("lastName", "testLastname")
+		             .param("email", "testemail@email")
+		             .param("password", "testpassword")
+		             .param("confirmation", "testpassword"))
+		     		.andExpect(status().isFound())
+		     		.andExpect(model().hasNoErrors())
+		     		.andExpect(view().name("redirect:/register?&firstName=testFirstname&lastName=testLastname&email=testemail@email&password=testpassword&confirmation=testpassword&errorMessage=Please enter EMAIL ID"));
+	 }
+		
 			
 			
 }
