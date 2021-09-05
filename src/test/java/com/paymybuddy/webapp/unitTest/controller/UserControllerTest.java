@@ -1,6 +1,7 @@
 package com.paymybuddy.webapp.unitTest.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -12,6 +13,7 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -58,4 +60,31 @@ class UserControllerTest {
 				.andExpect(status().isOk());
 	}
 
+
+    // ********************************************************************
+
+
+	@DisplayName("REGISTER POST valid request Response - 302 redirect  /login - "
+			+ "GIVEN POST request url /register "
+			+ "WHEN Requested POST /register "
+			+ "THEN returns expected 302 redirect /login http response") 
+    @Test
+    public void testAddNewUserWithValidInfo() throws Exception {
+        mockMvc.perform(post("/register")
+                .param("firstName","testfirstname")
+                .param("lastName", "testlastname")
+                .param("email", "testemail@email.com")
+                .param("password", "testpassword")
+                .param("confirmation", "testpassword"))
+        		.andExpect(status().isFound())
+        		.andExpect(model().hasNoErrors())
+        		.andExpect(status().is(302))
+        		.andExpect(view().name("redirect:/login"))
+        		;
+    }
+
+	   // ******************************************************************** 
+	
+	
+	
 }
