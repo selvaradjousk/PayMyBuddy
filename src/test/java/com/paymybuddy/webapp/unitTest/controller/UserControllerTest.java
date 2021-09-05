@@ -1,5 +1,6 @@
 package com.paymybuddy.webapp.unitTest.controller;
 
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -13,10 +14,12 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.paymybuddy.webapp.controller.UserController;
@@ -264,6 +267,29 @@ class UserControllerTest {
 		     		.andExpect(view().name("redirect:/register?&firstName=testFirstname&lastName=testLastname&email=testemail@email&password=testpassword&confirmation=testpassword&errorMessage=Please enter EMAIL ID"));
 	 }
 		
-			
-			
+		
+		// ********************************************************************
+	    
+		@DisplayName("AUTHorisation request check "
+				+ "GIVEN GET request url /register auth request private service"
+				+ "WHEN Requested GET /register "
+				+ "THEN returns expected 200 OK")
+	    @WithMockUser("testemail1@email.com")
+	    @Test
+	    public void givenAuthRequestOnPrivateService_shouldSucceedWith200() throws Exception {
+	    	
+	    	mockMvc = MockMvcBuilders
+	                .webAppContextSetup(context)
+	                .apply(springSecurity())
+	                .build();
+
+	    	
+	    	mockMvc.perform(get("/register")
+	    			.contentType(MediaType.APPLICATION_JSON))
+	          .andExpect(status().isOk());
+	    }		
+
+		
+	// ********************************************************************
+
 }
