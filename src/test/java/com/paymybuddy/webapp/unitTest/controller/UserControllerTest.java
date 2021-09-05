@@ -103,5 +103,25 @@ class UserControllerTest {
  }
 
  // ********************************************************************
+
+
+	@DisplayName("REGISTER POST request empty Firstname input Response - 302 - "
+			+ "GIVEN POST request url /register "
+			+ "WHEN Requested POST /register "
+			+ "THEN returns expected 302 redirect /register http response - Non alphanumeric names not accepted") 
+	@Test
+	public void testAddNewUserPostRequestEmptyFirstname() throws Exception {
+	     mockMvc.perform(post("/register")
+	             .param("firstName","")
+	             .param("lastName", "testlastname")
+	             .param("email", "testemail@email.com")
+	             .param("password", "testpassword")
+	             .param("confirmation", "testpassword"))
+	     		.andExpect(status().isFound())
+	     		.andExpect(model().hasNoErrors())
+	     		.andExpect(view().name("redirect:/register?&firstName=&lastName=testlastname&email=testemail@email.com&password=testpassword&confirmation=testpassword&errorMessage=Non alphanumeric names not accepted"));
+ }
+
+ // ********************************************************************
 	
 }
