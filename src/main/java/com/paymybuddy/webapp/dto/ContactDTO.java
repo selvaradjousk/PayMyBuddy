@@ -4,9 +4,7 @@ import java.time.LocalDate;
 
 import com.paymybuddy.webapp.model.User;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * The Class ContactDTO.
@@ -19,19 +17,6 @@ import lombok.Setter;
 public class ContactDTO {
 
 	/** The id contact. */
-	
-	/**
-	 * Gets the id contact.
-	 *
-	 * @return the id contact
-	 */
-	@Getter 
- /**
-  * Sets the id contact.
-  *
-  * @param idContact the new id contact
-  */
- @Setter
     private Integer idContact;
 
     /** The creation date. */
@@ -58,6 +43,25 @@ public class ContactDTO {
   		this.payer = payer;
   		this.contact = contact;
   	}
+
+	   /**
+     * Gets the id contact.
+     *
+     * @return the id contact
+     */
+    public Integer getIdContact() {
+  		return idContact;
+  	}
+
+
+    /**
+     * Sets the id contact.
+     *
+     * @param idContact the new id contact
+     */
+    public void setIdContact(Integer idContact) {
+        this.idContact = idContact;
+    }
 
 	/**
 	 * Gets the creation date.

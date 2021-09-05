@@ -1,7 +1,15 @@
 package com.paymybuddy.webapp.exception;
 
+/**
+ * The Class BalanceNotSufficientException.
+ */
 public class BalanceNotSufficientException extends RuntimeException {
 
+    /**
+     * Instantiates a new balance not sufficient exception.
+     *
+     * @param message the message
+     */
     public BalanceNotSufficientException(String message) {
         super(message);
     }

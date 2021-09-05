@@ -52,6 +52,11 @@ public class BankAccountDTO {
         this.user = user;
     }
 
+    /**
+     * Gets the rib.
+     *
+     * @return the rib
+     */
     public String getRib() {
         return rib;
     }

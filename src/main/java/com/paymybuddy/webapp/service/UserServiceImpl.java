@@ -3,9 +3,13 @@ package com.paymybuddy.webapp.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.paymybuddy.webapp.dto.UserDTO;
@@ -20,17 +24,6 @@ import lombok.extern.log4j.Log4j2;
 
 // **************************** TODOs LIST ***********************************
 
-// Method:
-// --> getAllUsers(String email) served by userRepository.findAll()
-// --> addNewUser(userDTO)
-// 			check for user exist already by
-// userRepository.findUserByEmail(email)
-//			add served by userMapper.toUserDTO(user)
-// --> check for email validity
-// --> check password match on confirm password
-// --> input fields validation done in the
-// respective DO with annotations
-
 /**
  * The Class UserServiceImpl.
  */
@@ -38,26 +31,32 @@ import lombok.extern.log4j.Log4j2;
 @Service
 public class UserServiceImpl implements IUserService {
 
+
 	/** The user repository. */
 	@Autowired
 	private UserRepository userRepository;
 
-    /**
-     * Instantiates a new user service impl.
-     *
-     * @param userRepository the user repository
-     * @param userMapper the user mapper
-     */
-    public UserServiceImpl(
-    		UserRepository userRepositoryy,
-    		UserMapper userMapperr) {
-		super();
-		this.userRepository = userRepositoryy;
-		this.userMapper = userMapperr;
-	}
+    /** The password encoder. */
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
-	/** The user mapper. */
+    /** The user mapper. */
     private UserMapper userMapper = new UserMapper();
+
+
+	/**
+	 * Instantiates a new user service impl.
+	 *
+	 * @param userRepository the user repository
+	 * @param passwordEncoder the password encoder
+	 * @param userMapper the user mapper
+	 */
+	public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, UserMapper userMapper) {
+		super();
+		this.userRepository = userRepository;
+		this.passwordEncoder = passwordEncoder;
+		this.userMapper = userMapper;
+	}
 
 
     // *******************************************************************
@@ -78,8 +77,11 @@ public class UserServiceImpl implements IUserService {
         for (User user: listOfUsers) {
         	listOfUsersDTO.add(userMapper.toUserDTO(user));
         }
-        log.info(" ====> FIND All USER Successfull <==== ");
-        return listOfUsersDTO; 
+
+        log.info(" ====> FIND All USER Successfull"
+        		+ " - size: " + listOfUsers.size());
+
+        return listOfUsersDTO;        
 	}
 
 
@@ -96,8 +98,6 @@ public class UserServiceImpl implements IUserService {
 		log.info(" ====> FIND USER by EMAIL requested <==== " + email);
 
 		User user = userRepository.findUserByEmail(email);
-
-		log.info(" ====> Email <==== " + user.getEmail());
 
 		log.info(" ====> FIND USER by EMAIL Sucessfull <==== ");
 
@@ -142,11 +142,11 @@ public class UserServiceImpl implements IUserService {
 
     	log.info(" ====> SAVE User requested <==== ");
 
-//    	User userAdd = new User();
+    	User userAdd = new User();
 
-    	User userAdd = userRepository.save(userMapper.toUserDO(userDTO));
+    	userAdd = userRepository.save(userMapper.toUserDO(userDTO));
 
-        log.info(" ====> User SAVED Successfully <==== ");
+        log.info(" ====> User SAVED Successfully : " + userAdd);
 
         return userMapper.toUserDTO(userAdd);
     }
@@ -176,14 +176,23 @@ public class UserServiceImpl implements IUserService {
      * @param confirmationPass the confirmation pass
      * @return the user DTO
      */
-    public UserDTO saveNewUser(final UserDTO userDTO, final String confirmationPass) {
+    public UserDTO saveNewUser(
+    		final UserDTO userDTO,
+    		final String confirmationPass) {
 
-   	log.info(" ====> SAVE NEW User requested <==== ");
+       	log.info(" ====> SAVE NEW User requested <==== ");
+       	log.info(" ====> confirmation password <==== "+ confirmationPass);
+       	log.info(" ====> password <==== "+ userDTO.getPassword());
 
-//        User userAdd = new User();
+        User userAdd = new User();
 
+//      checkConfirmationPasswordMatch(userDTO, confirmationPass);
+        //*********************************************************************          
+        //*********************************************************************
  		if (userDTO.getPassword().equals(confirmationPass) == false){
 
+ 		   	log.info(" ====> confirmation password <==== "+ confirmationPass);
+ 		   	log.info(" ====> password <==== "+ userDTO.getPassword());
  			log.info(" ====> ERROR: Password MISMATCH <==== ");
 
  			throw new DataNotConformException("Password MISMATCH");
@@ -208,13 +217,19 @@ public class UserServiceImpl implements IUserService {
             userDTO.setActive(true);
             userDTO.setCreationDate(LocalDate.now());
 
+            //*****************************************************************           
+            //*****************************************************************
+            userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            //*****************************************************************
+            //*****************************************************************
 
             log.info(" ====> NEW User PASSWORD: "
             + userDTO.getPassword() + " <==== ");
 
-            User userAdd = userRepository.save(userMapper.toUserDO(userDTO));
+            userAdd = userRepository.save(userMapper.toUserDO(userDTO));
 
-            log.info(" ====> SAVE NEW User SUCCESSFULL <==== ");
+            log.info(" ====> SAVE NEW User SUCCESSFULL"
+            		+ " - userAdd : " + userAdd);
 
             return userMapper.toUserDTO(userAdd);
         } else {
@@ -247,14 +262,18 @@ public class UserServiceImpl implements IUserService {
  	  */
  	private void checkAlphanumericNameEntry(final UserDTO userDTO) {
 
- 		if (checkStringName(userDTO.getUserName()) == false ||
-                         checkStringName(userDTO.getFirstName()) == false) {
+ 		if (checkStringName(userDTO
+ 				.getUserName()) == false ||
+                         checkStringName(userDTO
+                        		 .getFirstName()) == false) {
 
          	log.info(" ====> ERROR: Names not alphanumeric <==== ");
 
              throw new DataNotConformException(
             		 "Non alphanumeric names not accepted");
          }
+
+ 		log.info(" ==== Names are ok - alphanumeric <==== ");
  	}
 
 
@@ -302,5 +321,29 @@ public class UserServiceImpl implements IUserService {
         return stringNamePattern.matcher(string).matches();
     }
 
+    //******************************************************************
+    @Override
+    public Page<UserDTO> listUserNotBuddy(UserDTO userDTO, String mc,Pageable pageable) {
+        log.info(" ====> FIND LIST USER Not Buddy requested <==== ");
+        User payer = userMapper.toUserDO(userDTO);
+        Page<User> pagesUsers = userRepository.listUserNotBuddy(payer,mc,pageable);
+        log.info(" ====> pagesUsers <==== " + pagesUsers);
+        Page<UserDTO> pagesUsersDTO= pagesUsers.map(new Function<User, UserDTO>() {
+            @Override
+            public UserDTO apply(User user) {
+                UserDTO userDTO = new UserDTO();
+                userDTO = userMapper.toUserDTO(user);
+                log.info(" ====> userDTO <==== " + userDTO.toString());
+                return userDTO;
+            }
+        });
+        log.info(" ====> FIND LIST USER Pages returned <==== ");
+        log.info(" ====> pagesUsersDTO <==== " + pagesUsersDTO.toString());
+        return pagesUsersDTO;
+    }
+    //******************************************************************
+
+
+    
 
 }

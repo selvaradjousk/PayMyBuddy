@@ -19,12 +19,12 @@ public class TransactionDTO {
 	 *
 	 * @param idTransaction the new id transaction
 	 */
- /**
+	@Setter /**
   * Gets the id transaction.
   *
   * @return the id transaction
   */
- @Getter @Setter
+ @Getter
 	private int idTransaction;
 
 	/** The payer. */
@@ -136,8 +136,8 @@ public class TransactionDTO {
 	 *
 	 * @param createDate the new creation date
 	 */
-	public void setCreationDate(LocalDate creationDate) {
-		this.creationDate = creationDate;
+	public void setCreationDate(LocalDate createDate) {
+		this.creationDate = createDate;
 	}
 
 	/**
@@ -201,7 +201,7 @@ public class TransactionDTO {
 	 */
 	@Override
 	public String toString() {
-		return "Transaction ["
+		return "TransactionDTO ["
 				+ "idTransaction=" + idTransaction
 				+ ", payer=" + payer
 				+ ", beneficiary=" + beneficiary

@@ -2,7 +2,11 @@ package com.paymybuddy.webapp.repository;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.paymybuddy.webapp.model.User;
@@ -12,20 +16,6 @@ import com.paymybuddy.webapp.model.User;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-
-	// **************************** TODOs LIST ***********************************
-
-	// Method: c
-	// --> User findUserById(Integer id);
-	// --> User findByEmail(String email)
-	// --> User findByUserName(String userName);
-	// --> User findByEmailAndPassword(String email, String password);
-	// --> Optional<User> findByEmail(String email);
-	// --> Page<User> listUserNotContact(User payer,
-	// @Param("x")String keyWord , Pageable pageable)
-	// --> Page<User> listUserAlreadyContact(User beneficiary,
-	// @Param("x")String keyWord , Pageable pageable)
-	// --> 
 
 	/**
 	 * Find by email.
@@ -58,16 +48,18 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	 * @return the user
 	 */
 	User findByUserName(String userName);
+
+	   /**
+   	 * List user not buddy.
+   	 *
+   	 * @param payer the payer
+   	 * @param mc the mc
+   	 * @param pageable the pageable
+   	 * @return the page
+   	 */
+   	@Query("select u from User  u "
+	            + "WHERE u not in (Select contact from Contact f where f.payer= :payer)"
+	            + " AND u.email like :x")
+	public Page<User> listUserNotBuddy(User payer, @Param("x") String mc, Pageable pageable);
+
 }
-
-
-// Custom JPQL Queries with @Query
-// @Query("select u from UserEntity u where u.name = :name")
-// UserEntity findByNameCustomQuery(@Param("name") String name);
-
-// Native Queries with @Query
-// @Query(
-// value = "select * from user as u where u.name = :name", nativeQuery = true)
-// UserEntity findByNameNativeQuery(@Param("name") String name);
-
-

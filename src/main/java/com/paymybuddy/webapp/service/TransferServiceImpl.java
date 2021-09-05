@@ -33,16 +33,6 @@ import lombok.extern.log4j.Log4j2;
 @Service
 public class TransferServiceImpl implements ITransferService {
 
-	// **************************** TODOs LIST ***************************
-
-	// Method:
-	// --> getAllTransfers(): List(TransfersDTO) served by
-	// TransferMapper.toDTO(transfer)
-	// --> getAllTransfersByUser(UserDTO); TransferDTO by pages
-	// --> addTransfer(transferDTO): transferDTO
-	// --> pagination of transfer list
-	// --> Before validation of Transfer, Transaction approval
-	//  done by checking the account balance amount
 
 	/** The transfer repository. */
 	@Autowired
@@ -130,7 +120,9 @@ public class TransferServiceImpl implements ITransferService {
 		for (Transfer transfer : listOfTransfers) {
 			listOfTransfersDTO.add(transferMapper.toTransferDTO(transfer));
 		}
-		log.info(" ====> FIND All TRANSFER for a user Successfull <==== ");
+		log.info(" ====> FIND All TRANSFER for a user Successfull"
+				+ " : " +  listOfTransfersDTO);
+
 		return listOfTransfersDTO;
 	}
 
@@ -160,7 +152,9 @@ public class TransferServiceImpl implements ITransferService {
 		for (Transfer transfer : listOfTransfers) {
 			listOfTransfersDTO.add(transferMapper.toTransferDTO(transfer));
 		}
-		log.info(" ====> FIND All TRANSFER for a user Successfull <==== ");
+		log.info(" ====> FIND All TRANSFER for a user Successfull"
+				+ " : " + listOfTransfersDTO);
+
 		return listOfTransfersDTO;
 	}
 
@@ -189,7 +183,9 @@ public class TransferServiceImpl implements ITransferService {
 			listOfTransfersDTO.add(transferMapper
 					.toTransferDTO(transfer));
 		}
-		log.info(" ====> FIND All TRANSFER for a user Successfull <==== ");
+		log.info(" ====> FIND All TRANSFER for a user Successfull"
+				+ " :" + listOfTransfersDTO);
+
 		return listOfTransfersDTO;
 	}
 
@@ -216,6 +212,7 @@ public class TransferServiceImpl implements ITransferService {
       return pagesTransferDTO;
   }
 
+    // *********************************************************************
     /**
      * Last three transfers.
      *
@@ -223,7 +220,6 @@ public class TransferServiceImpl implements ITransferService {
      * @param pageable the pageable
      * @return the page
      */
-    // *********************************************************************
     @Override
     public Page<TransferDTO> lastThreeTransfers(
     		final UserDTO userDTO,
@@ -356,13 +352,14 @@ public class TransferServiceImpl implements ITransferService {
           }
       }
 
+
+      // ************verification data transfer valid ************************
       /**
        * Tranfer data verification.
        *
        * @param transfer the transfer
        * @return the boolean
        */
-      // ************verification data transfer valid ************************
       private Boolean tranferDataVerification(final Transfer transfer) {
 
       	Boolean result = true;

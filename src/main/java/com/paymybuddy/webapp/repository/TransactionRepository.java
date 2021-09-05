@@ -16,12 +16,6 @@ import com.paymybuddy.webapp.model.User;
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
 
 
-	// **************************** TODOs LIST ******************************
-	
-	// Method: c
-	// --> Find list of Transactions By Payer
-
-
 	/**
 	 * Find all transaction by payer.
 	 *
@@ -40,14 +34,23 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 	Page<Transaction> findAllTransactionByPayer(User payer, Pageable pageable);
 
 	 /**
- 	 * Last three transactions.
- 	 *
- 	 * @param user the user
- 	 * @param pageable the pageable
- 	 * @return the page
- 	 */
- 	@Query("SELECT t FROM Transaction t"
- 			+ " WHERE t.payer= :user  ORDER BY date desc")
-	Page<Transaction> lastThreeTransactions(User user, Pageable pageable);
+	 * Last three transactions.
+	 *
+	 * @param payer the payer
+	 * @param pageable the pageable
+	 * @return the page
+	 */
+	@Query("SELECT t FROM Transaction t WHERE t.payer= :payer  ORDER BY date desc")
+	Page<Transaction> lastThreeTransactions(User payer, Pageable pageable);
+
+	/**
+	  * Last three transactions beneficiary.
+	  *
+	  * @param user the user
+	  * @param pageable the pageable
+	  * @return the page
+	  */
+	 @Query("SELECT t FROM Transaction t WHERE t.beneficiary= :user  ORDER BY date desc")
+	Page<Transaction> lastThreeTransactionsBeneficiary(User user, Pageable pageable);
 	
 }

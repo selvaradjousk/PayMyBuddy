@@ -2,6 +2,9 @@ package com.paymybuddy.webapp.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.paymybuddy.webapp.dto.UserDTO;
 
 /**
@@ -58,5 +61,19 @@ public interface IUserService {
 	UserDTO saveNewUser(
 			UserDTO userDTO,
 			String confirmationPass);
+
+
+	/**
+	 * List user not buddy.
+	 *
+	 * @param userDTO the user DTO
+	 * @param mc the mc
+	 * @param pageable the pageable
+	 * @return the page
+	 */
+	Page<UserDTO> listUserNotBuddy(
+			UserDTO userDTO,
+			String mc,
+			Pageable pageable);
 
 }

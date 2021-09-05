@@ -15,12 +15,6 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-//**************************** TODOs LIST *******************************
-
-//Method: c
-//--> Checkstyle => java doc, hidden fields, blank spaces
-//--> validation field constraints -> not null, not blank, unique,
-//--> updating ER (Entity Relationship types) - associations
 
 /**
  * The Class Transfer.

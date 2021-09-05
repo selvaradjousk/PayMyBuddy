@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-// TODO: Auto-generated Javadoc
 /**
  * Instantiates a new transfer DTO.
  */

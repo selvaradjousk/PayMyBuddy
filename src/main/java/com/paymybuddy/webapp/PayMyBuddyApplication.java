@@ -2,14 +2,15 @@ package com.paymybuddy.webapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 
 /**
  * The Class PayMyBuddyApplication.
+ * 
+ * @author Senthil
  */
 
-@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+@SpringBootApplication
 public class PayMyBuddyApplication {
 
 	/**

@@ -11,12 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-//**************************** TODOs LIST ***************************
-
-//Method: c
-//--> Checkstyle => java doc, hidden fields, blank spaces
-//--> validation field constraints -> not null, not blank, unique,
-//--> updating ER (Entity Relationship types) - associations
 
 /**
  * The Class Contact.
@@ -52,25 +46,6 @@ public class Contact {
         super();
     }
 
-	/**
-	 * Instantiates a new contact.
-	 *
-	 * @param idContact the id contact
-	 * @param creationDate the creation date
-	 * @param payer the payer
-	 * @param contact the contact
-	 */
-	public Contact(
-			Integer idContact,
-			LocalDate creationDate,
-			User payer,
-			User contact) {
-  		super();
-  		this.idContact = idContact;
-  		this.creationDate = creationDate;
-  		this.payer = payer;
-  		this.contact = contact;
-  	}
 
     /**
      * Gets the id contact.
@@ -81,7 +56,16 @@ public class Contact {
   		return idContact;
   	}
 
-	/**
+    /**
+     * Sets the id contact.
+     *
+     * @param idContact the new id contact
+     */
+    public void setIdContact(Integer idContact) {
+        this.idContact = idContact;
+    }
+
+    /**
 	 * Gets the creation date.
 	 *
 	 * @return the creation date
@@ -97,15 +81,6 @@ public class Contact {
      */
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
-    }
-
-    /**
-     * Sets the id contact.
-     *
-     * @param idContact the new id contact
-     */
-    public void setIdContact(Integer idContact) {
-        this.idContact = idContact;
     }
 
     /**

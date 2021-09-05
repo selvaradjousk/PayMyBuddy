@@ -80,6 +80,6 @@ public interface ITransferService {
 	 */
 	List<TransferDTO> findAllByUserTypeDebit(UserDTO userDTO);
 
-//	TransferDTO addTransfer(String rib, double amount,
-	// String type, User user);
+
+	
 }

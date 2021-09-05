@@ -27,7 +27,6 @@
 		<dep.jacoco.version>0.8.6</dep.jacoco.version>
 	</properties>
 	
-	
 	<dependencies>
 	
 		<!-- ===================================================================== -->

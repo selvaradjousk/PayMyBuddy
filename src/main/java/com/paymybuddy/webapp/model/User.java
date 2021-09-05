@@ -9,12 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-//**************************** TODOs LIST ***********************************
-
-//Method: c
-//--> Checkstyle => java doc, hidden fields, blank spaces
-//--> validation field constraints -> not null, not blank, unique,
-//--> updating ER (Entity Relationship types) - associations
 
 /**
  * The Class User.
@@ -46,7 +40,7 @@ public class User {
     private String email;
 
     /** The password. */
-    @Column(name= "password", length = 50, nullable = false)
+    @Column(name= "password", length = 100, nullable = false)
     private String password;
 
 	/** The creation date. */
