@@ -210,5 +210,25 @@ class BankTransferControllerTest {
 	                .andExpect(status().isFound());
 	    }
 	    
+	   
+    // ********************************************************************
+
+	@DisplayName("POST /addTransfer page Url request Debit type Value Invalid Amount"
+			+ "GIVEN home url /addTransfer "
+			+ "WHEN Requested POST /addTransfer page"
+			+ "THEN returns expected reponse 400 BAD REQUEST") 
+    @WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+    @Test
+    public void testAddTransferBadAmountValues() throws Exception {
+        mockMvc.perform(post("/addTransfer")
+                .param("rib", "fr 1111 2222 3333 44444")
+                .param("amount", "100xxx0.0")
+                .param("type", "DEBIT"))
+                .andExpect(status().isBadRequest())
+                .andExpect(status().is(400));
+    }
+    
+    // ********************************************************************
+ 
 	
 }
