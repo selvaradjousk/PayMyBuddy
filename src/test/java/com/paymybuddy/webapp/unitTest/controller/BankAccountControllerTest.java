@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paymybuddy.webapp.controller.BankAccountController;
 import com.paymybuddy.webapp.dto.BankAccountDTO;
+import com.paymybuddy.webapp.model.BankAccount;
 import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.repository.UserRepository;
 import com.paymybuddy.webapp.service.IBankAccountService;
@@ -130,7 +131,7 @@ class BankAccountControllerTest {
     
 
     @DisplayName("Bank Account POST /manage/addBankAccount Url load request With Authentication - "
- 			+ "GIVEN home wrong url /manage/addBankAccount "
+ 			+ "GIVEN home url /manage/addBankAccount "
  			+ "WHEN Requested POST /manage/addBankAccount page with authentication"
  			+ "THEN returns expected 201 CREATED response")
      @WithMockUser(username="testemail1@email.com")
@@ -148,6 +149,28 @@ class BankAccountControllerTest {
 
      }
      
+       //******************************************************************** 
+   
+    @DisplayName("Bank Account POST /manage/addBankAccount Url Account null 400 BAD REQUEST- "
+ 			+ "GIVEN home url /manage/addBankAccount "
+ 			+ "WHEN Requested POST /manage/addBankAccount account null"
+ 			+ "THEN returns expected 400 BAD REQUEST response")
+    @WithMockUser(username = "testemail1@email.com")
+    @Test
+    public void addBankNAccountullTest() throws Exception {
+
+        BankAccount bankNull = null;
+
+        mockMvc.perform(post("/manage/bankAccount")
+                .contentType("application/json")
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(bankNull)))
+                .andExpect(status().isBadRequest());
+
+    }
+    
+    //********************************************************************
+    
   
      //******************************************************************** 
     
