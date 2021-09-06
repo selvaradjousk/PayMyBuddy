@@ -1,5 +1,6 @@
 package com.paymybuddy.webapp.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.paymybuddy.webapp.dto.ContactDTO;
 import com.paymybuddy.webapp.dto.UserDTO;
+import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.service.IContactService;
 import com.paymybuddy.webapp.service.IUserService;
 import com.paymybuddy.webapp.util.UserMapper;
@@ -118,6 +120,71 @@ public class ContactController {
 
     //******************************************************************
 
+    /**
+     * Adds the.
+     *
+     * @param idContact the id contact
+     * @return the string
+     */
+    @GetMapping("/addContact")
+    public String add(Integer idContact){
+        
+        log.info(" ====> ADD CONTACT FOR: "
+        + idContact + " requested <==== ");
+
+        UserDTO userLog = fetchUserLog();
+        log.info(" ====> userLog "+ userLog
+        		+ "  <==== ");
+
+        UserDTO uContact = userService
+        		.findUserById(idContact);
+        
+        log.info(" ====> uContact "+ uContact + "  <==== ");
+
+        LocalDate date = LocalDate.now();
+
+        User payer = userMapper.toUserDO(userLog);
+
+        ContactDTO newContactDTO = new ContactDTO(
+        		date,
+        		payer,
+        		userMapper.toUserDO(uContact));
+        
+        log.info(" ====> newContactDTO "
+        + newContactDTO + "  <==== ");
+ 
+        contactService.addContact(newContactDTO);
+
+        log.info(" ====> ADD CONTACT FOR: "
+        + idContact + " SUCCESS <==== ");
+ 
+        return"redirect:/contact";
+    }
+
+
+    //******************************************************************
+    /**
+     * Delete.
+     *
+     * @param idContact the id contact
+     * @return the string
+     */
+    @GetMapping("/deleteContact")
+    public String delete(Integer idContact){
+
+    	log.info(" ====> DELETE CONTACT FOR: "
+    	+ idContact + " requested <==== ");
+ 
+        contactService.deleteById(idContact);
+
+        log.info(" ====> DELETE CONTACT FOR: "
+        + idContact + " SUCCESS <==== ");
+ 
+        return"redirect:/contact";
+    }
+
+    
+    // ************************************************************************
 
 	/**
      * Adds the data to user model.
