@@ -1,5 +1,6 @@
 package com.paymybuddy.webapp.unitTest.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -110,30 +111,30 @@ class BankAccountControllerTest {
     
     // ********************************************************************
 
-//    @DisplayName("Bank Account POST /addBankAccount wrong Url load request With Authentication - "
-//			+ "GIVEN home wrong url /addBankAccount "
-//			+ "WHEN Requested POST /addBankAccount page with authentication"
+//    @DisplayName("Bank Account POST /bankAccount wrong Url load request With Authentication - "
+//			+ "GIVEN home wrong url /bankAccount "
+//			+ "WHEN Requested POST /bankAccount page with authentication"
 //			+ "THEN returns expected 302 REDIRECT: http://localhost/login response")
 //    @WithMockUser(username="testemail1@email.com", roles={"admin"})
 //    @Test
 //    public void testAddBankAccountWithWrongURL() throws Exception {
 //    	
 //   	
-//        mockMvc.perform(post("/addBankAccount")
+//        mockMvc.perform(post("/bankAccount")
 //                .param("rib", "1111 1111 1111 1111"))
 //        		.andExpect(model().hasNoErrors())
 //                .andExpect(status().isFound())
 //                .andExpect(redirectedUrl("/transfer"))
 //                .andExpect(view().name("redirect:/transfer"));
 //    }
-//    
+    
  
     //********************************************************************
     
 
-    @DisplayName("Bank Account POST /manage/addBankAccount Url load request With Authentication - "
- 			+ "GIVEN home url /manage/addBankAccount "
- 			+ "WHEN Requested POST /manage/addBankAccount page with authentication"
+    @DisplayName("Bank Account POST /manage/bankAccount Url load request With Authentication - "
+ 			+ "GIVEN home url /manage/bankAccount "
+ 			+ "WHEN Requested POST /manage/bankAccount page with authentication"
  			+ "THEN returns expected 201 CREATED response")
      @WithMockUser(username="testemail1@email.com")
      @Test
@@ -152,9 +153,9 @@ class BankAccountControllerTest {
      
        //******************************************************************** 
    
-    @DisplayName("Bank Account POST /manage/addBankAccount Url Account null 400 BAD REQUEST- "
- 			+ "GIVEN home url /manage/addBankAccount "
- 			+ "WHEN Requested POST /manage/addBankAccount account null"
+    @DisplayName("Bank Account POST /manage/bankAccount Url Account null 400 BAD REQUEST- "
+ 			+ "GIVEN home url /manage/bankAccount "
+ 			+ "WHEN Requested POST /manage/bankAccount account null"
  			+ "THEN returns expected 400 BAD REQUEST response")
     @WithMockUser(username = "testemail1@email.com")
     @Test
@@ -173,9 +174,9 @@ class BankAccountControllerTest {
     //********************************************************************
     
 
-    @DisplayName("Bank Account PUT /manage/addBankAccount request With Authentication - "
- 			+ "GIVEN url /manage/addBankAccount "
- 			+ "WHEN Requested PUT /manage/addBankAccount page with authentication"
+    @DisplayName("Bank Account PUT /manage/bankAccount request With Authentication - "
+ 			+ "GIVEN url /manage/bankAccount "
+ 			+ "WHEN Requested PUT /manage/bankAccount page with authentication"
  			+ "THEN returns expected 201 CREATED response")
     @WithMockUser(username = "testemail1@email.com")
     @Test
@@ -193,9 +194,9 @@ class BankAccountControllerTest {
     
     //********************************************************************
     
-    @DisplayName("Bank Account PUT /manage/addBankAccount account null 400 BAD REQUEST - "
- 			+ "GIVEN url /manage/addBankAccount account null"
- 			+ "WHEN Requested PUT /manage/addBankAccount "
+    @DisplayName("Bank Account PUT /manage/bankAccount account null 400 BAD REQUEST - "
+ 			+ "GIVEN url /manage/bankAccount account null"
+ 			+ "WHEN Requested PUT /manage/bankAccount "
  			+ "THEN returns expected 400 BAD_REQUEST response")
     @WithMockUser(username = "testemail1@email.com")
     @Test
@@ -214,7 +215,26 @@ class BankAccountControllerTest {
     //********************************************************************
     
     
-     //******************************************************************** 
+    @DisplayName("Bank Account delete /manage/bankAccount account - "
+ 			+ "GIVEN url /manage/bankAccount "
+ 			+ "WHEN Requested DELETE /manage/bankAccount "
+ 			+ "THEN returns expected 200 OK response")
+    @WithMockUser(username = "testemail1@email.com")
+    @Test
+    public void testDeleteBankAccount() throws Exception {
+        String emailSession = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findUserByEmail(emailSession);
+        BankAccount bankToCreate = new BankAccount(1,user,"fr 1111 1111 1111");
+
+        mockMvc.perform(delete("/manage/bankAccount")
+                .contentType("application/json")
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(bankToCreate)))
+                .andExpect(status().isOk());
+    }
+
+    //********************************************************************
+    
     
     
 }
