@@ -206,6 +206,25 @@ public class ContactTransactionController {
     // ************************************************************************
 
 
+    /**
+     * Delete.
+     *
+     * @param id the id
+     * @param page the page
+     * @return the string
+     */
+    @GetMapping({"/deleteTransaction"})
+    public String delete(Integer id, int page){
+
+    	log.info(" ====>Loading  '/'deleteTransaction"
+    			+ " transactionID: " + id + " <==== ");
+
+    	transactionService.deleteById(id);
+ 
+        return"redirect:/transaction?page="+page;
+    }
+
+    // ************************************************************************
 
 
 	/**

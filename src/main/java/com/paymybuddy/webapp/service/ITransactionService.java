@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.paymybuddy.webapp.dto.TransactionDTO;
 import com.paymybuddy.webapp.dto.UserDTO;
+import com.paymybuddy.webapp.model.Transaction;
 import com.paymybuddy.webapp.model.User;
 
 /**
@@ -72,6 +73,15 @@ public interface ITransactionService {
 	String doSaveNewTransaction(int page, Double amount, String contactEmail, String description, User beneficiary,
 			User payer);
 
+
+	/**
+	 * Delete by id.
+	 *
+	 * @param idTransactionDTO the id transaction DTO
+	 * @return the transaction
+	 */
+	Transaction deleteById(int idTransactionDTO);
+	
 
 	/**
 	 * Last three transactions beneficiary.

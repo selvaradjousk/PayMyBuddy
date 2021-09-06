@@ -561,7 +561,25 @@ public class TransactionServiceImpl  implements ITransactionService  {
                      "&amount="+amount+
                      "&description="+description;
      	}
+
+
      	// ************************************************************************
+
+
+        /**
+	      * Delete by id.
+	      *
+	      * @param idTransactionDTO the id transaction DTO
+	      * @return the transaction
+	      */
+	     @Override
+        public Transaction deleteById(int idTransactionDTO) {
+
+            transactionRepository.deleteById(idTransactionDTO);
+
+            return null;
+        }
+        // ************************************************************************
 
 
 }
