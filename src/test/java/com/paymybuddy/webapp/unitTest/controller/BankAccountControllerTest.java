@@ -1,6 +1,8 @@
 package com.paymybuddy.webapp.unitTest.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -86,7 +88,6 @@ class BankAccountControllerTest {
     // ********************************************************************
 
     
-    
     @DisplayName("Bank Account /manage/bankAccounts Url load request Without Authentication - "
 			+ "GIVEN home url /manage/bankAccounts "
 			+ "WHEN Requested GET /manage/bankAccounts page without authentication"
@@ -101,6 +102,27 @@ class BankAccountControllerTest {
     
     
     // ********************************************************************
+
     
+   
+    @DisplayName("Bank Account POST /addBankAccount wrong Url load request With Authentication - "
+			+ "GIVEN home wrong url /addBankAccount "
+			+ "WHEN Requested POST /addBankAccount page with authentication"
+			+ "THEN returns expected 302 REDIRECT: http://localhost/login response")
+    @WithMockUser(username="testemail1@email.com", roles={"admin"})
+    @Test
+    public void testAddBankAccountWithWrongURL() throws Exception {
+    	
+   	
+        mockMvc.perform(post("/addBankAccount")
+                .param("rib", "1111 1111 1111 1111"))
+        		.andExpect(model().hasNoErrors())
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrlPattern("**/login"))
+                .andExpect(redirectedUrl("http://localhost/login"));
+    }
+    
+ 
+    //********************************************************************
     
 }
