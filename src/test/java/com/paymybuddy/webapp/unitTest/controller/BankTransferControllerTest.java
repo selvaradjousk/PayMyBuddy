@@ -1,6 +1,7 @@
 package com.paymybuddy.webapp.unitTest.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
@@ -84,7 +85,10 @@ class BankTransferControllerTest {
     
 	// ********************************************************************
 
-	
+	@DisplayName("GET /transfer page Url request attribute exists 302 redirect /login- "
+			+ "GIVEN home url /transfer "
+			+ "WHEN Requested GET /transfer page"
+			+ "THEN returns expected reponse 302 redirect /login") 
 	@Test
 	public void testBankTransferAttributesExistsWithoutAuthetication() throws Exception {
         mockMvc.perform(get("/transfer"))
@@ -96,7 +100,19 @@ class BankTransferControllerTest {
 	
 	// ********************************************************************
 	
-	
-	
+	@DisplayName("POST /transfer page Url request NO AUTH 302 redirect /login- "
+			+ "GIVEN home url /transfer "
+			+ "WHEN Requested POST /transfer page"
+			+ "THEN returns expected reponse 302 redirect /login") 
+    @Test
+    public void testaddTransferCreditTypeWithoutAuthetication() throws Exception {
+        mockMvc.perform(post("/addTransfer")
+                .param("rib", "fr 1111 2222 3333 44444")
+                .param("amount", "200.0")
+                .param("type", "CREDIT"))
+                .andExpect(status().isFound())
+//				.andExpect(redirectedUrlPattern("http://localhost/login"))
+				.andExpect(redirectedUrl("http://localhost/login"));
+    }
 	
 }
