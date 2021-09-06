@@ -137,7 +137,7 @@ class BankAccountControllerTest {
  			+ "THEN returns expected 201 CREATED response")
      @WithMockUser(username="testemail1@email.com")
      @Test
-     public void addBankTestWithManageMapping() throws Exception {
+     public void testAddBankTestWithManageMapping() throws Exception {
          String emailSession = SecurityContextHolder.getContext().getAuthentication().getName();
          User user = userRepository.findUserByEmail(emailSession);
          BankAccountDTO bankToCreateDTO = new BankAccountDTO(user, "fr 1111 1111 1111");
@@ -158,7 +158,7 @@ class BankAccountControllerTest {
  			+ "THEN returns expected 400 BAD REQUEST response")
     @WithMockUser(username = "testemail1@email.com")
     @Test
-    public void addBankNAccountullTest() throws Exception {
+    public void testAddBankNAccountNull() throws Exception {
 
         BankAccount bankNull = null;
 
@@ -173,13 +173,13 @@ class BankAccountControllerTest {
     //********************************************************************
     
 
-    @DisplayName("Bank Account PUT /manage/addBankAccount Url load request With Authentication - "
- 			+ "GIVEN home url /manage/addBankAccount "
+    @DisplayName("Bank Account PUT /manage/addBankAccount request With Authentication - "
+ 			+ "GIVEN url /manage/addBankAccount "
  			+ "WHEN Requested PUT /manage/addBankAccount page with authentication"
  			+ "THEN returns expected 201 CREATED response")
     @WithMockUser(username = "testemail1@email.com")
     @Test
-    public void upDateBankTest() throws Exception {
+    public void testUpdateBankAccount() throws Exception {
         String emailSession = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findUserByEmail(emailSession);
         BankAccount bankToCreate = new BankAccount(1,user,"fr 1111 1111 1111");
@@ -189,6 +189,26 @@ class BankAccountControllerTest {
                 .accept(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(bankToCreate)))
                 .andExpect(status().isCreated());
+    }
+    
+    //********************************************************************
+    
+    @DisplayName("Bank Account PUT /manage/addBankAccount account null 400 BAD REQUEST - "
+ 			+ "GIVEN url /manage/addBankAccount account null"
+ 			+ "WHEN Requested PUT /manage/addBankAccount "
+ 			+ "THEN returns expected 400 BAD_REQUEST response")
+    @WithMockUser(username = "testemail1@email.com")
+    @Test
+    public void testUpdateBankAccountNullAccount() throws Exception {
+        String emailSession = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findUserByEmail(emailSession);
+        BankAccount bankToCreate = null;
+
+        mockMvc.perform(put("/manage/bankAccount")
+                .contentType("application/json")
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(bankToCreate)))
+                .andExpect(status().isBadRequest());
     }
     
     //********************************************************************
