@@ -70,6 +70,18 @@ class BankAccountControllerTest {
     
     //********************************************************************
     
+    @DisplayName("Bank Account /manage/bankAccounts Url load request With Authentication - "
+			+ "GIVEN home url /manage/bankAccounts "
+			+ "WHEN Requested GET /manage/bankAccounts page with authentication"
+			+ "THEN returns expected 200 OK response")
+    @WithMockUser(username="testemail1@email.com", roles={"ADMIN"} )
+    @Test
+    public void testFindAllBankAccountOK() throws Exception {
+        mockMvc.perform(get("/manage/bankAccounts"))
+                .andExpect(status().isOk());
+    }
     
+    
+    // ********************************************************************
     
 }
