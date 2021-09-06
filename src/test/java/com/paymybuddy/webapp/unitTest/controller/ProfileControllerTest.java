@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -55,6 +56,27 @@ class ProfileControllerTest {
 		
 	}
 	
+	// ********************************************************************
 	
+	@DisplayName("PROFILE page Url request with authentication Attributes exists - "
+			+ "GIVEN Profile url /profile with authentication attributes exists"
+			+ "WHEN Requested GET /profile page"
+			+ "THEN returns expected 200 OK http response") 
+	@WithMockUser(username="testemail1@email.com", roles={"ADMIN"} )
+	@Test
+	public void testProfileAttributesExists() throws Exception {
+        mockMvc.perform(get("/profile"))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeExists(
+        		"firstName",
+        		"lastName",
+        		"email",
+        		"password",
+                "confirmation"))
+        		.andExpect(view().name("profile"))
+        		.andExpect(model().hasNoErrors());
+	}
+
+	// ********************************************************************	
 	
 }
