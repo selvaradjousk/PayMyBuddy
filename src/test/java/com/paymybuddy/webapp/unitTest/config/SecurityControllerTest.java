@@ -35,7 +35,7 @@ class SecurityControllerTest {
 		+ "WHEN Requested GET /notAuthorized page without authentication"
 		+ "THEN returns expected redirect to (http://localhost/login)")
 	@Test
-	public void testHomeUrlWithoutAuthentication() throws Exception {
+	public void testSecurityUrlWithoutAuthentication() throws Exception {
 
 		mockMvc.perform(get("/notAuthorized"))
 		.andExpect(redirectedUrl("http://localhost/login"));
@@ -50,7 +50,7 @@ class SecurityControllerTest {
 		+ "THEN returns expected Response OK 200")
 	@WithMockUser("testemail1@email.com")
 	@Test
-	public void testHomeUrlWithAuthentication() throws Exception {
+	public void testSecurityUrlWithAuthentication() throws Exception {
 
 		mockMvc.perform(get("/notAuthorized"))
 		.andExpect(status().isOk());
