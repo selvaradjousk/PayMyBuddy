@@ -427,7 +427,7 @@ public class TransactionServiceImpl  implements ITransactionService  {
          *
          * @param transactionDTO the transaction DTO
          */
-    	private void checkForPayerById(
+    	public void checkForPayerById(
     			final TransactionDTO transactionDTO) {
 
     		if (userService.findUserById(transactionDTO

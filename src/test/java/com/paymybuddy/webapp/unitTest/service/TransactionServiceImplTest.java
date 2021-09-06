@@ -22,6 +22,7 @@ import com.paymybuddy.webapp.exception.DataNotConformException;
 import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.service.ITransactionService;
 import com.paymybuddy.webapp.service.IUserService;
+import com.paymybuddy.webapp.service.TransactionServiceImpl;
 import com.paymybuddy.webapp.util.UserMapper;
 
 @DisplayName("TRANSACTION SERVICE - H2 DB TEST ")
@@ -37,6 +38,7 @@ class TransactionServiceImplTest {
     
     public UserMapper userMapper = new UserMapper();
 	
+	   TransactionServiceImpl transactionServiceImpl;
     
     List<UserDTO> listUserDTO = new ArrayList<UserDTO>();
 	
@@ -237,8 +239,6 @@ class TransactionServiceImplTest {
 	   
 	   
 		// ******************************************************************* 
-	   
-	   
-	
-	   
+
+
 }
