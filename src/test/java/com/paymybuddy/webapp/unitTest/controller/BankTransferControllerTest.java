@@ -83,6 +83,19 @@ class BankTransferControllerTest {
 	}
     
 	// ********************************************************************
+
+	
+	@Test
+	public void testBankTransferAttributesExistsWithoutAuthetication() throws Exception {
+        mockMvc.perform(get("/transfer"))
+        		.andExpect(status().is(302))
+        		.andExpect(redirectedUrlPattern("**/login"))
+        		.andExpect(redirectedUrl("http://localhost/login"));;
+	}  	
+
+	
+	// ********************************************************************
+	
 	
 	
 	
