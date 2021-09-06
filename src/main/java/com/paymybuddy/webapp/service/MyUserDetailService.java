@@ -66,4 +66,6 @@ public class MyUserDetailService implements UserDetailsService {
 			    		"Username: " + email + " not found"));
 	}
 
+	// try for testing https://stackoverflow.com/questions/38330597/inject-authenticationprincipal-when-unit-testing-a-spring-rest-controller
+	
 }
