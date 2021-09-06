@@ -93,5 +93,17 @@ class ContactControllerTest {
     
     // ********************************************************************  
 	
+
+	@Test
+	public void testAddContactUrlWithoutLoginRedirectToLoginUrl() throws Exception {
+
+		mockMvc.perform(get("/addContact"))
+		.andExpect(status().is(302))
+		.andExpect(redirectedUrl("http://localhost/login"));
+	}
+
+	// ********************************************************************
+	
+	
 	
 }
