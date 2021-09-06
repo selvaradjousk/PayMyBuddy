@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -116,6 +117,40 @@ public class BankAccountController {
     }
     // ************************************************************************
  
+
+    /**
+     * Modify bank account.
+     *
+     * @param bankAccountDTO the bank account DTO
+     * @return the response entity
+     */
+    @PutMapping(value= "/bankAccount")
+    public ResponseEntity<BankAccountDTO> modifyBankAccount(
+    		@Validated @RequestBody BankAccountDTO bankAccountDTO) {
+
+    	log.info("update done for BankAccount on Rib : "
+    	+ bankAccountDTO.getRib()
+    	+ "for user: " + bankAccountDTO.getUser());
+
+    	// Bank account DTO data Mapped to DO
+    	BankAccount bankAccount = bankAccountMapper
+    			.toBankAccountDO(bankAccountDTO);
+
+    	// Bank Account DO update done through repository interface
+    	BankAccount bankAccountUpdate= bankAccountRepository
+    			.save(bankAccount);
+
+        log.info("New BankAccount Rib saved : "
+                + bankAccountUpdate.getRib()
+                + "for user: " + bankAccountUpdate.getUser()
+                + " update request SUCCESS");
+
+        return new ResponseEntity<BankAccountDTO>(bankAccountMapper
+    			.toBankAccountDTO(bankAccountUpdate), HttpStatus.CREATED);
+    }
+    // ************************************************************************
+
+
 
 
 
