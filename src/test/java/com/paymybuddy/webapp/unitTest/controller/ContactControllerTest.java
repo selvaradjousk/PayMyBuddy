@@ -137,5 +137,21 @@ class ContactControllerTest {
 	
 	// ******************************************************************** 
 	
+	@DisplayName("GET /deleteContact page Url request without AUTH 302 redirect /login - "
+			+ "GIVEN home url /deleteContact "
+			+ "WHEN Requested GET /deleteContact page"
+			+ "THEN returns expected reponse 302 redirect /login")
+	@WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+	    @Test
+	    public void testDeleteContact() throws Exception {
+	        mockMvc.perform(get("/deleteContact")
+	                .param("idContact", "1"))
+	        		.andExpect(status().is(302))
+	                .andExpect(status().isFound())
+	                .andExpect(redirectedUrl("/contact"));
+	    }
+    	
+
+	// ******************************************************************** 
 	
 }
