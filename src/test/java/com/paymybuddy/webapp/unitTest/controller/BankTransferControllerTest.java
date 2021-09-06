@@ -115,4 +115,28 @@ class BankTransferControllerTest {
 				.andExpect(redirectedUrl("http://localhost/login"));
     }
 	
+	   
+    // ********************************************************************
+	
+	@DisplayName("POST /transfer page Url request WITH AUTH 302 /transfer?page=0&errorMessage=Transfer saved "
+			+ "GIVEN home url /transfer "
+			+ "WHEN Requested POST /transfer page"
+			+ "THEN returns expected reponse 302 /transfer?page=0&errorMessage=Transfer saved") 
+    @WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+    @Test
+    public void testaddTransferCreditTypeWithAuthetication() throws Exception {
+        mockMvc.perform(post("/addTransfer")
+                .param("rib", "fr 1111 2222 3333 44444")
+                .param("amount", "200.0")
+                .param("type", "CREDIT"))
+                .andExpect(status().isFound())
+				.andExpect(redirectedUrlPattern("/transfer?page=0&errorMessage=Transfer saved"))
+				.andExpect(redirectedUrl("/transfer?page=0&errorMessage=Transfer saved"));
+    }
+    
+    
+	
+	
+	
+	
 }
