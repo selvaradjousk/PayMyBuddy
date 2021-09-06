@@ -60,4 +60,28 @@ class ContactTransactionControllerTest {
 	// ********************************************************************
 	
 	
+	@DisplayName("/transaction page Url request page attributes exists 200 OK - "
+			+ "GIVEN home url /transaction "
+			+ "WHEN Requested GET /transaction page for attributes check"
+			+ "THEN returns expected reponse page attributes exists 200 OK")  
+	@WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+	@Test
+	public void testTransactionAttributesExists() throws Exception {
+        mockMvc.perform(get("/transaction"))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeExists(
+        		"contacts",
+        		"transactions",
+        		"pages",
+                "errorMessage",
+        		"currentPage",
+        		"description",
+        		"contact"))
+        		.andExpect(model().hasNoErrors());
+	}
+
+
+
+
+
 }
