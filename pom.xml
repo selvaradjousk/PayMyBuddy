@@ -170,11 +170,17 @@
 			<artifactId>log4j-api</artifactId>
 			<version>2.6.1</version>
 		</dependency>
-		<!-- <dependency>
+		
+		<!-- ===================================================================== -->
+		<!-- ************** log4j-core : logger  **************** -->
+		<!-- **initially GitHub reported Dependabot vulnerability alert on 2.6.1 version* -->
+		<!-- **have updated to 2.13.1 - first version without reported vulnerabilitie * -->
+		<!-- ===================================================================== -->
+		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.6.1</version>
-		</dependency>-->
+			<version>2.13.1</version>
+		</dependency>
 		
 		<!-- ===================================================================== -->
 		<!-- LOMBOK annotations used to reduce boilerplate code for model/data 
