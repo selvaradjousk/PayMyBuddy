@@ -269,17 +269,39 @@ class BankTransferControllerTest {
     // ********************************************************************
  
 
-	@DisplayName("DELETE /deleteAccount page Url request IS FOUND"
+		@DisplayName("POST /deleteAccount page Url request IS FOUND"
 			+ "GIVEN home url /deleteAccount "
 			+ "WHEN Requested POST /deleteAccount page"
-			+ "THEN returns expected reponse 400 BAD REQUEST") 
-	   @WithMockUser(username="lolo@email.com", roles={"ADMIN"})
+			+ "THEN returns expected reponse DONE") 
+		@WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
 	    @Test
 	    public void testdeleteBankAccount() throws Exception {
 	        mockMvc.perform(get("/deleteAccount")
 	                .param("id", "1"))
-	                .andExpect(status().isFound());
+	                .andExpect(status().isFound())
+	                .andExpect(redirectedUrl("/transfer"));
 	    }
 
 	   // ********************************************************************
+	
+		@DisplayName("POST /addBankAccount page Url request IS FOUND"
+			+ "GIVEN home url /addBankAccount "
+			+ "WHEN Requested POST /addBankAccount page"
+			+ "THEN returns expected reponse 302 SAVED") 
+		@WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+	    @Test
+	    public void addBankAccountTest() throws Exception {
+	        mockMvc.perform(post("/addBankAccount")
+	                .param("rib", "fr 1111 1111 1111"))
+	                .andExpect(status().isFound())
+	                .andExpect(redirectedUrl("/transfer"));
+	                
+	    }
+	  
+	  
+	   // ********************************************************************	  
+	
+	
+	
+	
 }
