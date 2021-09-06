@@ -154,7 +154,10 @@ class BankTransferControllerTest {
     // ********************************************************************
 
 	// ZERO AMOUNT CHECK TO BE DONE IN VALIDATION
-    @DisplayName("Test /addTransfer")
+	@DisplayName("POST /addTransfer page Url request Zero Amount Value "
+			+ "GIVEN home url /addTransfer "
+			+ "WHEN Requested POST /addTransfer page"
+			+ "THEN returns expected reponse 302 redirect /transfer") 
     @WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
     @Test
     public void testaddTransferCreditTypeZeroAmountValue() throws Exception {
@@ -171,7 +174,10 @@ class BankTransferControllerTest {
     // ********************************************************************
     
     // WRONG TRANSFER TYPE CHECK TO BE DONE IN VALIDATION
-       @DisplayName("Test /addTransfer")
+	@DisplayName("POST /addTransfer page Url request Wrong credit type Value "
+			+ "GIVEN home url /addTransfer "
+			+ "WHEN Requested POST /addTransfer page"
+			+ "THEN returns expected reponse 302 redirect /transfer") 
        @WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
        @Test
        public void testaddTransferCreditTypeWithWrongTransferType() throws Exception {
@@ -188,5 +194,21 @@ class BankTransferControllerTest {
        
        
        // ********************************************************************
+	
+	
+	@DisplayName("POST /addTransfer page Url request Debit type Value "
+			+ "GIVEN home url /addTransfer "
+			+ "WHEN Requested POST /addTransfer page"
+			+ "THEN returns expected reponse 302 redirect /transfer") 
+	    @WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+	    @Test
+	    public void testAddTransferDeditOk() throws Exception {
+	        mockMvc.perform(post("/addTransfer")
+	                .param("rib", "fr 1111 2222 3333 44444")
+	                .param("amount", "20.0")
+	                .param("type", "DEBIT"))
+	                .andExpect(status().isFound());
+	    }
+	    
 	
 }
