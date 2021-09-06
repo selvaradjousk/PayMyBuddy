@@ -4,11 +4,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -54,7 +52,7 @@ class BankAccountControllerTest {
     
     //********************************************************************
     
-    @DisplayName("Bank Account Url load request Without Authentication - "
+    @DisplayName("GET /bankAccounts Url load request Without Authentication - "
 			+ "GIVEN home url /bankAccounts "
 			+ "WHEN Requested GET /bankAccounts page without authentication"
 			+ "THEN returns expected redirect to (/login")
@@ -68,7 +66,7 @@ class BankAccountControllerTest {
     
   //********************************************************************
 
-    @DisplayName("Bank Account invalid Url load request With Authentication - "
+    @DisplayName("GET invalid Url load request With Authentication - "
 			+ "GIVEN home url /bankAccounts "
 			+ "WHEN Requested GET /bankAccounts page with authentication"
 			+ "THEN returns expected 404 Not found response")
@@ -81,7 +79,7 @@ class BankAccountControllerTest {
     
     //********************************************************************
     
-    @DisplayName("Bank Account /manage/bankAccounts Url load request With Authentication - "
+    @DisplayName("GET /manage/bankAccounts Url load request With Authentication - "
 			+ "GIVEN home url /manage/bankAccounts "
 			+ "WHEN Requested GET /manage/bankAccounts page with authentication"
 			+ "THEN returns expected 200 OK response")
@@ -96,7 +94,7 @@ class BankAccountControllerTest {
     // ********************************************************************
 
     
-    @DisplayName("Bank Account /manage/bankAccounts Url load request Without Authentication - "
+    @DisplayName("GET /manage/bankAccounts Url load request Without Authentication - "
 			+ "GIVEN home url /manage/bankAccounts "
 			+ "WHEN Requested GET /manage/bankAccounts page without authentication"
 			+ "THEN returns expected 302 REDIRECT: http://localhost/login response")
@@ -111,28 +109,28 @@ class BankAccountControllerTest {
     
     // ********************************************************************
 
-//    @DisplayName("Bank Account POST /bankAccount wrong Url load request With Authentication - "
-//			+ "GIVEN home wrong url /bankAccount "
-//			+ "WHEN Requested POST /bankAccount page with authentication"
-//			+ "THEN returns expected 302 REDIRECT: http://localhost/login response")
-//    @WithMockUser(username="testemail1@email.com", roles={"admin"})
-//    @Test
-//    public void testAddBankAccountWithWrongURL() throws Exception {
-//    	
-//   	
-//        mockMvc.perform(post("/bankAccount")
-//                .param("rib", "1111 1111 1111 1111"))
-//        		.andExpect(model().hasNoErrors())
-//                .andExpect(status().isFound())
-//                .andExpect(redirectedUrl("/transfer"))
-//                .andExpect(view().name("redirect:/transfer"));
-//    }
-    
+    @DisplayName("POST /bankAccount wrong Url load request NOT FOUND - "
+ 			+ "GIVEN home wrong url /bankAccount "
+ 			+ "WHEN Requested POST /bankAccount page with authentication"
+ 			+ "THEN returns expected 404 NOT FOUND")
+     @WithMockUser(username="testemail1@email.com", roles={"admin"})
+     @Test
+     public void testAddBankAccountWithWrongURL() throws Exception {
+     	
+    	
+         mockMvc.perform(post("/bankAccount")
+                 .param("rib", "1111 1111 1111 1111"))
+//         		.andExpect(model().hasNoErrors())
+                 .andExpect(status().isNotFound())
+//                 .andExpect(redirectedUrl("/transfer"))
+//                 .andExpect(view().name("redirect:/transfer"))
+                 ;
+     }
  
     //********************************************************************
     
 
-    @DisplayName("Bank Account POST /manage/bankAccount Url load request With Authentication - "
+    @DisplayName("POST /manage/bankAccount Url load request With Authentication - "
  			+ "GIVEN home url /manage/bankAccount "
  			+ "WHEN Requested POST /manage/bankAccount page with authentication"
  			+ "THEN returns expected 201 CREATED response")
@@ -153,7 +151,7 @@ class BankAccountControllerTest {
      
        //******************************************************************** 
    
-    @DisplayName("Bank Account POST /manage/bankAccount Url Account null 400 BAD REQUEST- "
+    @DisplayName("POST /manage/bankAccount Url Account null 400 BAD REQUEST- "
  			+ "GIVEN home url /manage/bankAccount "
  			+ "WHEN Requested POST /manage/bankAccount account null"
  			+ "THEN returns expected 400 BAD REQUEST response")
@@ -174,7 +172,7 @@ class BankAccountControllerTest {
     //********************************************************************
     
 
-    @DisplayName("Bank Account PUT /manage/bankAccount request With Authentication - "
+    @DisplayName("PUT /manage/bankAccount request With Authentication - "
  			+ "GIVEN url /manage/bankAccount "
  			+ "WHEN Requested PUT /manage/bankAccount page with authentication"
  			+ "THEN returns expected 201 CREATED response")
@@ -194,15 +192,13 @@ class BankAccountControllerTest {
     
     //********************************************************************
     
-    @DisplayName("Bank Account PUT /manage/bankAccount account null 400 BAD REQUEST - "
+    @DisplayName("PUT /manage/bankAccount account null 400 BAD REQUEST - "
  			+ "GIVEN url /manage/bankAccount account null"
  			+ "WHEN Requested PUT /manage/bankAccount "
  			+ "THEN returns expected 400 BAD_REQUEST response")
     @WithMockUser(username = "testemail1@email.com")
     @Test
     public void testUpdateBankAccountNullAccount() throws Exception {
-        String emailSession = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userRepository.findUserByEmail(emailSession);
         BankAccount bankToCreate = null;
 
         mockMvc.perform(put("/manage/bankAccount")
@@ -215,7 +211,7 @@ class BankAccountControllerTest {
     //********************************************************************
     
     
-    @DisplayName("Bank Account delete /manage/bankAccount account - "
+    @DisplayName("delete /manage/bankAccount account - "
  			+ "GIVEN url /manage/bankAccount "
  			+ "WHEN Requested DELETE /manage/bankAccount "
  			+ "THEN returns expected 200 OK response")
@@ -236,5 +232,25 @@ class BankAccountControllerTest {
     //********************************************************************
     
     
+    @DisplayName("delete /manage/bankAccount account wrong url-  NOT FOUND"
+ 			+ "GIVEN url /bankAccount "
+ 			+ "WHEN Requested DELETE /bankAccount "
+ 			+ "THEN returns expected 404 NOT FOUND")
+    @WithMockUser(username = "testemail1@email.com")
+    @Test
+    public void testDeleteBankAccountWrongUrl() throws Exception {
+        String emailSession = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findUserByEmail(emailSession);
+        BankAccount bankToCreate = new BankAccount(1,user,"fr 1111 1111 1111");
+
+        mockMvc.perform(delete("/bankAccount")
+                .contentType("application/json")
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(bankToCreate)))
+                .andExpect(status().is(404));
+    }
+
+    //********************************************************************    
+       
     
 }
