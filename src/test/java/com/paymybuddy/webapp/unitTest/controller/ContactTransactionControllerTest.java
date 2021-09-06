@@ -151,7 +151,27 @@ class ContactTransactionControllerTest {
         		;
     }
 
-
+    
+	// ********************************************************************
+	
+	@DisplayName("POST /transaction page Url request + Auth INVALID AMOUNT VALUE 400 BAD REQUEST - "
+			+ "GIVEN home url /transaction "
+			+ "WHEN Requested POST /transaction invalid amount value"
+			+ "THEN returns expected reponse - 400 BAD REQUEST") 
+	@WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+    @Test
+    public void testAddTransactionWithWrongTypingAmount() throws Exception {
+        mockMvc.perform(post("/transaction")
+                .param("contactEmail","testemail2@email.com")
+                .param("amount", "^^^^")
+                .param("description", "something"))
+        		.andExpect(status().is(400))
+        		.andExpect(status().isBadRequest());
+    }
+       
+	// ********************************************************************
+    
+    
 
 
 }
