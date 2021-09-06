@@ -1,25 +1,53 @@
 package com.paymybuddy.webapp.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import com.paymybuddy.webapp.service.IContactService;
+import com.paymybuddy.webapp.service.IUserService;
+import com.paymybuddy.webapp.util.UserMapper;
+
+import lombok.extern.log4j.Log4j2;
+
+/**
+ * The Class ContactController.
+ */
+@Log4j2
+@Controller
 public class ContactController {
 
-	// **************************** TODOs LIST ***********************************
-	
-	// Method: 
-	// -->  @GetMapping("/contact")  Lists the contacts available for new connection
-	// -->  @GetMapping("/addedContact")  Lists the contacts connected to the account
-	// -->  @GetMapping("/listContact")  Lists the all contacts
-	// -->  @PostMapping("/addContact")  POST new contact to the buddy account
-	// -->  @DeleteMapping("deleteContact) DELETE a contact from the list of connections
-	// --> 
-	// --> 
-	// --> 
-	// --> 
-	// --> 
 
-	// --> REFERENCES & GUIDES
-	// --> https://github.com/isudarsan/friendmanagement
-	// --> https://www.dariawan.com/tutorials/spring/spring-boot-restful-web-services-crud-example/
-	// -->
-	// -->
-	// -->	
+
+    /** The contact service. */
+	@Autowired
+    IContactService contactService;
+
+	/** The user service. */
+    @Autowired
+    IUserService userService;
+
+    /** The user mapper. */
+    public UserMapper userMapper = new UserMapper();
+
+
+    /**
+     * Instantiates a new contact controller.
+     *
+     * @param contactService the contact service
+     * @param userService the user service
+     * @param userMapper the user mapper
+     */
+    public ContactController(
+    		IContactService contactService,
+    		IUserService userService,
+    		UserMapper userMapper) {
+
+		this.contactService = contactService;
+		this.userService = userService;
+		this.userMapper = userMapper;
+	}
+    
+    //******************************************************************
+    
+    
 }
