@@ -83,7 +83,7 @@ class ContactTransactionControllerTest {
 
 	@DisplayName("POST /transaction page Url request no Authetication 302 redirect /login - "
 			+ "GIVEN home url /transaction "
-			+ "WHEN Requested POST /transaction page for attributes check"
+			+ "WHEN Requested POST /transaction"
 			+ "THEN returns expected reponse 302 redirect /login") 
     @Test
     public void testAddTransactionWithoutAuthetication () throws Exception {
@@ -99,7 +99,7 @@ class ContactTransactionControllerTest {
 
 	@DisplayName("POST /transaction page Url request + Authetication TRANSACTION SAVED- "
 			+ "GIVEN home url /transaction "
-			+ "WHEN Requested POST /transaction page for attributes check"
+			+ "WHEN Requested POST /transaction "
 			+ "THEN returns expected reponse TRANSACTION SAVED") 
 	@WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
     @Test
@@ -115,7 +115,23 @@ class ContactTransactionControllerTest {
 	
 	// ********************************************************************
 
-
+	@DisplayName("POST /transaction page Url request + Auth Empty Email 302 Message = You must choose an emailD- "
+			+ "GIVEN home url /transaction "
+			+ "WHEN Requested POST /transaction no email"
+			+ "THEN returns expected reponse - You must choose an email") 
+	@WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+    @Test
+    public void testAddTransactionWithoutContactEmail() throws Exception {
+        mockMvc.perform(post("/transaction")
+                .param("contactEmail","")
+                .param("amount", "10.0")
+                .param("description", "something"))
+        		.andExpect(status().is(302))
+        		.andExpect(view().name("redirect:/transaction?page=0&errorMessage=You must choose an email! &contactEmail=&amount=10.0&description=something"));
+    }
+    
+	// ********************************************************************
+	
 
 
 
