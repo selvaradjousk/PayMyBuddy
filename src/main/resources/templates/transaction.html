@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+<meta charset="UTF-8">
+<title>Buddy Transfer in PayMyBuddy</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/my.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+	<div class="container-outer">
+
+		<div class="container">
+			<div class="header">
+				<a href="#default" class="logo"><img alt="logo"
+					src="img/logo.png"></a>
+				<div class="header-right">
+					<a href="#" th:href="@{/home}">Home</a> <a href="#" class="active"
+						th:href="@{/transaction}">Buddy-Transfer </a> <a href="#"
+						th:href="@{/profile}">Profile</a> <a href="#"
+						th:href="@{/contact}">Contact</a> <a href="#" th:href="@{/logout}">Log
+						off</a>
+				</div>
+			</div>
+
+
+
+
+
+			<!-- 	<div th:if="${errorMessage}" th:utext="${errorMessage}"
+					style="color: red; font-style: italic; font-weight: bold;">...
+				</div> -->
+
+
+
+			<div class="subMenu">
+				<a class="aHome" th:href="@{/home}"><span
+					style="color: rgb(0, 101, 202); font-size: 1.2em; font-weight: normal;">Home</a>
+				<a> / </a> <a th:href="@{/transaction}"><span
+					style="color: rgb(192, 192, 192); font-size: 1.2em; font-weight: normal;">Buddy-Transfer</a>
+			</div>
+			<br />
+			<div class="send">
+				<div class="send-a">
+					<a></a>
+					<p
+						style="margin-left: 10px; float: left; color: #000000; font-size: 1.4em; font-weight: bold;"
+						th:text="'Easy Money Transfer to Buddies '"></p>
+					<br />
+				</div>
+
+				<span style="color: #000000; font-size: 1.3em; font-weight: bold;">&nbsp;</span>
+				<div class="send-b">
+					<p
+						style="float: right; margin-right: 50px; font-size: 15px; font-style: italic;">
+						For Buddy Connections click the button here to your right <span
+							style="font-size: 30px;">☛</span> &emsp; <a
+							class="button-banktransfer" href="#" th:href="@{/contact}"
+							style="float: right; font-size: 15px"> Add Connection </a>
+					</p>
+				</div>
+			</div>
+
+
+<br /><br /><br />
+			<div th:if="${errorMessage}" th:utext="${errorMessage}"
+				style="color: red; font-style: italic; font-weight: bold;">
+			</div>
+			
+			
+			<div class="Transaction1">
+				<form th:action="@{/transaction}" method="post">
+					<div class="Transaction2">
+						<div class="buddytransfer" th:object="${contacts}">
+						<p style="color: red; font-style: italic; font-weight: normal;">Select a contact on the list below:</p>
+							<select class="form-control" id="contactEmail"
+								name="contactEmail">
+								<option th:value="${contact}" name="contact" th:if="${contact}"
+									th:utext="${contact}" : >Select a contact</option>
+								<option th:each="contact  : ${contacts }"
+									th:value="${contact.contact.email}"
+									th:text="${contact.contact.email}" required="true"></option>
+							</select>
+						</div>
+						<div >
+							<span style="font-style: italic; font-size: 14px; font-weight: bold; " > <input size="10" type="number"
+								name="amount" th:value="${amount}" min="5" max="10000"
+								placeholder="10€" required="true" />
+							</span>
+						</div>
+
+
+						<div >
+
+							<input
+								style="background-color: #ff6820; color: #ffffff; font-size: 14px; font-weight: bold;"
+								type="submit" class="button-pay" name="create"
+								value="Pay" />
+						</div>
+					</div>
+					
+					
+						<div >
+							<div class="description" th:object="${description}">
+								<input
+									style="font-style: italic; font-size: 16px; font-weight: bold;"
+									type="text" name="description" th:value="${description}"
+									placeholder="Type Description - reason of money transfer...."
+									required="true" />
+							</div>
+						</div>
+
+				</form>
+			</div>
+
+
+			<div >
+				<div class="panel-heading" align="left" style="font-style:italic; font-size:14px; color:#404040;">List of Buddy Money
+					Transfer Operations:</div>
+
+
+				<table class="table">
+					<thead>
+						<tr class="panel-th" style="font-size: 12px; font-weight: bold; color:#404040;">
+							<th width="30%" style="font-style:italic; font-size:14px; color:#707070; ">Connections</th>
+							<th width="50%" style="font-style:italic; font-size:14px; color:#707070; ">Description</th>
+							<th width="20%" style="font-style:italic; font-size:14px; color:#707070; ">Amount</th>
+							<th></th>
+					</thead>
+					</tr>
+					<tbody>
+						<tr th:each="transaction : ${transactions}">
+							<td th:utext="${transaction.beneficiary.email}">...</td>
+							<td th:utext="${transaction.description}">...</td>
+							<td th:utext="${transaction.amount}">...</td>
+							<td><a th:if="${admin}" class="btn btn-danger"
+								onclick="return confirm( ' Confirm deletion of contact?')"
+								th:href="@{/deleteTransaction(id=${transaction.idTransaction}, page=${currentPage})}">Delete</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<ul class="nav nav-pills">
+					<li th:class="${currentPage==status.index?'active':''}"
+						th:each="page,status:${pages}"><a
+						th:href="@{/transaction(page=${status.index})}"
+						th:text="${status.index}"></a></li>
+				</ul>
+
+			</div>
+
+			</br>
+			<footer>
+				<p style="font-style: italic; font-size: 15px">Footer</p>
+			</footer>
+		</div>
+</body>
+</div>
+</html>
