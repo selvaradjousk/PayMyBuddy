@@ -1,6 +1,7 @@
 package com.paymybuddy.webapp.unitTest.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -80,7 +81,19 @@ class ContactTransactionControllerTest {
         		.andExpect(model().hasNoErrors());
 	}
 
-
+	
+    @DisplayName("Test /transaction")
+    @Test
+    public void testAddTransactionWithoutAuthetication () throws Exception {
+        mockMvc.perform(post("/transaction")
+                .param("contactEmail","testemail2@email.com")
+                .param("amount", "10.0")
+                .param("description", "something"))
+        		.andExpect(status().is(302))
+				.andExpect(redirectedUrl("http://localhost/login"));
+    }
+	
+	// ********************************************************************
 
 
 
