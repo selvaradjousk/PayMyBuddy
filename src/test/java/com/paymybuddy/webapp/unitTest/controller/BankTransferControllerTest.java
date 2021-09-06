@@ -155,7 +155,7 @@ class BankTransferControllerTest {
 	   
     // ********************************************************************   
 
-	@DisplayName("POST /addTransfer page Url request DEBIT type WITH AUTH  400 BAD REQUEST "
+	@DisplayName("POST /addTransfer page Url request DEBIT type WITH AUTH amount null 400 BAD REQUEST "
 			+ "GIVEN home url /addTransfer "
 			+ "WHEN Requested POST /addTransfer page"
 			+ "THEN returns expected reponse 400 BAD REQUEST") 
@@ -268,4 +268,18 @@ class BankTransferControllerTest {
     
     // ********************************************************************
  
+
+	@DisplayName("DELETE /deleteAccount page Url request IS FOUND"
+			+ "GIVEN home url /deleteAccount "
+			+ "WHEN Requested POST /deleteAccount page"
+			+ "THEN returns expected reponse 400 BAD REQUEST") 
+	   @WithMockUser(username="lolo@email.com", roles={"ADMIN"})
+	    @Test
+	    public void testdeleteBankAccount() throws Exception {
+	        mockMvc.perform(get("/deleteAccount")
+	                .param("id", "1"))
+	                .andExpect(status().isFound());
+	    }
+
+	   // ********************************************************************
 }
