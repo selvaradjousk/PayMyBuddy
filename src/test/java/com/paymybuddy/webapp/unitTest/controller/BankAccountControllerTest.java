@@ -1,6 +1,7 @@
 package com.paymybuddy.webapp.unitTest.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -83,5 +84,23 @@ class BankAccountControllerTest {
     
     
     // ********************************************************************
+
+    
+    
+    @DisplayName("Bank Account /manage/bankAccounts Url load request Without Authentication - "
+			+ "GIVEN home url /manage/bankAccounts "
+			+ "WHEN Requested GET /manage/bankAccounts page without authentication"
+			+ "THEN returns expected 302 REDIRECT: http://localhost/login response")
+        @Test
+    public void testFindAllBankAccountWithoutAuth() throws Exception {
+        mockMvc.perform(get("/manage/bankAccounts"))
+                .andExpect(status().is(302))
+                .andExpect(redirectedUrlPattern("**/login"))
+                .andExpect(redirectedUrl("http://localhost/login"));
+    }
+    
+    
+    // ********************************************************************
+    
     
 }
