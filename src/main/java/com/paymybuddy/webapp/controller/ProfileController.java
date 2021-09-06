@@ -93,7 +93,8 @@ public class ProfileController {
         addDataToUserModel(
         		model,
         		errorMessage,
-        		firstName, lastName,
+        		firstName,
+        		lastName,
         		email,
         		password,
         		confirmation,

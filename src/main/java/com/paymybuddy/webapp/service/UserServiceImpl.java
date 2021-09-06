@@ -51,7 +51,11 @@ public class UserServiceImpl implements IUserService {
 	 * @param passwordEncoder the password encoder
 	 * @param userMapper the user mapper
 	 */
-	public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, UserMapper userMapper) {
+	public UserServiceImpl(
+			UserRepository userRepository,
+			PasswordEncoder passwordEncoder,
+			UserMapper userMapper) {
+
 		super();
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
