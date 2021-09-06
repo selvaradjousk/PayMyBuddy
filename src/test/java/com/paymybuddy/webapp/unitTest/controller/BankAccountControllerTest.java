@@ -6,18 +6,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paymybuddy.webapp.controller.BankAccountController;
+import com.paymybuddy.webapp.dto.BankAccountDTO;
+import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.repository.UserRepository;
 import com.paymybuddy.webapp.service.IBankAccountService;
 
@@ -103,26 +108,48 @@ class BankAccountControllerTest {
     
     // ********************************************************************
 
-    
-   
-    @DisplayName("Bank Account POST /addBankAccount wrong Url load request With Authentication - "
-			+ "GIVEN home wrong url /addBankAccount "
-			+ "WHEN Requested POST /addBankAccount page with authentication"
-			+ "THEN returns expected 302 REDIRECT: http://localhost/login response")
-    @WithMockUser(username="testemail1@email.com", roles={"admin"})
-    @Test
-    public void testAddBankAccountWithWrongURL() throws Exception {
-    	
-   	
-        mockMvc.perform(post("/addBankAccount")
-                .param("rib", "1111 1111 1111 1111"))
-        		.andExpect(model().hasNoErrors())
-                .andExpect(status().isFound())
-                .andExpect(redirectedUrlPattern("**/login"))
-                .andExpect(redirectedUrl("http://localhost/login"));
-    }
-    
+//    @DisplayName("Bank Account POST /addBankAccount wrong Url load request With Authentication - "
+//			+ "GIVEN home wrong url /addBankAccount "
+//			+ "WHEN Requested POST /addBankAccount page with authentication"
+//			+ "THEN returns expected 302 REDIRECT: http://localhost/login response")
+//    @WithMockUser(username="testemail1@email.com", roles={"admin"})
+//    @Test
+//    public void testAddBankAccountWithWrongURL() throws Exception {
+//    	
+//   	
+//        mockMvc.perform(post("/addBankAccount")
+//                .param("rib", "1111 1111 1111 1111"))
+//        		.andExpect(model().hasNoErrors())
+//                .andExpect(status().isFound())
+//                .andExpect(redirectedUrl("/transfer"))
+//                .andExpect(view().name("redirect:/transfer"));
+//    }
+//    
  
     //********************************************************************
+    
+
+    @DisplayName("Bank Account POST /manage/addBankAccount Url load request With Authentication - "
+ 			+ "GIVEN home wrong url /manage/addBankAccount "
+ 			+ "WHEN Requested POST /manage/addBankAccount page with authentication"
+ 			+ "THEN returns expected 201 CREATED response")
+     @WithMockUser(username="testemail1@email.com")
+     @Test
+     public void addBankTestWithManageMapping() throws Exception {
+         String emailSession = SecurityContextHolder.getContext().getAuthentication().getName();
+         User user = userRepository.findUserByEmail(emailSession);
+         BankAccountDTO bankToCreateDTO = new BankAccountDTO(user, "fr 1111 1111 1111");
+
+        mockMvc.perform(post("/manage/bankAccount")
+                 .contentType("application/json")
+                 .accept(MediaType.APPLICATION_JSON)
+                 .content(objectMapper.writeValueAsString(bankToCreateDTO)))
+                 .andExpect(status().isCreated());
+
+     }
+     
+  
+     //******************************************************************** 
+    
     
 }

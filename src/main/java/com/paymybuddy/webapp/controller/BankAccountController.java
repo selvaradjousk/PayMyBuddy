@@ -1,10 +1,16 @@
 package com.paymybuddy.webapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.paymybuddy.webapp.dto.BankAccountDTO;
 import com.paymybuddy.webapp.model.BankAccount;
 import com.paymybuddy.webapp.repository.BankAccountRepository;
 import com.paymybuddy.webapp.service.IBankAccountService;
@@ -78,7 +84,38 @@ public class BankAccountController {
     
     // ************************************************************************
 
-    
+    /**
+     * Adds the bank account.
+     *
+     * @param bankAccountDTO the bank account DTO
+     * @return the response entity
+     */
+    @PostMapping(value = "/bankAccount")
+    public ResponseEntity<BankAccountDTO> addBankAccount(
+    		@Validated @RequestBody BankAccountDTO bankAccountDTO) {
+
+        log.debug("post /bankAccount - BankAccount Id: "
+        + bankAccountDTO.getIdBankAccount()
+        + ", account owner:" + bankAccountDTO.getUser() + ""
+        + ", RIB:" + bankAccountDTO.getRib());
+
+        // Bank account DTO data Mapped to DO
+        BankAccount bankAccount = bankAccountMapper
+        		.toBankAccountDO(bankAccountDTO);
+
+        // Bank Account DO saved through repository interface
+        BankAccount newBankAccount = bankAccountRepository
+        		.save(bankAccount);
+
+        log.info("New BankAccount Rib saved : "
+        + newBankAccount.getRib()
+        + "POST request SUCCESS");
+
+        return new ResponseEntity<BankAccountDTO>(bankAccountMapper
+        		.toBankAccountDTO(newBankAccount), HttpStatus.CREATED);
+    }
+    // ************************************************************************
+ 
 
 
 

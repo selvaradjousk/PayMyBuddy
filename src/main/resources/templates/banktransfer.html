@@ -1,9 +1,174 @@
- <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+<meta charset="UTF-8">
+<title>Bank Transfer in PayMyBuddy</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/my.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
 <body>
 
-<h1>TRANSFER PAGE</h1>
-<p>....</p>
+	<div class="container-outer">
 
+		<div class="container">
+			<div class="header">
+				<a href="#default" class="logo"><img alt="logo"
+					src="img/logo.png"></a>
+				<div class="header-right">
+					<a href="#" th:href="@{/home}">Home</a> <a href="#" class="active"
+						th:href="@{/transaction}">Buddy-Transfer </a> <a href="#"
+						th:href="@{/profile}">Profile</a> <a href="#"
+						th:href="@{/contact}">Contact</a> <a href="#" th:href="@{/logout}">Log
+						off</a>
+				</div>
+			</div>
+
+
+
+
+<div class="subMenu">
+<a class="aHome" th:href="@{/home}"><span
+					style="color: rgb(0, 101, 202); font-size: 1.2em; font-weight: normal;">Home</a>
+				<a> / </a> <a th:href="@{/transfer}"><span
+					style="color: rgb(192, 192, 192); font-size: 1.2em; font-weight: normal;">Bank Transfer</a>
+    </div>
+			<br />
+    <div class="send">
+ 					<a></a>
+					<p
+						style="margin-left: 10px; float: left; color: #000000; font-size: 1.4em; font-weight: bold;"
+						th:text="'Bank Transfer with Buddy Account '"></p>
+					<br />
+
+    </div>
+    
+    <br /><br />
+    <div th:if="${errorMessage}" th:utext="${errorMessage}"
+         style=" color:red; font-style:italic ; font-weight: bold; "> </div>
+    <div class="Transactio31">
+      <form th:action="@{/addTransfer}" method="post">
+        <div class="Transaction2">
+          <div class="buddytransfer" th:object="${contacts}">
+          <p style="color: red; font-style: italic; font-weight: normal;">Select a Rib on the list below:</p>
+            <select class="form-control" id="rib" name="rib" >
+              <option th:value="${bankAccount}"  name="bankAccount" th:if="${bankAccount}" th:utext="${bankAccount}">Select a RIB</option>
+              
+              <option th:each="bankAccount  : ${bankAccounts}"
+                      th:value="${bankAccount.rib}"
+                      th:text="${bankAccount.rib}"  required="true"></option>
+            </select>
+<br />
+          </div>
+          
+          <div >
+          <br />
+              <span class="input-euro right" style="font-style: italic; font-size: 20px; font-weight: bold; color:black; " >
+                 <input size="10" type="number" name="amount"  th:value="${amount}" min="5" max="15000" placeholder="10€" required="true"/>
+              </span>
+          </div>
+          
+          <div class=transfer>
+          <br />
+            <input style="font-size:16px; font-weight: bold;" type="submit" class="button-banktransfer" name="create" value="Validate" />
+          </div>
+        </div>
+        <br/>
+        <div>
+      <div class="panel-heading" align="left" style="font-style:italic; font-size:16px; color:#404040; font-weight: bold;">Select a type of transfer</div>
+          <input type="radio" id="CREDIT" name="type" value="CREDIT" checked>
+          <label class="label-rib"  for="CREDIT" style="color:black;font-size:16px; font-weight: bold;">Credit </label>
+
+          <input type="radio" id="DEBIT" name="type" value="DEBIT" >
+          <label class="label-rib" for="DEBIT" style="color:black;font-size:16px; font-weight: bold; ">Debit</label>
+
+      </form>
+    </div>
+
+
+    <div>
+      <div class="panel-heading" align="left" style="font-style:italic; font-size:14px; color:#404040;">List of recent Bank Transfer operations:</div>
+
+      <table class="table">
+        <thead>
+        <tr class="panel-th" style="font-size: 12px; font-weight: bold; color:#404040;" >
+          <th width="30%" style="font-style:italic; font-size:14px; color:#707070; " >Date</th>
+          <th width="50%" style="font-style:italic; font-size:14px; color:#707070; ">Type</th>
+          <th width="20%" style="font-style:italic; font-size:14px; color:#707070; ">Amount</th>
+          <th ></th>
+        </thead>
+        </tr>
+        <tbody>
+          <tr th:each ="transfer : ${transfers}">
+            <td th:utext="${transfer.createDate}">...</td>
+            <td th:utext="${transfer.type}">...</td>
+            <td th:utext="${transfer.amount}">...</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ul class="nav nav-pills" >
+        <li  th:class="${currentPage==status.index?'active':''}" th:each="page,status:${pages}">
+          <a th:href="@{/transfer(page=${status.index})}" th:text="${status.index}"></a>
+        </li>
+      </ul>
+    </div>
+    <br/>
+    <div class="transfer">
+      <form th:action="@{/addBankAccount}" method="post">
+          <div  th:object="${rib}">
+            <input style="font-size:16px; font-weight: bold;" type="text" size="60" name="rib"  th:value="${rib}" placeholder="Type RIB of new account to be added here! " required="true" />
+              <input style="font-size:16px; font-weight: bold;" type="submit" class="button-banktransfer" name="create" value="Add Account"  />
+          </div>
+      </form>
+    </div>
+
+  <br/>
+    <div class="send">
+      <div class="send-a">
+            <div class="panel-heading" align="left" style="font-style:italic; font-size:14px; color:#404040;">List of Bank Accounts linked to BuddyTransfer Account:</div>
+      </div>
+    </div>
+
+    <div class="consTrans3" style="overflow:scroll;  height: 125px;">
+
+      <table class="table">
+        <thead>
+        <tr class="panel-th" >
+          <th width="80%" style="font-style:italic; font-size:14px; color:#707070; ">RIB Details</th>
+          <th ></th>
+        </thead>
+        </tr>
+        <tbody>
+        <tr style="font-size:16px; font-weight: normal;" th:each ="bankAccount : ${bankAccounts}">
+          <td th:utext="${bankAccount.rib}">...</td>
+          <td>
+
+            <a style="font-size:16px; font-weight: bold;" class="button-banktransfer-delete" onclick="return confirm( 'Are you sure you want to delete?')"
+               th:href="@{/deleteAccount(id=${bankAccount.idBankAccount})}">Delete</a>
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+
+			</div>
+
+			</br>
+			<footer>
+				<p style="font-style: italic; font-size: 15px">Footer</p>
+			</footer>
+		</div>
 </body>
-</html> 
+</div>
+</html>
