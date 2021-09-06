@@ -15,20 +15,6 @@ import com.paymybuddy.webapp.repository.ContactRepository;
 import com.paymybuddy.webapp.util.ContactMapper;
 import com.paymybuddy.webapp.util.UserMapper;
 
-// **************************** TODOs LIST ***********************************
-
-// Method: c
-
-// --> getAllContactsByUser(String email) served by contactRepository
-//										.findAll()
-// --> getContactByEmail(String email) served by userRepository
-// 										.findByEmail(email)
-// --> getContactNotConnected(userDTO) served by userRepository
-//										.listUserNotConnected(user)
-// --> getContactConnected(userDTO) served by userRepository
-// 										.listUserConnected(user)
-// --> addContact(contactDTO) served by userRepository.save(contact))
-// --> deleteContact(email) served by contactRepository.deleteByEmail()
 
 /**
  * The Class ContactServiceImpl.
@@ -65,8 +51,8 @@ public class ContactServiceImpl implements IContactService {
 
 			for (Contact contact : contactsList) {
 
-//				ContactDTO contactDTO = new ContactDTO();
-				ContactDTO contactDTO = contactMapper
+				ContactDTO contactDTO = new ContactDTO();
+				contactDTO = contactMapper
 						.toContactDTO(contact);
 				contactsDTOList.add(contactDTO);
 			}

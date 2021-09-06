@@ -47,7 +47,29 @@ public class Contact {
     }
 
 
-    /**
+    //************************************************************************
+    //************************************************************************
+	/**
+	 * Instantiates a new contact.
+	 *
+	 * @param idContact the id contact
+	 * @param creationDate the creation date
+	 * @param payer the payer
+	 * @param contact the contact
+	 */
+	public Contact(Integer idContact, LocalDate creationDate, User payer, User contact) {
+		super();
+		this.idContact = idContact;
+		this.creationDate = creationDate;
+		this.payer = payer;
+		this.contact = contact;
+	}
+
+    //************************************************************************
+    //************************************************************************
+
+
+	/**
      * Gets the id contact.
      *
      * @return the id contact

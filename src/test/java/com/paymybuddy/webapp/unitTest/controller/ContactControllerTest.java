@@ -107,10 +107,10 @@ class ContactControllerTest {
 
 	// ********************************************************************
 	
-	@DisplayName("GET /addContact page Url request with AUTH page attributes exists 200 OK /contact - "
+	@DisplayName("GET /addContact page Url request with AUTH Login Status not found - "
 			+ "GIVEN home url /addContact "
 			+ "WHEN Requested GET /addContact page"
-			+ "THEN returns expected reponse 200 OK page attributes exists") 
+			+ "THEN returns expected reponse NOT FOUND") 
 	@WithMockUser(username= "testemail1@email.com")
 	@Test
 	public void testAddContactUrlWithLoginStatus() throws Exception {
@@ -120,6 +120,20 @@ class ContactControllerTest {
 		 .andExpect(status().isNotFound());
 		
 	}
+	
+	// ********************************************************************
+	@DisplayName("GET /addContact page Url request with AUTH Login Status FOUND - "
+			+ "GIVEN home url /addContact "
+			+ "WHEN Requested GET /addContact page"
+			+ "THEN returns expected reponse FOUND") 
+	 @WithMockUser(username="testemail1@email.com")
+	    @Test
+	    public void addContactTest() throws Exception {
+	        mockMvc.perform(get("/addContact")
+	                .param("idContact", "1"))
+	                .andExpect(status().isFound());
+	    }
+	
 	
 	// ********************************************************************
 
@@ -153,5 +167,6 @@ class ContactControllerTest {
     	
 
 	// ******************************************************************** 
+
 	
 }
