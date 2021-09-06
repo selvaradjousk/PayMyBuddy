@@ -9,12 +9,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.paymybuddy.webapp.dto.ContactDTO;
 import com.paymybuddy.webapp.dto.TransactionDTO;
 import com.paymybuddy.webapp.dto.UserDTO;
 import com.paymybuddy.webapp.exception.DataNotFoundException;
+import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.service.IContactService;
 import com.paymybuddy.webapp.service.ITransactionService;
 import com.paymybuddy.webapp.service.IUserService;
@@ -137,6 +139,69 @@ public class ContactTransactionController {
             return "transaction";
     }
 
+
+    // ************************************************************************
+
+
+    /**
+     * Adds the transaction.
+     *
+     * @param model the model
+     * @param page the page
+     * @param amount the amount
+     * @param contactEmail the contact email
+     * @param description the description
+     * @param errorMessage the error message
+     * @return the string
+     */
+    @PostMapping(value = { "/transaction" })
+    public String addTransaction(
+    		Model model,
+    		@RequestParam(name="page", defaultValue = "0")
+    		int page,
+    		Double amount,
+    		String contactEmail,
+    		String description,
+    		String errorMessage)
+    {
+    	log.info(" ====>POST transaction requested - POST /transaction<==== ");
+
+    	String emailSession = SecurityContextHolder.getContext()
+    			.getAuthentication().getName();
+
+        UserDTO userLog = fetchUserByEmail(emailSession);
+
+        if (contactEmail.equals("")) {
+            errorMessage="You must choose an email! ";
+        }else {
+
+            log.info("  ---> Gather info on Payer & Beneficiary");
+
+            UserDTO beneficiaryDTO = userService
+            		.findUserByEmail(contactEmail);
+
+            User beneficiary = userMapper.toUserDO(beneficiaryDTO);
+
+            User payer = userMapper.toUserDO(userLog);
+
+
+            transactionService.doSaveNewTransaction(
+            		page,
+            		amount,
+            		contactEmail,
+            		description,
+            		beneficiary,
+            		payer);
+
+            errorMessage = "Transaction saved";
+        }
+            return"redirect:/transaction?page="+page+
+                    "&errorMessage="+errorMessage+
+                    "&contactEmail="+contactEmail+
+                    "&amount="+amount+
+                    "&description="+description;
+
+    }
 
     // ************************************************************************
 

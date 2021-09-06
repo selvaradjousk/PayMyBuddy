@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.paymybuddy.webapp.dto.TransactionDTO;
 import com.paymybuddy.webapp.dto.UserDTO;
+import com.paymybuddy.webapp.model.User;
 
 /**
  * The Interface ITransactionService.
@@ -57,7 +58,21 @@ public interface ITransactionService {
 	 */
 	TransactionDTO addTransaction(TransactionDTO transactionDTO);
 	
-	
+	/**
+	 * Do save new transaction.
+	 *
+	 * @param page the page
+	 * @param amount the amount
+	 * @param contactEmail the contact email
+	 * @param description the description
+	 * @param beneficiary the beneficiary
+	 * @param payer the payer
+	 * @return the string
+	 */
+	String doSaveNewTransaction(int page, Double amount, String contactEmail, String description, User beneficiary,
+			User payer);
+
+
 	/**
 	 * Last three transactions beneficiary.
 	 *

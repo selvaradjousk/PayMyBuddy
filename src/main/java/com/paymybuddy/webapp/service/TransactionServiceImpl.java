@@ -526,5 +526,42 @@ public class TransactionServiceImpl  implements ITransactionService  {
             return transactionDTO;
     	}
 
+    	   // ************************************************************************
+
+     	/**
+     	 * Do save new transaction.
+     	 *
+     	 * @param page the page
+     	 * @param amount the amount
+     	 * @param friendEmail the friend email
+     	 * @param description the description
+     	 * @param beneficiary the beneficiary
+     	 * @param payer the payer
+     	 * @return the string
+     	 */
+     	public String doSaveNewTransaction(int page, Double amount, String friendEmail, String description, User beneficiary,
+     			User payer) {
+     		String errorMessage;
+     		try {
+     		    TransactionDTO newTransactionDTO = new TransactionDTO(payer, beneficiary, amount, description);
+     		    addTransaction(newTransactionDTO);
+     		}
+     		catch (DataNotFoundException | DataNotConformException | BalanceNotSufficientException e){
+     		    errorMessage = e.getMessage();
+     		    return"redirect:/transaction?page="+page+
+     		                    "&errorMessage="+errorMessage+
+     		                    "&friendEmail="+friendEmail+
+     		                    "&amount="+amount+
+     		                    "&description="+description;
+     		}
+     		errorMessage = "Transaction saved";
+     	    return"redirect:/transaction?page="+page+
+                     "&errorMessage="+errorMessage+
+                     "&friendEmail="+friendEmail+
+                     "&amount="+amount+
+                     "&description="+description;
+     	}
+     	// ************************************************************************
+
 
 }
