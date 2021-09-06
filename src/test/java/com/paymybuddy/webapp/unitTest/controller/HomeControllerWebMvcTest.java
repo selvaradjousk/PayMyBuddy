@@ -119,8 +119,8 @@ class HomeControllerWebMvcTest {
 		public void testLogoutUrlWithoutLoginRedirectToLoginUrl() throws Exception {
 
 			mockMvc.perform(get("/logout"))
-			.andExpect(status().is(302))
-			.andExpect(redirectedUrl("/login"));
+				.andExpect(status().is(302))
+				.andExpect(redirectedUrl("/login"));
 		}
 
 		// ********************************************************************
@@ -135,9 +135,9 @@ class HomeControllerWebMvcTest {
 		public void testLogoutUrlWithLoginStatus() throws Exception {
 
 			mockMvc.perform(get("/logout"))
-			.andExpect(status().is(302))
-			 .andExpect(redirectedUrl("/login"))
-			 .andExpect(status().isFound());
+				.andExpect(status().is(302))
+				.andExpect(redirectedUrl("/login"))
+				.andExpect(status().isFound());
 			
 		}
 	    

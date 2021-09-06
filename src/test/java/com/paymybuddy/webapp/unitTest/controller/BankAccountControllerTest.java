@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -56,6 +57,19 @@ class BankAccountControllerTest {
     
   //********************************************************************
 
+    @DisplayName("Bank Account invalid Url load request With Authentication - "
+			+ "GIVEN home url /bankAccounts "
+			+ "WHEN Requested GET /bankAccounts page with authentication"
+			+ "THEN returns expected 404 Not found response")
+    @WithMockUser(username="testemail1@email.com", roles={"ADMIN"} )
+    @Test
+    public void testGetBankAccountPageWithAuthenticationTest() throws Exception {
+        mockMvc.perform(get("/bankAccounts"))
+                .andExpect(status().is(404));
+    }
+    
+    //********************************************************************
+    
     
     
 }
