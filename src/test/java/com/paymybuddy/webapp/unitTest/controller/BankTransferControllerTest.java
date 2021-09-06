@@ -152,7 +152,23 @@ class BankTransferControllerTest {
     }
           
     // ********************************************************************
-	
+
+	// ZERO AMOUNT CHECK TO BE DONE IN VALIDATION
+    @DisplayName("Test /addTransfer")
+    @WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+    @Test
+    public void testaddTransferCreditTypeZeroAmountValue() throws Exception {
+        mockMvc.perform(post("/addTransfer")
+                .param("rib", "fr 1111 2222 3333 44444")
+                .param("amount", "0")
+                .param("type", "CREDIT"))
+        		.andExpect(view().name("redirect:/transfer?page=0&errorMessage=Transfer saved"))
+				.andExpect(redirectedUrlPattern("/transfer?page=0&errorMessage=Transfer saved"))
+				.andExpect(redirectedUrl("/transfer?page=0&errorMessage=Transfer saved"))
+                .andExpect(status().is(302));
+    }
+      
+    // ********************************************************************
 	
 	
 }
