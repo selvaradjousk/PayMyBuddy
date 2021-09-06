@@ -435,4 +435,27 @@ public class TransferServiceImpl implements ITransferService {
 
     // *********************************************************************
 
+
+	public String doAddTransfer(
+			int page,
+			String rib,
+			double amount,
+			String type,
+			User user) {
+
+		String errorMessage;
+		try{
+            addTransfer(rib,amount, type, user);
+        }
+        catch (DataNotFoundException | DataNotConformException e){
+            errorMessage = e.getMessage();
+            return"redirect:/transfer?page="+page+
+                    "&errorMessage="+errorMessage;
+        }
+		return errorMessage = "Transfer saved";
+	}
+
+    // ************************************************************************
+
+
 }

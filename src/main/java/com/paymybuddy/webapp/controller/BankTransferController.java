@@ -9,11 +9,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.paymybuddy.webapp.dto.BankAccountDTO;
 import com.paymybuddy.webapp.dto.TransferDTO;
 import com.paymybuddy.webapp.dto.UserDTO;
+import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.service.IBankAccountService;
 import com.paymybuddy.webapp.service.ITransferService;
 import com.paymybuddy.webapp.service.IUserService;
@@ -126,7 +128,53 @@ public class BankTransferController {
 
     // ************************************************************************
  
-    
+
+    /**
+     * Adds the transfer.
+     *
+     * @param model the model
+     * @param page the page
+     * @param rib the rib
+     * @param amount the amount
+     * @param type the type
+     * @param errorMessage the error message
+     * @return the string
+     */
+    @PostMapping(value = { "/addTransfer" })
+    public String addTransfer(
+    		Model model,
+    		@RequestParam(name="page", defaultValue = "0") int page,
+            String rib,
+            double amount,
+            String type,
+            String errorMessage){
+
+        log.info(" ====> Loading POST request  /addBTransfer : "
+        + rib + " - " + amount + " - " + type);
+
+        //check null for bank account rib
+        checkForBankAccountRibNotNull(page, rib);
+
+        // fetch list of user logs
+        String emailSession = SecurityContextHolder
+        		.getContext()
+        		.getAuthentication()
+        		.getName();
+
+        UserDTO userLog = userService.findUserByEmail(emailSession);
+
+        User user = userMapper.toUserDO(userLog);
+
+        transferService.doAddTransfer(page, rib, amount, type, user);
+
+        errorMessage = "Transfer saved";
+
+        return"redirect:/transfer?page="+page+
+                "&errorMessage="+errorMessage;
+    }
+
+
+    // ************************************************************************  
 
     /**
      * Adds the data to transfer model.
