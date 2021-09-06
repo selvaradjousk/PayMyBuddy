@@ -171,7 +171,26 @@ class ContactTransactionControllerTest {
        
 	// ********************************************************************
     
-    
+	// NEEDS VALIDATION CHECK AT SERVICE LAYER OR CONTROLLER !!!!!
+	@DisplayName("POST /transaction page Url request + Auth ZERO AMOUNT VALUE 302 Message = Trasaction Saved - "
+			+ "GIVEN home url /transaction "
+			+ "WHEN Requested POST /transaction ZERO amount value"
+			+ "THEN returns expected reponse - Transaction Saved") 
+	@WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+    @Test
+    public void testAddTransactionWithAmountZero() throws Exception {
+        mockMvc.perform(post("/transaction")
+                .param("contactEmail","testemail2@email.com")
+                .param("amount", "0")
+                .param("description", "something"))
+        		.andExpect(status().is(302))
+        		.andExpect(view().name("redirect:/transaction?page=0&errorMessage=Transaction saved&contactEmail=testemail2@email.com&amount=0.0&description=something"))
+//        		.andExpect(model().hasErrors())
+//        		.andExpect(model().attributeHasFieldErrorCode("transaction", "amount", ""))
+        		;
+    }
+
+	// ********************************************************************  
 
 
 }
