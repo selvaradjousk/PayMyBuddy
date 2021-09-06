@@ -169,6 +169,24 @@ class BankTransferControllerTest {
     }
       
     // ********************************************************************
-	
+    
+    // WRONG TRANSFER TYPE CHECK TO BE DONE IN VALIDATION
+       @DisplayName("Test /addTransfer")
+       @WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+       @Test
+       public void testaddTransferCreditTypeWithWrongTransferType() throws Exception {
+           mockMvc.perform(post("/addTransfer")
+                   .param("rib", "fr 1111 2222 3333 44444")
+                   .param("amount", "100.0")
+                   .param("type", "CREDITTTINH"))
+           		.andExpect(status().isFound())
+                   .andExpect(status().is3xxRedirection())
+                   .andExpect(view().name("redirect:/transfer?page=0&errorMessage=Transfer saved"))
+   				.andExpect(redirectedUrlPattern("/transfer?page=0&errorMessage=Transfer saved"))
+   				.andExpect(redirectedUrl("/transfer?page=0&errorMessage=Transfer saved"));
+       }
+       
+       
+       // ********************************************************************
 	
 }
