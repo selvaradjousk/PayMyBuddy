@@ -2,6 +2,7 @@ package com.paymybuddy.webapp.unitTest.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
@@ -171,7 +172,28 @@ class BankAccountControllerTest {
     
     //********************************************************************
     
-  
+
+    @DisplayName("Bank Account PUT /manage/addBankAccount Url load request With Authentication - "
+ 			+ "GIVEN home url /manage/addBankAccount "
+ 			+ "WHEN Requested PUT /manage/addBankAccount page with authentication"
+ 			+ "THEN returns expected 201 CREATED response")
+    @WithMockUser(username = "testemail1@email.com")
+    @Test
+    public void upDateBankTest() throws Exception {
+        String emailSession = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findUserByEmail(emailSession);
+        BankAccount bankToCreate = new BankAccount(1,user,"fr 1111 1111 1111");
+
+        mockMvc.perform(put("/manage/bankAccount")
+                .contentType("application/json")
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(bankToCreate)))
+                .andExpect(status().isCreated());
+    }
+    
+    //********************************************************************
+    
+    
      //******************************************************************** 
     
     
