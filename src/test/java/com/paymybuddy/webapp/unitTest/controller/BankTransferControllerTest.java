@@ -61,6 +61,28 @@ class BankTransferControllerTest {
 	}
 	
 	
+	// ********************************************************************
+	
+	@DisplayName("GET /transfer page Url request attribute exists - "
+			+ "GIVEN home url /transfer "
+			+ "WHEN Requested GET /transfer page"
+			+ "THEN returns expected reponse 200 OK  attribute exists") 
+	@WithMockUser("testemail1@email.com")
+	@Test
+	public void testBankTransferAttributesExists() throws Exception {
+        mockMvc.perform(get("/transfer"))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeExists(
+        		"transfers",
+        		"bankAccounts",
+        		"pages",
+        		"currentPage",
+                "errorMessage"))
+        		.andExpect(model().hasNoErrors())
+        		.andExpect(view().name("transfer"));
+	}
+    
+	// ********************************************************************
 	
 	
 	
