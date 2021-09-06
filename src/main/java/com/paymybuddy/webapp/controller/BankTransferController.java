@@ -126,6 +126,58 @@ public class BankTransferController {
 
  
 
+
+    // ************************************************************************
+
+    /**
+     * Delete.
+     *
+     * @param id the id
+     * @return the string
+     */
+    @GetMapping("/deleteAccount")
+    public String delete(Integer id){
+
+    	log.info(" ====> Loading GET request for /deleteAccount");
+
+    	bankAccountService.deleteBankAccount(id);
+
+    	return"redirect:/transfer";
+    }
+
+    // ************************************************************************
+
+    /**
+     * Adds the account.
+     *
+     * @param model the model
+     * @param page the page
+     * @param rib the rib
+     * @return the string
+     */
+    @PostMapping(value = { "/addBankAccount" })
+    public String addAccount(
+    		Model model,
+    		@RequestParam(name="page", defaultValue = "0") int page,
+    		String rib){
+
+        log.info(" ====> Loading POST request /addBankAccount rib: " + rib);
+
+        // fetch list of user logs
+        String emailSession = SecurityContextHolder
+        		.getContext()
+        		.getAuthentication()
+        		.getName();
+
+        UserDTO userLog = userService
+        		.findUserByEmail(emailSession);
+
+        // add a new bank account
+        bankAccountService.addBankAccount( rib ,userLog);
+
+        return"redirect:/transfer";
+    }
+
     // ************************************************************************
  
 
@@ -246,17 +298,12 @@ public class BankTransferController {
 
 	//****************************************************************** 
 
+    
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
 }

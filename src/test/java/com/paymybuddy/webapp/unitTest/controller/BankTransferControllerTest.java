@@ -100,9 +100,9 @@ class BankTransferControllerTest {
 	
 	// ********************************************************************
 	
-	@DisplayName("POST /transfer page Url request NO AUTH 302 redirect /login- "
-			+ "GIVEN home url /transfer "
-			+ "WHEN Requested POST /transfer page"
+	@DisplayName("POST /addTransfer page Url request NO AUTH 302 redirect /login- "
+			+ "GIVEN home url /addTransfer "
+			+ "WHEN Requested POST /addTransfer page"
 			+ "THEN returns expected reponse 302 redirect /login") 
     @Test
     public void testaddTransferCreditTypeWithoutAuthetication() throws Exception {
@@ -118,9 +118,9 @@ class BankTransferControllerTest {
 	   
     // ********************************************************************
 	
-	@DisplayName("POST /transfer page Url request WITH AUTH 302 /transfer?page=0&errorMessage=Transfer saved "
-			+ "GIVEN home url /transfer "
-			+ "WHEN Requested POST /transfer page"
+	@DisplayName("POST /addTransfer page Url request WITH AUTH 302 /transfer?page=0&errorMessage=Transfer saved "
+			+ "GIVEN home url /addTransfer "
+			+ "WHEN Requested POST /addTransfer page"
 			+ "THEN returns expected reponse 302 /transfer?page=0&errorMessage=Transfer saved") 
     @WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
     @Test
@@ -134,8 +134,24 @@ class BankTransferControllerTest {
 				.andExpect(redirectedUrl("/transfer?page=0&errorMessage=Transfer saved"));
     }
     
-    
-	
+    // ********************************************************************   
+
+	@DisplayName("POST /addTransfer page Url request WITH AUTH  400 BAD REQUEST "
+			+ "GIVEN home url /addTransfer "
+			+ "WHEN Requested POST /addTransfer page"
+			+ "THEN returns expected reponse 400 BAD REQUEST") 
+    @WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+    @Test
+    public void testaddTransferCreditTypeWithouAmount() throws Exception {
+        mockMvc.perform(post("/addTransfer")
+                .param("rib", "fr 1111 2222 3333 44444")
+                .param("amount", "")
+                .param("type", "CREDIT"))
+                .andExpect(status().isBadRequest())
+                .andExpect(status().is(400));
+    }
+          
+    // ********************************************************************
 	
 	
 	
