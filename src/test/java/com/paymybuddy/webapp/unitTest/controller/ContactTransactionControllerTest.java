@@ -28,7 +28,7 @@ class ContactTransactionControllerTest {
     // ********************************************************************
 
 	   
-	@DisplayName("/transaction page Url request without authentication redirect /login - "
+	@DisplayName("GET /transaction page Url request without authentication redirect /login - "
 			+ "GIVEN home url /transaction "
 			+ "WHEN Requested GET /transaction page"
 			+ "THEN returns expected reponse redirect to / login")   
@@ -43,7 +43,7 @@ class ContactTransactionControllerTest {
 
 	// ********************************************************************
 
-	@DisplayName("/transaction page Url request with authentication 200 OK - "
+	@DisplayName("GET /transaction page Url request with authentication 200 OK - "
 			+ "GIVEN home url /transaction "
 			+ "WHEN Requested GET /transaction page"
 			+ "THEN returns expected reponse 200 OK")  
@@ -61,7 +61,7 @@ class ContactTransactionControllerTest {
 	// ********************************************************************
 	
 	
-	@DisplayName("/transaction page Url request page attributes exists 200 OK - "
+	@DisplayName("GET /transaction page Url request page attributes exists 200 OK - "
 			+ "GIVEN home url /transaction "
 			+ "WHEN Requested GET /transaction page for attributes check"
 			+ "THEN returns expected reponse page attributes exists 200 OK")  
@@ -81,8 +81,10 @@ class ContactTransactionControllerTest {
         		.andExpect(model().hasNoErrors());
 	}
 
-	
-    @DisplayName("Test /transaction")
+	@DisplayName("POST /transaction page Url request no Authetication 302 redirect /login - "
+			+ "GIVEN home url /transaction "
+			+ "WHEN Requested POST /transaction page for attributes check"
+			+ "THEN returns expected reponse 302 redirect /login") 
     @Test
     public void testAddTransactionWithoutAuthetication () throws Exception {
         mockMvc.perform(post("/transaction")
@@ -95,6 +97,22 @@ class ContactTransactionControllerTest {
 	
 	// ********************************************************************
 
-
+	@DisplayName("POST /transaction page Url request + Authetication TRANSACTION SAVED- "
+			+ "GIVEN home url /transaction "
+			+ "WHEN Requested POST /transaction page for attributes check"
+			+ "THEN returns expected reponse TRANSACTION SAVED") 
+	@WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+    @Test
+    public void testAddTransaction () throws Exception {
+        mockMvc.perform(post("/transaction")
+                .param("contactEmail","testemail2@email.com")
+                .param("amount", "10.0")
+                .param("description", "something"))
+        		.andExpect(model().hasNoErrors())
+        		.andExpect(view().name("redirect:/transaction?page=0&errorMessage=Transaction saved&contactEmail=testemail2@email.com&amount=10.0&description=something"))
+                .andExpect(status().isFound());
+    }
+	
+	// ********************************************************************
 
 }
