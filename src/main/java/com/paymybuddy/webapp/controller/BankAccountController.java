@@ -1,9 +1,11 @@
 package com.paymybuddy.webapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.paymybuddy.webapp.model.BankAccount;
 import com.paymybuddy.webapp.repository.BankAccountRepository;
 import com.paymybuddy.webapp.service.IBankAccountService;
 import com.paymybuddy.webapp.util.BankAccountMapper;
@@ -59,6 +61,24 @@ public class BankAccountController {
 
 
     // ************************************************************************
+
+
+    /**
+     * Gets the bank accounts.
+     *
+     * @return the bank accounts
+     */
+    @GetMapping("/bankAccounts")
+    public Iterable<BankAccount> getbankAccounts() {
+    	log.debug("get /bankAccounts - Access");
+
+        // return the list of bank accounts for the user
+        return bankAccountRepository.findAll();
+    }
+    
+    // ************************************************************************
+
+    
 
 
 
