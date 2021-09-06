@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -152,6 +153,36 @@ public class BankAccountController {
 
 
 
+    /**
+     * Delete bank account.
+     *
+     * @param bankAccountDTO the bank account DTO
+     * @return the response entity
+     */
+    @DeleteMapping(value= "/bankAccount")
+    public ResponseEntity<BankAccountDTO> deleteBankAccount(
+    		@RequestBody BankAccountDTO bankAccountDTO) {
+
+    	log.info("Delete Bank acocount requested - RIB: "
+    	+ bankAccountDTO.getRib()
+    	+ " for user "
+    	+ bankAccountDTO.getUser());
+
+    	// Bank account DTO data Mapped to DO
+    	BankAccount bankAccount = bankAccountMapper
+        		.toBankAccountDO(bankAccountDTO);
+
+    	// Bank Account DO deleted done through repository interface
+    	bankAccountRepository.delete(bankAccount);
+
+        log.info("New BankAccount Rib saved : "
+        + bankAccount.getRib()
+        + "for user: " + bankAccount.getUser()
+        + " delete request SUCCESS");
+
+        return new ResponseEntity<>(bankAccountDTO, HttpStatus.OK);
+    }
+    // ************************************************************************
 
 
 }
