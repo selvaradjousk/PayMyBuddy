@@ -151,6 +151,26 @@ class BankTransferControllerTest {
                 .andExpect(status().is(400));
     }
           
+	
+	   
+    // ********************************************************************   
+
+	@DisplayName("POST /addTransfer page Url request DEBIT type WITH AUTH  400 BAD REQUEST "
+			+ "GIVEN home url /addTransfer "
+			+ "WHEN Requested POST /addTransfer page"
+			+ "THEN returns expected reponse 400 BAD REQUEST") 
+    @WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+    @Test
+    public void testaddTransferDebitTypeWithouAmount() throws Exception {
+        mockMvc.perform(post("/addTransfer")
+                .param("rib", "fr 1111 2222 3333 44444")
+                .param("amount", "")
+                .param("type", "DEBIT"))
+                .andExpect(status().isBadRequest())
+                .andExpect(status().is(400));
+    }
+          
+	
     // ********************************************************************
 
 	// ZERO AMOUNT CHECK TO BE DONE IN VALIDATION
@@ -174,7 +194,7 @@ class BankTransferControllerTest {
     // ********************************************************************
     
     // WRONG TRANSFER TYPE CHECK TO BE DONE IN VALIDATION
-	@DisplayName("POST /addTransfer page Url request Wrong credit type Value "
+	@DisplayName("POST /addTransfer page Url request Wrong Transfer type Value "
 			+ "GIVEN home url /addTransfer "
 			+ "WHEN Requested POST /addTransfer page"
 			+ "THEN returns expected reponse 302 redirect /transfer") 
@@ -196,7 +216,7 @@ class BankTransferControllerTest {
        // ********************************************************************
 	
 	
-	@DisplayName("POST /addTransfer page Url request Debit type Value "
+	@DisplayName("POST /addTransfer page Url request DEBIT type Value "
 			+ "GIVEN home url /addTransfer "
 			+ "WHEN Requested POST /addTransfer page"
 			+ "THEN returns expected reponse 302 redirect /transfer") 
@@ -213,7 +233,7 @@ class BankTransferControllerTest {
 	   
     // ********************************************************************
 
-	@DisplayName("POST /addTransfer page Url request Debit type Value Invalid Amount"
+	@DisplayName("POST /addTransfer page Url request DEBIT type Value Invalid Amount"
 			+ "GIVEN home url /addTransfer "
 			+ "WHEN Requested POST /addTransfer page"
 			+ "THEN returns expected reponse 400 BAD REQUEST") 
@@ -231,7 +251,7 @@ class BankTransferControllerTest {
     // ********************************************************************
  
 
-	@DisplayName("POST /addTransfer page Url request Credit type Value Invalid Amount"
+	@DisplayName("POST /addTransfer page Url request CREDIT type Value Invalid Amount"
 			+ "GIVEN home url /addTransfer "
 			+ "WHEN Requested POST /addTransfer page"
 			+ "THEN returns expected reponse 400 BAD REQUEST") 
