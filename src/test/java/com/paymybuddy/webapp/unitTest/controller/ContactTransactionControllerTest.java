@@ -228,6 +228,21 @@ class ContactTransactionControllerTest {
     
 	// ********************************************************************
 
-
+	
+	@DisplayName("DELETE /deleteTransaction page Url request + Auth Transaction deleted - "
+			+ "GIVEN home url /transaction "
+			+ "WHEN Requested DELETE /deleteTransaction"
+			+ "THEN returns expected reponse - Transaction deleted") 
+    @WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
+    @Test
+    public void deleteTransactionTest() throws Exception {
+        mockMvc.perform(get("/deleteTransaction")
+                .param("id", "3")
+                .param("page", "0"))
+                .andExpect(status().isFound());
+    }
+	
+	
+	// ********************************************************************
 
 }
