@@ -71,7 +71,27 @@ class ContactControllerTest {
 	
 	// ********************************************************************
 	
-	
+
+	@DisplayName("GET /contact page Url request with AUTH page attributes exists 200 OK /contact - "
+			+ "GIVEN home url /contact "
+			+ "WHEN Requested GET /contact page"
+			+ "THEN returns expected reponse 200 OK page attributes exists") 
+    @WithMockUser(username="testemail1@email.com")
+    @Test
+    public void testContactAttributesExist() throws Exception {
+
+        mockMvc.perform(get("/contact"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists(
+                		"contacts",
+                		"notContacts",
+                		"errorMessage",
+                		"currentPage"))
+                .andExpect(view().name("contact"))
+                .andExpect(model().attribute("errorMessage", ""));
+    }
+    
+    // ********************************************************************  
 	
 	
 }
