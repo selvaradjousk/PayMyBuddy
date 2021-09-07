@@ -326,14 +326,37 @@ public class UserServiceImpl implements IUserService {
     }
 
     //******************************************************************
+
+    /**
+     * List user not buddy.
+     *
+     * @param userDTO the user DTO
+     * @param mc the mc
+     * @param pageable the pageable
+     * @return the page
+     */
     @Override
     public Page<UserDTO> listUserNotBuddy(UserDTO userDTO, String mc,Pageable pageable) {
-        log.info(" ====> FIND LIST USER Not Buddy requested <==== ");
-        User payer = userMapper.toUserDO(userDTO);
-        Page<User> pagesUsers = userRepository.listUserNotBuddy(payer,mc,pageable);
-        log.info(" ====> pagesUsers <==== " + pagesUsers);
-        Page<UserDTO> pagesUsersDTO= pagesUsers.map(new Function<User, UserDTO>() {
-            @Override
+
+    	log.info(" ====> FIND LIST USER Not Buddy requested <==== ");
+
+    	User payer = userMapper.toUserDO(userDTO);
+
+    	Page<User> pagesUsers = userRepository.listUserNotBuddy(payer,mc,pageable);
+//    	pagesUsers.toList().remove(payer);
+    	
+    	
+//    	for (User pagesUser : pagesUsers) {
+//            if (pagesUser != (payer)) {
+//            	Page<User> pagesUsers = new Page<User>()
+//            }
+//        }
+
+    	log.info(" ====> pagesUsers <==== " + pagesUsers);
+
+    	Page<UserDTO> pagesUsersDTO= pagesUsers.map(new Function<User, UserDTO>() {
+
+    		@Override
             public UserDTO apply(User user) {
                 UserDTO userDTO = new UserDTO();
                 userDTO = userMapper.toUserDTO(user);
@@ -341,9 +364,12 @@ public class UserServiceImpl implements IUserService {
                 return userDTO;
             }
         });
-        log.info(" ====> FIND LIST USER Pages returned <==== ");
-        log.info(" ====> pagesUsersDTO <==== " + pagesUsersDTO.toString());
-        return pagesUsersDTO;
+
+    	log.info(" ====> FIND LIST USER Pages returned <==== ");
+
+    	log.info(" ====> pagesUsersDTO <==== " + pagesUsersDTO.toString());
+
+    	return pagesUsersDTO;
     }
     //******************************************************************
 

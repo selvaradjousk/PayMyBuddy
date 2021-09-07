@@ -190,11 +190,14 @@ public class TransactionServiceImpl  implements ITransactionService  {
   	  // ************************************************************************
 
     	@Override
-    	public Page<TransactionDTO> lastThreeTransactionsBeneficiary(UserDTO userDTO, Pageable pageable) {
+    	public Page<TransactionDTO> lastThreeTransactionsBeneficiary(
+    			UserDTO userDTO, Pageable pageable) {
 
           User user = userMapper.toUserDO(userDTO);
-          Page<Transaction> pagesTransaction =transactionRepository.lastThreeTransactionsBeneficiary(user, pageable);
-              Page<TransactionDTO> pagesTransactionDTO= pagesTransaction.map(new Function<Transaction, TransactionDTO>() {
+          Page<Transaction> pagesTransaction =transactionRepository
+        		  .lastThreeTransactionsBeneficiary(user, pageable);
+              Page<TransactionDTO> pagesTransactionDTO= pagesTransaction
+            		  .map(new Function<Transaction, TransactionDTO>() {
                   @Override
                   public TransactionDTO apply(Transaction transaction) {
                       return mappedTransactionDTO(transaction);
@@ -322,7 +325,7 @@ public class TransactionServiceImpl  implements ITransactionService  {
 
         // ********************************************************************
         /**
-         * Sets the up transaction operation data.
+         * Sets the up transaction operation data and commission calculation.
          *
          * @param transactionDTO the new up transaction operation data
          */
@@ -539,14 +542,26 @@ public class TransactionServiceImpl  implements ITransactionService  {
      	 * @param payer the payer
      	 * @return the string
      	 */
-     	public String doSaveNewTransaction(int page, Double amount, String friendEmail, String description, User beneficiary,
+     	public String doSaveNewTransaction(
+     			int page,
+     			Double amount,
+     			String friendEmail,
+     			String description,
+     			User beneficiary,
      			User payer) {
      		String errorMessage;
      		try {
-     		    TransactionDTO newTransactionDTO = new TransactionDTO(payer, beneficiary, amount, description);
+     		    TransactionDTO newTransactionDTO = new TransactionDTO(
+     		    		payer,
+     		    		beneficiary,
+     		    		amount,
+     		    		description);
+     		    
      		    addTransaction(newTransactionDTO);
      		}
-     		catch (DataNotFoundException | DataNotConformException | BalanceNotSufficientException e){
+     		catch (DataNotFoundException
+     				| DataNotConformException |
+     				BalanceNotSufficientException e){
      		    errorMessage = e.getMessage();
      		    return"redirect:/transaction?page="+page+
      		                    "&errorMessage="+errorMessage+

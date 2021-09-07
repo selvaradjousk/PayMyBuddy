@@ -59,7 +59,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
    	 */
    	@Query("select u from User  u "
 	            + "WHERE u not in (Select contact from Contact f where f.payer= :payer)"
-	            + " AND u.email like :x")
+	            + " AND u.email like :x AND u!=:payer")
 	public Page<User> listUserNotBuddy(User payer, @Param("x") String mc, Pageable pageable);
 
 }
