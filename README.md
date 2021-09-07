@@ -8,32 +8,6 @@
 <p> The purpose of the project is to build an App that would allow customers to transfer money, to manage their finances or pay their friends with atmost ease. </p>
 
 
-
-   * [Introduction and Quick Overview](#introduction)
-   * [Technical Specifications](#technical-specifications)
-   * [Project Milestones](#project-milestones)
-   * [Preliminary Design Sketches](#preliminary-design-sketches)
-   * [Project Milestones](#project-milestones)
-   * [Preliminary Design Sketches](#preliminary-design-sketches)
-   * [Functional Scope of the Requirements](#functional-scope-of-the-requirements)
-   * [Activity Diagram](#activity-diagram)
-   * [User Case Diagram](#user-case-diagram)
-   * [Activity Diagram Elaborated Sketching](#activity-diagram-elaborated-sketching)
-   * [Login View Template Mockup Sketch API Endpoints and Development Features Analysis](#login-view-template-mockup-sketch-api-endpoints-and-development-features-analysis)
-   * [SignUp View Template Mockup Sketch API Endpoints and Development Features Analysis](#signup-view-template-mockup-sketch-api-endpoints-and-development-features-analysis)
-   * [Detailed features requirement Analysis on API endpoints and validation rules](#detailed-features-requirement-analysis-on-api-endpoints-and-validation-rules)
-   * [Schema MVC Software Architecture Design](#schema-mvc-software-architecture-design)
-   * [UML class diagram MCD](#uml-class-diagram-mcd)
-   * [UML physical Data Model MPD Entity RelationShip Diagram ER](#uml-physical-data-model-mpd-entity-relationship-diagram-er)
-   * [SQL Scripts](#sql-scripts)
-   * [UI visuals](#ui-visuals)
-   * [Endpoints Information](#endpoints-information)
-   * [Actuator Info](#actuator-info)
-   * [API Documentation Swagger](#api-documentation-swagger)
-   * [Reference Documentation](#reference-documentation)
-   * [Reference Guides](#reference-guides)
-   
-
 Introduction
 ===
 
@@ -84,43 +58,30 @@ Project Milestones
 
 Preliminary Design Sketches
 ===
-Functional Scope of the Requirements
-===
+
 [Functional Scope](readme_files/DESIGN_DRAFTS.md "Functional Scope")<br />
 
-
-Activity Diagram
-===
 
 [Activity Diagram](readme_files/DESIGN_DRAFTS.md "Activity Diagram")<br />
 
 
-User Case Diagram
-===
-
 [User Case Diagram](readme_files/DESIGN_DRAFTS.md "User Case Diagram")<br />
 
-
-Activity Diagram Elaborated Sketching
-===
 
 [Activity Diagram Elaborated Sketching](readme_files/DESIGN_DRAFTS.md "Activity Diagram Elaborated Sketching")<br />
 
 
-Login View Template Mockup Sketch API Endpoints and Development Features Analysis
-===
+### Login View Template Mockup Sketch API Endpoints and Development Features Analysis
 
 [Login Endpoint](readme_files/DESIGN_DRAFTS.md "Login Endpoint")<br />
 
 
-SignUp View Template Mockup Sketch API Endpoints and Development Features Analysis
-===
+### SignUp View Template Mockup Sketch API Endpoints and Development Features Analysis
 
 [SignUp Endpoint](readme_files/DESIGN_DRAFTS.md "SignUp Endpoint")<br />
 
 
-Detailed features requirement Analysis on API endpoints and validation rules
-===
+### Detailed features requirement Analysis on API endpoints and validation rules
 
 [API endpoints and validation rules](readme_files/DESIGN_DRAFTS.md "API endpoints and validation rules")<br />
 
@@ -148,7 +109,6 @@ SQL Scripts
 [SQL Scripts](readme_files/sql_scripts.md "SQLScripts")<br />
 
 
-
 UI visuals
 ===
 
@@ -157,8 +117,6 @@ UI visuals
 
 Endpoints Information
 ===
-
-[ACTUATOR ENDPOINTS](readme_files/actuator_info.md "ACTUATOR ENDPOINTS")<br /><br />
 
 
 Actuator Info
