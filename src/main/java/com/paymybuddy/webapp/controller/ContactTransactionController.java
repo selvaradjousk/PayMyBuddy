@@ -120,6 +120,14 @@ public class ContactTransactionController {
             Page<TransactionDTO> pageTransactions = transactionService
             		.findAllTransactionByPayer(
             				userLog, PageRequest.of(page, 4));
+            
+            
+            Page<TransactionDTO> pageRefunds = transactionService
+            		.lastThreeTransactionsBeneficiary(
+            				userLog, PageRequest.of(page,2));
+            
+            
+            
 
             String role = isUserRoleAdminCheck(userLog);
 
@@ -132,6 +140,7 @@ public class ContactTransactionController {
             		description,
             		contacts,
 					pageTransactions,
+					pageRefunds,
 					role);
 
             log.info(" ====>model <==== " + model.toString());
@@ -250,11 +259,13 @@ public class ContactTransactionController {
 			String description,
 			List<ContactDTO> contacts,
 			Page<TransactionDTO> pageTransactions,
+			Page<TransactionDTO> pageRefunds,
 			String role) {
 
 		model.addAttribute("admin", role);
 		model.addAttribute("contacts", contacts);
 		model.addAttribute("transactions", pageTransactions.getContent());
+		model.addAttribute("refunds", pageRefunds);
 		model.addAttribute("pages", new int[pageTransactions.getTotalPages()]);
 		model.addAttribute("errorMessage", errorMessage);
 		model.addAttribute("currentPage", page);

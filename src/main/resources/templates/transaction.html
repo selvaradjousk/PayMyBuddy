@@ -83,7 +83,7 @@
 				<form th:action="@{/transaction}" method="post">
 					<div class="Transaction2">
 						<div class="buddytransfer" th:object="${contacts}">
-						<p style="color: red; font-style: italic; font-weight: normal;">Select a contact on the list below:</p>
+						<p style="color: black; font-style: italic; font-weight: normal;">Select a contact on the list below:</p>
 							<select class="form-control" id="contactEmail"
 								name="contactEmail">
 								<option th:value="${contact}" name="contact" th:if="${contact}"
@@ -143,7 +143,7 @@
 						<tr th:each="transaction : ${transactions}">
 							<td th:utext="${transaction.beneficiary.email}">...</td>
 							<td th:utext="${transaction.description}">...</td>
-							<td th:utext="${transaction.amount}">...</td>
+							<td th:utext="'- ' + ${transaction.amount}">...</td>
 							<td><a th:if="${admin}" class="btn btn-danger"
 								onclick="return confirm( ' Confirm deletion of contact?')"
 								th:href="@{/deleteTransaction(id=${transaction.idTransaction}, page=${currentPage})}">Delete</a>
@@ -160,8 +160,27 @@
 				</ul>
 
 			</div>
-
+  		<div class="consTrans2">
+              <div class="panel-heading" align="left" style="font-style:italic; font-size:14px; color:#404040;"><b>Recent list of transfer operations on amount credited to Buddy Account from other buddy Account (REFUND - PAYBACK ):</b></div>
+              <table class="table">
+                  <thead>
+                  <tr class="panel-th" >
+                      <th width="30%"  style="font-style:italic; font-size:14px; color:#707070; ">Payer</th>
+                      <th width="50%"  style="font-style:italic; font-size:14px; color:#707070; ">Description</th>
+                      <th width="20%"  style="font-style:italic; font-size:14px; color:#707070; ">Amount</th>
+                  </thead>
+                  </tr>
+                  <tbody>
+                  <tr th:each ="refund : ${refunds}">
+                      <td th:utext="${refund.payer.email}">...</td>
+                      <td th:utext="${refund.description}">...</td>
+                      <td th:utext="'+ ' + ${refund.amount}">...</td>
+                  </tr>
+                  </tbody>
+              </table>
 			</br>
+
+
 			<footer>
 				<p style="font-style: italic; font-size: 15px">Footer</p>
 			</footer>

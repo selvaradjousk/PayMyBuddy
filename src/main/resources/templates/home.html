@@ -87,7 +87,7 @@
 							<tr th:each="transaction : ${transactions}">
 								<td th:utext="${transaction.beneficiary.email}">...</td>
 								<td th:utext="${transaction.description}">...</td>
-								<td th:utext="${transaction.amount}">...</td>
+								<td th:utext="'- ' + ${transaction.amount}">...</td>
 							</tr>
 						</tbody>
 					</table>
@@ -108,13 +108,31 @@
 							<tr th:each="transfer : ${transfers}">
 								<td th:utext="${transfer.createDate}">...</td>
 								<td th:utext="${transfer.type}">...</td>
-								<td th:utext="${transfer.amount}">...</td>
+								<td th:utext="'+ ' + ${transfer.amount}">...</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-			</div>
-
+				
+ 		<div class="consTrans2">
+              <div class="panel-heading" align="left" style="font-style:italic; font-size:14px; color:#404040;"><b>Recent list of transfer operations on amount credited to Buddy Account from other buddy Account (REFUND - PAYBACK ):</b></div>
+              <table class="table">
+                  <thead>
+                  <tr class="panel-th" >
+                      <th width="30%"  style="font-style:italic; font-size:14px; color:#707070; ">Payer</th>
+                      <th width="50%"  style="font-style:italic; font-size:14px; color:#707070; ">Description</th>
+                      <th width="20%"  style="font-style:italic; font-size:14px; color:#707070; ">Amount</th>
+                  </thead>
+                  </tr>
+                  <tbody>
+                  <tr th:each ="refund : ${refunds}">
+                      <td th:utext="${refund.payer.email}">...</td>
+                      <td th:utext="${refund.description}">...</td>
+                      <td th:utext="'+ ' + ${refund.amount}">...</td>
+                  </tr>
+                  </tbody>
+              </table>
+			</br>
 
 
 
