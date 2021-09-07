@@ -80,49 +80,49 @@ Keeping in mind the obligations of the production environment, the following tec
 
 Project Milestones
 ===
-![Milestones](assets/requirements_milestones_planning.PNG "Project Milestones")<br />
+[Milestones](readme_files/project_milestones.md "Project Milestones")<br />
 
 Preliminary Design Sketches
 ===
 Functional Scope of the Requirements
 ===
-![Functional Scope](assets/functional_scope.PNG "Functional Scope")<br />
+[Functional Scope](readme_files/DESIGN_DRAFTS.md "Functional Scope")<br />
 
 
 Activity Diagram
 ===
 
-![Activity Diagram](assets/activity_diagram.PNG "Activity Diagram")<br />
+[Activity Diagram](readme_files/DESIGN_DRAFTS.md "Activity Diagram")<br />
 
 
 User Case Diagram
 ===
 
-![User Case Diagram](assets/user_case_diagram.PNG "User Case Diagram")<br />
+[User Case Diagram](readme_files/DESIGN_DRAFTS.md "User Case Diagram")<br />
 
 
 Activity Diagram Elaborated Sketching
 ===
 
-![Activity Diagram Elaborated Sketching](assets/activity_diagram_detailed.PNG "Activity Diagram Elaborated Sketching")<br />
+[Activity Diagram Elaborated Sketching](readme_files/DESIGN_DRAFTS.md "Activity Diagram Elaborated Sketching")<br />
 
 
 Login View Template Mockup Sketch API Endpoints and Development Features Analysis
 ===
 
-![Login Endpoint](assets/endpoints_login.PNG "Login Endpoint")<br />
+[Login Endpoint](readme_files/DESIGN_DRAFTS.md "Login Endpoint")<br />
 
 
 SignUp View Template Mockup Sketch API Endpoints and Development Features Analysis
 ===
 
-![SignUp Endpoint](assets/enpoints_signup.PNG "SignUp Endpoint")<br />
+[SignUp Endpoint](readme_files/DESIGN_DRAFTS.md "SignUp Endpoint")<br />
 
 
 Detailed features requirement Analysis on API endpoints and validation rules
 ===
 
-![API endpoints and validation rules](assets/enpoints_validation_detailed.PNG "API endpoints and validation rules")<br />
+[API endpoints and validation rules](readme_files/DESIGN_DRAFTS.md "API endpoints and validation rules")<br />
 
 
 Schema MVC Software Architecture Design
@@ -145,34 +145,44 @@ UML physical Data Model MPD Entity RelationShip Diagram ER
 SQL Scripts
 ===
 
+[SQL Scripts](readme_files/sql_scripts.md "SQLScripts")<br />
 
-// TODO
+
 
 UI visuals
 ===
-// TODO<br />
+
+[USER INTERFACE VISUALS](readme_files/ui_visuals.md "USER INTERFACE VISUALS")<br /><br />
+
 
 Endpoints Information
 ===
-// TODO
+
+[ACTUATOR ENDPOINTS](readme_files/actuator_info.md "ACTUATOR ENDPOINTS")<br /><br />
 
 
 Actuator Info
 ===
-// TODO
+
+[ACTUATOR ENDPOINTS](readme_files/actuator_info.md "ACTUATOR ENDPOINTS")<br /><br />
+
 
 API Documentation Swagger
 ===
-// TODO
+
+[SWAGGER API DOCUMENTATION](readme_files/swagger.md "SWAGGER API DOCUMENTATION")<br /><br />
 
 ### Authors
-// TODO
+
+Mentee: @Senthil
+
+Mentor: Clément SEZETTRE
 
 ### versions
-// TODO
+Version: 1.0
 
 ### License
-// TODO
+@OpenClassrooms & @PayMyBuddy
 
 
 

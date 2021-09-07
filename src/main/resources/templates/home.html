@@ -59,9 +59,12 @@
 					<div class="send-b">
 					<p style="float: right; margin-right: 50px; font-size:15px; font-style:italic; " >For Bank Operations click the button here to your right  <span style="font-size:30px;">☛</span> &emsp;
 						<a class="button-banktransfer" href="#" th:href="@{/transfer}" style="float: right; font-size:15px"> Bank
-							transfer </a></p>
+							transfer </a></p><br />
 					</div>
 				</div>
+				
+
+					
 				<div th:if="${errorMessage}" th:utext="${errorMessage}"
 					style="color: red; font-style: italic;">
 				</div>
@@ -132,14 +135,27 @@
                   </tr>
                   </tbody>
               </table>
+              
+              	<div style="float: right; margin-right: 50px; font-size:15px; font-style:italic; ">
+					<br />
+					<div >
+					<p style="float: right; margin-right: 50px; font-size:15px; font-style:italic; " >Billing Information  <span style="font-size:30px;">☛</span> &emsp;
+						<a class="button-billing" href="#" style="float: right; font-size:15px"> Bill Receipts </a></p>
+					</div>
+				</div>	
+
+			</br>
+              
 			</br>
 
-
-
-	<footer>
-		<p style="font-style: italic; font-size: 15px">Footer</p>
-	</footer>
 			</div>
+			</div>
+<div>
+
+			</div>
+			</div>
+
+		
 	</div>
 </body>
 </html>

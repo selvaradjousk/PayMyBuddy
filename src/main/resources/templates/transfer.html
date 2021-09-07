@@ -59,7 +59,7 @@
       <form th:action="@{/addTransfer}" method="post">
         <div class="Transaction2">
           <div class="buddytransfer" th:object="${contacts}">
-          <p style="color: red; font-style: italic; font-weight: normal;">Select a Rib on the list below:</p>
+          <p style="color:black; font-style: italic; font-weight: normal;"><b>Select a Rib on the list below:</b></p>
             <select class="form-control" id="rib" name="rib" >
               <option th:value="${bankAccount}"  name="bankAccount" th:if="${bankAccount}" th:utext="${bankAccount}">Select a RIB</option>
               

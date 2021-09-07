@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p><br>
+-- -----------------------------------------------------<br>
+/* CREATION USER pmb_user with privilages to database: paymybuddy_maindb */<br>
+-- -----------------------------------------------------<br>
+CREATE USER 'pmb_user'@'localhost' IDENTIFIED BY 'pmb_pass';<br>
+GRANT ALL PRIVILEGES ON paymybuddy_maindb.* TO 'pmb_user'@'localhost' WITH GRANT OPTION;<br>
+<br>
+-- -----------------------------------------------------<br>
+-- -----------------------------------------------------<br>
+-- -----------------------------------------------------<br>
+-- SCHEMA TO CREATE DATABASE FOR TESTING = (Schema.sql))<br>
+-- -----------------------------------------------------<br>
+-- -----------------------------------------------------<br>
+-- -----------------------------------------------------<br>
+<br>
+/* CREATION OF DATABASE NAMED: paymybuddy_maindb */<br>
+-- ----------------------------------- --<br>
+<br>
+-- -----------------------------------------------------<br>
+-- DATABASE SCHEMA DEFINITION<br>
+-- -----------------------------------------------------<br>
+-- DROP DATABASE if exists `paymybuddy_maindb`;<br>
+-- CREATE DATABASE `paymybuddy_maindb`;<br>
+USE `paymybuddy_maindb` ;<br>
+<br>
+/* Droping the existing data during intialisation of database paymybuddy_maindb */<br>
+DROP TABLE if exists `bank_account`;<br>
+DROP TABLE if exists `transaction`;<br>
+DROP TABLE if exists `contact`;<br>
+DROP TABLE if exists `transfer`;<br>
+DROP TABLE if exists `users`;<br>
+<br>
+-- ----------------------------------------------------<br>
+-- CREATING the Table user<br>
+-- -----------------------------------------------------<br>
+CREATE TABLE `user` (<br>
+&emsp;	`id_user` INT NOT NULL AUTO_INCREMENT,<br>
+&emsp;	`user_name` VARCHAR(50) NOT NULL,<br>
+&emsp;	`first_name` VARCHAR(50) NOT NULL,<br>
+&emsp;	`last_name` VARCHAR(50) NOT NULL,<br>
+&emsp;	`email` VARCHAR(50) NOT NULL,<br>
+&emsp;	`password` VARCHAR(100) NOT NULL,<br>
+&emsp;	`creation_date` DATE NOT NULL,<br>
+&emsp;	`modification_date` DATE NULL DEFAULT NULL,<br>
+&emsp;	`roles` VARCHAR(20) NOT NULL,<br>
+&emsp;	`active` BIT(1) NULL DEFAULT b'1',<br>
+&emsp;	`walletAmount` DOUBLE NOT NULL DEFAULT 0.0,<br>
+&ensp; PRIMARY KEY  (`id_user`),<br>
+&ensp; UNIQUE KEY `UK_users_email` (`email`)<br>
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;<br>
+<br>
+-- -----------------------------------------------------<br>
+-- CREATING the Table bank_account<br>
+-- -----------------------------------------------------<br>
+CREATE TABLE IF NOT EXISTS `paymybuddy_maindb`.`bank_account` (<br>
+&emsp;	`id_bank_account` INT NOT NULL AUTO_INCREMENT,<br>
+&emsp;	`user_id` INT NOT NULL,<br>
+&emsp;	`rib` VARCHAR(255) NOT NULL,<br>
+&ensp; PRIMARY KEY  (`id_bank_account`),<br>
+&ensp; CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`) <br>
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;<br>
+<br>
+-- -----------------------------------------------------<br>
+-- CREATING the Table transaction<br>
+-- -----------------------------------------------------<br>
+CREATE TABLE IF NOT EXISTS `paymybuddy_maindb`.`transaction` (<br>
+&emsp;  `id_transaction` INT NOT NULL AUTO_INCREMENT,<br>
+&emsp;  `payer_id` INT NOT NULL,<br>
+&emsp;  `beneficiary_id` INT NOT NULL,<br>
+&emsp;  `amount` DOUBLE NOT NULL,<br>
+&emsp;  `description` VARCHAR(200) NOT NULL,<br>
+ &emsp; `date` DATETIME NULL DEFAULT NULL,<br>
+ &emsp; `commision` DOUBLE NOT NULL,<br>
+&ensp; PRIMARY KEY (`id_transaction`),<br>
+&ensp; CONSTRAINT `fk_beneficiary` FOREIGN KEY (`beneficiary_id`) REFERENCES `user` (`id_user`),<br>
+&ensp; CONSTRAINT `fk_payer` FOREIGN KEY (`payer_id`) REFERENCES `user` (`id_user`)<br>
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;<br>
+<br>
+<br>
+<br>
+<br>
+-- -----------------------------------------------------<br>
+-- CREATING the Table transfer<br>
+-- -----------------------------------------------------<br>
+CREATE TABLE IF NOT EXISTS `paymybuddy_maindb`.`transfer` (<br>
+&emsp;  `id_transfer` INT NOT NULL AUTO_INCREMENT,<br>
+&emsp;  `rib` VARCHAR(255) NOT NULL,<br>
+&emsp;  `date` DATE NOT NULL,<br>
+&emsp;  `amount` DOUBLE NOT NULL,<br>
+&emsp;  `type` ENUM('CREDIT', 'DEBIT') NOT NULL,<br>
+&emsp;  `user_id` INT NOT NULL,<br>
+&ensp; PRIMARY KEY (`id_transfer`),<br>
+&ensp; CONSTRAINT `fk_user_transfer` FOREIGN KEY (`user_id`) REFERENCES user(`id_user`)<br>
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;<br>
+<br>
+<br>
+-- -----------------------------------------------------<br>
+-- CREATING the Table contact<br>
+-- -----------------------------------------------------<br>
+CREATE TABLE IF NOT EXISTS `paymybuddy_maindb`.`contact` (<br>
+&emsp;	`id_contact` INT NOT NULL AUTO_INCREMENT,<br>
+&emsp;	`creation_date` DATE NOT NULL,<br>
+&emsp;	`payer_id` INT NOT NULL,<br>
+&emsp;	`contact_id` INT NOT NULL,<br>
+&ensp; PRIMARY KEY  (`id_contact`),<br>
+&ensp; CONSTRAINT `fk_payer` FOREIGN KEY (`payer_idv) REFERENCES `user` (`id_user`),<br>
+&ensp; CONSTRAINT `fk_contact` FOREIGN KEY (`contact_id`) REFERENCES `user` (`id_user`)<br>
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+-- -----------------------------------------------------<br>
+-- -----------------------------------------------------<br>
+-- DATA TO POPULATE THE DATABASE FOR TESTING = (Data.sql))<br>
+-- -----------------------------------------------------<br>
+-- -----------------------------------------------------<br>
+-- -----------------------------------------------------<br>
+-- Table `paymybuddy_maindb`.`user`  Bcrypt password = password<br>
+-- -----------------------------------------------------<br>
+-- -----------------------------------------------------<br>
+<br>
+INSERT INTO 'user' ('user_name', 'first_name', 'last_name', 'email', 'password', 'creation_date', 'modification_date', 'roles', 'active', 'wallet_amount') values<br>
+&emsp;	('testusername1', 'testfirstname1', 'testlastname1', 'testemail1@email.com', '$2a$10$el8am2L8Jr83rPDagpPzPOJ3.z5iE9LxaGHLsPzKtpoYk.f8K6DnW', '2021-08-26', '2021-08-26', 'admin', true, 1000.0);<br>
+    &emsp;	('testusername2', 'testfirstname2', 'testlastname2', 'testemail2@email.com', '$2a$10$el8am2L8Jr83rPDagpPzPOJ3.z5iE9LxaGHLsPzKtpoYk.f8K6DnW',  '2021-08-26', '2021-08-26', 'user', true, 2000.0);<br>
+    &emsp;	('testusername3', 'testfirstname3', 'testlastname3', 'testemail3@email.com', '$2a$10$el8am2L8Jr83rPDagpPzPOJ3.z5iE9LxaGHLsPzKtpoYk.f8K6DnW',  '2021-08-26', '2021-08-26', 'user', true, 3000.0);<br>
+    &emsp;	('testusername4', 'testfirstname4', 'testlastname4', 'testemail4@email.com', '$2a$10$el8am2L8Jr83rPDagpPzPOJ3.z5iE9LxaGHLsPzKtpoYk.f8K6DnW',  '2021-08-26', '2021-08-26', 'user', true, 4000.0);<br>
+    &emsp;	('testusername5', 'testfirstname5', 'testlastname5', 'testemail5@email.com', '$2a$10$el8am2L8Jr83rPDagpPzPOJ3.z5iE9LxaGHLsPzKtpoYk.f8K6DnW',  '2021-08-26', '2021-08-26', 'user', true, 5000.0);<br>
+    &emsp;	('testusername6', 'testfirstname6', 'testlastname6', 'testemail6@email.com', '$2a$10$el8am2L8Jr83rPDagpPzPOJ3.z5iE9LxaGHLsPzKtpoYk.f8K6DnW',  '2021-08-26', '2021-08-26', 'user', true, 6000.0);<br>
+    &emsp;	('testusername7', 'testfirstname7', 'testlastname7', 'testemail7@email.com', '$2a$10$el8am2L8Jr83rPDagpPzPOJ3.z5iE9LxaGHLsPzKtpoYk.f8K6DnW',  '2021-08-26', '2021-08-26', 'user', true, 7000.0);<br>
+    &emsp;	('testusername8', 'testfirstname8', 'testlastname8', 'testemail8@email.com', '$2a$10$el8am2L8Jr83rPDagpPzPOJ3.z5iE9LxaGHLsPzKtpoYk.f8K6DnW',  '2021-08-26', '2021-08-26', 'user', true, 8000.0);<br>
+    &emsp;	('testusername9', 'testfirstname9', 'testlastname9', 'testemail9@email.com', '$2a$10$el8am2L8Jr83rPDagpPzPOJ3.z5iE9LxaGHLsPzKtpoYk.f8K6DnW',  '2021-08-26', '2021-08-26', 'user', true, 9000.0);<br>
+    &emsp;	('testusername10', 'testfirstname10', 'testlastname10', 'testemail10@email.com', '$2a$10$el8am2L8Jr83rPDagpPzPOJ3.z5iE9LxaGHLsPzKtpoYk.f8K6DnW',  '2021-08-26', '2021-08-26', 'user', true, 10000.0);<br>
+commit;<br>
+<br>
+<br>
+-- -----------------------------------------------------<br>
+-- Table `paymybuddy_maindb`.`bank_account`<br>
+-- -----------------------------------------------------<br>
+INSERT INTO bank_account (rib, user_id) VALUES<br>
+&emsp;	('fr 1111 1111 1111 1111 A', '1'),<br>
+&emsp;	('fr 2222 2222 2222 2222 A', '2'),<br>
+&emsp;	('fr 3333 3333 3333 3333 A', '3'),<br>
+&emsp;	('fr 4444 4444 4444 4444 A', '1'),<br>
+&emsp;	('fr 5555 5555 5555 5555 A', '5'),<br>
+&emsp;	('fr 6666 6666 6666 6666 A', '1'),<br>
+&emsp;	('fr 7777 7777 7777 7777 A', '7'),<br>
+&emsp;	('fr 8888 8888 8888 8888 A', '1'),<br>
+&emsp;	('fr 9999 9999 9999 9999 A', '9'),<br>
+&emsp;	('fr 1010 1010 1010 1010 A', '10');<br>
+commit;<br>
+<br>
+-- -----------------------------------------------------<br>
+-- Table `paymybuddy_maindb`.`contact`<br>
+-- -----------------------------------------------------<br>
+INSERT INTO 'contact' ('creation_date', 'payer_id', 'contact_id') VALUES<br>
+&emsp;	('2021-08-26', '1', '10'),<br>
+&emsp;	('2021-08-26', '1', '9'),<br>
+&emsp;	('2021-08-26', '1', '8'),<br>
+&emsp;	('2021-08-26', '1', '7'),<br>
+&emsp;	('2021-08-26', '2', '5'),<br>
+&emsp;	('2021-08-26', '2', '4'),<br>
+&emsp;	('2021-08-26', '2', '3'),<br>
+&emsp;	('2021-08-26', '3', '1'),<br>
+&emsp;	('2021-08-26', '3', '1'),<br>
+&emsp;	('2021-08-26', '3', '10');<br>
+commit;<br>
+<br>
+-- -----------------------------------------------------<br>
+-- Table `paymybuddy_maindb`.`transaction`<br>
+-- -----------------------------------------------------<br>
+INSERT INTO <br>
+	transaction (payer_id, beneficiary_id, amount, description, date, commision)<br>
+ VALUES<br>
+&emsp;	('1', '2', '100', 'description1', '2021-08-27', 0.5),<br>
+&emsp;	('1', '3', '150', 'description2', '2021-08-27', 0.5),<br>
+&emsp;	('1', '4', '200', 'description3', '2021-08-27', 0.5),<br>
+&emsp;	('2', '1', '100', 'description4', '2021-08-27', 0.5),<br>
+&emsp;	('2', '3', '150', 'description5', '2021-08-27', 0.5),<br>
+&emsp;	('2', '4', '200', 'description6', '2021-08-27', 0.5),<br>
+&emsp;	('3', '1', '150', 'description7', '2021-08-27', 0.5),<br>
+&emsp;	('3', '2', '100', 'description8', '2021-08-27', 0.5),<br>
+&emsp;	('3', '4', '200', 'description1', '2021-08-27', 0.5),<br>
+&emsp;	('9', '2', '100', 'description1', '2021-08-27', 0.5);<br>
+commit;<br>
+<br>
+-- -----------------------------------------------------<br>
+-- Table `paymybuddy_maindb`.`transfer`<br>
+-- -----------------------------------------------------<br>
+INSERT INTO 'transfer' ('rib', 'date', 'amount', 'type', 'user_id')  VALUES<br>
+&emsp;	('fr 1111 1111 1111 1111 A', '2021-08-27', '100', 'CREDIT', '1');<br>
+&emsp;	('fr 2222 2222 2222 2222 A', '2021-08-27', '200', 'DEBIT', '1');<br>
+&emsp;	('fr 3333 3333 3333 3333 A', '2021-08-27', '130', 'CREDIT', '1');<br>
+&emsp;	('fr 4444 4444 4444 4444 A', '2021-08-27', '140', 'DEBIT', '1');<br>
+&emsp;	('fr 5555 5555 5555 5555 A', '2021-08-27', '150', 'DEBIT', '2');<br>
+&emsp;	('fr 6666 6666 6666 6666 A', '2021-08-27', '160', 'CREDIT', '2');<br>
+&emsp;	('fr 7777 7777 7777 7777 A', '2021-08-27', '170', 'DEBIT', '2');<br>
+&emsp;	('fr 8888 8888 8888 8888 A', '2021-08-27', '180', 'DEBIT', '3');<br>
+&emsp;	('fr 9999 9999 9999 9999 A', '2021-08-27', '190', 'DEBIT', '3');<br>
+&emsp;	('fr 1010 1010 1010 1010 A', '2021-08-27', '100', 'DEBIT', '3');<br>
+commit;<br>
+</p>
+</body>
+</html>
