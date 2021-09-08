@@ -54,65 +54,65 @@ Keeping in mind the obligations of the production environment, the following tec
 
 Project Milestones
 ===
-[Milestones](readme_files/project_milestones.md "Project Milestones")<br />
+[Milestones](readme_files/project_milestones.md "Project Milestones")🡸<br />
 
 Preliminary Design Sketches
 ===
 
-[Functional Scope](readme_files/DESIGN_DRAFTS.md "Functional Scope")<br />
+[Functional Scope](readme_files/DESIGN_DRAFTS.md "Functional Scope")🡸<br />
 
 
-[Activity Diagram](readme_files/DESIGN_DRAFTS.md "Activity Diagram")<br />
+[Activity Diagram](readme_files/DESIGN_DRAFTS.md "Activity Diagram")🡸<br />
 
 
-[User Case Diagram](readme_files/DESIGN_DRAFTS.md "User Case Diagram")<br />
+[User Case Diagram](readme_files/DESIGN_DRAFTS.md "User Case Diagram")🡸<br />
 
 
-[Activity Diagram Elaborated Sketching](readme_files/DESIGN_DRAFTS.md "Activity Diagram Elaborated Sketching")<br />
+[Activity Diagram Elaborated Sketching](readme_files/DESIGN_DRAFTS.md "Activity Diagram Elaborated Sketching")🡸<br />
 
 
 ### Login View Template Mockup Sketch API Endpoints and Development Features Analysis
 
-[Login Endpoint](readme_files/DESIGN_DRAFTS.md "Login Endpoint")<br />
+[Login Endpoint](readme_files/DESIGN_DRAFTS.md "Login Endpoint")🡸<br />
 
 
 ### SignUp View Template Mockup Sketch API Endpoints and Development Features Analysis
 
-[SignUp Endpoint](readme_files/DESIGN_DRAFTS.md "SignUp Endpoint")<br />
+[SignUp Endpoint](readme_files/DESIGN_DRAFTS.md "SignUp Endpoint")🡸<br />
 
 
 ### Detailed features requirement Analysis on API endpoints and validation rules
 
-[API endpoints and validation rules](readme_files/DESIGN_DRAFTS.md "API endpoints and validation rules")<br />
+[API endpoints and validation rules](readme_files/DESIGN_DRAFTS.md "API endpoints and validation rules")🡸<br />
 
 
 Schema MVC Software Architecture Design
 ===
 
-![Schema MVC Software Architecture Design](assets/schema_mvc.PNG "Schema MVC Software Architecture Design")<br />
+![Schema MVC Software Architecture Design](assets/schema_mvc.PNG "Schema MVC Software Architecture Design")🡸<br />
 
 
 UML class diagram MCD
 ===
 
-![UML class diagram MCD](assets/mcd_class_diagram.PNG "UML class diagram MCD")<br />
+![UML class diagram MCD](assets/mcd_class_diagram.PNG "UML class diagram MCD")🡸<br />
 
 
 UML physical Data Model MPD Entity RelationShip Diagram ER
 ===
 
-![UML physical Data Model MPD Entity RelationShip Diagram ER](assets/mpd.PNG "MPD Entity RelationShip Diagram")<br />
+![UML physical Data Model MPD Entity RelationShip Diagram ER](assets/mpd.PNG "MPD Entity RelationShip Diagram")🡸<br />
 
 SQL Scripts
 ===
 
-[SQL Scripts](readme_files/sql_scripts.md "SQLScripts")<br />
+[SQL Scripts](readme_files/sql_scripts.md "SQLScripts")🡸<br />
 
 
 UI visuals
 ===
 
-[USER INTERFACE VISUALS](readme_files/ui_visuals.md "USER INTERFACE VISUALS")<br /><br />
+[USER INTERFACE VISUALS](readme_files/ui_visuals.md "USER INTERFACE VISUALS")🡸<br /><br />
 
 
 Endpoints Information
@@ -122,22 +122,22 @@ Endpoints Information
 Actuator Info
 ===
 
-[ACTUATOR ENDPOINTS](readme_files/actuator_info.md "ACTUATOR ENDPOINTS")<br /><br />
+[ACTUATOR ENDPOINTS](readme_files/actuator_info.md "ACTUATOR ENDPOINTS")🡸<br /><br />
 
 
 API Documentation Swagger
 ===
 
-[SWAGGER API DOCUMENTATION](readme_files/swagger.md "SWAGGER API DOCUMENTATION")<br /><br />
+[SWAGGER API DOCUMENTATION](readme_files/swagger.md "SWAGGER API DOCUMENTATION")🡸<br /><br />
 
 ### Authors
 
-Mentee: @Senthil
+Mentee:🡆 @Senthil
 
-Mentor: Clément SEZETTRE
+Mentor:🡆 Clément SEZETTRE
 
 ### versions
-Version: 1.0
+Version:🡆 1.0
 
 ### License
 @OpenClassrooms & @PayMyBuddy
