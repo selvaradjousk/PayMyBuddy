@@ -14,7 +14,7 @@ SQL Scripts
 
 [click here to access](../assets/sql_scripts/paymybuddy_maindb.sql) <-- SQL Scripts<br /><br /><br />
 
-
+![DB Setup](../assets/sql_scripts/DB_sql_application_properties_setup.png "DB Setup")
 
 -- -----------------------------------------------------
 ###  CREATION USER pmb_user with privilages to database: paymybuddy_maindb 
