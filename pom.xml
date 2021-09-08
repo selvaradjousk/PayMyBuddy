@@ -64,6 +64,24 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
+		<!-- ===================================================================== -->
+		<!--SPRING BOOT SECURITY OAUTH2 CLIENT-->
+		<!-- ===================================================================== -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+		
+		<!-- ===================================================================== -->
+		<!--JASYPT ENCRYPTION TOOL-->
+		<!-- ===================================================================== -->		
+			<dependency>
+				<groupId>com.github.ulisesbocchio</groupId>
+				<artifactId>jasypt-spring-boot-starter</artifactId>
+				<version>3.0.3</version>
+			</dependency>
+		
 		
 		<!-- ===================================================================== -->
 		<!-- spring-boot-starter-thymeleaf that interact with your application -->
@@ -148,12 +166,6 @@
 			<scope>runtime</scope>
 		</dependency>
 		
-		
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
 		
 		<!-- ===================================================================== -->
 		<!-- Tests imports - JUnit4, Spring Test, AssertJ, Hamcrest, Mockito, JSONassert 
@@ -256,6 +268,18 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			
+			
+		<!-- ======================================================= -->
+		<!-- jasypt plugin -->
+		<!-- ======================================================= -->
+		<plugin>
+    		<groupId>com.github.ulisesbocchio</groupId>
+    		<artifactId>jasypt-maven-plugin</artifactId>
+    		<version>3.0.3</version>
+		</plugin>
+			
+			
 			
 			<!-- ===================================================================== -->
 			<!-- Maven failsafe - used during the integration-test and verify phases 
@@ -401,6 +425,10 @@
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.9.1</version>
 			</plugin>	
+			
+
+
+			
 			
 		</plugins>
 	</build>

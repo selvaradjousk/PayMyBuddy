@@ -3,6 +3,8 @@ package com.paymybuddy.webapp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+
 
 /**
  * The Class PayMyBuddyApplication.
@@ -10,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Senthil
  */
 
+@EnableEncryptableProperties
 @SpringBootApplication
 public class PayMyBuddyApplication {
 

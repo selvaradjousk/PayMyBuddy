@@ -91,10 +91,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         		.failureForwardUrl("/register").permitAll();
 				
 //        http
-//				.formLogin()
-//				.and()
 //				.oauth2Login()
-//        		.loginPage("/register");
+//        		.defaultSuccessUrl("/home", true)
+//        		.loginPage("/login");
 
         // https://www.baeldung.com/spring-security-logout
         // https://www.baeldung.com/spring-security-manual-logout
