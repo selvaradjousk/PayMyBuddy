@@ -52,6 +52,13 @@ Keeping in mind the obligations of the production environment, the following tec
 ![BCrypt Encryption](https://img.shields.io/badge/%F0%9F%94%8F-BCrypt%20Encryption-yellowgreen)
 
 
+<br /><br /><br />
+
+---
+![UI VISUALS LOGIN](assets/ui_visuals/01_login.PNG "UI VISUALS LOGIN")
+
+<br /><br /><br />
+
 Project Milestones
 ===
 [Milestones](readme_files/project_milestones.md "Project Milestones")🡸<br />
