@@ -264,7 +264,7 @@ public class BankTransferController {
   * @param rib the rib
   * @return the string
   */
- private String checkForBankAccountRibNotNull(int page, String rib) {
+ public String checkForBankAccountRibNotNull(int page, String rib) {
 		String errorMessage;
 		if(rib==null){
             errorMessage = "You must created an account";

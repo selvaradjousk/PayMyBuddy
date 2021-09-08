@@ -11,9 +11,9 @@ class PayMyBuddyApplicationTests {
 	}
 	
 	// ApplicationStartTest
-	   @Test
-	   public void main() {
-		   PayMyBuddyApplication.main(new String[] {});
-	   }
+//	   @Test
+//	   public void main() {
+//		   PayMyBuddyApplication.main(new String[] {});
+//	   }
 
 }

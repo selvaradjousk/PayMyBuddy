@@ -49,8 +49,7 @@ public class MyUserDetailService implements UserDetailsService {
 
 		// https://stackoverflow.com/questions/59352914/custom-spring-boot-login-form
 		
-		log.debug("Fetching user - MyUserDetailsService.loadUserByUsername"
-				+ " for username : " + email);
+		log.debug("Fetching user - MyUserDetailsService.loadUserByUsername");
 
 //		Optional<User> user = userRepository.findByEmail(email);
 //		log.info("Transforming " + user + " into UserDetails object");

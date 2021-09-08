@@ -1,6 +1,9 @@
 package com.paymybuddy.webapp.util;
 
+import javax.annotation.Nonnull;
+
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 import com.paymybuddy.webapp.dto.BankAccountDTO;
 import com.paymybuddy.webapp.model.BankAccount;
@@ -18,18 +21,18 @@ public class BankAccountMapper {
   	 * @param bankAccountDTO the bank account DTO
   	 * @return the bank account
   	 */
-  	public BankAccount toBankAccountDO(BankAccountDTO bankAccountDTO) {
+  	public BankAccount toBankAccountDO(@Validated @Nonnull BankAccountDTO bankAccountDTO) {
 	        BankAccount bankAccount = new BankAccount();
 
-	        if (bankAccountDTO != null) {
+//	        if (bankAccountDTO != null) {
 	        bankAccount.setIdBankAccount(bankAccountDTO.getIdBankAccount());
 	        bankAccount.setUser(bankAccountDTO.getUser());
 	        bankAccount.setRib(bankAccountDTO.getRib());
 	        return bankAccount;
-
-	        } else {
-	            return null;
-	        }
+//
+//	        } else {
+//	            return null;
+//	        }
 	    }
 
 	    /**
@@ -38,17 +41,17 @@ public class BankAccountMapper {
     	 * @param bankAccount the bank account
     	 * @return the bank account DTO
     	 */
-    	public BankAccountDTO toBankAccountDTO(BankAccount bankAccount) {
+    	public BankAccountDTO toBankAccountDTO(@Validated @Nonnull BankAccount bankAccount) {
 	        BankAccountDTO bankAccountDTO = new BankAccountDTO();
 
-	        if (bankAccount != null) {
+//	        if (bankAccount != null) {
 	        bankAccountDTO.setIdBankAccount(bankAccount.getIdBankAccount());
 	        bankAccountDTO.setUser(bankAccount.getUser());
 	        bankAccountDTO.setRib(bankAccount.getRib());
 	        return bankAccountDTO;
-
-	        } else {
-	        	return null;
-	        }
+//
+//	        } else {
+//	        	return null;
+//	        }
     	}
 }

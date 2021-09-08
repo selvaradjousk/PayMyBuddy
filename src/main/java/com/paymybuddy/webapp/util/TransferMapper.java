@@ -1,6 +1,9 @@
 package com.paymybuddy.webapp.util;
 
+import javax.annotation.Nonnull;
+
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 import com.paymybuddy.webapp.dto.TransferDTO;
 import com.paymybuddy.webapp.model.Transfer;
@@ -19,9 +22,9 @@ public class TransferMapper {
  * @param transferDTO the transfer DTO
  * @return the transfer
  */
-public Transfer toTransferDO(final TransferDTO transferDTO) {
+public Transfer toTransferDO(@Validated @Nonnull final TransferDTO transferDTO) {
         Transfer transfer = new Transfer();
-        if (transferDTO != null) {
+//        if (transferDTO != null) {
         transfer.setIdTransfer(transferDTO.getIdTransfer());
         transfer.setRib(transferDTO.getRib());
         transfer.setCreateDate(transferDTO.getCreateDate());
@@ -30,9 +33,9 @@ public Transfer toTransferDO(final TransferDTO transferDTO) {
         transfer.setUser(transferDTO.getUser());
 
         return transfer;
-        	} else {
-        		return null;
-        	}
+//        	} else {
+//        		return null;
+//        	}
      }
 
     /**
@@ -41,10 +44,10 @@ public Transfer toTransferDO(final TransferDTO transferDTO) {
      * @param transfer the transfer
      * @return the transfer DTO
      */
-    public TransferDTO toTransferDTO(final Transfer transfer) {
+    public TransferDTO toTransferDTO(@Validated @Nonnull final Transfer transfer) {
         TransferDTO transferDTO = new TransferDTO();
 
-        if (transfer != null) {
+//        if (transfer != null) {
         transferDTO.setIdTransfer(transfer.getIdTransfer());
         transferDTO.setRib(transferDTO.getRib());
         transferDTO.setCreateDate(transfer.getCreateDate());
@@ -53,8 +56,8 @@ public Transfer toTransferDO(final TransferDTO transferDTO) {
         transferDTO.setUser(transfer.getUser());
 
         return transferDTO;
-        } else {
-            return null;
-            }
+//        } else {
+//            return null;
+//            }
     }
 }
