@@ -17,7 +17,16 @@ The main goal is to commit on participating in the different phases of the softw
 	![✒️ DESIGN](https://img.shields.io/badge/%E2%9C%92%EF%B8%8F-%20DESIGN-critical) (WireFraming, User Stories, Data flow diagram - DFD, Technical Design - Software blueprint, UI prototyping, DDD principle ...),<br />
 	![🔨 CODING IMPLEMENTATION](https://img.shields.io/badge/%F0%9F%94%A8-%20CODING%20IMPLEMENTATION-success) (Spring boot framework - backend API development),<br />
 	![❓ ❕  FUNCTIONAL TESTING](https://img.shields.io/badge/%E2%9D%93%20%E2%9D%95-FUNCTIONAL%20TESTING-informational) (Unit, Integration Testing... Code quality review, report generation, Test summary..),<br />
-	![🔑 DEPLOYMENT](https://img.shields.io/badge/%F0%9F%94%91-DEPLOYMENT-red) - pre-release evaluation with domain experts on its quality standards to deliver as a functionally strong backend Application API.<br />
+	![🔑 DEPLOYMENT](https://img.shields.io/badge/%F0%9F%94%91-DEPLOYMENT-red) - pre-release evaluation with domain experts on its quality standards to deliver as a functionally strong backend Application API.<br /><br />
+
+
+
+<br /><br /><br />
+
+---
+![UI VISUALS LOGIN](assets/ui_visuals/01_login.PNG "UI VISUALS LOGIN")
+
+<br /><br /><br />
 
 
 Technical Specifications
@@ -49,15 +58,10 @@ Keeping in mind the obligations of the production environment, the following tec
 ![Actuator](https://img.shields.io/badge/%F0%9F%93%89-Actuator-red)
 ![POSTMAN](https://img.shields.io/badge/%F0%9F%93%A9-POSTMAN-critical)
 ![Lombok](https://img.shields.io/badge/%F0%9F%9A%80-LOMBOK-brightgreen)
-![BCrypt Encryption](https://img.shields.io/badge/%F0%9F%94%8F-BCrypt%20Encryption-yellowgreen)
+![BCrypt Encryption](https://img.shields.io/badge/%F0%9F%94%8F-BCrypt%20Encryption-yellowgreen)<br /><br /><br />
 
 
-<br /><br /><br />
 
----
-![UI VISUALS LOGIN](assets/ui_visuals/01_login.PNG "UI VISUALS LOGIN")
-
-<br /><br /><br />
 
 Project Milestones
 ===
