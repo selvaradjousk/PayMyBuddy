@@ -164,21 +164,20 @@ class HomeControllerWebMvcTest {
 
 		// ********************************************************************
     
-		@DisplayName("LOGIN page Url request with authentication 200 OK - "
-				+ "GIVEN home url /login "
+		@DisplayName("LOGIN page Url request with authentication 302 redirect to /home - "
+				+ "GIVEN logged in user "
 				+ "WHEN Requested GET login page"
-				+ "THEN returns expected reponse 200 OK http response")  
+				+ "THEN returns expected reponse 302 redirect:/home")  
 		@WithMockUser("testemail1@email.com")
 		@Test
 		public void testLoginUrlWithLoginStatusOK() throws Exception {
 
 			mockMvc.perform(get("/login"))
-			.andExpect(view().name("login"))
+			.andExpect(view().name("redirect:/home"))
 			.andExpect(model().hasNoErrors())
-			 .andExpect(status().isOk());
+			 .andExpect(status().is(302));
 			
 		}
-
 
 		// ********************************************************************
 
