@@ -33,41 +33,41 @@ public class BankTransferController {
 
     /** The user service. */
     @Autowired
-    IUserService userService;
+    private IUserService userService;
 
 	/** The bank account service. */
     @Autowired
-    IBankAccountService bankAccountService;
+    private IBankAccountService bankAccountService;
 
     /** The transfer service. */
     @Autowired
-    ITransferService transferService;
+    private ITransferService transferService;
 
     /** The user mapper. */
-    public UserMapper userMapper = new UserMapper();
+    private UserMapper userMapper = new UserMapper();
 
-
+    /** The Constant NUMBER_OF_ELEMENTS_PER_PAGE. */
+    private static final int NUMBER_OF_ELEMENTS_PER_PAGE = 2;
     /**
      * Instantiates a new bank transfer controller.
      *
-     * @param userService the user service
-     * @param bankAccountService the bank account service
-     * @param transferService the transfer service
-     * @param userMapper the user mapper
+     * @param userServicee the user servicee
+     * @param bankAccountServicee the bank account servicee
+     * @param transferServicee the transfer servicee
+     * @param userMapperr the user mapperr
      */
     public BankTransferController(
-    		IUserService userService,
-    		IBankAccountService bankAccountService,
-			ITransferService transferService,
-			UserMapper userMapper) {
-		this.userService = userService;
-		this.bankAccountService = bankAccountService;
-		this.transferService = transferService;
-		this.userMapper = userMapper;
+    		final IUserService userServicee,
+    		final IBankAccountService bankAccountServicee,
+			final ITransferService transferServicee,
+			final UserMapper userMapperr) {
+		this.userService = userServicee;
+		this.bankAccountService = bankAccountServicee;
+		this.transferService = transferServicee;
+		this.userMapper = userMapperr;
 	}
 
-    
-    // ************************************************************************
+    // *********************************************************************
 
     /**
      * Transfer.
@@ -82,15 +82,15 @@ public class BankTransferController {
 //    @RequestMapping(value = { "/transfer" }, method = RequestMethod.GET)
     @GetMapping(value = { "/transfer" })
     public String transfer(
-    		Model model,
-            @RequestParam(name="page", defaultValue = "0")
-    		int page,
-            @RequestParam(name="motCle", defaultValue = "")
-    		String mc,
-            @RequestParam(name="errorMessage", defaultValue = "")
-    		String errorMessage)
-    {
-    	 log.info(" ====> Loading GET request for /transfer");
+    		final Model model,
+            @RequestParam(name = "page", defaultValue = "0")
+    		final int page,
+            @RequestParam(name = "motCle", defaultValue = "")
+    		final String mc,
+            @RequestParam(name = "errorMessage", defaultValue = "")
+    		final String errorMessage) {
+
+    	log.info(" ====> Loading GET request for /transfer");
 
         // fetch list of user logs
         String emailSession = SecurityContextHolder
@@ -100,14 +100,16 @@ public class BankTransferController {
 
         UserDTO userLogDTO = userService
         		.findUserByEmail(emailSession);
-  
+
         //-- fetch the list of bankaccounts
         List<BankAccountDTO> bankAccounts = bankAccountService
         		.findBankAccountByUser(userLogDTO);
 
         // fetch by pages list of all users
         Page<TransferDTO> pageTransfers = transferService
-        		.findAllTransferByUser(userLogDTO, PageRequest.of(page,2));
+        		.findAllTransferByUser(userLogDTO, PageRequest.of(
+        				page,
+        				NUMBER_OF_ELEMENTS_PER_PAGE));
 
         // check and assign role admin for operation
         String role = isUserRoleAdminCheck(userLogDTO);
@@ -124,10 +126,8 @@ public class BankTransferController {
         return "transfer";
     }
 
- 
 
-
-    // ************************************************************************
+    // *********************************************************************
 
     /**
      * Delete.
@@ -136,16 +136,16 @@ public class BankTransferController {
      * @return the string
      */
     @GetMapping("/deleteAccount")
-    public String delete(Integer id){
+    public String delete(final Integer id) {
 
     	log.info(" ====> Loading GET request for /deleteAccount");
 
     	bankAccountService.deleteBankAccount(id);
 
-    	return"redirect:/transfer";
+    	return "redirect:/transfer";
     }
 
-    // ************************************************************************
+    // *********************************************************************
 
     /**
      * Adds the account.
@@ -157,9 +157,12 @@ public class BankTransferController {
      */
     @PostMapping(value = { "/addBankAccount" })
     public String addAccount(
-    		Model model,
-    		@RequestParam(name="page", defaultValue = "0") int page,
-    		String rib){
+    		final Model model,
+    		@RequestParam(
+    				name = "page",
+    				defaultValue = "0")
+    		final int page,
+    		final String rib) {
 
         log.info(" ====> Loading POST request /addBankAccount rib: " + rib);
 
@@ -173,13 +176,13 @@ public class BankTransferController {
         		.findUserByEmail(emailSession);
 
         // add a new bank account
-        bankAccountService.addBankAccount( rib ,userLog);
+        bankAccountService.addBankAccount(rib, userLog);
 
-        return"redirect:/transfer";
+        return "redirect:/transfer";
     }
 
-    // ************************************************************************
- 
+    // *********************************************************************
+
 
     /**
      * Adds the transfer.
@@ -194,12 +197,15 @@ public class BankTransferController {
      */
     @PostMapping(value = { "/addTransfer" })
     public String addTransfer(
-    		Model model,
-    		@RequestParam(name="page", defaultValue = "0") int page,
-            String rib,
-            double amount,
-            String type,
-            String errorMessage){
+    		final Model model,
+    		@RequestParam(
+    				name = "page",
+    				defaultValue = "0")
+    		final int page,
+            final String rib,
+            final double amount,
+            final String type,
+            String errorMessage) {
 
         log.info(" ====> Loading POST request  /addBTransfer : "
         + rib + " - " + amount + " - " + type);
@@ -221,12 +227,12 @@ public class BankTransferController {
 
         errorMessage = "Transfer saved";
 
-        return"redirect:/transfer?page="+page+
-                "&errorMessage="+errorMessage;
+        return "redirect:/transfer?page=" + page
+                + "&errorMessage=" + errorMessage;
     }
 
 
-    // ************************************************************************  
+    // *********************************************************************
 
     /**
      * Adds the data to transfer model.
@@ -239,12 +245,12 @@ public class BankTransferController {
      * @param role the role
      */
     private void addDataToTransferModel(
-    		Model model,
-    		int page,
-    		String errorMessage,
-    		List<BankAccountDTO> bankAccounts,
-			Page<TransferDTO> pageTransfers,
-			String role) {
+    		final Model model,
+    		final int page,
+    		final String errorMessage,
+    		final List<BankAccountDTO> bankAccounts,
+			final Page<TransferDTO> pageTransfers,
+			final String role) {
 
     	model.addAttribute("admin", role);
         model.addAttribute("errorMessage", errorMessage);
@@ -253,9 +259,9 @@ public class BankTransferController {
         model.addAttribute("transfers", pageTransfers);
         model.addAttribute("pages", new int[pageTransfers.getTotalPages()]);
 	}
-    
 
- // ************************************************************************
+
+ // *********************************************************************
 
 	/**
   * Check for bank account rib not null.
@@ -264,25 +270,25 @@ public class BankTransferController {
   * @param rib the rib
   * @return the string
   */
- public String checkForBankAccountRibNotNull (int page, String rib){
+ public String checkForBankAccountRibNotNull(final int page, final String rib) {
 		String errorMessage;
-		if(rib == null){
+		if (rib == null) {
             errorMessage = "You must created an account";
-            
-            log.info(" ====> Account rib is null" + errorMessage);
-            
-            return"redirect:/transfer?page="+page+
-                    "&errorMessage="+errorMessage;
 
-        }
-		else {
+            log.info(" ====> Account rib is null" + errorMessage);
+
+            return "redirect:/transfer?page=" + page
+                    + "&errorMessage=" + errorMessage;
+
+        } else {
 			errorMessage = "OK";
-			log.info(" ====> Account rib is not null" + errorMessage);
+			log.info(" ====> Account rib is not null"
+			+ errorMessage);
 		}
 		return errorMessage;
 	}
 
-    // ************************************************************************
+    // *******************************************************************
 
 	/**
 	 * Checks if is user role admin check.
@@ -290,24 +296,16 @@ public class BankTransferController {
 	 * @param userLogDTO the user log DTO
 	 * @return the string
 	 */
-	private String isUserRoleAdminCheck(UserDTO userLogDTO) {
+	private String isUserRoleAdminCheck(final UserDTO userLogDTO) {
 		String role = null;
         String authorisation = userLogDTO.getRoles();
 
-        if ( authorisation.equals("ROLE_ADMIN") ) {
+        if (authorisation.equals("ROLE_ADMIN")) {
             role = "admin";
         }
 		return role;
 	}
 
-	//****************************************************************** 
-
-    
-
-
-
-
-
-
+	//******************************************************************
 
 }

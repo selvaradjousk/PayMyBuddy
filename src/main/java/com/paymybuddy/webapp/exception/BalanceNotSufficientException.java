@@ -2,6 +2,7 @@ package com.paymybuddy.webapp.exception;
 
 /**
  * The Class BalanceNotSufficientException.
+ * @author Senthil
  */
 public class BalanceNotSufficientException extends RuntimeException {
 
@@ -10,21 +11,24 @@ public class BalanceNotSufficientException extends RuntimeException {
      *
      * @param message the message
      */
-    public BalanceNotSufficientException(String message) {
+    public BalanceNotSufficientException(final String message) {
         super(message);
     }
-    
-    
-	// **************************** TODOs LIST ***********************************
-	
+
+	// **************************** TODOs LIST **************************
+
 	// Method: c
-	// --> UserAlreadyExistException (is thrown when a new user tries to signup with existing email) 
-	// --> UserNotFoundException (Is thrown when user tries to login with email not registered
-	// --> 
+	// --> UserAlreadyExistException (is thrown when a
+    // new user tries to signup with existing email)
+	// --> UserNotFoundException (Is thrown when user
+    // tries to login with email not registered
+	// -->
 	// --> Implemnatation of exception handler as in previous project
 	// --> GlobalExceptionHandler @ControllerAdvice
-	// --> 
-	// --> https://springframework.guru/exception-handling-in-spring-boot-rest-api/
+	// -->
+	// --> https://springframework.guru/exception-handling
+    // -in-spring-boot-rest-api/
 	// --> https://www.baeldung.com/exception-handling-for-rest-with-spring
-	// --> https://stackoverflow.com/questions/28902374/spring-boot-rest-service-exception-handling
+	// --> https://stackoverflow.com/questions/28902374/spring-boot
+    // -rest-service-exception-handling
 }

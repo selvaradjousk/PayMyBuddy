@@ -29,49 +29,50 @@ import lombok.extern.log4j.Log4j2;
 
 /**
  * The Class HomeController.
+ * @author Senthil
  */
 @Log4j2
 @Controller
 public class HomeController {
 
-
     /** The contact service. */
     @Autowired
-    IContactService contactService;
+    private IContactService contactService;
 
 	/** The user service. */
     @Autowired
-    IUserService userService;
+    private IUserService userService;
 
     /** The transaction service. */
     @Autowired
-    ITransactionService transactionService;
+    private ITransactionService transactionService;
 
     /** The transfer service. */
     @Autowired
-    ITransferService transferService;
+    private ITransferService transferService;
 
-
+    /** The Constant NUMBER_OF_ELEMENTS_PER_PAGE_TWO. */
+    private static final int NUMBER_OF_ELEMENTS_PER_PAGE_TWO = 2;
 
     /**
      * Instantiates a new home controller.
      *
-     * @param contactService the contact service
-     * @param userService the user service
-     * @param transactionService the transaction service
-     * @param transferService the transfer service
+     * @param contactServicee the contact servicee
+     * @param userServicee the user servicee
+     * @param transactionServicee the transaction servicee
+     * @param transferServicee the transfer servicee
      */
     public HomeController(
-    		IContactService contactService,
-    		IUserService userService,
-			ITransactionService transactionService,
-			ITransferService transferService) {
+    		final IContactService contactServicee,
+    		final IUserService userServicee,
+    		final ITransactionService transactionServicee,
+    		final ITransferService transferServicee) {
 
-		this.contactService = contactService;
-		this.userService = userService;
-		this.transactionService = transactionService;
-		this.transferService = transferService;
-	}    
+		this.contactService = contactServicee;
+		this.userService = userServicee;
+		this.transactionService = transactionServicee;
+		this.transferService = transferServicee;
+	}
 
     // ************************************************************************
 
@@ -88,15 +89,15 @@ public class HomeController {
      */
     @GetMapping({ "/home" })
     public String home(
-    		Model model,
-    		@RequestParam(name="page", defaultValue = "0")
-    		int page, 
-    		Double amount,
-    		String contactEmail,
-    		String description,
-    		String errorMessage)
-    {
-        String emailSession = SecurityContextHolder
+    		final Model model,
+    		@RequestParam(name = "page", defaultValue = "0")
+    		final int page,
+    		final Double amount,
+    		final String contactEmail,
+    		final String description,
+    		final String errorMessage) {
+
+    	String emailSession = SecurityContextHolder
         		.getContext()
         		.getAuthentication()
         		.getName();
@@ -112,14 +113,20 @@ public class HomeController {
         		.findContactByPayer(userLogDTO);
 
         Page<TransactionDTO> pageTransactions = transactionService
-        		.lastThreeTransactions(userLogDTO, PageRequest.of(page,2));
+        		.lastThreeTransactions(userLogDTO, PageRequest.of(
+        				page,
+        				NUMBER_OF_ELEMENTS_PER_PAGE_TWO));
 
         Page<TransferDTO> pageTransfers = transferService
-        		.lastThreeTransfers(userLogDTO, PageRequest.of(page,2));
+        		.lastThreeTransfers(userLogDTO, PageRequest.of(
+        				page,
+        				NUMBER_OF_ELEMENTS_PER_PAGE_TWO));
 
         Page<TransactionDTO> pageRefunds = transactionService
         		.lastThreeTransactionsBeneficiary(
-        				userLogDTO, PageRequest.of(page,2));
+        				userLogDTO, PageRequest.of(
+        						page,
+        						NUMBER_OF_ELEMENTS_PER_PAGE_TWO));
 
         String role = isUserRoleAdminCheck(userLogDTO);
 
@@ -136,7 +143,7 @@ public class HomeController {
         		pageTransfers,
 				pageRefunds,
 				role);
-        
+
         log.info(" ====> GET REQUEST TO LAUNCH HOME PAGE"
         		+ " - Get /home SUCCESS<==== ");
 
@@ -144,7 +151,7 @@ public class HomeController {
     }
 
 
-    // ************************************************************************
+    // **********************************************************************
 
 	/**
      * Login.
@@ -153,13 +160,12 @@ public class HomeController {
      * @return the string
      */
     @GetMapping({ "/login" })
-    public String login(Model model)
-    {
+    public String login(final Model model) {
 		log.info(" ====>Loading login requested - Get /login <==== ");
         return "login";
     }
 
-	// ************************************************************************
+	// *********************************************************************
 
 	/**
 	 * Save.
@@ -168,11 +174,10 @@ public class HomeController {
 	 * @return the string
 	 */
 	@GetMapping({ "/save" })
-    public String save(Model model)
-    {
+    public String save(final Model model) {
         return "login";
     }
-    // ************************************************************************
+    // **********************************************************************
 
 	/**
      * Index.
@@ -181,13 +186,12 @@ public class HomeController {
      * @return the string
      */
     @GetMapping({ "/index" })
-	public String index(Model model)
-    {
+	public String index(final Model model) {
         return "login";
     }
 
-	// ************************************************************************
- 
+	// ********************************************************************
+
 	/**
 	 * Logout.
 	 *
@@ -197,25 +201,26 @@ public class HomeController {
 	 */
 	@GetMapping({ "/logout" })
 	public String logout(
-			HttpServletRequest request,
-			HttpServletResponse response)
-    {
-    	log.info(" ====> logout requested - Get /logout<==== ");
+			final HttpServletRequest request,
+			final HttpServletResponse response) {
+
+		log.info(" ====> logout requested - Get /logout<==== ");
 
     	Authentication auth = SecurityContextHolder
         		.getContext().getAuthentication();
 
-    	if (auth != null){
+    	if (auth != null) {
             new SecurityContextLogoutHandler()
             .logout(request, response, auth);
         }
-        log.info(" ====> logout request - Get /logout -> SUCCESS<==== ");
+        log.info(" ====> logout request"
+        		+ " - Get /logout -> SUCCESS<==== ");
+
         return "redirect:/login?logout";
     }
 
 
-	// ************************************************************************
-
+	// *******************************************************************
 
 	/**
 	 * Adds the data to user model.
@@ -233,16 +238,16 @@ public class HomeController {
 	 * @return the string
 	 */
 	private String addDataToUserModel(
-			Model model,
-			int page,
-			String errorMessage,
-			String firstName,
-			Double wallet,
-			List<ContactDTO> contacts,
-			Page<TransactionDTO> pageTransactions,
-			Page<TransferDTO> pageTransfers,
-			Page<TransactionDTO> pageRefunds,
-			String role) {
+			final Model model,
+			final int page,
+			final String errorMessage,
+			final String firstName,
+			final Double wallet,
+			final List<ContactDTO> contacts,
+			final Page<TransactionDTO> pageTransactions,
+			final Page<TransferDTO> pageTransfers,
+			final Page<TransactionDTO> pageRefunds,
+			final String role) {
 
 		model.addAttribute("admin", role);
         model.addAttribute("contacts", contacts);
@@ -265,17 +270,16 @@ public class HomeController {
 	 * @param userLogDTO the user log DTO
 	 * @return the string
 	 */
-	private String isUserRoleAdminCheck(UserDTO userLogDTO) {
+	private String isUserRoleAdminCheck(final UserDTO userLogDTO) {
 		String role = null;
         String authorisation = userLogDTO.getRoles();
 
-        if ( authorisation.equals("ROLE_ADMIN") ) {
+        if (authorisation.equals("ROLE_ADMIN")) {
             role = "admin";
         }
 		return role;
 	}
 
-	//****************************************************************** 
-
+	//******************************************************************
 
 }

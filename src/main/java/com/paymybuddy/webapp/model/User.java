@@ -14,53 +14,58 @@ import javax.persistence.Table;
  * The Class User.
  */
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
+
+	private static final int VARIABLE_LENGTH_10 = 10;
+	private static final int VARIABLE_LENGTH_50 = 50;
+	private static final int VARIABLE_LENGTH_100 = 100;
 
 	/** The id. */
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "id_user", nullable = false)
+    @Column(name = "id_user", nullable = false)
     private int id;
 
     /** The user name. */
-    @Column(name= "user_name", length = 50, nullable = false)
+    @Column(name = "user_name", length = VARIABLE_LENGTH_50, nullable = false)
     private String userName;
 
     /** The first name. */
-    @Column(name= "first_name", length = 50)
+    @Column(name = "first_name", length = VARIABLE_LENGTH_50)
     private String firstName;
 
     /** The last name. */
-    @Column(name= "last_name", length = 50)
+    @Column(name = "last_name", length = VARIABLE_LENGTH_50)
     private String lastName;
 
     /** The email. */
-    @Column(name= "email", length = 50, unique = true, nullable = false)
+    @Column(name = "email", length = VARIABLE_LENGTH_50,
+    		unique = true, nullable = false)
     private String email;
 
     /** The password. */
-    @Column(name= "password", length = 100, nullable = false)
+    @Column(name = "password", length = VARIABLE_LENGTH_100, nullable = false)
     private String password;
 
 	/** The creation date. */
-	@Column(name= "creation_date", nullable = false)
+	@Column(name = "creation_date", nullable = false)
     private LocalDate creationDate = LocalDate.now();
 
     /** The modification date. */
-    @Column(name= "modification_date")
+    @Column(name = "modification_date")
     private LocalDate modificationDate = LocalDate.now();
 
     /** The roles. */
-    @Column(name= "roles", length = 10, nullable = false)
+    @Column(name = "roles", length = VARIABLE_LENGTH_10, nullable = false)
     private String roles;
 
     /** The active. */
-    @Column(name= "active")
+    @Column(name = "active")
     private boolean active;
 
     /** The wallet amount. */
-    @Column(name= "wallet_amount", length = 10)
+    @Column(name = "wallet_amount", length = VARIABLE_LENGTH_10)
     private Double  walletAmount  ;
 
     /**
@@ -72,41 +77,42 @@ public class User {
     /**
      * Instantiates a new user.
      *
-     * @param id the id
-     * @param userName the user name
-     * @param firstName the first name
-     * @param lastName the last name
-     * @param email the email
-     * @param password the password
-     * @param creationDate the creation date
-     * @param modificationDate the modification date
-     * @param roles the roles
-     * @param active the active
-     * @param walletAmount the wallet amount
+     * @param idd the idd
+     * @param userNamee the user namee
+     * @param firstNamee the first namee
+     * @param lastNamee the last namee
+     * @param emaill the emaill
+     * @param passwordd the passwordd
+     * @param creationDatee the creation datee
+     * @param modificationDatee the modification datee
+     * @param roless the roless
+     * @param activee the activee
+     * @param walletAmountt the wallet amountt
      */
-    public User(int id,
-    		String userName,
-    		String firstName,
-    		String lastName,
-    		String email,
-    		String password,
-			LocalDate creationDate,
-			LocalDate modificationDate,
-			String roles,
-			boolean active,
-			Double walletAmount) {
+    public User(
+    		final int idd,
+    		final String userNamee,
+    		final String firstNamee,
+    		final String lastNamee,
+    		final String emaill,
+    		final String passwordd,
+    		final LocalDate creationDatee,
+    		final LocalDate modificationDatee,
+    		final String roless,
+    		final boolean activee,
+    		final Double walletAmountt) {
 		super();
-		this.id = id;
-		this.userName = userName;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-		this.creationDate = creationDate;
-		this.modificationDate = modificationDate;
-		this.roles = roles;
-		this.active = active;
-		this.walletAmount = walletAmount;
+		this.id = idd;
+		this.userName = userNamee;
+		this.firstName = firstNamee;
+		this.lastName = lastNamee;
+		this.email = emaill;
+		this.password = passwordd;
+		this.creationDate = creationDatee;
+		this.modificationDate = modificationDatee;
+		this.roles = roless;
+		this.active = activee;
+		this.walletAmount = walletAmountt;
 	}
 
     /**
@@ -121,10 +127,10 @@ public class User {
     /**
      * Sets the id.
      *
-     * @param id the new id
+     * @param idd the new id
      */
-    public void setId(int id) {
-        this.id = id;
+    public void setId(final int idd) {
+        this.id = idd;
     }
 
     /**
@@ -139,10 +145,10 @@ public class User {
     /**
      * Sets the user name.
      *
-     * @param userName the new user name
+     * @param userNamee the new user name
      */
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(final String userNamee) {
+        this.userName = userNamee;
     }
 
     /**
@@ -157,10 +163,10 @@ public class User {
     /**
      * Sets the first name.
      *
-     * @param firstName the new first name
+     * @param firstNamee the new first name
      */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstName(final String firstNamee) {
+        this.firstName = firstNamee;
     }
 
     /**
@@ -175,10 +181,10 @@ public class User {
     /**
      * Sets the last name.
      *
-     * @param lastName the new last name
+     * @param lastNamee the new last name
      */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastName(final String lastNamee) {
+        this.lastName = lastNamee;
     }
 
     /**
@@ -193,10 +199,10 @@ public class User {
     /**
      * Sets the email.
      *
-     * @param email the new email
+     * @param emaill the new email
      */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(final String emaill) {
+        this.email = emaill;
     }
 
     /**
@@ -211,10 +217,10 @@ public class User {
     /**
      * Sets the password.
      *
-     * @param password the new password
+     * @param passwordd the new password
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(final String passwordd) {
+        this.password = passwordd;
     }
 
     /**
@@ -238,19 +244,19 @@ public class User {
     /**
      * Sets the modification date.
      *
-     * @param modificationDate the new modification date
+     * @param modificationDatee the new modification date
      */
-    public void setModificationDate(LocalDate modificationDate) {
-        this.modificationDate = modificationDate;
+    public void setModificationDate(final LocalDate modificationDatee) {
+        this.modificationDate = modificationDatee;
     }
 
     /**
      * Sets the creation date.
      *
-     * @param creationDate the new creation date
+     * @param creationDatee the new creation date
      */
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
+    public void setCreationDate(final LocalDate creationDatee) {
+        this.creationDate = creationDatee;
     }
 
     /**
@@ -265,10 +271,10 @@ public class User {
     /**
      * Sets the roles.
      *
-     * @param roles the new roles
+     * @param roless the new roles
      */
-    public void setRoles(String roles) {
-        this.roles = roles;
+    public void setRoles(final String roless) {
+        this.roles = roless;
     }
 
     /**
@@ -283,10 +289,10 @@ public class User {
     /**
      * Sets the active.
      *
-     * @param active the new active
+     * @param activee the new active
      */
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setActive(final boolean activee) {
+        this.active = activee;
     }
 
     /**
@@ -295,16 +301,16 @@ public class User {
      * @return the wallet amount
      */
     public Double getWalletAmount() {
-        return walletAmount; 
+        return walletAmount;
     }
 
     /**
      * Sets the wallet amount.
      *
-     * @param walletAmount the new wallet amount
+     * @param walletAmountt the new wallet amount
      */
-    public void setWalletAmount(Double walletAmount) {
-    	 this.walletAmount = walletAmount;
+    public void setWalletAmount(final Double walletAmountt) {
+    	 this.walletAmount = walletAmountt;
     }
 
     /**

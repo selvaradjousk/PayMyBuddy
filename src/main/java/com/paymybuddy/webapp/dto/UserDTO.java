@@ -2,9 +2,7 @@ package com.paymybuddy.webapp.dto;
 
 import java.time.LocalDate;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * The Class UserDTO.
@@ -13,7 +11,6 @@ import lombok.Setter;
 public class UserDTO {
 
 	/** The id. */
-	@Setter @Getter
     private int id;
 
     /** The user name. */
@@ -44,29 +41,28 @@ public class UserDTO {
     private boolean active;
 
 	/** The wallet amount. */
-    private Double  walletAmount;	
+    private Double  walletAmount;
 
     /**
      * Instantiates a new user DTO.
      *
-     * @param userName the user name
-     * @param firstName the first name
-     * @param email the email
-     * @param password the password
+     * @param userNamee the user namee
+     * @param firstNamee the first namee
+     * @param emaill the emaill
+     * @param passwordd the passwordd
      */
     public UserDTO(
-    		String userName,
-    		String firstName,
-    		String email,
-    		String password) {
-    	
-		this.userName = userName;
-		this.firstName = firstName;
-		this.email = email;
-		this.password = password;
+    		final String userNamee,
+    		final String firstNamee,
+    		final String emaill,
+    		final String passwordd) {
+
+		this.userName = userNamee;
+		this.firstName = firstNamee;
+		this.email = emaill;
+		this.password = passwordd;
 	}
 
-	
     /**
      * Gets the id.
      *
@@ -79,15 +75,15 @@ public class UserDTO {
     /**
      * Sets the id.
      *
-     * @param id the new id
+     * @param idd the new id
      */
-    public void setId(int id) {
-        this.id = id;
+    public void setId(final int idd) {
+        this.id = idd;
     }
 
     /**
   * Gets the user name.
-  * 
+  *
   * @return the user name
   */
     public String getUserName() {
@@ -97,10 +93,10 @@ public class UserDTO {
     /**
      * Sets the user name.
      *
-     * @param userName the new user name
+     * @param userNamee the new user name
      */
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(final String userNamee) {
+        this.userName = userNamee;
     }
 
     /**
@@ -115,10 +111,10 @@ public class UserDTO {
     /**
      * Sets the first name.
      *
-     * @param firstName the new first name
+     * @param firstNamee the new first name
      */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstName(final String firstNamee) {
+        this.firstName = firstNamee;
     }
 
 
@@ -128,13 +124,12 @@ public class UserDTO {
     /**
      * Sets the last name.
      *
-     * @param firstName the new last name
+     * @param lastNamee the new last name
      */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastName(final String lastNamee) {
+        this.lastName = lastNamee;
     }
  
-
     /**
      * Gets the last name.
      *
@@ -162,10 +157,10 @@ public class UserDTO {
     /**
      * Sets the email.
      *
-     * @param email the new email
+     * @param emaill the new email
      */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(final String emaill) {
+        this.email = emaill;
     }
 
 
@@ -181,12 +176,12 @@ public class UserDTO {
     /**
      * Sets the password.
      *
-     * @param password the new password
+     * @param passwordd the new password
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(final String passwordd) {
+        this.password = passwordd;
     }
-   
+
     /**
      * Checks if is active.
      *
@@ -199,10 +194,10 @@ public class UserDTO {
     /**
      * Sets the active.
      *
-     * @param active the new active
+     * @param activee the new active
      */
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setActive(final boolean activee) {
+        this.active = activee;
     }
 
 
@@ -218,10 +213,10 @@ public class UserDTO {
     /**
      * Sets the roles.
      *
-     * @param roles the new roles
+     * @param roless the new roles
      */
-    public void setRoles(String roles) {
-        this.roles = roles;
+    public void setRoles(final String roless) {
+        this.roles = roless;
     }
 
     /**
@@ -236,10 +231,10 @@ public class UserDTO {
     /**
      * Sets the wallet amount.
      *
-     * @param walletAmount the new wallet amount
+     * @param walletAmountt the new wallet amount
      */
-    public void setWalletAmount(Double walletAmount) {
-        this.walletAmount = walletAmount;
+    public void setWalletAmount(final Double walletAmountt) {
+        this.walletAmount = walletAmountt;
     }
 
     /**
@@ -254,10 +249,10 @@ public class UserDTO {
     /**
      * Sets the creation date.
      *
-     * @param creationDate the new creation date
+     * @param creationDatee the new creation date
      */
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
+    public void setCreationDate(final LocalDate creationDatee) {
+        this.creationDate = creationDatee;
     }
 
     /**
@@ -272,12 +267,12 @@ public class UserDTO {
     /**
      * Sets the modification date.
      *
-     * @param modificationDate the new modification date
+     * @param modificationDatee the new modification date
      */
-    public void setModificationDate(LocalDate modificationDate) {
-        this.modificationDate = modificationDate;
+    public void setModificationDate(final LocalDate modificationDatee) {
+        this.modificationDate = modificationDatee;
     } 
-    
+
     /**
      * To string.
      *

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * The Class SecurityController.
+ * @author Senthil
  */
 @Controller
 public class SecurityController {
@@ -17,7 +18,7 @@ public class SecurityController {
 	 * @return the string
 	 */
 	@GetMapping("/notAuthorized")
-	public String error(Model model) {
+	public String error(final Model model) {
 		return "notAuthorized";
 	}
 }

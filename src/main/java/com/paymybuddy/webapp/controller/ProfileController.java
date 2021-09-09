@@ -13,28 +13,26 @@ import lombok.extern.log4j.Log4j2;
 
 /**
  * The Class ProfileController.
+ * @author Senthil
  */
 @Log4j2
 @Controller
 public class ProfileController {
 
-
     /** The user service. */
 	@Autowired
-    IUserService userService;
+    private IUserService userService;
 
     /**
      * Instantiates a new profile controller.
      *
-     * @param userService the user service
+     * @param userServicee the user servicee
      */
-    public ProfileController(IUserService userService) {
-		this.userService = userService;
+    public ProfileController(final IUserService userServicee) {
+		this.userService = userServicee;
 	}
 
-
-
-	// ************************************************************************
+	// ********************************************************************
 
     /**
 	 * Login.
@@ -50,23 +48,23 @@ public class ProfileController {
 	 */
 	@GetMapping({ "/profile" })
     public String login(
-    		Model model,
-    		String errorMessage,
+    		final Model model,
+    		final String errorMessage,
     		String firstName,
     		String lastName,
     		String email,
     		String password,
-    		String confirmation)
-    {
-    	log.info(" Request - Get /profile ");
+    		String confirmation) {
+
+		log.info(" Request - Get /profile ");
 
     	String emailSession = SecurityContextHolder
     			.getContext()
     			.getAuthentication()
     			.getName();
- 
+
     	log.info(" Session email by SecurityContextHolder: " + emailSession);
-    	
+
     	UserDTO userLogDTO = userService
     			.findUserByEmail(emailSession);
 
@@ -89,7 +87,7 @@ public class ProfileController {
         String role = isUserRoleAdminCheck(userLogDTO);
 
         log.info(" ====> GATHER DATA MODEL FOR PROFILE PAGE LOADING<==== ");
-        
+
         addDataToUserModel(
         		model,
         		errorMessage,
@@ -107,8 +105,6 @@ public class ProfileController {
     }
     // ************************************************************************
 
-
-
 	/**
      * Adds the data to user model.
      *
@@ -120,16 +116,17 @@ public class ProfileController {
      * @param password the password
      * @param confirmation the confirmation
      * @param role the role
+     * @return the string
      */
     private String addDataToUserModel(
-    		Model model,
-    		String errorMessage,
-    		String firstName,
-    		String lastName,
-    		String email,
-			String password,
-			String confirmation,
-			String role) {
+    		final Model model,
+    		final String errorMessage,
+    		final String firstName,
+    		final String lastName,
+    		final String email,
+    		final String password,
+    		final String confirmation,
+    		final String role) {
 
     	model.addAttribute("firstName", firstName);
         model.addAttribute("lastName", lastName);
@@ -144,22 +141,21 @@ public class ProfileController {
 
     // ************************************************************
 
-
 	/**
      * Checks if is user role admin check.
      *
      * @param userLogDTO the user log DTO
      * @return the string
      */
-    private String isUserRoleAdminCheck(UserDTO userLogDTO) {
+    private String isUserRoleAdminCheck(final UserDTO userLogDTO) {
 		String role = null;
         String authorisation = userLogDTO
         		.getRoles();
-        if ( authorisation.equals("ROLE_ADMIN") ) {
+        if (authorisation.equals("ROLE_ADMIN")) {
             role = "admin";
         }
 		return role;
 	}
 
-	// ************************************************************************
+	// ******************************************************************
 }

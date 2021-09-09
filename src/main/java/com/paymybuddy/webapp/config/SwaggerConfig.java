@@ -14,6 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * The Class SwaggerConfig.
+ * @author Senthil
  */
 @Log4j2
 @Configuration
@@ -38,6 +39,11 @@ public class SwaggerConfig {
         		.build();
     }
 
+	/**
+	 * Api info.
+	 *
+	 * @return the api info
+	 */
 	private ApiInfo apiInfo() {
 		log.info("Swagger UI requested...");
 		return new ApiInfoBuilder().title("PayMyBuddy Web App")

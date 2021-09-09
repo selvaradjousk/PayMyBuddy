@@ -13,13 +13,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * The Class SecurityConfig.
- * 
+ *
  * @author Senthil
  */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 
     /** The user details service. */
 	@Autowired
@@ -29,10 +29,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * Instantiates a new security config.
      *
-     * @param userDetailsService the user details service
+     * @param userDetailsServicee the user details servicee
      */
-    public SecurityConfig(UserDetailsService userDetailsService) {
-		this.userDetailsService = userDetailsService;
+    public SecurityConfig(
+    		final UserDetailsService userDetailsServicee) {
+		this.userDetailsService = userDetailsServicee;
 	}
 
  // ************************************************************************
@@ -43,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * @return the password encoder
      */
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -55,7 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * @throws Exception the exception
      */
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(
+    		final AuthenticationManagerBuilder auth) throws Exception {
 
         auth.userDetailsService(userDetailsService);
     }
@@ -68,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * @throws Exception the exception
      */
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
 
         http.authorizeRequests().antMatchers("/register*").permitAll();
 
@@ -77,7 +79,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/").permitAll()
                     .antMatchers("/css/**").permitAll()
                     .antMatchers("/img/**").permitAll()
-                    .antMatchers("/save**/**","/admin,/manage/**").hasRole("ADMIN")
+                    .antMatchers("/save**/**", "/admin,/manage/**")
+                    	.hasRole("ADMIN")
                     .anyRequest().authenticated();
 
         http
@@ -87,9 +90,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         		.defaultSuccessUrl("/home")
         		// redirect the user back to the login page on error login
         		.failureUrl("/login?error=true")
-        		// redirect the user back to the registration page on error login
+        		// redirect the user back to the registration page
+        		// on error login
         		.failureForwardUrl("/register").permitAll();
-				
+
 //        http
 //				.oauth2Login()
 //        		.defaultSuccessUrl("/home", true)
@@ -117,11 +121,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // authenticated users to submit a request to a Web application
         // against which they are currently authenticated. CSRF attacks
         // exploit the trust a Web application has in an authenticated user.
-        
+
         // CSRF protection is enabled by default in the Java configuration.
-        // https://stackoverflow.com/questions/52363487/what-is-the-reason-to-disable-csrf-in-spring-boot-web-application
-        
-        // CSRF - disable it because it was interfering with our existing authentication mechanism.
+        // https://stackoverflow.com/questions/52363487/what-is-the
+        // -reason-to-disable-csrf-in-spring-boot-web-application
+
+        // CSRF - disable it because it was interfering with our existing
+        // authentication mechanism.
         http.csrf().disable();
 
     }

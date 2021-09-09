@@ -16,27 +16,27 @@ import javax.persistence.Table;
  * The Class Contact.
  */
 @Entity
-@Table(name="contact")
+@Table(name = "contact")
 public class Contact {
 
     /** The id contact. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "id_contact", nullable = false)
+    @Column(name = "id_contact", nullable = false)
     private Integer idContact;
 
 	/** The creation date. */
-	@Column(name= "creation_date", updatable=false)
+	@Column(name = "creation_date", updatable = false)
     private LocalDate creationDate = LocalDate.now();
 
     /** The payer. */
     @ManyToOne(optional = false)
-    @JoinColumn(name= "payer_id")
+    @JoinColumn(name = "payer_id")
     private User payer;
 
     /** The contact. */
     @ManyToOne(optional = false)
-    @JoinColumn(name= "contact_id")
+    @JoinColumn(name = "contact_id")
     private User contact;
 
       /**
@@ -50,19 +50,23 @@ public class Contact {
     //************************************************************************
     //************************************************************************
 	/**
-	 * Instantiates a new contact.
-	 *
-	 * @param idContact the id contact
-	 * @param creationDate the creation date
-	 * @param payer the payer
-	 * @param contact the contact
-	 */
-	public Contact(Integer idContact, LocalDate creationDate, User payer, User contact) {
+     * Instantiates a new contact.
+     *
+     * @param idContactt the id contactt
+     * @param creationDatee the creation datee
+     * @param payerr the payerr
+     * @param contactt the contactt
+     */
+	public Contact(
+			final Integer idContactt,
+			final LocalDate creationDatee,
+			final User payerr,
+			final User contactt) {
 		super();
-		this.idContact = idContact;
-		this.creationDate = creationDate;
-		this.payer = payer;
-		this.contact = contact;
+		this.idContact = idContactt;
+		this.creationDate = creationDatee;
+		this.payer = payerr;
+		this.contact = contactt;
 	}
 
     //************************************************************************
@@ -81,10 +85,10 @@ public class Contact {
     /**
      * Sets the id contact.
      *
-     * @param idContact the new id contact
+     * @param idContactt the new id contact
      */
-    public void setIdContact(Integer idContact) {
-        this.idContact = idContact;
+    public void setIdContact(final Integer idContactt) {
+        this.idContact = idContactt;
     }
 
     /**
@@ -99,10 +103,10 @@ public class Contact {
     /**
      * Sets the creation date.
      *
-     * @param creationDate the new creation date
+     * @param creationDatee the new creation date
      */
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
+    public void setCreationDate(final LocalDate creationDatee) {
+        this.creationDate = creationDatee;
     }
 
     /**
@@ -117,10 +121,10 @@ public class Contact {
     /**
      * Sets the payer.
      *
-     * @param payer the new payer
+     * @param payerr the new payer
      */
-    public void setPayer(User payer) {
-        this.payer = payer;
+    public void setPayer(final User payerr) {
+        this.payer = payerr;
     }
 
     /**
@@ -135,10 +139,10 @@ public class Contact {
     /**
      * Sets the contact.
      *
-     * @param contact the new contact
+     * @param contactt the new contact
      */
-    public void setContact(User contact) {
-        this.contact = contact;
+    public void setContact(final User contactt) {
+        this.contact = contactt;
     }
 
     /**

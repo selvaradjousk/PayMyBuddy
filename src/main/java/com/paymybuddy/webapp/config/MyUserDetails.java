@@ -14,19 +14,20 @@ import com.paymybuddy.webapp.model.User;
 
 /**
  * The Class MyUserDetails.
+ * @author Senthil
  */
 public class MyUserDetails  implements UserDetails {
 
 
 	/** The user name. */
 	private String userName;
-    
+
     /** The password. */
     private String password;
-    
+
     /** The active. */
     private boolean active;
-    
+
     /** The authorities. */
     private List<GrantedAuthority> authorities;
 
@@ -37,7 +38,7 @@ public class MyUserDetails  implements UserDetails {
      *
      * @param user the user
      */
-    public MyUserDetails(User user){
+    public MyUserDetails(final User user) {
         this.userName = user.getEmail();
         this.password = user.getPassword();
         this.active = user.isActive();

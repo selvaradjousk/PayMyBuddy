@@ -9,10 +9,6 @@ import lombok.NoArgsConstructor;
 /**
  * The Class ContactDTO.
  */
-
-/**
- * Instantiates a new contact DTO.
- */
 @NoArgsConstructor
 public class ContactDTO {
 
@@ -28,20 +24,22 @@ public class ContactDTO {
     /** The contact. */
     private User contact;
 
-      
+
 	/**
 	 * Instantiates a new contact DTO.
 	 *
-	 * @param creationDate the creation date
-	 * @param payer the payer
-	 * @param contact the contact
+	 * @param creationDatee the creation datee
+	 * @param payere the payere
+	 * @param contacte the contacte
 	 */
 	public ContactDTO(
-			LocalDate creationDate, User payer, User contact) {
+			final LocalDate creationDatee,
+			final User payere,
+			final User contacte) {
   		super();
-		this.creationDate = creationDate;
-  		this.payer = payer;
-  		this.contact = contact;
+		this.creationDate = creationDatee;
+  		this.payer = payere;
+  		this.contact = contacte;
   	}
 
 	   /**
@@ -57,10 +55,10 @@ public class ContactDTO {
     /**
      * Sets the id contact.
      *
-     * @param idContact the new id contact
+     * @param idContactt the new id contact
      */
-    public void setIdContact(Integer idContact) {
-        this.idContact = idContact;
+    public void setIdContact(final Integer idContactt) {
+        this.idContact = idContactt;
     }
 
 	/**
@@ -75,10 +73,10 @@ public class ContactDTO {
     /**
      * Sets the creation date.
      *
-     * @param creationDate the new creation date
+     * @param creationDater the new creation date
      */
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
+    public void setCreationDate(final LocalDate creationDater) {
+        this.creationDate = creationDater;
     }
 
 
@@ -94,10 +92,10 @@ public class ContactDTO {
     /**
      * Sets the payer.
      *
-     * @param payer the new payer
+     * @param payerr the new payer
      */
-    public void setPayer(User payer) {
-        this.payer = payer;
+    public void setPayer(final User payerr) {
+        this.payer = payerr;
     }
 
     /**
@@ -112,10 +110,10 @@ public class ContactDTO {
     /**
      * Sets the contact.
      *
-     * @param contact the new contact
+     * @param contactt the new contact
      */
-    public void setContact(User contact) {
-        this.contact = contact;
+    public void setContact(final User contactt) {
+        this.contact = contactt;
     }
 
     /**

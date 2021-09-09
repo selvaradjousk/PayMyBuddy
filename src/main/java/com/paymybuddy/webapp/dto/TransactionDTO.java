@@ -14,17 +14,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TransactionDTO {
 
-	/**
-	 * Sets the id transaction.
-	 *
-	 * @param idTransaction the new id transaction
-	 */
-	@Setter /**
-  * Gets the id transaction.
-  *
-  * @return the id transaction
-  */
- @Getter
+	/** The idTransaction. */
+	@Getter @Setter
 	private int idTransaction;
 
 	/** The payer. */
@@ -45,30 +36,27 @@ public class TransactionDTO {
 	/** The commision. */
 	private double commision;
 	
-	
 
 	/**
 	 * Instantiates a new transaction DTO.
 	 *
-	 * @param payer the payer
-	 * @param beneficiary the beneficiary
-	 * @param amount the amount
-	 * @param description the description
-	 * @param creationDate the creation date
-	 * @param commision the commision
+	 * @param payerr the payerr
+	 * @param beneficiaryy the beneficiaryy
+	 * @param amountt the amountt
+	 * @param descriptionn the descriptionn
 	 */
 	public TransactionDTO(
-			User payer,
-			User beneficiary,
-			double amount,
-			 String description) {
+			final User payerr,
+			final User beneficiaryy,
+			final double amountt,
+			final String descriptionn) {
 		super();
-		this.payer = payer;
-		this.beneficiary = beneficiary;
-		this.amount = amount;
-		this.description = description;
+		this.payer = payerr;
+		this.beneficiary = beneficiaryy;
+		this.amount = amountt;
+		this.description = descriptionn;
 	}
-	
+
 //	public TransactionDTO(
 //			User payer,
 //			User beneficiary,
@@ -85,7 +73,6 @@ public class TransactionDTO {
 //		this.commision = commision;
 //	}
 
-
 	/**
 	 * Gets the payer.
 	 *
@@ -98,10 +85,10 @@ public class TransactionDTO {
 	/**
 	 * Sets the payer.
 	 *
-	 * @param payer the new payer
+	 * @param payerr the new payer
 	 */
-	public void setPayer(User payer) {
-		this.payer = payer;
+	public void setPayer(final User payerr) {
+		this.payer = payerr;
 	}
 
 	/**
@@ -116,10 +103,10 @@ public class TransactionDTO {
 	/**
 	 * Sets the beneficiary.
 	 *
-	 * @param beneficiary the new beneficiary
+	 * @param beneficiaryy the new beneficiary
 	 */
-	public void setBeneficiary(User beneficiary) {
-		this.beneficiary = beneficiary;
+	public void setBeneficiary(final User beneficiaryy) {
+		this.beneficiary = beneficiaryy;
 	}
 
 	/**
@@ -134,10 +121,10 @@ public class TransactionDTO {
 	/**
 	 * Sets the creation date.
 	 *
-	 * @param createDate the new creation date
+	 * @param createDatee the new creation date
 	 */
-	public void setCreationDate(LocalDate createDate) {
-		this.creationDate = createDate;
+	public void setCreationDate(final LocalDate createDatee) {
+		this.creationDate = createDatee;
 	}
 
 	/**
@@ -152,10 +139,10 @@ public class TransactionDTO {
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount the new amount
+	 * @param amountt the new amount
 	 */
-	public void setAmount(double amount) {
-		this.amount = amount;
+	public void setAmount(final double amountt) {
+		this.amount = amountt;
 	}
 
 	/**
@@ -170,10 +157,10 @@ public class TransactionDTO {
 	/**
 	 * Sets the description.
 	 *
-	 * @param description the new description
+	 * @param descriptionn the new description
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescription(final String descriptionn) {
+		this.description = descriptionn;
 	}
 
 	/**
@@ -188,10 +175,10 @@ public class TransactionDTO {
 	/**
 	 * Sets the commision.
 	 *
-	 * @param commision the new commision
+	 * @param commisionn the new commision
 	 */
-	public void setCommision(double commision) {
-		this.commision = commision;
+	public void setCommision(final double commisionn) {
+		this.commision = commisionn;
 	}
 
 	/**

@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.paymybuddy.webapp.dto.BankAccountDTO;
 import com.paymybuddy.webapp.model.BankAccount;
 import com.paymybuddy.webapp.repository.BankAccountRepository;
-import com.paymybuddy.webapp.service.IBankAccountService;
 import com.paymybuddy.webapp.util.BankAccountMapper;
-import com.paymybuddy.webapp.util.UserMapper;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -31,40 +29,25 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("manage")
 public class BankAccountController {
 
-	
-
     /** The bank account repository. */
 	@Autowired
-    BankAccountRepository bankAccountRepository;
-
-	/** The bank account service. */
-	@Autowired
-    IBankAccountService bankAccountService;
-
-    /** The user mapper. */
-    public UserMapper userMapper= new UserMapper();
+    private BankAccountRepository bankAccountRepository;
 
     /** The bank account mapper. */
-    public BankAccountMapper bankAccountMapper = new BankAccountMapper();
+    private BankAccountMapper bankAccountMapper = new BankAccountMapper();
 
     /**
      * Constructor of class BankAccountController.
      * Instantiates a new bank account controller.
      *
-     * @param bankAccountRepository the bank account repository
-     * @param bankAccountService the bank account service
-     * @param userMapper the user mapper
-     * @param bankAccountMapper the bank account mapper
+     * @param bankAccountRepositoryy the bank account repositoryy
+     * @param bankAccountMapperr the bank account mapperr
      */
     public BankAccountController(
-    		BankAccountRepository bankAccountRepository,
-    		IBankAccountService bankAccountService,
-			UserMapper userMapper,
-			BankAccountMapper bankAccountMapper) {
-		this.bankAccountRepository = bankAccountRepository;
-		this.bankAccountService = bankAccountService;
-		this.userMapper = userMapper;
-		this.bankAccountMapper = bankAccountMapper;
+    		final BankAccountRepository bankAccountRepositoryy,
+			final BankAccountMapper bankAccountMapperr) {
+		this.bankAccountRepository = bankAccountRepositoryy;
+		this.bankAccountMapper = bankAccountMapperr;
 	}
 
 
@@ -83,7 +66,7 @@ public class BankAccountController {
         // return the list of bank accounts for the user
         return bankAccountRepository.findAll();
     }
-    
+
     // ************************************************************************
 
     /**
@@ -94,7 +77,7 @@ public class BankAccountController {
      */
     @PostMapping(value = "/bankAccount")
     public ResponseEntity<BankAccountDTO> addBankAccount(
-    		@Validated @RequestBody BankAccountDTO bankAccountDTO) {
+    		@Validated @RequestBody final BankAccountDTO bankAccountDTO) {
 
         log.debug("post /bankAccount - BankAccount Id: "
         + bankAccountDTO.getIdBankAccount()
@@ -117,7 +100,7 @@ public class BankAccountController {
         		.toBankAccountDTO(newBankAccount), HttpStatus.CREATED);
     }
     // ************************************************************************
- 
+
 
     /**
      * Modify bank account.
@@ -125,9 +108,9 @@ public class BankAccountController {
      * @param bankAccountDTO the bank account DTO
      * @return the response entity
      */
-    @PutMapping(value= "/bankAccount")
+    @PutMapping(value = "/bankAccount")
     public ResponseEntity<BankAccountDTO> modifyBankAccount(
-    		@Validated @RequestBody BankAccountDTO bankAccountDTO) {
+    		@Validated @RequestBody final BankAccountDTO bankAccountDTO) {
 
     	log.info("update done for BankAccount on Rib : "
     	+ bankAccountDTO.getRib()
@@ -138,7 +121,7 @@ public class BankAccountController {
     			.toBankAccountDO(bankAccountDTO);
 
     	// Bank Account DO update done through repository interface
-    	BankAccount bankAccountUpdate= bankAccountRepository
+    	BankAccount bankAccountUpdate = bankAccountRepository
     			.save(bankAccount);
 
         log.info("New BankAccount Rib saved : "
@@ -146,8 +129,9 @@ public class BankAccountController {
                 + "for user: " + bankAccountUpdate.getUser()
                 + " update request SUCCESS");
 
-        return new ResponseEntity<BankAccountDTO>(bankAccountMapper
-    			.toBankAccountDTO(bankAccountUpdate), HttpStatus.CREATED);
+        return new ResponseEntity<BankAccountDTO>(
+        		bankAccountMapper.toBankAccountDTO(bankAccountUpdate),
+    			HttpStatus.CREATED);
     }
     // ************************************************************************
 
@@ -159,9 +143,9 @@ public class BankAccountController {
      * @param bankAccountDTO the bank account DTO
      * @return the response entity
      */
-    @DeleteMapping(value= "/bankAccount")
+    @DeleteMapping(value = "/bankAccount")
     public ResponseEntity<BankAccountDTO> deleteBankAccount(
-    		@RequestBody BankAccountDTO bankAccountDTO) {
+    		@RequestBody final BankAccountDTO bankAccountDTO) {
 
     	log.info("Delete Bank acocount requested - RIB: "
     	+ bankAccountDTO.getRib()
@@ -183,6 +167,5 @@ public class BankAccountController {
         return new ResponseEntity<>(bankAccountDTO, HttpStatus.OK);
     }
     // ************************************************************************
-
 
 }

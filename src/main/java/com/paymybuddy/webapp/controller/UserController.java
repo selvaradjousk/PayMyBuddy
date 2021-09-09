@@ -15,6 +15,7 @@ import lombok.extern.log4j.Log4j2;
 
 /**
  * The Class UserController.
+ * @author Senthil
  */
 @Log4j2
 @Controller
@@ -22,16 +23,16 @@ public class UserController {
 
 	/** The user service. */
 	@Autowired
-    IUserService userService;
+    private IUserService userService;
 
 
     /**
      * Instantiates a new user controller.
      *
-     * @param userService the user service
+     * @param userServicee the user servicee
      */
-    public UserController(IUserService userService) {
-		this.userService = userService;
+    public UserController(IUserService userServicee) {
+		this.userService = userServicee;
 	}
 
     // ************************************************************************
@@ -50,15 +51,15 @@ public class UserController {
      */
     @GetMapping({ "/register" })
     public String register(
-    		Model model,
-    		String password,
-    		String confirmation,
-    		String firstName,
-    		String lastName,
-    		String email,
-    		String errorMessage)
-    {
-		log.info(" ====>Loading login requested - Get /register <==== ");
+    		final Model model,
+    		final String password,
+    		final String confirmation,
+    		final String firstName,
+    		final String lastName,
+    		final String email,
+    		final String errorMessage) {
+
+    	log.info(" ====>Loading login requested - Get /register <==== ");
 
 		model.addAttribute("firstName", firstName);
         model.addAttribute("lastName", lastName);
@@ -66,6 +67,7 @@ public class UserController {
         model.addAttribute("password", password);
         model.addAttribute("confirmation", confirmation);
         model.addAttribute("errorMessage", errorMessage);
+
         return "register";
     }
 
@@ -84,15 +86,21 @@ public class UserController {
      * @return the string
      */
     @PostMapping(value = { "/register" })
-    public String addNewUser(Model model,
-    		String firstName, String lastName, String email,
-    		String password, String confirmation, String errorMessage){
+    public String addNewUser(
+    		final Model model,
+    		final String firstName,
+    		final String lastName,
+    		final String email,
+    		final String password,
+    		final String confirmation,
+    		String errorMessage) {
 
     	log.info(" Login register new user requested"
-				+ " - POST /register for firstname: " + firstName
+				+ " - POST /register for firstname: "
+    			+ firstName
 				+ " lastname: " + lastName
-				+" password: "+ password
-				+"confirmation password: " + confirmation);
+				+ " password: " + password
+				+ "confirmation password: " + confirmation);
 
             try {
                 UserDTO newUserDTO = new UserDTO(
@@ -105,17 +113,17 @@ public class UserController {
                 		newUserDTO,
                 		confirmation);
 
-                return"redirect:/login";
-            }
-            catch (DataNotConformException | DataAlreadyExistException e){
+                return "redirect:/login";
+
+            } catch (DataNotConformException | DataAlreadyExistException e) {
                 errorMessage = e.getMessage();
-                return "redirect:/register?" +
-                        "&firstName="+firstName+
-                        "&lastName="+lastName+
-                        "&email="+email+
-                        "&password="+password+
-                        "&confirmation="+confirmation+
-                        "&errorMessage="+errorMessage;
+                return "redirect:/register?"
+                        + "&firstName=" + firstName
+                        + "&lastName=" + lastName
+                        + "&email=" + email
+                        + "&password=" + password
+                        + "&confirmation=" + confirmation
+                        + "&errorMessage=" + errorMessage;
             }
 
     }

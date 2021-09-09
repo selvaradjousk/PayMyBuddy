@@ -14,17 +14,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TransferDTO {
 
-	/**
-	 * Sets the id transfer.
-	 *
-	 * @param idTransfer the new id transfer
-	 */
-	@Setter /**
-  * Gets the id transfer.
-  *
-  * @return the id transfer
-  */
- @Getter
+	/** The idTransfer. */
+	@Getter @Setter
 	private int idTransfer;
 
 	/** The rib. */
@@ -46,26 +37,26 @@ public class TransferDTO {
 	/**
 	 * Instantiates a new transfer DTO.
 	 *
-	 * @param idTransfer the id transfer
-	 * @param rib the rib
-	 * @param createDate the create date
-	 * @param amount the amount
-	 * @param type the type
-	 * @param user the user
+	 * @param idTransferr the id transferr
+	 * @param ribb the ribb
+	 * @param createDatee the create datee
+	 * @param amountt the amountt
+	 * @param typee the typee
+	 * @param userr the userr
 	 */
 	public TransferDTO(
-			int idTransfer,
-			String rib,
-			LocalDate createDate,
-			double amount,
-			String type,
-			User user) {
+			final int idTransferr,
+			final String ribb,
+			final LocalDate createDatee,
+			final double amountt,
+			final String typee,
+			final User userr) {
 		super();
-		this.rib = rib;
-		this.createDate = createDate;
-		this.amount = amount;
-		this.type = type;
-		this.user = user;
+		this.rib = ribb;
+		this.createDate = createDatee;
+		this.amount = amountt;
+		this.type = typee;
+		this.user = userr;
 	}
 
 	/**
@@ -80,10 +71,10 @@ public class TransferDTO {
 	/**
 	 * Sets the rib.
 	 *
-	 * @param rib the new rib
+	 * @param ribb the new rib
 	 */
-	public void setRib(String rib) {
-		this.rib = rib;
+	public void setRib(final String ribb) {
+		this.rib = ribb;
 	}
 
 	/**
@@ -98,10 +89,10 @@ public class TransferDTO {
 	/**
 	 * Sets the creates the date.
 	 *
-	 * @param createDate the new creates the date
+	 * @param createDatee the new creates the date
 	 */
-	public void setCreateDate(LocalDate createDate) {
-		this.createDate = createDate;
+	public void setCreateDate(final LocalDate createDatee) {
+		this.createDate = createDatee;
 	}
 
 	/**
@@ -116,10 +107,10 @@ public class TransferDTO {
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount the new amount
+	 * @param amountt the new amount
 	 */
-	public void setAmount(double amount) {
-		this.amount = amount;
+	public void setAmount(final double amountt) {
+		this.amount = amountt;
 	}
 
 	/**
@@ -134,10 +125,10 @@ public class TransferDTO {
 	/**
 	 * Sets the type.
 	 *
-	 * @param type the new type
+	 * @param typee the new type
 	 */
-	public void setType(String type) {
-		this.type = type;
+	public void setType(final String typee) {
+		this.type = typee;
 	}
 
 	/**
@@ -152,10 +143,10 @@ public class TransferDTO {
 	/**
 	 * Sets the user.
 	 *
-	 * @param user the new user
+	 * @param userr the new user
 	 */
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(final User userr) {
+		this.user = userr;
 	}
 
 	/**
@@ -167,7 +158,9 @@ public class TransferDTO {
 	public String toString() {
 		return "TransferDTO [idTransfer=" + idTransfer
 				+ ", rib=" + rib + ","
-				+ " createDate=" + createDate + ", amount="
-				+ amount + ", type=" + type + ", user=" + user + "]";
+				+ " createDate=" + createDate
+				+ ", amount="
+				+ amount + ", type=" + type
+				+ ", user=" + user + "]";
 	}
 }

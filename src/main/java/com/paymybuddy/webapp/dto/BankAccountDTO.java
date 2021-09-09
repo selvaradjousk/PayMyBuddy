@@ -26,12 +26,14 @@ public class BankAccountDTO {
 	/**
 	 * Instantiates a new bank account DTO.
 	 *
-	 * @param user the user
-	 * @param rib the rib
+	 * @param userr the userr
+	 * @param ribb the ribb
 	 */
-	public BankAccountDTO(User user, String rib) {
-        this.user = user;
-        this.rib = rib;
+	public BankAccountDTO(
+			final User userr,
+			final String ribb) {
+        this.user = userr;
+        this.rib = ribb;
     }
 
     /**
@@ -46,10 +48,10 @@ public class BankAccountDTO {
     /**
      * Sets the user.
      *
-     * @param user the new user
+     * @param userr the new user
      */
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(final User userr) {
+        this.user = userr;
     }
 
     /**
@@ -64,12 +66,11 @@ public class BankAccountDTO {
     /**
      * Sets the rib.
      *
-     * @param rib the new rib
+     * @param ribb the new rib
      */
-    public void setRib(String rib) {
-        this.rib = rib;
+    public void setRib(final String ribb) {
+        this.rib = ribb;
     }
-    
 
     /**
      * To string.
@@ -80,7 +81,7 @@ public class BankAccountDTO {
 	public String toString() {
 		return "BankAccount ["
 				+ "idBankAccount=" + idBankAccount + ","
-				+ " user=" + user +
-				", rib=" + rib + "]";
+				+ " user=" + user + ","
+				+ " rib=" + rib + "]";
 	}
 }

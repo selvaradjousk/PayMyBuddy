@@ -14,22 +14,22 @@ import javax.persistence.Table;
  * The Class BankAccount.
  */
 @Entity
-@Table(name="bank_account")
+@Table(name = "bank_account")
 public class BankAccount {
 
     /** The id bank account. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "id_bank_account", nullable = false)
+    @Column(name = "id_bank_account", nullable = false)
     private Integer idBankAccount;
 
     /** The user. */
     @ManyToOne(optional = false)
-    @JoinColumn(name= "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     /** The rib. */
-    @Column(name= "rib", nullable = false)
+    @Column(name = "rib", nullable = false)
     private String rib;
 
     /**
@@ -41,25 +41,30 @@ public class BankAccount {
 	/**
 	 * Instantiates a new bank account.
 	 *
-	 * @param user the user
-	 * @param rib the rib
+	 * @param userr the userr
+	 * @param ribb the ribb
 	 */
-	public BankAccount(User user, String rib) {
-        this.user = user;
-        this.rib = rib;
+	public BankAccount(
+			final User userr,
+			final String ribb) {
+        this.user = userr;
+        this.rib = ribb;
     }
 
     /**
      * Instantiates a new bank account.
      *
-     * @param idBankAccount the id bank account
-     * @param user the user
-     * @param rib the rib
+     * @param idBankAccountt the id bank accountt
+     * @param userr the userr
+     * @param ribb the ribb
      */
-    public BankAccount(Integer idBankAccount, User user, String rib) {
-        this.idBankAccount = idBankAccount;
-        this.user = user;
-        this.rib = rib;
+    public BankAccount(
+    		final Integer idBankAccountt,
+    		final User userr,
+    		final String ribb) {
+        this.idBankAccount = idBankAccountt;
+        this.user = userr;
+        this.rib = ribb;
     }
 
     /**
@@ -74,10 +79,10 @@ public class BankAccount {
     /**
      * Sets the id bank account.
      *
-     * @param idBankAccount the new id bank account
+     * @param idBankAccountt the new id bank account
      */
-    public void setIdBankAccount(Integer idBankAccount) {
-        this.idBankAccount = idBankAccount;
+    public void setIdBankAccount(final Integer idBankAccountt) {
+        this.idBankAccount = idBankAccountt;
     }
 
     /**
@@ -92,10 +97,10 @@ public class BankAccount {
     /**
      * Sets the user.
      *
-     * @param user the new user
+     * @param userr the new user
      */
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(final User userr) {
+        this.user = userr;
     }
 
     /**
@@ -110,10 +115,10 @@ public class BankAccount {
     /**
      * Sets the rib.
      *
-     * @param rib the new rib
+     * @param ribb the new rib
      */
-    public void setRib(String rib) {
-        this.rib = rib;
+    public void setRib(final String ribb) {
+        this.rib = ribb;
     }
 
     /**

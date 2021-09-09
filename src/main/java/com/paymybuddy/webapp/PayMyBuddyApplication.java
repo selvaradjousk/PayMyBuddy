@@ -8,7 +8,7 @@ import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties
 
 /**
  * The Class PayMyBuddyApplication.
- * 
+ *
  * @author Senthil
  */
 

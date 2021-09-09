@@ -16,13 +16,13 @@ import javax.persistence.Table;
  * The Class Transaction.
  */
 @Entity
-@Table(name="transaction")
+@Table(name = "transaction")
 public class Transaction {
 
 	/** The id transaction. */
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name= "id_transaction", nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_transaction", nullable = false)
 	private int idTransaction;
 
 	/** The payer. */
@@ -32,23 +32,23 @@ public class Transaction {
 
 	/** The beneficiary. */
 	@ManyToOne
-	@JoinColumn(name= "beneficiary_id", nullable = false)
+	@JoinColumn(name = "beneficiary_id", nullable = false)
 	private User beneficiary;
 
 	/** The amount. */
-	@Column(name= "amount", nullable = false)
+	@Column(name = "amount", nullable = false)
 	private double amount;
 
 	/** The description. */
-	@Column(name= "description", length = 150,nullable = false)
+	@Column(name = "description", length = 150, nullable = false)
 	private String description;
 
 	/** The creation date. */
-	@Column(name= "date", nullable = false)
+	@Column(name = "date", nullable = false)
 	private LocalDate creationDate = LocalDate.now();
 
 	/** The commision. */
-	@Column(name= "commision")
+	@Column(name = "commision")
 	private double commision;
 
 	/**
@@ -62,30 +62,30 @@ public class Transaction {
 	/**
 	 * Instantiates a new transaction.
 	 *
-	 * @param idTransaction the id transaction
-	 * @param payer the payer
-	 * @param beneficiary the beneficiary
-	 * @param amount the amount
-	 * @param description the description
-	 * @param creationDate the creation date
-	 * @param commision the commision
+	 * @param idTransactionn the id transactionn
+	 * @param payerr the payerr
+	 * @param beneficiaryy the beneficiaryy
+	 * @param amountt the amountt
+	 * @param descriptionn the descriptionn
+	 * @param creationDatee the creation datee
+	 * @param commisionn the commisionn
 	 */
 	public Transaction(
-			int idTransaction,
-			User payer,
-			User beneficiary,
-			double amount,
-			String description,
-			LocalDate creationDate,
-			double commision) {
+			final int idTransactionn,
+			final User payerr,
+			final User beneficiaryy,
+			final double amountt,
+			final String descriptionn,
+			final LocalDate creationDatee,
+			final double commisionn) {
 		super();
-		this.idTransaction = idTransaction;
-		this.payer = payer;
-		this.beneficiary = beneficiary;
-		this.amount = amount;
-		this.description = description;
-		this.creationDate = creationDate;
-		this.commision = commision;
+		this.idTransaction = idTransactionn;
+		this.payer = payerr;
+		this.beneficiary = beneficiaryy;
+		this.amount = amountt;
+		this.description = descriptionn;
+		this.creationDate = creationDatee;
+		this.commision = commisionn;
 	}
 
 	/**
@@ -100,10 +100,10 @@ public class Transaction {
 	/**
 	 * Sets the id transaction.
 	 *
-	 * @param idTransaction the new id transaction
+	 * @param idTransactionn the new id transaction
 	 */
-	public void setIdTransaction(int idTransaction) {
-		this.idTransaction = idTransaction;
+	public void setIdTransaction(final int idTransactionn) {
+		this.idTransaction = idTransactionn;
 	}
 
 	/**
@@ -118,10 +118,10 @@ public class Transaction {
 	/**
 	 * Sets the payer.
 	 *
-	 * @param payer the new payer
+	 * @param payerr the new payer
 	 */
-	public void setPayer(User payer) {
-		this.payer = payer;
+	public void setPayer(final User payerr) {
+		this.payer = payerr;
 	}
 
 	/**
@@ -136,10 +136,10 @@ public class Transaction {
 	/**
 	 * Sets the beneficiary.
 	 *
-	 * @param beneficiary the new beneficiary
+	 * @param beneficiaryy the new beneficiary
 	 */
-	public void setBeneficiary(User beneficiary) {
-		this.beneficiary = beneficiary;
+	public void setBeneficiary(final User beneficiaryy) {
+		this.beneficiary = beneficiaryy;
 	}
 
 	/**
@@ -154,10 +154,10 @@ public class Transaction {
 	/**
 	 * Sets the creation date.
 	 *
-	 * @param createDate the new creation date
+	 * @param createDatee the new creation date
 	 */
-	public void setCreationDate(LocalDate createDate) {
-		this.creationDate = createDate;
+	public void setCreationDate(final LocalDate createDatee) {
+		this.creationDate = createDatee;
 	}
 
 	/**
@@ -172,10 +172,10 @@ public class Transaction {
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount the new amount
+	 * @param amountt the new amount
 	 */
-	public void setAmount(double amount) {
-		this.amount = amount;
+	public void setAmount(final double amountt) {
+		this.amount = amountt;
 	}
 
 	/**
@@ -190,10 +190,10 @@ public class Transaction {
 	/**
 	 * Sets the description.
 	 *
-	 * @param description the new description
+	 * @param descriptionn the new description
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescription(final String descriptionn) {
+		this.description = descriptionn;
 	}
 
 	/**
@@ -208,10 +208,10 @@ public class Transaction {
 	/**
 	 * Sets the commision.
 	 *
-	 * @param commision the new commision
+	 * @param commisionn the new commision
 	 */
-	public void setCommision(double commision) {
-		this.commision = commision;
+	public void setCommision(final double commisionn) {
+		this.commision = commisionn;
 	}
 
 	/**
