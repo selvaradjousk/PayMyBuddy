@@ -32,7 +32,8 @@ public interface TransferRepository extends JpaRepository<Transfer, Integer> {
 	 */
 	@Query("Select t from Transfer t"
 			+ " where t.user = :user and t.type='CREDIT'")
-	List<Transfer> findAllByUserTypeCredit(User user);
+	List<Transfer> findAllByUserTypeCredit(
+			User user);
 
 	/**
 	 * Find all by user type debit.
@@ -42,7 +43,8 @@ public interface TransferRepository extends JpaRepository<Transfer, Integer> {
 	 */
 	@Query("Select t from Transfer t"
 			+ " where t.user = :user and t.type='DEBIT'")
-	List<Transfer> findAllByUserTypeDebit(User user);
+	List<Transfer> findAllByUserTypeDebit(
+			User user);
 
 	/**
 	 * Find all transfer by user.
@@ -51,7 +53,9 @@ public interface TransferRepository extends JpaRepository<Transfer, Integer> {
 	 * @param pageable the pageable
 	 * @return the page
 	 */
-	Page<Transfer> findAllTransferByUser(User user, Pageable pageable);
+	Page<Transfer> findAllTransferByUser(
+			User user,
+			Pageable pageable);
 
 	/**
 	 * Last three transfers.
@@ -60,6 +64,9 @@ public interface TransferRepository extends JpaRepository<Transfer, Integer> {
 	 * @param pageable the pageable
 	 * @return the page
 	 */
-	@Query("SELECT t FROM Transfer t WHERE t.user= :user  ORDER BY date desc")
-	Page<Transfer> lastThreeTransfers(User user, Pageable pageable);
+	@Query("SELECT t FROM Transfer t"
+			+ " WHERE t.user= :user  ORDER BY date desc")
+	Page<Transfer> lastThreeTransfers(
+			User user,
+			Pageable pageable);
 }

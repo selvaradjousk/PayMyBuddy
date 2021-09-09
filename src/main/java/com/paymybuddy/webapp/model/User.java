@@ -17,8 +17,13 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class User {
 
+	/** The Constant VARIABLE_LENGTH_10. */
 	private static final int VARIABLE_LENGTH_10 = 10;
+	
+	/** The Constant VARIABLE_LENGTH_50. */
 	private static final int VARIABLE_LENGTH_50 = 50;
+	
+	/** The Constant VARIABLE_LENGTH_100. */
 	private static final int VARIABLE_LENGTH_100 = 100;
 
 	/** The id. */
@@ -66,7 +71,7 @@ public class User {
 
     /** The wallet amount. */
     @Column(name = "wallet_amount", length = VARIABLE_LENGTH_10)
-    private Double  walletAmount  ;
+    private Double  walletAmount;
 
     /**
      * Instantiates a new user.

@@ -58,7 +58,7 @@ public interface ITransactionService {
 	 * @return the transaction DTO
 	 */
 	TransactionDTO addTransaction(TransactionDTO transactionDTO);
-	
+
 	/**
 	 * Do save new transaction.
 	 *
@@ -70,7 +70,12 @@ public interface ITransactionService {
 	 * @param payer the payer
 	 * @return the string
 	 */
-	String doSaveNewTransaction(int page, Double amount, String contactEmail, String description, User beneficiary,
+	String doSaveNewTransaction(
+			int page,
+			Double amount,
+			String contactEmail,
+			String description,
+			User beneficiary,
 			User payer);
 
 
@@ -81,7 +86,7 @@ public interface ITransactionService {
 	 * @return the transaction
 	 */
 	Transaction deleteById(int idTransactionDTO);
-	
+
 
 	/**
 	 * Last three transactions beneficiary.
@@ -90,6 +95,8 @@ public interface ITransactionService {
 	 * @param pageable the pageable
 	 * @return the page
 	 */
-	Page<TransactionDTO> lastThreeTransactionsBeneficiary(UserDTO userDTO, Pageable pageable);
+	Page<TransactionDTO> lastThreeTransactionsBeneficiary(
+			UserDTO userDTO,
+			Pageable pageable);
 
 }

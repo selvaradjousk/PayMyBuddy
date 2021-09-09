@@ -25,28 +25,13 @@ import com.paymybuddy.webapp.util.UserMapper;
 
 import lombok.extern.log4j.Log4j2;
 
-
 /**
  * The Class TransactionServiceImpl.
+ * @author Senthil
  */
 @Log4j2
 @Service
 public class TransactionServiceImpl  implements ITransactionService  {
-
-
-
-	// **************************** TODOs LIST ******************************
-	
-	// Method: 
-	// --> getAllTransactions(): List(TransactionsDTO)
-	// served by TransactionMapper.toDTO(transaction)
-	// --> getAllTransactionsByPayer(UserDTO); TransactionDTO by pages
-	// --> getAllTransactionsByBeneficiary(UserDTO); TransactionDTO by pages
-	// --> addTransaction(transactionDTO): transactionDTO
-	// --> pagination of transaction list
-	// --> Before validation of Transfer, Transaction approval
-	// done by checking the account balance amount
-
 
 	/** The transaction repository. */
 	@Autowired
@@ -62,27 +47,35 @@ public class TransactionServiceImpl  implements ITransactionService  {
 	/** The user mapper. */
 	private UserMapper userMapper = new UserMapper();
 
+	/** The Constant DESCRIPTION_LENGTH. */
+	private static final double DESCRIPTION_LENGTH = 30;
 
-    /**
-     * Instantiates a new transaction service impl.
-     *
-     * @param transactionRepository the transaction repository
-     * @param userService the user service
-     * @param transactionMapper the transaction mapper
-     * @param userMapper the user mapper
-     */
+	/** The Constant NUMBER_100. */
+	private static final double NUMBER_100 = 100;
+
+	/** The Constant COMMISION_RATE. */
+	private static final double COMMISSION_RATE = 0.005;
+
+	/**
+	 * Instantiates a new transaction service impl.
+	 *
+	 * @param transactionRepositoryy the transaction repositoryy
+	 * @param userServicee the user servicee
+	 * @param transactionMapperr the transaction mapperr
+	 * @param userMapperr the user mapperr
+	 */
     public TransactionServiceImpl(
-    		TransactionRepository transactionRepositoryy,
-    		IUserService userServicee,
-			TransactionMapper transactionMapperr,
-			UserMapper userMapperr) {
+    		final TransactionRepository transactionRepositoryy,
+    		final IUserService userServicee,
+			final TransactionMapper transactionMapperr,
+			final UserMapper userMapperr) {
 		super();
 		this.transactionRepository = transactionRepositoryy;
 		this.userService = userServicee;
 		this.transactionMapper = transactionMapperr;
 		this.userMapper = userMapperr;
 	}
-	
+
 	// *******************************************************************
 
 	/**
@@ -127,9 +120,10 @@ public class TransactionServiceImpl  implements ITransactionService  {
 		List<Transaction> listOfTransactions = transactionRepository
 				.findAllTransactionByPayer(user);
 
-		log.info(" ====> FIND All TRANSACTION for a user requested <==== ");
+		log.info(" ====> FIND All TRANSACTION"
+				+ " for a user requested <==== ");
 
-		List<TransactionDTO> listOfTransactionsDTO 
+		List<TransactionDTO> listOfTransactionsDTO
 				= new ArrayList<TransactionDTO>();
 
 		for (Transaction transaction : listOfTransactions) {
@@ -164,7 +158,7 @@ public class TransactionServiceImpl  implements ITransactionService  {
 	      return pagesTransactionDTO;
 	  }
 
-	    // ********************************************************************
+	    // *****************************************************************
 
 	    /**
     	 * Last three transactions.
@@ -186,27 +180,40 @@ public class TransactionServiceImpl  implements ITransactionService  {
 	    	return pagesTransactionDTO;
 	    }
 
+  	  // *******************************************************************
 
-  	  // ************************************************************************
-
-    	@Override
+    	/**
+  	   * Last three transactions beneficiary.
+  	   *
+  	   * @param userDTO the user DTO
+  	   * @param pageable the pageable
+  	   * @return the page
+  	   */
+  	  @Override
     	public Page<TransactionDTO> lastThreeTransactionsBeneficiary(
-    			UserDTO userDTO, Pageable pageable) {
+    			final UserDTO userDTO,
+    			final Pageable pageable) {
 
           User user = userMapper.toUserDO(userDTO);
-          Page<Transaction> pagesTransaction =transactionRepository
+
+          Page<Transaction> pagesTransaction = transactionRepository
         		  .lastThreeTransactionsBeneficiary(user, pageable);
-              Page<TransactionDTO> pagesTransactionDTO= pagesTransaction
-            		  .map(new Function<Transaction, TransactionDTO>() {
-                  @Override
-                  public TransactionDTO apply(Transaction transaction) {
-                      return mappedTransactionDTO(transaction);
-                  }
-              });
+
+          Page<TransactionDTO> pagesTransactionDTO = pagesTransaction
+        		  .map(new Function<Transaction, TransactionDTO>() {
+
+        			  @Override
+        			  public TransactionDTO apply(
+        					  final Transaction transaction) {
+            				  return mappedTransactionDTO(transaction);
+            				  }
+        			  });
+
           return pagesTransactionDTO;
     	}
-	    // ************************************************************************
-  	 
+
+  	  // *****************************************************************
+
     	/**
          * Adds the transaction.
          *
@@ -224,13 +231,12 @@ public class TransactionServiceImpl  implements ITransactionService  {
 
         	// Check beneficiary field not null
         	checkBeneficiaryNotNull(transactionDTO);
-        	
+
         	// Check length of the description field
             checkDescriptionLengthGreaterThan30Characters(transactionDTO);
-            
+
         	// Check length of the description field
             checkDescriptionLengthEmpty(transactionDTO);
-            
 
         	// Check amount field has value greater than zero
             checkTransactionAmountGreaterThanZero(transactionDTO);
@@ -247,7 +253,7 @@ public class TransactionServiceImpl  implements ITransactionService  {
 
             	// If above checks pass and result is true
             	// we do the following steps
-                if (buddyUserWalletOperation == true){
+                if (buddyUserWalletOperation == true) {
 
                 	// save transaction operation to DO
                 	Transaction transaction = saveTransactionOperation(
@@ -297,26 +303,26 @@ public class TransactionServiceImpl  implements ITransactionService  {
 
         	double wallet = transactionDTO.getPayer().getWalletAmount();
             double amount = transactionDTO.getAmount();
-            double commision = transactionDTO.getCommision();
+            double commission = transactionDTO.getCommision();
 
             // check transaction amount + commision is not
             // exceeding user account balance
-            if( wallet - (amount+commision) >= 0) {
+            if (wallet - (amount + commission) >= 0) {
                 return true;
-            }else {
+            } else {
                 return false;
             }
         }
 
         // ********************************************************************
-    	/** 
-    	 * check Transaction Amount Not Zero Value
+    	/**
+    	 * check Transaction Amount Not Zero Value.
     	 * @param transactionDTO
     	 */
     	private void checkTransactionAmountNotZeroValue(
     			final TransactionDTO transactionDTO) {
- 
-    		if ( transactionDTO.getAmount() == 0) {
+
+    		if (transactionDTO.getAmount() == 0) {
                 throw new DataNotConformException(
                 		"Amount must be greater than 0");
             }
@@ -330,16 +336,17 @@ public class TransactionServiceImpl  implements ITransactionService  {
          * @param transactionDTO the new up transaction operation data
          */
     	private void setupTransactionOperationData(
-    			TransactionDTO transactionDTO) {
- 
+    			final TransactionDTO transactionDTO) {
+
     		LocalDate createDate = LocalDate.now();
- 
-    		Double fee = (double)Math.round((transactionDTO
-    				.getAmount()*0.005)*100)/100;
- 
+
+    		Double commissionFee = (double) Math.round((transactionDTO
+    				.getAmount() * COMMISSION_RATE)
+    				* NUMBER_100) / NUMBER_100;
+
     		transactionDTO.setCreationDate(createDate);
 
-    		transactionDTO.setCommision(fee);
+    		transactionDTO.setCommision(commissionFee);
     	}
 
         // ********************************************************************
@@ -350,7 +357,7 @@ public class TransactionServiceImpl  implements ITransactionService  {
          */
     	private void addModificationDateToPayerAndBeneficiaryUsers(
     			final TransactionDTO transactionDTO) {
- 
+
     		LocalDate modifDate = LocalDate.now();
 
     		transactionDTO.getBeneficiary()
@@ -359,7 +366,7 @@ public class TransactionServiceImpl  implements ITransactionService  {
     	}
 
 
-        // ********************************************************************
+        // *******************************************************************
         /**
          * Update wallet of payer.
          *
@@ -367,18 +374,20 @@ public class TransactionServiceImpl  implements ITransactionService  {
          */
     	private void updateWalletOfPayer(
     			final TransactionDTO transactionDTO) {
- 
-    		Double newWallet = (transactionDTO.getPayer().getWalletAmount()
+
+    		Double newWallet = (transactionDTO.getPayer()
+    				.getWalletAmount()
     				- (transactionDTO
     						.getAmount() + transactionDTO
-    						.getCommision()) );
+    						.getCommision()));
 
-    		newWallet = (double) Math.round((newWallet) * 100) / 100;
- 
+    		newWallet = (double) Math.round((newWallet)
+    				* NUMBER_100) / NUMBER_100;
+
     		transactionDTO.getPayer().setWalletAmount(newWallet);
     	}
 
-        // ********************************************************************
+        // *******************************************************************
     	/**
          * Update wallet of beneficiary.
          *
@@ -387,12 +396,14 @@ public class TransactionServiceImpl  implements ITransactionService  {
     	private void updateWalletOfBeneficiary(
     			final TransactionDTO transactionDTO) {
 
-    		    transactionDTO.getBeneficiary().setWalletAmount((
-    		    		transactionDTO.getBeneficiary().getWalletAmount()
+    		    transactionDTO.getBeneficiary()
+    		    .setWalletAmount((
+    		    		transactionDTO.getBeneficiary()
+    		    		.getWalletAmount()
     		    		+ transactionDTO.getAmount()));
     	}
 
-        // ********************************************************************
+        // *******************************************************************
     	/**
          * Save transaction operation.
          *
@@ -410,7 +421,7 @@ public class TransactionServiceImpl  implements ITransactionService  {
     		return transaction;
     	}
 
-        // ********************************************************************
+        // *******************************************************************
     	/**
          * Check transaction amount greater than zero.
          *
@@ -437,7 +448,8 @@ public class TransactionServiceImpl  implements ITransactionService  {
     				.getPayer().getId()) == null) {
 
     			throw new DataNotFoundException(
-    					"Problem with the database, user payer not found");
+    					"Problem with the database,"
+    					+ " user payer not found");
     		}
     	}
 
@@ -450,15 +462,15 @@ public class TransactionServiceImpl  implements ITransactionService  {
     	private void checkDescriptionLengthGreaterThan30Characters(
     			final TransactionDTO transactionDTO) {
 
-    		if (transactionDTO.getDescription().length() > 30) {
+    		if (transactionDTO.getDescription()
+    				.length() > DESCRIPTION_LENGTH) {
 
     		    throw new DataNotConformException(
     		    		"description should be 30 characters maximum");
     		}
     	}
-        // ********************************************************************        
 
-    	
+    	// ********************************************************************
 
     	/**
          * Check payer not null.
@@ -475,10 +487,7 @@ public class TransactionServiceImpl  implements ITransactionService  {
     		}
     	}
 
-        // ********************************************************************  
-
-
-
+        // ********************************************************************
 
     	/**
          * Check beneficiary not null.
@@ -494,6 +503,7 @@ public class TransactionServiceImpl  implements ITransactionService  {
     		    		"user - Beneficiary cannot be null");
     		}
     	}
+
         // ********************************************************************
 
     	/**
@@ -513,7 +523,6 @@ public class TransactionServiceImpl  implements ITransactionService  {
 
         // ********************************************************************
 
-
     	/**
 	     * Mapped transaction DTO.
 	     *
@@ -529,57 +538,62 @@ public class TransactionServiceImpl  implements ITransactionService  {
             return transactionDTO;
     	}
 
-    	   // ************************************************************************
+    	   // *************************************************************
 
      	/**
      	 * Do save new transaction.
      	 *
      	 * @param page the page
      	 * @param amount the amount
-     	 * @param friendEmail the friend email
+     	 * @param contactEmail the friend email
      	 * @param description the description
      	 * @param beneficiary the beneficiary
      	 * @param payer the payer
      	 * @return the string
      	 */
      	public String doSaveNewTransaction(
-     			int page,
-     			Double amount,
-     			String friendEmail,
-     			String description,
-     			User beneficiary,
-     			User payer) {
+     			final int page,
+     			final Double amount,
+     			final String contactEmail,
+     			final String description,
+     			final User beneficiary,
+     			final User payer) {
+
      		String errorMessage;
+
      		try {
      		    TransactionDTO newTransactionDTO = new TransactionDTO(
      		    		payer,
      		    		beneficiary,
      		    		amount,
      		    		description);
-     		    
+
      		    addTransaction(newTransactionDTO);
+
+     		} catch (DataNotFoundException
+     				| DataNotConformException
+     				| BalanceNotSufficientException e) {
+
+     			errorMessage = e.getMessage();
+
+     			return "redirect:/transaction?page=" + page
+                        + "&errorMessage=" + errorMessage
+                        + "&friendEmail=" + contactEmail
+                        + "&amount=" + amount
+                        + "&description=" + description;
      		}
-     		catch (DataNotFoundException
-     				| DataNotConformException |
-     				BalanceNotSufficientException e){
-     		    errorMessage = e.getMessage();
-     		    return"redirect:/transaction?page="+page+
-     		                    "&errorMessage="+errorMessage+
-     		                    "&friendEmail="+friendEmail+
-     		                    "&amount="+amount+
-     		                    "&description="+description;
-     		}
+
      		errorMessage = "Transaction saved";
-     	    return"redirect:/transaction?page="+page+
-                     "&errorMessage="+errorMessage+
-                     "&friendEmail="+friendEmail+
-                     "&amount="+amount+
-                     "&description="+description;
+
+     		return "redirect:/transaction?page=" + page
+                     + "&errorMessage=" + errorMessage
+                     + "&friendEmail=" + contactEmail
+                     + "&amount=" + amount
+                     + "&description=" + description;
      	}
 
 
-     	// ************************************************************************
-
+     	// *********************************************************************
 
         /**
 	      * Delete by id.
@@ -588,13 +602,12 @@ public class TransactionServiceImpl  implements ITransactionService  {
 	      * @return the transaction
 	      */
 	     @Override
-        public Transaction deleteById(int idTransactionDTO) {
+        public Transaction deleteById(final int idTransactionDTO) {
 
             transactionRepository.deleteById(idTransactionDTO);
 
             return null;
         }
-        // ************************************************************************
-
+        // ******************************************************************
 
 }

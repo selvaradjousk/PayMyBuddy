@@ -30,12 +30,13 @@ public class MyUserDetailService implements UserDetailsService {
 	 * Constructor of class MyUserDetailsService Instantiates a new
 	 *  my user detail service.
 	 *
-	 * @param userRepository the user repository
+	 * @param userRepositoryy the user repositoryy
 	 */
-	public MyUserDetailService(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	public MyUserDetailService(final UserRepository userRepositoryy) {
+		this.userRepository = userRepositoryy;
 	}
 
+    // *******************************************************************
 	/**
 	 * Loads user detail by username.
 	 *
@@ -45,10 +46,12 @@ public class MyUserDetailService implements UserDetailsService {
 	 * @throws DataAccessException the data access exception
 	 */
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException, DataAccessException {
+	public UserDetails loadUserByUsername(final String email)
+			throws UsernameNotFoundException, DataAccessException {
 
-		// https://stackoverflow.com/questions/59352914/custom-spring-boot-login-form
-		
+		// https://stackoverflow.com/questions/59352914
+		// /custom-spring-boot-login-form
+
 		log.debug("Fetching user - MyUserDetailsService.loadUserByUsername");
 
 //		Optional<User> user = userRepository.findByEmail(email);
@@ -57,14 +60,16 @@ public class MyUserDetailService implements UserDetailsService {
 //				"Username: " + email + " not found"));
 //		  log.info("About to return " + user.map(MyUserDetails::new).get());
 //		return user.map(MyUserDetails::new).get();
-		
+
 		// short form of the above codes
 		return userRepository.findByEmail(email)
 			    .map(MyUserDetails::new)
-			    .orElseThrow(()-> new UsernameNotFoundException(
+			    .orElseThrow(() -> new UsernameNotFoundException(
 			    		"Username: " + email + " not found"));
 	}
-
-	// try for testing https://stackoverflow.com/questions/38330597/inject-authenticationprincipal-when-unit-testing-a-spring-rest-controller
-	
+    // *******************************************************************
+	// try for testing https://stackoverflow.com/questions/38330597
+	// /inject-authenticationprincipal-when-unit-testing
+	// -a-spring-rest-controller
+    // *******************************************************************
 }

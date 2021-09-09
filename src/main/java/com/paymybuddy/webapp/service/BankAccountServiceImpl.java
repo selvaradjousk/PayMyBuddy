@@ -38,7 +38,7 @@ public class BankAccountServiceImpl implements IBankAccountService {
 
     /** The bank account repository. */
 	@Autowired
-    BankAccountRepository bankAccountRepository;
+    private BankAccountRepository bankAccountRepository;
 
 	/** The user mapper. */
 	private UserMapper userMapper = new UserMapper();
@@ -50,14 +50,14 @@ public class BankAccountServiceImpl implements IBankAccountService {
     /**
      * Instantiates a new bank account service impl.
      *
-     * @param bankAccountRepository the bank account repository
-     * @param userMapper the user mapper
-     * @param bankAccountMapper the bank account mapper
+     * @param bankAccountRepositoryy the bank account repositoryy
+     * @param userMapperr the user mapperr
+     * @param bankAccountMapperr the bank account mapperr
      */
     public BankAccountServiceImpl(
-    		BankAccountRepository bankAccountRepositoryy,
-    		UserMapper userMapperr,
-			BankAccountMapper bankAccountMapperr) {
+    		final BankAccountRepository bankAccountRepositoryy,
+    		final UserMapper userMapperr,
+    		final BankAccountMapper bankAccountMapperr) {
 		super();
 		this.bankAccountRepository = bankAccountRepositoryy;
 		this.userMapper = userMapperr;
@@ -109,10 +109,10 @@ public class BankAccountServiceImpl implements IBankAccountService {
 			final UserDTO userDTO) {
 
     	log.info(" ====> BANK Account CREATION requested <==== ");
-    	
+
         User user = userMapper.toUserDO(userDTO);
 
-        BankAccount newBankAccount = new BankAccount(user,rib);
+        BankAccount newBankAccount = new BankAccount(user, rib);
 
         BankAccount bankAccountAdd = bankAccountRepository
         		.save(newBankAccount);

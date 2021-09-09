@@ -38,7 +38,7 @@ public class UserServiceImpl implements IUserService {
 
     /** The password encoder. */
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     /** The user mapper. */
     private UserMapper userMapper = new UserMapper();
@@ -47,21 +47,19 @@ public class UserServiceImpl implements IUserService {
 	/**
 	 * Instantiates a new user service impl.
 	 *
-	 * @param userRepository the user repository
-	 * @param passwordEncoder the password encoder
-	 * @param userMapper the user mapper
+	 * @param userRepositoryy the user repositoryy
+	 * @param passwordEncoderr the password encoderr
+	 * @param userMapperr the user mapperr
 	 */
 	public UserServiceImpl(
-			UserRepository userRepository,
-			PasswordEncoder passwordEncoder,
-			UserMapper userMapper) {
+			final UserRepository userRepositoryy,
+			final PasswordEncoder passwordEncoderr,
+			final UserMapper userMapperr) {
 
-		super();
-		this.userRepository = userRepository;
-		this.passwordEncoder = passwordEncoder;
-		this.userMapper = userMapper;
+		this.userRepository = userRepositoryy;
+		this.passwordEncoder = passwordEncoderr;
+		this.userMapper = userMapperr;
 	}
-
 
     // *******************************************************************
     /**
@@ -85,7 +83,7 @@ public class UserServiceImpl implements IUserService {
         log.info(" ====> FIND All USER Successfull"
         		+ " - size: " + listOfUsers.size());
 
-        return listOfUsersDTO;        
+        return listOfUsersDTO;
 	}
 
 
@@ -186,28 +184,33 @@ public class UserServiceImpl implements IUserService {
     		final UserDTO userDTO,
     		final String confirmationPass) {
 
-       	log.info(" ====> SAVE NEW User requested <==== ");
-       	log.info(" ====> confirmation password <==== "+ confirmationPass);
-       	log.info(" ====> password <==== "+ userDTO.getPassword());
+       	log.info(" ====> SAVE NEW User"
+       			+ " requested <==== ");
+       	log.info(" ====> confirmation password"
+       			+ " <==== " + confirmationPass);
+       	log.info(" ====> password*"
+       			+ " <==== "+ userDTO.getPassword());
 
         User userAdd = new User();
 
         log.info(" ====> New User to be saved instance initiated: " + userAdd);
 
         //      checkConfirmationPasswordMatch(userDTO, confirmationPass);
-        //*********************************************************************          
-        //*********************************************************************
- 		if (userDTO.getPassword().equals(confirmationPass) == false){
+        //********************************************************************
+        //********************************************************************
+ 		if (userDTO.getPassword().equals(confirmationPass) == false) {
 
- 		   	log.info(" ====> confirmation password <==== "+ confirmationPass);
- 		   	log.info(" ====> password <==== "+ userDTO.getPassword());
+ 		   	log.info(" ====> confirmation password"
+ 		   			+ " <==== " + confirmationPass);
+ 		   	log.info(" ====> password"
+ 		   			+ " <==== " + userDTO.getPassword());
  			log.info(" ====> ERROR: Password MISMATCH <==== ");
 
  			throw new DataNotConformException("Password MISMATCH");
          }
 
 
- 		if (userDTO.getPassword().equals("") == true){
+ 		if (userDTO.getPassword().equals("") == true) {
 
          	log.info(" ====> ERROR: Password FIELD EMPTY <==== ");
 
@@ -225,7 +228,7 @@ public class UserServiceImpl implements IUserService {
             userDTO.setActive(true);
             userDTO.setCreationDate(LocalDate.now());
 
-            //*****************************************************************           
+            //*****************************************************************
             //*****************************************************************
             userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             //*****************************************************************
@@ -271,8 +274,8 @@ public class UserServiceImpl implements IUserService {
  	private void checkAlphanumericNameEntry(final UserDTO userDTO) {
 
  		if (checkStringName(userDTO
- 				.getUserName()) == false ||
-                         checkStringName(userDTO
+ 				.getUserName()) == false
+ 						|| checkStringName(userDTO
                         		 .getFirstName()) == false) {
 
          	log.info(" ====> ERROR: Names not alphanumeric <==== ");
@@ -321,11 +324,13 @@ public class UserServiceImpl implements IUserService {
      * @return true, if successful
      */
     public boolean checkStringEmail(final String string) {
-        Pattern stringNamePattern = Pattern.compile(
+
+    	Pattern stringNamePattern = Pattern.compile(
         		"(?:\\w|[\\-_])"
         		+ "+(?:\\.(?:\\w|[\\-_])"
         		+ "+)*\\@(?:\\w|[\\-_])"
         		+ "+(?:\\.(?:\\w|[\\-_])+)+");
+
         return stringNamePattern.matcher(string).matches();
     }
 
@@ -340,16 +345,20 @@ public class UserServiceImpl implements IUserService {
      * @return the page
      */
     @Override
-    public Page<UserDTO> listUserNotBuddy(UserDTO userDTO, String mc,Pageable pageable) {
+    public Page<UserDTO> listUserNotBuddy(
+    		UserDTO userDTO,
+    		String mc,
+    		Pageable pageable) {
 
-    	log.info(" ====> FIND LIST USER Not Buddy requested <==== ");
+    	log.info(" ====> FIND LIST USER Not Buddy"
+    			+ " requested <==== ");
 
     	User payer = userMapper.toUserDO(userDTO);
 
-    	Page<User> pagesUsers = userRepository.listUserNotBuddy(payer,mc,pageable);
+    	Page<User> pagesUsers = userRepository
+    			.listUserNotBuddy(payer, mc, pageable);
 //    	pagesUsers.toList().remove(payer);
-    	
-    	
+
 //    	for (User pagesUser : pagesUsers) {
 //            if (pagesUser != (payer)) {
 //            	Page<User> pagesUsers = new Page<User>()
@@ -358,29 +367,32 @@ public class UserServiceImpl implements IUserService {
 
     	log.info(" ====> pagesUsers <==== " + pagesUsers);
 
-    	Page<UserDTO> pagesUsersDTO = pagesUsers.map(new Function<User, UserDTO>() {
- 
-    		@Override
-            public UserDTO apply(User user) {
-                UserDTO userDTO = new UserDTO();
+    	Page<UserDTO> pagesUsersDTO = pagesUsers
+    			.map(new Function<User, UserDTO>() {
 
-                log.info(" ====> userDTO instance initiated " + userDTO);
+    		@Override
+            public UserDTO apply(final User user) {
+                
+    			UserDTO userDTO = new UserDTO();
+
+                log.info(" ====> userDTO instance"
+                		+ " initiated " + userDTO);
 
                 userDTO = userMapper.toUserDTO(user);
-                log.info(" ====> userDTO <==== " + userDTO.toString());
+                log.info(" ====> userDTO"
+                		+ " <==== " + userDTO.toString());
+
                 return userDTO;
             }
         });
 
     	log.info(" ====> FIND LIST USER Pages returned <==== ");
 
-    	log.info(" ====> pagesUsersDTO <==== " + pagesUsersDTO.toString());
+    	log.info(" ====> pagesUsersDTO"
+    			+ " <==== " + pagesUsersDTO.toString());
 
     	return pagesUsersDTO;
     }
     //******************************************************************
-
-
-    
 
 }

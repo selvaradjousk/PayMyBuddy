@@ -27,11 +27,11 @@ public class ContactServiceImpl implements IContactService {
 
 	/** The contact repository. */
 	@Autowired
-	ContactRepository contactRepository;
+	private ContactRepository contactRepository;
 
 	/** The user mapper. */
 	private UserMapper userMapper = new UserMapper();
-	
+
 	/** The contact mapper. */
 	private ContactMapper contactMapper = new ContactMapper();
 
@@ -39,18 +39,18 @@ public class ContactServiceImpl implements IContactService {
 	/**
 	 * Instantiates a new contact service impl.
 	 *
-	 * @param contactRepository the contact repository
-	 * @param userMapper the user mapper
-	 * @param contactMapper the contact mapper
+	 * @param contactRepositoryy the contact repositoryy
+	 * @param userMapperr the user mapperr
+	 * @param contactMapperr the contact mapperr
 	 */
 	public ContactServiceImpl(
-			ContactRepository contactRepository,
-			UserMapper userMapper,
-			ContactMapper contactMapper) {
+			final ContactRepository contactRepositoryy,
+			final UserMapper userMapperr,
+			final ContactMapper contactMapperr) {
 
-		this.contactRepository = contactRepository;
-		this.userMapper = userMapper;
-		this.contactMapper = contactMapper;
+		this.contactRepository = contactRepositoryy;
+		this.userMapper = userMapperr;
+		this.contactMapper = contactMapperr;
 	}
 
 
@@ -62,7 +62,7 @@ public class ContactServiceImpl implements IContactService {
   	 */
   	// ************************************************************************
 	@Override
-	public List<ContactDTO> findContactByPayer(UserDTO payerDTO) {
+	public List<ContactDTO> findContactByPayer(final UserDTO payerDTO) {
 
 		List<ContactDTO> contactsDTOList = new ArrayList<>();
 		User payer = userMapper.toUserDO(payerDTO);
@@ -77,7 +77,8 @@ public class ContactServiceImpl implements IContactService {
 
 				ContactDTO contactDTO = new ContactDTO();
 
-				log.info("contactDTO instance initiated" + contactDTO);
+				log.info("contactDTO instance initiated"
+				+ contactDTO);
 
 				contactDTO = contactMapper
 						.toContactDTO(contact);
@@ -127,7 +128,7 @@ public class ContactServiceImpl implements IContactService {
      * @return the contact DTO
      */
     @Override
-    public ContactDTO deleteById(Integer id) {
+    public ContactDTO deleteById(final Integer id) {
 
         contactRepository.deleteById(id);
 

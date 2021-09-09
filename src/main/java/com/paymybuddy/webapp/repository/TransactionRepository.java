@@ -31,7 +31,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 	 * @param pageable the pageable
 	 * @return the page
 	 */
-	Page<Transaction> findAllTransactionByPayer(User payer, Pageable pageable);
+	Page<Transaction> findAllTransactionByPayer(
+			User payer,
+			Pageable pageable);
 
 	 /**
 	 * Last three transactions.
@@ -40,8 +42,11 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 	 * @param pageable the pageable
 	 * @return the page
 	 */
-	@Query("SELECT t FROM Transaction t WHERE t.payer= :payer  ORDER BY date desc")
-	Page<Transaction> lastThreeTransactions(User payer, Pageable pageable);
+	@Query("SELECT t FROM Transaction t"
+			+ " WHERE t.payer= :payer  ORDER BY date desc")
+	Page<Transaction> lastThreeTransactions(
+			User payer,
+			Pageable pageable);
 
 	/**
 	  * Last three transactions beneficiary.
@@ -50,7 +55,10 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 	  * @param pageable the pageable
 	  * @return the page
 	  */
-	 @Query("SELECT t FROM Transaction t WHERE t.beneficiary= :user  ORDER BY date desc")
-	Page<Transaction> lastThreeTransactionsBeneficiary(User user, Pageable pageable);
-	
+	 @Query("SELECT t FROM Transaction t"
+	 		+ " WHERE t.beneficiary= :user  ORDER BY date desc")
+	Page<Transaction> lastThreeTransactionsBeneficiary(
+			User user,
+			Pageable pageable);
+
 }

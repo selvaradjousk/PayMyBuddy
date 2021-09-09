@@ -90,6 +90,11 @@ public interface ITransferService {
 	 * @param user the user
 	 * @return the string
 	 */
-	String doAddTransfer(int page, String rib, double amount, String type, User user);
-	
+	String doAddTransfer(
+			int page,
+			String rib,
+			double amount,
+			String type,
+			User user);
+
 }
