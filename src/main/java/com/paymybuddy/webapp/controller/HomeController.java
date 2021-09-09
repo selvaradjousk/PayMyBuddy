@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -162,7 +163,16 @@ public class HomeController {
     @GetMapping({ "/login" })
     public String login(final Model model) {
 		log.info(" ====>Loading login requested - Get /login <==== ");
+
+		// this section prevents user logged in to return to login page
+        Authentication authentication = SecurityContextHolder
+        		.getContext().getAuthentication();
+        if (authentication == null
+        		|| authentication instanceof AnonymousAuthenticationToken) {
+
         return "login";
+        }
+        return "redirect:/home";
     }
 
 	// *********************************************************************
