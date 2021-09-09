@@ -148,6 +148,8 @@ public class UserServiceImpl implements IUserService {
 
     	User userAdd = new User();
 
+    	log.info(" ====> User to be saved instance initiated: " + userAdd);
+
     	userAdd = userRepository.save(userMapper.toUserDO(userDTO));
 
         log.info(" ====> User SAVED Successfully : " + userAdd);
@@ -190,7 +192,9 @@ public class UserServiceImpl implements IUserService {
 
         User userAdd = new User();
 
-//      checkConfirmationPasswordMatch(userDTO, confirmationPass);
+        log.info(" ====> New User to be saved instance initiated: " + userAdd);
+
+        //      checkConfirmationPasswordMatch(userDTO, confirmationPass);
         //*********************************************************************          
         //*********************************************************************
  		if (userDTO.getPassword().equals(confirmationPass) == false){
@@ -354,11 +358,14 @@ public class UserServiceImpl implements IUserService {
 
     	log.info(" ====> pagesUsers <==== " + pagesUsers);
 
-    	Page<UserDTO> pagesUsersDTO= pagesUsers.map(new Function<User, UserDTO>() {
-
+    	Page<UserDTO> pagesUsersDTO = pagesUsers.map(new Function<User, UserDTO>() {
+ 
     		@Override
             public UserDTO apply(User user) {
                 UserDTO userDTO = new UserDTO();
+
+                log.info(" ====> userDTO instance initiated " + userDTO);
+
                 userDTO = userMapper.toUserDTO(user);
                 log.info(" ====> userDTO <==== " + userDTO.toString());
                 return userDTO;

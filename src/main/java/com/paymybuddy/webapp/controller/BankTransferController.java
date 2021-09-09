@@ -264,16 +264,20 @@ public class BankTransferController {
   * @param rib the rib
   * @return the string
   */
- public String checkForBankAccountRibNotNull(int page, String rib) {
+ public String checkForBankAccountRibNotNull (int page, String rib){
 		String errorMessage;
-		if(rib==null){
+		if(rib == null){
             errorMessage = "You must created an account";
+            
+            log.info(" ====> Account rib is null" + errorMessage);
+            
             return"redirect:/transfer?page="+page+
                     "&errorMessage="+errorMessage;
 
         }
 		else {
 			errorMessage = "OK";
+			log.info(" ====> Account rib is not null" + errorMessage);
 		}
 		return errorMessage;
 	}

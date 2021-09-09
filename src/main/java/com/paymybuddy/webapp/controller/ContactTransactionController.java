@@ -184,7 +184,7 @@ public class ContactTransactionController {
             errorMessage="You must choose an email! ";
         }else {
 
-            log.info("  ---> Gather info on Payer & Beneficiary");
+            log.info("  ====> Gather info on Payer & Beneficiary");
 
             UserDTO beneficiaryDTO = userService
             		.findUserByEmail(contactEmail);
@@ -288,12 +288,18 @@ public class ContactTransactionController {
 	private UserDTO fetchUserByEmail(String emailSession) {
 
 		UserDTO userLog = new UserDTO();
+
+		log.info("  ====> user log initiated instance" + userLog);
+
         try {
             userLog = userService.findUserByEmail(emailSession);
             }catch (Exception e){
             throw new DataNotFoundException("Problem with the database");
             }
-		return userLog;
+
+    	log.info("  ====> user log" + userLog);
+
+        return userLog;
 	}
 
     // ************************************************************************
