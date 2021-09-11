@@ -85,43 +85,43 @@ Keeping in mind the obligations of the production environment, the following tec
 Project Milestones
 ===
 [Milestones](readme_files/project_milestones.md "Project Milestones")
-![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20here%20for%20infomation%20!-lightgrey)<br /><br />
 
 Preliminary Design Sketches
 ===
 
 [Functional Scope](readme_files/DESIGN_DRAFTS.md "Functional Scope")
-![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20here%20for%20infomation%20!-lightgrey)<br /><br />
 
 
 [Activity Diagram](readme_files/DESIGN_DRAFTS.md "Activity Diagram")
-![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20here%20for%20infomation%20!-lightgrey)<br /><br />
 
 
 [User Case Diagram](readme_files/DESIGN_DRAFTS.md "User Case Diagram")
-![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20here%20for%20infomation%20!-lightgrey)<br /><br />
 
 
 [Activity Diagram Elaborated Sketching](readme_files/DESIGN_DRAFTS.md "Activity Diagram Elaborated Sketching")
-![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20here%20for%20infomation%20!-lightgrey)<br /><br />
 
 
 ### Login View Template Mockup Sketch API Endpoints and Development Features Analysis
 
 [Login Endpoint](readme_files/DESIGN_DRAFTS.md "Login Endpoint")
-![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20here%20for%20infomation%20!-lightgrey)<br /><br />
 
 
 ### SignUp View Template Mockup Sketch API Endpoints and Development Features Analysis
 
 [SignUp Endpoint](readme_files/DESIGN_DRAFTS.md "SignUp Endpoint")
-![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20here%20for%20infomation%20!-lightgrey)<br /><br />
 
 
 ### Detailed features requirement Analysis on API endpoints and validation rules
 
 [API endpoints and validation rules](readme_files/DESIGN_DRAFTS.md "API endpoints and validation rules")
-![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20here%20for%20infomation%20!-lightgrey)<br /><br />
 
 
 Schema MVC Software Architecture Design
@@ -146,7 +146,7 @@ STAN -Structural Analysis - Design metrics
 ===
 
 [STAN -Structural Analysis - Design metrics](readme_files/stan4j.md "STAN -Structural Analysis - Design metrics") 🡸 🡸 
-![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /> for more details click the link here.<br />
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20here%20for%20infomation%20!-lightgrey)<br /> for more details click the link here.<br />
 ![STAN -Structural Analysis - Design metrics](assets/stan4j/02_stan_design_complete_code.PNG "STAN -Structural Analysis - Design metrics")🡸<br />
 
 
@@ -156,28 +156,28 @@ SQL Scripts
 ===
 
 [SQL Scripts](readme_files/sql_scripts.md "SQLScripts")
-![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20here%20for%20infomation%20!-lightgrey)<br /><br />
 
 
 UI visuals
 ===
 
 [USER INTERFACE VISUALS](readme_files/ui_visuals.md "USER INTERFACE VISUALS")
-![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br /><br />
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20here%20for%20infomation%20!-lightgrey)<br /><br /><br />
 
 
 Actuator Info
 ===
 
 [ACTUATOR ENDPOINTS](readme_files/actuator_info.md "ACTUATOR ENDPOINTS")
-![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br /><br />
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20here%20for%20infomation%20!-lightgrey)<br /><br /><br />
 
 
 API Documentation Swagger
 ===
 
 [SWAGGER API DOCUMENTATION](readme_files/swagger.md "SWAGGER API DOCUMENTATION")
-![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br /><br />
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20here%20for%20infomation%20!-lightgrey)<br /><br /><br />
 
 
 JaCoCo - final Report
@@ -189,7 +189,7 @@ JaCoCo - final Report
 ![JUnit - final Report](assets/progress_record/20210911_Progress_junit_tests_report_final.PNG "JUnit - Analysis final Report") 🡸 🡸 🡸 <br />
 ![JUnit - IT final Report](assets/progress_record/20210911_Progress_junit_tests_IT_report_final.PNG "JUnit - IT Analysis final Report") 🡸 🡸 🡸 <br />
 [More](readme_files/PROGRESS_REPORT.md "More") ... 
-![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br />
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20here%20for%20infomation%20!-lightgrey)<br />
 
 
 ### Authors
