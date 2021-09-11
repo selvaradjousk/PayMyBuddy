@@ -1,3 +1,21 @@
+![Java Version](https://img.shields.io/badge/Java-1.8-blue)
+![JaCoCo](https://img.shields.io/badge/%F0%9F%94%A8-JACoCo%2098.4%25-success)
+![STAN4j2](https://img.shields.io/badge/%F0%9F%8E%A2-Stan4j2-important)
+![SureFire](https://img.shields.io/badge/%F0%9F%9B%A0%EF%B8%8F-SureFire-informational)
+![SonarLint](https://img.shields.io/badge/%F0%9F%8F%B9-SonarLint-ff69b4t)
+![SpotBugs / FindBugs](https://img.shields.io/badge/%F0%9F%90%9B-SpotBugs%20%2F%20FindBugs-important)
+![MySQL](https://img.shields.io/badge/MySQL--cyan)
+![H2 DB](https://img.shields.io/badge/H2-Database-important)
+![Spring Security](https://img.shields.io/badge/%F0%9F%94%91-Spring%20Security-critical)
+![Spring DATA JPA](https://img.shields.io/badge/%E2%9B%88%EF%B8%8F-Spring%20DATA%20JPA-blue)
+![Thymeleaf](https://img.shields.io/badge/%F0%9F%8C%B1-Thymeleaf-brightgreen)
+![HTML](https://img.shields.io/badge/%F0%9F%92%BB-HTML-success)
+![CSS](https://img.shields.io/badge/%F0%9F%91%91-CSS-orange)
+![Maven Version](https://img.shields.io/badge/Maven-2.7.7-yellow)<br />
+
+
+
+
 # Pay My Buddy
 <p><b>PayMyBuddy</b> We make moving your money easy!</p>
 
@@ -32,11 +50,12 @@ The main goal is to commit on participating in the different phases of the softw
 Technical Specifications
 ===
 Keeping in mind the obligations of the production environment, the following technologies are used:<br />
-![✒️ DESIGN & ANALYSIS:](https://img.shields.io/badge/%E2%9C%92%EF%B8%8F-DESIGN%20%26%20ANALYSIS%3A-orange)<br />
+![✒️ DESIGN & ANALYSIS:](https://img.shields.io/badge/%E2%9C%92%EF%B8%8F-%20DESIGN%20%26%20ANALYSIS--%20TOOLS%20%26%20TECHNOLOGIES%20USED%3A-blueviolet)<br />
 ![ Drawoio](https://img.shields.io/badge/%E2%9C%92%EF%B8%8F-Drawio-blue) ![Lucidchart](https://img.shields.io/badge/%E2%9C%8F%EF%B8%8F-LucidChart-yellow) ![Trello](https://img.shields.io/badge/%F0%9F%93%8D-Tello-yellowgreen)<br /><br />
 
-![🔨 CODING IMPLEMENTATION & DEVELOPMENT:](https://img.shields.io/badge/%F0%9F%94%A8-CODING%20IMPLEMENTATION%20%26%20DEVELOPMENT-red)<br />
+![🔨 CODING IMPLEMENTATION & DEVELOPMENT:](https://img.shields.io/badge/%F0%9F%94%A8-CODING%20IMPLEMENTATION%20%26%20DEVELOPMENT%20--%20TOOLS%20%26%20TECHNOLOGIES%20USED%3A-blueviolet)<br />
 ![Java Version](https://img.shields.io/badge/Java-1.8-blue)
+![STAN4j2](https://img.shields.io/badge/%F0%9F%8E%A2-Stan4j2-important)
 ![Maven Version](https://img.shields.io/badge/Maven-2.7.7-yellow)
 ![SpringBoot Version](https://img.shields.io/badge/Spring%20Boot-2.4.3-red)
 ![MySQL](https://img.shields.io/badge/MySQL--cyan)
@@ -48,7 +67,7 @@ Keeping in mind the obligations of the production environment, the following tec
 ![HTML](https://img.shields.io/badge/%F0%9F%92%BB-HTML-success)
 ![CSS](https://img.shields.io/badge/%F0%9F%91%91-CSS-orange)<br /><br />
 
-![❕ FUNCTIONAL TESTING](https://img.shields.io/badge/%E2%9C%82%EF%B8%8F-%E2%9D%95%20FUNCTIONAL%20TESTING%20-critical)<br />
+![❕ FUNCTIONAL TESTING](https://img.shields.io/badge/%E2%9D%95-FUNCTIONAL%20TESTING%20--%20REPORTING%20--%20QUALITY%2C%20PERFORMANCE%2C%20STABILITY%20AUDIT%20AND%20ANALYSIS%20--%20TOOLS%20%26%20TECHNOLOGIES%20USED%3A-blueviolet)<br />
 ![SureFire](https://img.shields.io/badge/%F0%9F%9B%A0%EF%B8%8F-SureFire-informational)
 ![Jacoco](https://img.shields.io/badge/%F0%9F%94%A7-Jacoco-blueviolet)
 ![SonarLint](https://img.shields.io/badge/%F0%9F%8F%B9-SonarLint-ff69b4t)
@@ -65,90 +84,122 @@ Keeping in mind the obligations of the production environment, the following tec
 
 Project Milestones
 ===
-[Milestones](readme_files/project_milestones.md "Project Milestones")🡸<br />
+[Milestones](readme_files/project_milestones.md "Project Milestones")
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
 
 Preliminary Design Sketches
 ===
 
-[Functional Scope](readme_files/DESIGN_DRAFTS.md "Functional Scope")🡸<br />
+[Functional Scope](readme_files/DESIGN_DRAFTS.md "Functional Scope")
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
 
 
-[Activity Diagram](readme_files/DESIGN_DRAFTS.md "Activity Diagram")🡸<br />
+[Activity Diagram](readme_files/DESIGN_DRAFTS.md "Activity Diagram")
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
 
 
-[User Case Diagram](readme_files/DESIGN_DRAFTS.md "User Case Diagram")🡸<br />
+[User Case Diagram](readme_files/DESIGN_DRAFTS.md "User Case Diagram")
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
 
 
-[Activity Diagram Elaborated Sketching](readme_files/DESIGN_DRAFTS.md "Activity Diagram Elaborated Sketching")🡸<br />
+[Activity Diagram Elaborated Sketching](readme_files/DESIGN_DRAFTS.md "Activity Diagram Elaborated Sketching")
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
 
 
 ### Login View Template Mockup Sketch API Endpoints and Development Features Analysis
 
-[Login Endpoint](readme_files/DESIGN_DRAFTS.md "Login Endpoint")🡸<br />
+[Login Endpoint](readme_files/DESIGN_DRAFTS.md "Login Endpoint")
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
 
 
 ### SignUp View Template Mockup Sketch API Endpoints and Development Features Analysis
 
-[SignUp Endpoint](readme_files/DESIGN_DRAFTS.md "SignUp Endpoint")🡸<br />
+[SignUp Endpoint](readme_files/DESIGN_DRAFTS.md "SignUp Endpoint")
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
 
 
 ### Detailed features requirement Analysis on API endpoints and validation rules
 
-[API endpoints and validation rules](readme_files/DESIGN_DRAFTS.md "API endpoints and validation rules")🡸<br />
+[API endpoints and validation rules](readme_files/DESIGN_DRAFTS.md "API endpoints and validation rules")
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
 
 
 Schema MVC Software Architecture Design
 ===
 
-![Schema MVC Software Architecture Design](assets/schema_mvc.PNG "Schema MVC Software Architecture Design")🡸<br />
+![Schema MVC Software Architecture Design](assets/schema_mvc.PNG "Schema MVC Software Architecture Design")<br />
 
 
 UML class diagram MCD
 ===
 
-![UML class diagram MCD](assets/mcd_class_diagram.PNG "UML class diagram MCD")🡸<br />
+![UML class diagram MCD](assets/mcd_class_diagram.PNG "UML class diagram MCD")<br />
 
 
 UML physical Data Model MPD Entity RelationShip Diagram ER
 ===
 
-![UML physical Data Model MPD Entity RelationShip Diagram ER](assets/mpd.PNG "MPD Entity RelationShip Diagram")🡸<br />
+![UML physical Data Model MPD Entity RelationShip Diagram ER](assets/mpd.PNG "MPD Entity RelationShip Diagram")<br />
+
+
+STAN -Structural Analysis - Design metrics
+===
+
+[STAN -Structural Analysis - Design metrics](readme_files/stan4j.md "STAN -Structural Analysis - Design metrics") 🡸 🡸 
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /> for more details click the link here.<br />
+![STAN -Structural Analysis - Design metrics](assets/stan4j/02_stan_design_complete_code.PNG "STAN -Structural Analysis - Design metrics")🡸<br />
+
+
+
 
 SQL Scripts
 ===
 
-[SQL Scripts](readme_files/sql_scripts.md "SQLScripts")🡸<br />
+[SQL Scripts](readme_files/sql_scripts.md "SQLScripts")
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br />
 
 
 UI visuals
 ===
 
-[USER INTERFACE VISUALS](readme_files/ui_visuals.md "USER INTERFACE VISUALS")🡸<br /><br />
-
-
-Endpoints Information
-===
+[USER INTERFACE VISUALS](readme_files/ui_visuals.md "USER INTERFACE VISUALS")
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br /><br />
 
 
 Actuator Info
 ===
 
-[ACTUATOR ENDPOINTS](readme_files/actuator_info.md "ACTUATOR ENDPOINTS")🡸<br /><br />
+[ACTUATOR ENDPOINTS](readme_files/actuator_info.md "ACTUATOR ENDPOINTS")
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br /><br />
 
 
 API Documentation Swagger
 ===
 
-[SWAGGER API DOCUMENTATION](readme_files/swagger.md "SWAGGER API DOCUMENTATION")🡸<br /><br />
+[SWAGGER API DOCUMENTATION](readme_files/swagger.md "SWAGGER API DOCUMENTATION")
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br /><br /><br />
+
+
+JaCoCo - final Report
+===
+
+
+
+![JaCoCo - final Report](assets/progress_record/20210911_Progress_jacoco_reports_coverage_final.PNG "JaCoCo - Analysis final Report") 🡸 🡸 🡸 <br />
+![JUnit - final Report](assets/progress_record/20210911_Progress_junit_tests_report_final.PNG "JUnit - Analysis final Report") 🡸 🡸 🡸 <br />
+![JUnit - IT final Report](assets/progress_record/20210911_Progress_junit_tests_IT_report_final.PNG "JUnit - IT Analysis final Report") 🡸 🡸 🡸 <br />
+[More](readme_files/PROGRESS_REPORT.md "More") ... 
+![Follow Link here](https://img.shields.io/badge/%E2%AC%85%EF%B8%8F-Follow%20the%20link%20there%20for%20infomation%20!-blueviolet)<br />
+
 
 ### Authors
 
-Mentee:🡆 @Senthil
+Mentee:  🡆   @Senthil
 
-Mentor:🡆 Clément SEZETTRE
+Mentor:  🡆   Clément SEZETTRE
 
 ### versions
-Version:🡆 1.0
+Version:  🡆 1.0
 
 ### License
 @OpenClassrooms & @PayMyBuddy
