@@ -1,7 +1,7 @@
 package com.paymybuddy.webapp.util;
 
 
-import javax.annotation.Nonnull;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
@@ -23,20 +23,20 @@ public class ContactMapper {
  * @param contactDTO the contact DTO
  * @return the contact
  */
-public Contact toContactDO(@Validated @Nonnull ContactDTO contactDTO) {
+public Contact toContactDO(@Validated @NotNull ContactDTO contactDTO) {
 
         Contact contact = new Contact();
 
-//        if (contactDTO != null){
+        if (contactDTO != null){
         contact.setIdContact(contactDTO.getIdContact());
         contact.setCreationDate(contactDTO.getCreationDate());
         contact.setPayer(contactDTO.getPayer());
         contact.setContact(contactDTO.getContact());
 
         return contact;
-//        } else {
-//        return null;
-//        }
+        } else {
+        return null;
+        }
      }
 
     /**
@@ -45,11 +45,11 @@ public Contact toContactDO(@Validated @Nonnull ContactDTO contactDTO) {
      * @param contact the contact
      * @return the contact DTO
      */
-    public ContactDTO toContactDTO(@Validated @Nonnull Contact contact) {
+    public ContactDTO toContactDTO(@Validated @NotNull Contact contact) {
 
         ContactDTO contactDTO = new ContactDTO();
 
-//        if (contact != null) {
+        if (contact != null) {
         contactDTO.setIdContact(contact.getIdContact());
         contactDTO.setCreationDate(contact.getCreationDate());
         contactDTO.setPayer(contact.getPayer());
@@ -57,8 +57,8 @@ public Contact toContactDO(@Validated @Nonnull ContactDTO contactDTO) {
 
         return contactDTO;
 
-//        } else {
-//        return null;
-//        }
+        } else {
+        return null;
+        }
     }
 }

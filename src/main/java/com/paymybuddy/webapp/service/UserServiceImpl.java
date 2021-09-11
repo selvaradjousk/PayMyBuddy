@@ -251,7 +251,24 @@ public class UserServiceImpl implements IUserService {
 
     //******************************************************************
 
- 	/**
+//
+//    @Override
+//    public UserDTO updateUser(UserDTO userDTO) {
+//        UserDTO oldUser = findUserByEmail(userDTO.getEmail());
+//       	log.info(" ====> SAVE User requested <==== ");
+//        oldUser.setFirstName(userDTO.getFirstName());
+//        oldUser.setLastName(userDTO.getLastName());
+//       	log.info(" ====> SAVE User requested <==== ");
+//        User userUpdate = new User();
+//        userUpdate = userRepository.save(userMapper.toUserDO(oldUser));
+//       	log.info(" ====> SAVE User requested <==== ");        
+////        saveUser(oldUser);
+//
+//        return userMapper.toUserDTO(userUpdate);
+//    }
+    //******************************************************************
+
+    /**
      * Check entry for email format.
      *
      * @param userDTO the user DTO

@@ -1,6 +1,6 @@
 package com.paymybuddy.webapp.util;
 
-import javax.annotation.Nonnull;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
@@ -22,11 +22,11 @@ public class TransactionMapper {
  * @param transactionDTO the transaction DTO
  * @return the transaction
  */
-public Transaction toTransactionDO(@Validated @Nonnull TransactionDTO transactionDTO) {
+public Transaction toTransactionDO(@Validated @NotNull TransactionDTO transactionDTO) {
 
 	        Transaction transaction = new Transaction();
 
-//	        if (transactionDTO != null) {
+	        if (transactionDTO != null) {
 	        transaction.setIdTransaction(transactionDTO.getIdTransaction());
 	        transaction.setPayer(transactionDTO.getPayer());
 	        transaction.setBeneficiary(transactionDTO.getBeneficiary());
@@ -36,9 +36,9 @@ public Transaction toTransactionDO(@Validated @Nonnull TransactionDTO transactio
 	        transaction.setCommision(transactionDTO.getCommision());
 
 	        return transaction;
-//	        } else {
-//	        return null;
-//	        }
+	        } else {
+	        return null;
+	        }
 	    }
 
 	    /**
@@ -47,11 +47,11 @@ public Transaction toTransactionDO(@Validated @Nonnull TransactionDTO transactio
     	 * @param transaction the transaction
     	 * @return the transaction DTO
     	 */
-    	public TransactionDTO toTransactionDTO(@Validated @Nonnull final Transaction transaction) {
+    	public TransactionDTO toTransactionDTO(@Validated @NotNull final Transaction transaction) {
 
 	        TransactionDTO transactionDTO = new TransactionDTO();
 
-//	        if (transaction != null) {
+	        if (transaction != null) {
 	        transactionDTO.setIdTransaction(transaction.getIdTransaction());
 	        transactionDTO.setPayer(transaction.getPayer());
 	        transactionDTO.setBeneficiary(transaction.getBeneficiary());
@@ -61,8 +61,8 @@ public Transaction toTransactionDO(@Validated @Nonnull TransactionDTO transactio
 	        transactionDTO.setCommision(transaction.getCommision());
 
 	        return transactionDTO;
-//	        } else {
-//	        return null;
-//	        }
+	        } else {
+	        return null;
+	        }
 	    }
 }

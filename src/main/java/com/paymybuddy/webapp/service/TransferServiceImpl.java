@@ -193,7 +193,7 @@ public class TransferServiceImpl implements ITransferService {
 
 		return listOfTransfersDTO;
 	}
-
+    // *********************************************************************
     /**
      * Find all transfer by user.
      *
@@ -288,13 +288,13 @@ public class TransferServiceImpl implements ITransferService {
      * @param transfer the transfer
      */
   	private void savingCreditAccountOperation(final Transfer transfer) {
-  		Double newWallet =  (double) Math.round((transfer
+  		Double newWalletAmount =  (double) Math.round((transfer
   				.getUser()
   				.getWalletAmount()
   				+ transfer.getAmount())
   				* NUMBER_100) / NUMBER_100;
 
-  		transfer.getUser().setWalletAmount(newWallet);
+  		transfer.getUser().setWalletAmount(newWalletAmount);
 
   		transferRepository.save(transfer);
 
@@ -340,7 +340,7 @@ public class TransferServiceImpl implements ITransferService {
      * @param transfer the transfer
      * @return the boolean
      */
-    private Boolean walletOperation(final Transfer transfer) {
+    public Boolean walletOperation(final Transfer transfer) {
 
     	if (transfer.getAmount() == 0) {
             throw new DataNotFoundException(
@@ -367,15 +367,15 @@ public class TransferServiceImpl implements ITransferService {
        * @param transfer the transfer
        * @return the boolean
        */
-      private Boolean tranferDataVerification(final Transfer transfer) {
+      public Boolean tranferDataVerification(final Transfer transfer) {
 
       	Boolean result = true;
           result = checkIfTransferValueMoreThanZero(transfer, result);
-
+          log.info("XXXXXXXXXXXXXXXXXXXXXXXX checkIfTransferValueMoreThanZero OK " + result);
           result = checkIfUserExistAndNotNull(transfer, result);
-
+          log.info("XXXXXXXXXXXXXXXXXXXXXXXX checkIfUserExistAndNotNull OK " + result);
           result = checkIfOperationTypeIsWithinCreditOrDebit(transfer, result);
-
+          log.info("XXXXXXXXXXXXXXXXXXXXXXXX checkIfOperationTypeIsWithinCreditOrDebit OK " + result);
           return result;
       }
 
@@ -408,20 +408,25 @@ public class TransferServiceImpl implements ITransferService {
      * @param result the result
      * @return the boolean
      */
-	private Boolean checkIfUserExistAndNotNull(
+	public Boolean checkIfUserExistAndNotNull(
 			final Transfer transfer,
 			Boolean result) {
 
 		User userTransferToChecked = transfer.getUser();
 
 		if (userTransferToChecked != null) {
+
             if (userService.userExistById(
           		  userTransferToChecked.getId()) == false) {
+
                 result = false;
-                }
+
+            }
         } else {
             result = false;
+
         }
+
 		return result;
 	}
 

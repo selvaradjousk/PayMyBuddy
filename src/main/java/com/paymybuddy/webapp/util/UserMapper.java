@@ -1,6 +1,6 @@
 package com.paymybuddy.webapp.util;
 
-import javax.annotation.Nonnull;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
@@ -23,8 +23,8 @@ public class UserMapper {
  * @param user the user
  * @return the user DTO
  */
-public UserDTO toUserDTO(@Validated @Nonnull final User user) {
-//    	if (user != null) {
+public UserDTO toUserDTO(@Validated @NotNull final User user) {
+    	if (user != null) {
 			UserDTO userDTO = new UserDTO();
             userDTO.setId(user.getId());
             userDTO.setUserName(user.getUserName());
@@ -38,9 +38,9 @@ public UserDTO toUserDTO(@Validated @Nonnull final User user) {
             userDTO.setWalletAmount(user.getWalletAmount());
 
             return userDTO;
-//        } else {
-//            throw new DataNotConformException(" USER CANNOT BE NULL");
-//        }
+        } else {
+            throw new DataNotConformException(" USER CANNOT BE NULL");
+        }
     }
 
     /**
@@ -49,8 +49,8 @@ public UserDTO toUserDTO(@Validated @Nonnull final User user) {
      * @param userDTO the user DTO
      * @return the user
      */
-    public User toUserDO(@Validated @Nonnull final UserDTO userDTO) {
-//        if(userDTO != null) {
+    public User toUserDO(@Validated @NotNull final UserDTO userDTO) {
+        if(userDTO != null) {
     	User user = new User();
         user.setId(userDTO.getId());
         user.setUserName(userDTO.getUserName());
@@ -63,8 +63,8 @@ public UserDTO toUserDTO(@Validated @Nonnull final User user) {
         user.setActive(userDTO.isActive());
         user.setWalletAmount(userDTO.getWalletAmount());
             return user;
-//        } else {
-//            return null;
-//        }
+        } else {
+            return null;
+        }
     }
 }

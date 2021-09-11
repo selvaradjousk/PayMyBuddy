@@ -239,7 +239,7 @@ public class HomeController {
 	 * @param page the page
 	 * @param errorMessage the error message
 	 * @param firstName the first name
-	 * @param wallet the wallet
+	 * @param walletAmount the wallet
 	 * @param contacts the contacts
 	 * @param pageTransactions the page transactions
 	 * @param pageTransfers the page transfers
@@ -252,7 +252,7 @@ public class HomeController {
 			final int page,
 			final String errorMessage,
 			final String firstName,
-			final Double wallet,
+			final Double walletAmount,
 			final List<ContactDTO> contacts,
 			final Page<TransactionDTO> pageTransactions,
 			final Page<TransferDTO> pageTransfers,
@@ -266,7 +266,7 @@ public class HomeController {
         model.addAttribute("refunds", pageRefunds);
         model.addAttribute("errorMessage", errorMessage);
         model.addAttribute("firstName", firstName);
-        model.addAttribute("wallet", wallet);
+        model.addAttribute("wallet", walletAmount);
         model.addAttribute("currentPage", page);
 
         return "home";

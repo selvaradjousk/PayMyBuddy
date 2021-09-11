@@ -111,7 +111,8 @@
           <tr th:each ="transfer : ${transfers}">
             <td th:utext="${transfer.createDate}">...</td>
             <td th:utext="${transfer.type}">...</td>
-            <td th:utext="${transfer.amount}">...</td>
+            <td th:utext="${transfer.type} == 'CREDIT'? '+ ' + ${transfer.amount} + ' €' :  '- ' + ${transfer.amount} + ' €'">...</td>
+             
           </tr>
         </tbody>
       </table>

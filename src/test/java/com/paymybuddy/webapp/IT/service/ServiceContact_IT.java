@@ -1,4 +1,4 @@
-package com.paymybuddy.webapp.unitTest.service;
+package com.paymybuddy.webapp.IT.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -19,10 +19,10 @@ import com.paymybuddy.webapp.service.IContactService;
 import com.paymybuddy.webapp.service.IUserService;
 import com.paymybuddy.webapp.util.UserMapper;
 
-@DisplayName("CONTACT SERVICE - H2 DB TEST ")
+@DisplayName("CONTACT SERVICE - IT MySQL DB TEST ")
 @SpringBootTest
-@ActiveProfiles("test")
-class ContactServiceImplTest {
+@ActiveProfiles("integration")
+class ServiceContact_IT {
 
     @Autowired
     IContactService contactService;
@@ -34,7 +34,11 @@ class ContactServiceImplTest {
 
     
     // ************************************************************************
-
+	
+    @DisplayName("Find All Contacts By User(Service) - "
+			+ "GIVEN Contacts list "
+			+ "WHEN Requested find all contacts list by user"
+			+ "THEN returns expected user contacts list size")
     @Test
     public void testFindContactByPayer(){
 
@@ -47,7 +51,11 @@ class ContactServiceImplTest {
     
     
     // ************************************************************************
-
+	
+    @DisplayName("Add New Contact - "
+			+ "GIVEN new Contact "
+			+ "WHEN Requested add new contact"
+			+ "THEN returns expected contact added")
     @Test
     public void testAddContact(){
 
@@ -79,7 +87,11 @@ class ContactServiceImplTest {
     
     
     // ************************************************************************
-    
+	
+    @DisplayName("Delete Contact - "
+			+ "GIVEN Contact "
+			+ "WHEN Requested delete contact"
+			+ "THEN returns expected contact deleted")
     @Test
     public void testDeleteContact(){
     	

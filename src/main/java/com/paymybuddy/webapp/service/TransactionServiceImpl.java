@@ -295,7 +295,7 @@ public class TransactionServiceImpl  implements ITransactionService  {
          * @return the boolean
          */
         // ********************************************************************
-        private Boolean walletOperation(
+        public Boolean walletOperation(
         		final TransactionDTO transactionDTO) {
 
         	// Check if the transaction amount is not zero value
@@ -375,16 +375,16 @@ public class TransactionServiceImpl  implements ITransactionService  {
     	private void updateWalletOfPayer(
     			final TransactionDTO transactionDTO) {
 
-    		Double newWallet = (transactionDTO.getPayer()
+    		Double newWalletAmount = (transactionDTO.getPayer()
     				.getWalletAmount()
     				- (transactionDTO
     						.getAmount() + transactionDTO
     						.getCommision()));
 
-    		newWallet = (double) Math.round((newWallet)
+    		newWalletAmount = (double) Math.round((newWalletAmount)
     				* NUMBER_100) / NUMBER_100;
 
-    		transactionDTO.getPayer().setWalletAmount(newWallet);
+    		transactionDTO.getPayer().setWalletAmount(newWalletAmount);
     	}
 
         // *******************************************************************
@@ -459,7 +459,7 @@ public class TransactionServiceImpl  implements ITransactionService  {
          *
          * @param transactionDTO the transaction DTO
          */
-    	private void checkDescriptionLengthGreaterThan30Characters(
+    	public void checkDescriptionLengthGreaterThan30Characters(
     			final TransactionDTO transactionDTO) {
 
     		if (transactionDTO.getDescription()

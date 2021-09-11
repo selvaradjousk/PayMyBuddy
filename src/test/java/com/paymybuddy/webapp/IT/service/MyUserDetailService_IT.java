@@ -1,7 +1,6 @@
-package com.paymybuddy.webapp.unitTest.service;
+package com.paymybuddy.webapp.IT.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 
@@ -18,11 +17,11 @@ import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.repository.UserRepository;
 import com.paymybuddy.webapp.service.MyUserDetailService;
 
-@DisplayName("MyUserDetailService - H2 DB TEST ")
+@DisplayName("MyUserDetailService - IT DB TEST ")
 @AutoConfigureMockMvc
 @SpringBootTest
-@ActiveProfiles("test")
-class MyUserDetailServiceTest {
+@ActiveProfiles("integration")
+class MyUserDetailService_IT {
 
 	
 	@Autowired
@@ -79,51 +78,5 @@ class MyUserDetailServiceTest {
     	assertEquals(toTestUser2.getEmail(), toTestUser1.getEmail());
     	
     }
-
-    
-	  
-  	// *******************************************************************
-
-	  @DisplayName("User Details Test Null - "
-				+ "GIVEN user email null"
-				+ "WHEN loadUserByUsername"
-				+ "THEN returns Exception")
-	  @Test
-	  public void testLoadUserByUsername(){
 	
-		    assertThrows(org.springframework.security.core.userdetails.UsernameNotFoundException.class, ()
-		     		  -> myUserDetailService.loadUserByUsername(null));		
-  }  
-  
-	    
-	  
-	  	// *******************************************************************
-
-		  @DisplayName("User Details Test invalid username- "
-					+ "GIVEN user email invalid"
-					+ "WHEN loadUserByUsername"
-					+ "THEN returns Exception")
-		  @Test
-		  public void testLoadUserByUsernameinvalidName(){
-		
-			    assertThrows(org.springframework.security.core.userdetails.UsernameNotFoundException.class, ()
-			     		  -> myUserDetailService.loadUserByUsername("SDFSDFSDFSQFDSQDF"));		
-	  }  
-	  
-	       
-	  
-	  	// *******************************************************************
-
-		  @DisplayName("User Details Test username ButNotFound- "
-					+ "GIVEN user email ButNotFound"
-					+ "WHEN loadUserByUsername"
-					+ "THEN returns Exception")
-		  @Test
-		  public void testLoadUserByUsernameValidEmailButNotFound(){
-		
-			    assertThrows(org.springframework.security.core.userdetails.UsernameNotFoundException.class, ()
-			     		  -> myUserDetailService.loadUserByUsername("testemail.@email.com"));		
-	  }  
-	  
-	        
 }

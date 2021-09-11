@@ -1,4 +1,4 @@
-package com.paymybuddy.webapp.unitTest.repository;
+package com.paymybuddy.webapp.IT.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,14 +25,14 @@ import com.paymybuddy.webapp.model.User;
 import com.paymybuddy.webapp.repository.UserRepository;
 
 //@Transactional
+@DisplayName("USER REPOSITORY - IT MySQL DB TEST ")
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-@ActiveProfiles("test")
-public class UserRepositoryTest {
+@ActiveProfiles("integration")
+public class RepositoryUser_IT {
 
 	@Autowired
 	private DataSource dataSource;
-	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
@@ -49,7 +49,6 @@ public class UserRepositoryTest {
 			+ "THEN will set up a Spring application context")
 	@Test
 	void injectedComponentsAreNotNull() {
-		
 		assertThat(dataSource).isNotNull();
 		assertThat(jdbcTemplate).isNotNull();
 		assertThat(entityManager).isNotNull();
@@ -65,9 +64,7 @@ public class UserRepositoryTest {
 			+ "THEN returns the number of user avalable in the H2 DB dataset")
 	@Test
 	public void should_find_all_Users() {
-		
 		Iterable<User> users = userRepository.findAll();
-		
 		assertThat(users).hasSize(10);
 	}
 	
@@ -81,7 +78,6 @@ public class UserRepositoryTest {
 	@Test
 	@Sql({ "/h2sourcedata_moreusers.sql" })
 	public void testLoadDataForTestClass() {
-		
 		assertEquals(15, userRepository.findAll().size());
 	}
 	
@@ -152,7 +148,6 @@ public class UserRepositoryTest {
 	public void whenFindByEmail_thenReturnUserfromDB() {
 
 		User foundUser = userRepository.findUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
-		
 		assertNotNull(foundUser);
 		assertEquals("testemail1@email.com", foundUser.getEmail());
 	}
@@ -168,9 +163,7 @@ public class UserRepositoryTest {
 	@Test
 	@Sql("/createUser.sql")
 	void whenInitializedByDbUnit_thenFindsByEmail() {
-		
 		User user = userRepository.findUserByEmail("testemail100@email.com");
-		
 		assertNotNull(user);
 		assertEquals("testemail100@email.com", user.getEmail());
 	}
@@ -185,9 +178,7 @@ public class UserRepositoryTest {
 	@Test
 	@Sql("/createUser.sql")
 	void whenInitializedByDbUnit_thenFindsByNameAndCheckEmailExistEquals() {
-		
 		User user = userRepository.findUserByEmail("testemail100@email.com");
-		
 		assertEquals("testfirstname100", user.getFirstName());
 		assertThat(user).hasFieldOrPropertyWithValue("password", "testpassword100");
 	}
@@ -252,7 +243,6 @@ public class UserRepositoryTest {
 		user.setCreationDate(LocalDate.parse("2021-08-26"));
 		user.setModificationDate(LocalDate.parse("2021-08-26"));
 		user = entityManager.persistAndFlush(user);
-		
 		assertEquals(user, userRepository.findByEmail(user.getEmail()).get());
 		}
 
@@ -304,9 +294,7 @@ public class UserRepositoryTest {
 		user.setRoles("admin");
 		user.setCreationDate(LocalDate.parse("2021-08-26"));
 		user.setModificationDate(LocalDate.parse("2021-08-26"));
-		
 		user = userRepository.findById(1).get();
-		
 		assertEquals(1, user.getId());
 		}
 
@@ -330,9 +318,7 @@ public class UserRepositoryTest {
 		user.setRoles("admin");
 		user.setCreationDate(LocalDate.parse("2021-08-26"));
 		user.setModificationDate(LocalDate.parse("2021-08-26"));
-		
 		user = userRepository.findById(1).get();
-		
 		assertEquals(1, user.getId());
 		}
 	

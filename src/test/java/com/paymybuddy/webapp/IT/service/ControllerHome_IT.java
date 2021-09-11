@@ -1,4 +1,4 @@
-package com.paymybuddy.webapp.unitTest.controller;
+package com.paymybuddy.webapp.IT.service;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -18,11 +18,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+// WebMvcTest(controllers = HelloController.class) - load only the controller by listing here
 @DisplayName("Home CONTROLLER - IT DB TEST ")
 @AutoConfigureMockMvc
 @SpringBootTest
 @ActiveProfiles("integration")
-class HomeControllerWebMvcTest {
+class ControllerHome_IT {
 
     @Autowired
     private MockMvc mockMvc;

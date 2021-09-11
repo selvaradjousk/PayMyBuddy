@@ -131,23 +131,23 @@
 
 
 				<table class="table">
-					<thead>
-						<tr class="panel-th" style="font-size: 12px; font-weight: bold; color:#404040;">
-							<th width="30%" style="font-style:italic; font-size:14px; color:#707070; ">Connections</th>
-							<th width="50%" style="font-style:italic; font-size:14px; color:#707070; ">Description</th>
-							<th width="20%" style="font-style:italic; font-size:14px; color:#707070; ">Amount</th>
-							<th></th>
-					</thead>
+						<thead>
+							<tr class="panel-th">
+								<th width="20%" style="font-style:italic; font-size:14px; color:#707070; ">Connections</th>
+								<th width="30%" style="font-style:italic; font-size:14px; color:#707070;">Description</th>
+								<th width="20%" style="font-style:italic; font-size:14px; color:#707070;">Amount Transfered</th>
+								<th width="20%" style="font-style:italic; font-size:14px; color:#707070;">Commision fee</th>
+								<th width="20%" style="font-style:italic; font-size:14px; color:#707070;">Amount + Commision</th>
+						</thead>
+
 					</tr>
 					<tbody>
 						<tr th:each="transaction : ${transactions}">
 							<td th:utext="${transaction.beneficiary.email}">...</td>
 							<td th:utext="${transaction.description}">...</td>
-							<td th:utext="'- ' + ${transaction.amount}">...</td>
-							<td><a th:if="${admin}" class="btn btn-danger"
-								onclick="return confirm( ' Confirm deletion of contact?')"
-								th:href="@{/deleteTransaction(id=${transaction.idTransaction}, page=${currentPage})}">Delete</a>
-							</td>
+							<td th:utext="'- ' + ${transaction.amount} + ' €' ">...</td>
+							<td th:utext="'- ' + ${transaction.commision} + ' €' ">...</td>
+							<td th:utext="'- ' + ${transaction.commision + transaction.amount} + ' €' ">...</td>
 						</tr>
 					</tbody>
 				</table>
@@ -174,7 +174,7 @@
                   <tr th:each ="refund : ${refunds}">
                       <td th:utext="${refund.payer.email}">...</td>
                       <td th:utext="${refund.description}">...</td>
-                      <td th:utext="'+ ' + ${refund.amount}">...</td>
+                      <td th:utext="'+ ' + ${refund.amount} + ' €' ">...</td>
                   </tr>
                   </tbody>
               </table>

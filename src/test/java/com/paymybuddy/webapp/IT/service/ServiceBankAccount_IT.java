@@ -1,4 +1,4 @@
-package com.paymybuddy.webapp.unitTest.service;
+package com.paymybuddy.webapp.IT.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -21,10 +21,10 @@ import com.paymybuddy.webapp.service.IUserService;
 import com.paymybuddy.webapp.util.BankAccountMapper;
 import com.paymybuddy.webapp.util.UserMapper;
 
-@DisplayName("BANK ACCOUNT SERVICE - H2 DB TEST ")
+@DisplayName("BANK ACCOUNT SERVICE IT - DB TEST ")
 @SpringBootTest
-@ActiveProfiles("test")
-public class BankAccountServiceImplTest {
+@ActiveProfiles("integration")
+public class ServiceBankAccount_IT {
 
 	@Autowired
 	private IBankAccountService bankAccountService;
@@ -36,7 +36,11 @@ public class BankAccountServiceImplTest {
 	public BankAccountMapper bankAccountMapper = new BankAccountMapper();
 
 	//******************************************************************
-
+	
+    @DisplayName("Lists of BankAccounts - "
+			+ "GIVEN BankAccount list"
+			+ "WHEN Requested list BankAccounts"
+			+ "THEN returns expected list of bankaccounts")
 	@Test
 	public void testFindBankAccountByUser() {
 
@@ -53,7 +57,11 @@ public class BankAccountServiceImplTest {
 		assertEquals(1, listBankAccount.size());
 	}
 	//******************************************************************
-
+	
+    @DisplayName("Add new BankAccount - "
+			+ "GIVEN BankAccount "
+			+ "WHEN Requested Add new BankAccount"
+			+ "THEN returns expected BankAccount added")
 	@Test
 	public void testAddAccount() {
 		
@@ -80,7 +88,11 @@ public class BankAccountServiceImplTest {
 
 	}
 	//******************************************************************
-
+	
+    @DisplayName("Delete BankAccount - "
+			+ "GIVEN BankAccount "
+			+ "WHEN Requested delete BankAccount"
+			+ "THEN returns expected BankAccount deleted")
 	@Test
 	public void testDeleteAccount() {
 
