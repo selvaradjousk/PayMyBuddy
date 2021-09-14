@@ -1,5 +1,7 @@
 package com.paymybuddy.webapp.unitTest.controller;
 
+import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -17,6 +19,9 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.paymybuddy.webapp.controller.BankTransferController;
+import com.paymybuddy.webapp.dto.UserDTO;
+
 @DisplayName("BANK TRANSFER CONTROLLER - H2 DB TEST ")
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -26,6 +31,9 @@ class BankTransferControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+    
+    @Autowired
+    private BankTransferController bankTransferController;
 
     
     
@@ -265,24 +273,7 @@ class BankTransferControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(status().is(400));
     }
-    
-    // ********************************************************************
-	// TODO - NESTED ERROR BY SUREFIRE - NEEDS CHECK ON CODE FLOW
-    // ********************************************************************
  
-//
-//		@DisplayName("POST /deleteAccount page Url request IS FOUND"
-//			+ "GIVEN home url /deleteAccount "
-//			+ "WHEN Requested POST /deleteAccount page"
-//			+ "THEN returns expected reponse DONE") 
-//		@WithMockUser(username="testemail1@email.com", roles={"ADMIN"})
-//	    @Test
-//	    public void testdeleteBankAccount() throws Exception {
-//	        mockMvc.perform(get("/deleteAccount")
-//	                .param("id", "1"))
-//	                .andExpect(status().isFound())
-//	                .andExpect(redirectedUrl("/transfer"));
-//	    }
 
 	   // ********************************************************************
 	
@@ -299,11 +290,99 @@ class BankTransferControllerTest {
 	                .andExpect(redirectedUrl("/transfer"));
 	                
 	    }
-	  
-	  
+
 	   // ********************************************************************	  
 	
-	
+
+	    @DisplayName("checkForBankAccountRibNotNull - Rib Null - "
+				+ "GIVEN checkForBankAccountRibNotNull Rib null "
+				+ "WHEN Requested checkForBankAccountRibNotNull BankAccount"
+				+ "THEN returns expected message redirect:/transfer?page=1&errorMessage=You must created an account")
+		@Test
+		public void testcheckForBankAccountRibNotNullWhenNull() {
+
+			// GIVEN
+	    	String testRib = null;
+	    	
+	    	// WHEN
+	    	String testErrorMessage = bankTransferController.checkForBankAccountRibNotNull(1, testRib);
+	    	
+	    	// THEN
+//	        assertThrows(NullPointerException.class, ()
+//	        		-> bankTransferController.checkForBankAccountRibNotNull(1, testRib));
+
+	    	assertEquals("redirect:/transfer?page=1&errorMessage=You must created an account", testErrorMessage);
+		}
+		//******************************************************************
+	      
+		
+
+	    @DisplayName("checkForBankAccountRibNotNull - Rib Not Null - "
+				+ "GIVEN checkForBankAccountRibNotNull Rib not null "
+				+ "WHEN Requested checkForBankAccountRibNotNull BankAccount"
+				+ "THEN returns expected message OK")
+		@Test
+		public void testcheckForBankAccountRibNotNull() {
+
+			// GIVEN
+	    	String testRib = "ribValue";
+	    	
+	    	// WHEN
+	    	String testErrorMessage = bankTransferController.checkForBankAccountRibNotNull(1, testRib);
+	    	
+	    	// THEN
+//	        assertThrows(NullPointerException.class, ()
+//	        		-> bankTransferController.checkForBankAccountRibNotNull(1, testRib));
+
+	    	assertEquals("OK", testErrorMessage);
+		}
+		//******************************************************************
+	      
+		
+
+	    @DisplayName("isUserRoleAdminCheck - role admin - "
+				+ "GIVEN isUserRoleAdminCheck role admin "
+				+ "WHEN Requested isUserRoleAdminCheck "
+				+ "THEN returns expected value admin")
+		@Test
+		public void testIsUserRoleAdminCheck() {
+
+			// GIVEN
+	    	String role = "ROLE_ADMIN";
+	    	UserDTO userLogDTO = new UserDTO();
+	    	userLogDTO.setRoles(role);
+	    	
+	    	// WHEN
+	    	String testRole = bankTransferController.isUserRoleAdminCheck(userLogDTO);
+	    	
+	    	// THEN
+	    	assertEquals("admin", testRole);
+		}
+		//******************************************************************
+	      
+		
+
+	    @DisplayName("isUserRoleAdminCheck - role not admin - "
+				+ "GIVEN isUserRoleAdminCheck role not admin "
+				+ "WHEN Requested isUserRoleAdminCheck"
+				+ "THEN returns expected value user")
+		@Test
+		public void testIsUserRoleAdminCheckNotAdmin() {
+
+			// GIVEN
+	    	String role = "ROLE_USER";
+	    	UserDTO userLogDTO = new UserDTO();
+	    	userLogDTO.setRoles(role);
+	    	
+	    	// WHEN
+	    	String testRole = bankTransferController.isUserRoleAdminCheck(userLogDTO);
+	    	
+	    	// THEN
+
+	    	assertNull(testRole);
+		}
+		//******************************************************************
+	      
 	
 	
 }

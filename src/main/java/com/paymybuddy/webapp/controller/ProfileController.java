@@ -104,51 +104,7 @@ public class ProfileController {
         return "profile";
     }
 
-    // ************************************************************
-	// https://stackoverflow.com/questions/42693643/updating-user-info-spring-boot
-
-//    @PostMapping("/addUpdate")
-//    public String updateProfile(
-//    		final Model model,
-//    		final String errorMessage,
-//    		String firstName,
-//    		String lastName,
-//    		String email,
-//    		String password,
-//    		String confirmation) {
-//
-//		log.info(" Request - Get /profile ");
-//
-//    	String emailSession = SecurityContextHolder
-//    			.getContext()
-//    			.getAuthentication()
-//    			.getName();
-//
-//    	log.info(" Session email by SecurityContextHolder: " + emailSession);
-//
-// 
-//        if(emailSession != null) {
-//        	
-//            UserDTO userUpdateDTO = new UserDTO();
-//        	
-//        	userUpdateDTO = userService
-//        			.findUserByEmail(emailSession);
-//        	
-//        	userUpdateDTO.setFirstName(firstName);
-//        	userUpdateDTO.setLastName(lastName);
-//        	userUpdateDTO.setEmail(email);
-//        	userUpdateDTO.setPassword(password);
-//
-//        	log.info(" userService.findUserByEmail: "
-//        	+ userUpdateDTO.getUserName());
-//
-//            userService.updateUser(userUpdateDTO);
-//        }
-//
-//        return "redirect:/profile";
-//    }
-
-
+ 
 
 
 	// ************************************************************************

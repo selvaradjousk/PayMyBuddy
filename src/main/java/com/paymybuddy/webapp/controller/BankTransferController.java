@@ -296,7 +296,7 @@ public class BankTransferController {
 	 * @param userLogDTO the user log DTO
 	 * @return the string
 	 */
-	private String isUserRoleAdminCheck(final UserDTO userLogDTO) {
+	public String isUserRoleAdminCheck(final UserDTO userLogDTO) {
 		String role = null;
         String authorisation = userLogDTO.getRoles();
 

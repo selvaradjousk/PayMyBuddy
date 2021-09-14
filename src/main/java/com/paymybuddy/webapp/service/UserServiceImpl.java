@@ -22,7 +22,6 @@ import com.paymybuddy.webapp.util.UserMapper;
 
 import lombok.extern.log4j.Log4j2;
 
-// **************************** TODOs LIST ***********************************
 
 /**
  * The Class UserServiceImpl.
@@ -251,22 +250,6 @@ public class UserServiceImpl implements IUserService {
 
     //******************************************************************
 
-//
-//    @Override
-//    public UserDTO updateUser(UserDTO userDTO) {
-//        UserDTO oldUser = findUserByEmail(userDTO.getEmail());
-//       	log.info(" ====> SAVE User requested <==== ");
-//        oldUser.setFirstName(userDTO.getFirstName());
-//        oldUser.setLastName(userDTO.getLastName());
-//       	log.info(" ====> SAVE User requested <==== ");
-//        User userUpdate = new User();
-//        userUpdate = userRepository.save(userMapper.toUserDO(oldUser));
-//       	log.info(" ====> SAVE User requested <==== ");        
-////        saveUser(oldUser);
-//
-//        return userMapper.toUserDTO(userUpdate);
-//    }
-    //******************************************************************
 
     /**
      * Check entry for email format.
@@ -305,18 +288,6 @@ public class UserServiceImpl implements IUserService {
  	}
 
 
- 	//******************************************************************
-// 	/**
-// 	 * @param userDTO
-// 	 * @param confirmationPass
-// 	 */
-// 	private void checkConfirmationPasswordMatch
- 	// (UserDTO userDTO, String confirmationPass) {
-// 		if(userDTO.getPassword().equals(confirmationPass)==true){
-//         	log.info(" ====> ERROR: Password MISMATCH <==== ");
-//             throw new DataNotConformException("Password MISMATCH");
-//         }
-// 	}
  	 //******************************************************************
 
    /**
