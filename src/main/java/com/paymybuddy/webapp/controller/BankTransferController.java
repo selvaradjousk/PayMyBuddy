@@ -78,8 +78,6 @@ public class BankTransferController {
      * @param errorMessage the error message
      * @return the string
      */
-
-//    @RequestMapping(value = { "/transfer" }, method = RequestMethod.GET)
     @GetMapping(value = { "/transfer" })
     public String transfer(
     		final Model model,
